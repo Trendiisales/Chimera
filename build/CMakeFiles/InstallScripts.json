@@ -1,0 +1,8 @@
+{
+	"InstallScripts" : 
+	[
+		"/Users/jo/omega_recovery/linux_rt/Chimera/build/cmake_install.cmake",
+		"/Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine/cmake_install.cmake"
+	],
+	"Parallel" : false
+}
