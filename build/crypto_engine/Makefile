@@ -130,101 +130,29 @@ crypto_engine/fast:
 	cd /Users/jo/omega_recovery/linux_rt/Chimera/build && $(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/build
 .PHONY : crypto_engine/fast
 
-src/binance/BinanceDepthAdapterWS.o: src/binance/BinanceDepthAdapterWS.cpp.o
-.PHONY : src/binance/BinanceDepthAdapterWS.o
+src/binance/BinanceDepthFeed.o: src/binance/BinanceDepthFeed.cpp.o
+.PHONY : src/binance/BinanceDepthFeed.o
 
 # target to build an object file
-src/binance/BinanceDepthAdapterWS.cpp.o:
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build && $(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthAdapterWS.cpp.o
-.PHONY : src/binance/BinanceDepthAdapterWS.cpp.o
+src/binance/BinanceDepthFeed.cpp.o:
+	cd /Users/jo/omega_recovery/linux_rt/Chimera/build && $(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthFeed.cpp.o
+.PHONY : src/binance/BinanceDepthFeed.cpp.o
 
-src/binance/BinanceDepthAdapterWS.i: src/binance/BinanceDepthAdapterWS.cpp.i
-.PHONY : src/binance/BinanceDepthAdapterWS.i
-
-# target to preprocess a source file
-src/binance/BinanceDepthAdapterWS.cpp.i:
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build && $(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthAdapterWS.cpp.i
-.PHONY : src/binance/BinanceDepthAdapterWS.cpp.i
-
-src/binance/BinanceDepthAdapterWS.s: src/binance/BinanceDepthAdapterWS.cpp.s
-.PHONY : src/binance/BinanceDepthAdapterWS.s
-
-# target to generate assembly for a file
-src/binance/BinanceDepthAdapterWS.cpp.s:
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build && $(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthAdapterWS.cpp.s
-.PHONY : src/binance/BinanceDepthAdapterWS.cpp.s
-
-src/binance/BinanceDepthParser.o: src/binance/BinanceDepthParser.cpp.o
-.PHONY : src/binance/BinanceDepthParser.o
-
-# target to build an object file
-src/binance/BinanceDepthParser.cpp.o:
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build && $(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthParser.cpp.o
-.PHONY : src/binance/BinanceDepthParser.cpp.o
-
-src/binance/BinanceDepthParser.i: src/binance/BinanceDepthParser.cpp.i
-.PHONY : src/binance/BinanceDepthParser.i
+src/binance/BinanceDepthFeed.i: src/binance/BinanceDepthFeed.cpp.i
+.PHONY : src/binance/BinanceDepthFeed.i
 
 # target to preprocess a source file
-src/binance/BinanceDepthParser.cpp.i:
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build && $(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthParser.cpp.i
-.PHONY : src/binance/BinanceDepthParser.cpp.i
+src/binance/BinanceDepthFeed.cpp.i:
+	cd /Users/jo/omega_recovery/linux_rt/Chimera/build && $(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthFeed.cpp.i
+.PHONY : src/binance/BinanceDepthFeed.cpp.i
 
-src/binance/BinanceDepthParser.s: src/binance/BinanceDepthParser.cpp.s
-.PHONY : src/binance/BinanceDepthParser.s
-
-# target to generate assembly for a file
-src/binance/BinanceDepthParser.cpp.s:
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build && $(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthParser.cpp.s
-.PHONY : src/binance/BinanceDepthParser.cpp.s
-
-src/binance/BinanceHFTFeed.o: src/binance/BinanceHFTFeed.cpp.o
-.PHONY : src/binance/BinanceHFTFeed.o
-
-# target to build an object file
-src/binance/BinanceHFTFeed.cpp.o:
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build && $(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceHFTFeed.cpp.o
-.PHONY : src/binance/BinanceHFTFeed.cpp.o
-
-src/binance/BinanceHFTFeed.i: src/binance/BinanceHFTFeed.cpp.i
-.PHONY : src/binance/BinanceHFTFeed.i
-
-# target to preprocess a source file
-src/binance/BinanceHFTFeed.cpp.i:
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build && $(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceHFTFeed.cpp.i
-.PHONY : src/binance/BinanceHFTFeed.cpp.i
-
-src/binance/BinanceHFTFeed.s: src/binance/BinanceHFTFeed.cpp.s
-.PHONY : src/binance/BinanceHFTFeed.s
+src/binance/BinanceDepthFeed.s: src/binance/BinanceDepthFeed.cpp.s
+.PHONY : src/binance/BinanceDepthFeed.s
 
 # target to generate assembly for a file
-src/binance/BinanceHFTFeed.cpp.s:
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build && $(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceHFTFeed.cpp.s
-.PHONY : src/binance/BinanceHFTFeed.cpp.s
-
-src/binance/BinanceReplay.o: src/binance/BinanceReplay.cpp.o
-.PHONY : src/binance/BinanceReplay.o
-
-# target to build an object file
-src/binance/BinanceReplay.cpp.o:
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build && $(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceReplay.cpp.o
-.PHONY : src/binance/BinanceReplay.cpp.o
-
-src/binance/BinanceReplay.i: src/binance/BinanceReplay.cpp.i
-.PHONY : src/binance/BinanceReplay.i
-
-# target to preprocess a source file
-src/binance/BinanceReplay.cpp.i:
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build && $(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceReplay.cpp.i
-.PHONY : src/binance/BinanceReplay.cpp.i
-
-src/binance/BinanceReplay.s: src/binance/BinanceReplay.cpp.s
-.PHONY : src/binance/BinanceReplay.s
-
-# target to generate assembly for a file
-src/binance/BinanceReplay.cpp.s:
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build && $(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceReplay.cpp.s
-.PHONY : src/binance/BinanceReplay.cpp.s
+src/binance/BinanceDepthFeed.cpp.s:
+	cd /Users/jo/omega_recovery/linux_rt/Chimera/build && $(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthFeed.cpp.s
+.PHONY : src/binance/BinanceDepthFeed.cpp.s
 
 src/binance/BinanceRestClient.o: src/binance/BinanceRestClient.cpp.o
 .PHONY : src/binance/BinanceRestClient.o
@@ -298,77 +226,53 @@ src/binance/BinaryLogWriter.cpp.s:
 	cd /Users/jo/omega_recovery/linux_rt/Chimera/build && $(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinaryLogWriter.cpp.s
 .PHONY : src/binance/BinaryLogWriter.cpp.s
 
-src/binance/ExecutionLogger.o: src/binance/ExecutionLogger.cpp.o
-.PHONY : src/binance/ExecutionLogger.o
+src/binance/DeltaGate.o: src/binance/DeltaGate.cpp.o
+.PHONY : src/binance/DeltaGate.o
 
 # target to build an object file
-src/binance/ExecutionLogger.cpp.o:
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build && $(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/ExecutionLogger.cpp.o
-.PHONY : src/binance/ExecutionLogger.cpp.o
+src/binance/DeltaGate.cpp.o:
+	cd /Users/jo/omega_recovery/linux_rt/Chimera/build && $(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/DeltaGate.cpp.o
+.PHONY : src/binance/DeltaGate.cpp.o
 
-src/binance/ExecutionLogger.i: src/binance/ExecutionLogger.cpp.i
-.PHONY : src/binance/ExecutionLogger.i
+src/binance/DeltaGate.i: src/binance/DeltaGate.cpp.i
+.PHONY : src/binance/DeltaGate.i
 
 # target to preprocess a source file
-src/binance/ExecutionLogger.cpp.i:
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build && $(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/ExecutionLogger.cpp.i
-.PHONY : src/binance/ExecutionLogger.cpp.i
+src/binance/DeltaGate.cpp.i:
+	cd /Users/jo/omega_recovery/linux_rt/Chimera/build && $(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/DeltaGate.cpp.i
+.PHONY : src/binance/DeltaGate.cpp.i
 
-src/binance/ExecutionLogger.s: src/binance/ExecutionLogger.cpp.s
-.PHONY : src/binance/ExecutionLogger.s
+src/binance/DeltaGate.s: src/binance/DeltaGate.cpp.s
+.PHONY : src/binance/DeltaGate.s
 
 # target to generate assembly for a file
-src/binance/ExecutionLogger.cpp.s:
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build && $(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/ExecutionLogger.cpp.s
-.PHONY : src/binance/ExecutionLogger.cpp.s
+src/binance/DeltaGate.cpp.s:
+	cd /Users/jo/omega_recovery/linux_rt/Chimera/build && $(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/DeltaGate.cpp.s
+.PHONY : src/binance/DeltaGate.cpp.s
 
-src/binance/MidPriceStrategy.o: src/binance/MidPriceStrategy.cpp.o
-.PHONY : src/binance/MidPriceStrategy.o
+src/binance/OrderBook.o: src/binance/OrderBook.cpp.o
+.PHONY : src/binance/OrderBook.o
 
 # target to build an object file
-src/binance/MidPriceStrategy.cpp.o:
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build && $(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/MidPriceStrategy.cpp.o
-.PHONY : src/binance/MidPriceStrategy.cpp.o
+src/binance/OrderBook.cpp.o:
+	cd /Users/jo/omega_recovery/linux_rt/Chimera/build && $(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/OrderBook.cpp.o
+.PHONY : src/binance/OrderBook.cpp.o
 
-src/binance/MidPriceStrategy.i: src/binance/MidPriceStrategy.cpp.i
-.PHONY : src/binance/MidPriceStrategy.i
-
-# target to preprocess a source file
-src/binance/MidPriceStrategy.cpp.i:
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build && $(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/MidPriceStrategy.cpp.i
-.PHONY : src/binance/MidPriceStrategy.cpp.i
-
-src/binance/MidPriceStrategy.s: src/binance/MidPriceStrategy.cpp.s
-.PHONY : src/binance/MidPriceStrategy.s
-
-# target to generate assembly for a file
-src/binance/MidPriceStrategy.cpp.s:
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build && $(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/MidPriceStrategy.cpp.s
-.PHONY : src/binance/MidPriceStrategy.cpp.s
-
-src/binance/PrometheusMetrics.o: src/binance/PrometheusMetrics.cpp.o
-.PHONY : src/binance/PrometheusMetrics.o
-
-# target to build an object file
-src/binance/PrometheusMetrics.cpp.o:
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build && $(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/PrometheusMetrics.cpp.o
-.PHONY : src/binance/PrometheusMetrics.cpp.o
-
-src/binance/PrometheusMetrics.i: src/binance/PrometheusMetrics.cpp.i
-.PHONY : src/binance/PrometheusMetrics.i
+src/binance/OrderBook.i: src/binance/OrderBook.cpp.i
+.PHONY : src/binance/OrderBook.i
 
 # target to preprocess a source file
-src/binance/PrometheusMetrics.cpp.i:
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build && $(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/PrometheusMetrics.cpp.i
-.PHONY : src/binance/PrometheusMetrics.cpp.i
+src/binance/OrderBook.cpp.i:
+	cd /Users/jo/omega_recovery/linux_rt/Chimera/build && $(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/OrderBook.cpp.i
+.PHONY : src/binance/OrderBook.cpp.i
 
-src/binance/PrometheusMetrics.s: src/binance/PrometheusMetrics.cpp.s
-.PHONY : src/binance/PrometheusMetrics.s
+src/binance/OrderBook.s: src/binance/OrderBook.cpp.s
+.PHONY : src/binance/OrderBook.s
 
 # target to generate assembly for a file
-src/binance/PrometheusMetrics.cpp.s:
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build && $(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/PrometheusMetrics.cpp.s
-.PHONY : src/binance/PrometheusMetrics.cpp.s
+src/binance/OrderBook.cpp.s:
+	cd /Users/jo/omega_recovery/linux_rt/Chimera/build && $(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/OrderBook.cpp.s
+.PHONY : src/binance/OrderBook.cpp.s
 
 src/binance/PrometheusServer.o: src/binance/PrometheusServer.cpp.o
 .PHONY : src/binance/PrometheusServer.o
@@ -394,53 +298,29 @@ src/binance/PrometheusServer.cpp.s:
 	cd /Users/jo/omega_recovery/linux_rt/Chimera/build && $(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/PrometheusServer.cpp.s
 .PHONY : src/binance/PrometheusServer.cpp.s
 
-src/binance/StrategyBridge.o: src/binance/StrategyBridge.cpp.o
-.PHONY : src/binance/StrategyBridge.o
+src/binance/VenueHealth.o: src/binance/VenueHealth.cpp.o
+.PHONY : src/binance/VenueHealth.o
 
 # target to build an object file
-src/binance/StrategyBridge.cpp.o:
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build && $(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/StrategyBridge.cpp.o
-.PHONY : src/binance/StrategyBridge.cpp.o
+src/binance/VenueHealth.cpp.o:
+	cd /Users/jo/omega_recovery/linux_rt/Chimera/build && $(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/VenueHealth.cpp.o
+.PHONY : src/binance/VenueHealth.cpp.o
 
-src/binance/StrategyBridge.i: src/binance/StrategyBridge.cpp.i
-.PHONY : src/binance/StrategyBridge.i
-
-# target to preprocess a source file
-src/binance/StrategyBridge.cpp.i:
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build && $(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/StrategyBridge.cpp.i
-.PHONY : src/binance/StrategyBridge.cpp.i
-
-src/binance/StrategyBridge.s: src/binance/StrategyBridge.cpp.s
-.PHONY : src/binance/StrategyBridge.s
-
-# target to generate assembly for a file
-src/binance/StrategyBridge.cpp.s:
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build && $(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/StrategyBridge.cpp.s
-.PHONY : src/binance/StrategyBridge.cpp.s
-
-src/binance/TlsWebSocket.o: src/binance/TlsWebSocket.cpp.o
-.PHONY : src/binance/TlsWebSocket.o
-
-# target to build an object file
-src/binance/TlsWebSocket.cpp.o:
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build && $(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/TlsWebSocket.cpp.o
-.PHONY : src/binance/TlsWebSocket.cpp.o
-
-src/binance/TlsWebSocket.i: src/binance/TlsWebSocket.cpp.i
-.PHONY : src/binance/TlsWebSocket.i
+src/binance/VenueHealth.i: src/binance/VenueHealth.cpp.i
+.PHONY : src/binance/VenueHealth.i
 
 # target to preprocess a source file
-src/binance/TlsWebSocket.cpp.i:
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build && $(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/TlsWebSocket.cpp.i
-.PHONY : src/binance/TlsWebSocket.cpp.i
+src/binance/VenueHealth.cpp.i:
+	cd /Users/jo/omega_recovery/linux_rt/Chimera/build && $(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/VenueHealth.cpp.i
+.PHONY : src/binance/VenueHealth.cpp.i
 
-src/binance/TlsWebSocket.s: src/binance/TlsWebSocket.cpp.s
-.PHONY : src/binance/TlsWebSocket.s
+src/binance/VenueHealth.s: src/binance/VenueHealth.cpp.s
+.PHONY : src/binance/VenueHealth.s
 
 # target to generate assembly for a file
-src/binance/TlsWebSocket.cpp.s:
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build && $(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/TlsWebSocket.cpp.s
-.PHONY : src/binance/TlsWebSocket.cpp.s
+src/binance/VenueHealth.cpp.s:
+	cd /Users/jo/omega_recovery/linux_rt/Chimera/build && $(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/VenueHealth.cpp.s
+.PHONY : src/binance/VenueHealth.cpp.s
 
 # Help Target
 help:
@@ -451,18 +331,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... crypto_engine"
-	@echo "... src/binance/BinanceDepthAdapterWS.o"
-	@echo "... src/binance/BinanceDepthAdapterWS.i"
-	@echo "... src/binance/BinanceDepthAdapterWS.s"
-	@echo "... src/binance/BinanceDepthParser.o"
-	@echo "... src/binance/BinanceDepthParser.i"
-	@echo "... src/binance/BinanceDepthParser.s"
-	@echo "... src/binance/BinanceHFTFeed.o"
-	@echo "... src/binance/BinanceHFTFeed.i"
-	@echo "... src/binance/BinanceHFTFeed.s"
-	@echo "... src/binance/BinanceReplay.o"
-	@echo "... src/binance/BinanceReplay.i"
-	@echo "... src/binance/BinanceReplay.s"
+	@echo "... src/binance/BinanceDepthFeed.o"
+	@echo "... src/binance/BinanceDepthFeed.i"
+	@echo "... src/binance/BinanceDepthFeed.s"
 	@echo "... src/binance/BinanceRestClient.o"
 	@echo "... src/binance/BinanceRestClient.i"
 	@echo "... src/binance/BinanceRestClient.s"
@@ -472,24 +343,18 @@ help:
 	@echo "... src/binance/BinaryLogWriter.o"
 	@echo "... src/binance/BinaryLogWriter.i"
 	@echo "... src/binance/BinaryLogWriter.s"
-	@echo "... src/binance/ExecutionLogger.o"
-	@echo "... src/binance/ExecutionLogger.i"
-	@echo "... src/binance/ExecutionLogger.s"
-	@echo "... src/binance/MidPriceStrategy.o"
-	@echo "... src/binance/MidPriceStrategy.i"
-	@echo "... src/binance/MidPriceStrategy.s"
-	@echo "... src/binance/PrometheusMetrics.o"
-	@echo "... src/binance/PrometheusMetrics.i"
-	@echo "... src/binance/PrometheusMetrics.s"
+	@echo "... src/binance/DeltaGate.o"
+	@echo "... src/binance/DeltaGate.i"
+	@echo "... src/binance/DeltaGate.s"
+	@echo "... src/binance/OrderBook.o"
+	@echo "... src/binance/OrderBook.i"
+	@echo "... src/binance/OrderBook.s"
 	@echo "... src/binance/PrometheusServer.o"
 	@echo "... src/binance/PrometheusServer.i"
 	@echo "... src/binance/PrometheusServer.s"
-	@echo "... src/binance/StrategyBridge.o"
-	@echo "... src/binance/StrategyBridge.i"
-	@echo "... src/binance/StrategyBridge.s"
-	@echo "... src/binance/TlsWebSocket.o"
-	@echo "... src/binance/TlsWebSocket.i"
-	@echo "... src/binance/TlsWebSocket.s"
+	@echo "... src/binance/VenueHealth.o"
+	@echo "... src/binance/VenueHealth.i"
+	@echo "... src/binance/VenueHealth.s"
 .PHONY : help
 
 

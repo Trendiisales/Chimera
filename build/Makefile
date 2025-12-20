@@ -142,6 +142,19 @@ crypto_engine/fast:
 	$(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/build
 .PHONY : crypto_engine/fast
 
+#=============================================================================
+# Target rules for targets named cfd_engine
+
+# Build rule for target.
+cfd_engine: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 cfd_engine
+.PHONY : cfd_engine
+
+# fast build rule for target.
+cfd_engine/fast:
+	$(MAKE) $(MAKESILENT) -f cfd_engine/CMakeFiles/cfd_engine.dir/build.make cfd_engine/CMakeFiles/cfd_engine.dir/build
+.PHONY : cfd_engine/fast
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -174,6 +187,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... cfd_engine"
 	@echo "... chimera"
 	@echo "... crypto_engine"
 	@echo "... main.o"

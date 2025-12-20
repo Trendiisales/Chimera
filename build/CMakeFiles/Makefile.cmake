@@ -10,6 +10,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/Users/jo/omega_recovery/linux_rt/Chimera/CMakeLists.txt"
   "CMakeFiles/4.2.0/CMakeCXXCompiler.cmake"
   "CMakeFiles/4.2.0/CMakeSystem.cmake"
+  "/Users/jo/omega_recovery/linux_rt/Chimera/cfd_engine/CMakeLists.txt"
   "/Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/CMakeLists.txt"
   "/opt/homebrew/share/cmake/Modules/CMakeCXXCompiler.cmake.in"
   "/opt/homebrew/share/cmake/Modules/CMakeCXXCompilerABI.cpp"
@@ -35,6 +36,9 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/opt/homebrew/share/cmake/Modules/CMakeTestCXXCompiler.cmake"
   "/opt/homebrew/share/cmake/Modules/CMakeTestCompilerCommon.cmake"
   "/opt/homebrew/share/cmake/Modules/CMakeUnixFindMake.cmake"
+  "/opt/homebrew/share/cmake/Modules/CheckCXXSourceCompiles.cmake"
+  "/opt/homebrew/share/cmake/Modules/CheckIncludeFileCXX.cmake"
+  "/opt/homebrew/share/cmake/Modules/CheckLibraryExists.cmake"
   "/opt/homebrew/share/cmake/Modules/Compiler/ADSP-DetermineCompiler.cmake"
   "/opt/homebrew/share/cmake/Modules/Compiler/ARMCC-DetermineCompiler.cmake"
   "/opt/homebrew/share/cmake/Modules/Compiler/ARMClang-DetermineCompiler.cmake"
@@ -80,14 +84,14 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/opt/homebrew/share/cmake/Modules/Compiler/XL-CXX-DetermineCompiler.cmake"
   "/opt/homebrew/share/cmake/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake"
   "/opt/homebrew/share/cmake/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake"
-  "/opt/homebrew/share/cmake/Modules/FindOpenSSL.cmake"
   "/opt/homebrew/share/cmake/Modules/FindPackageHandleStandardArgs.cmake"
   "/opt/homebrew/share/cmake/Modules/FindPackageMessage.cmake"
-  "/opt/homebrew/share/cmake/Modules/FindPkgConfig.cmake"
+  "/opt/homebrew/share/cmake/Modules/FindThreads.cmake"
   "/opt/homebrew/share/cmake/Modules/Internal/CMakeCXXLinkerInformation.cmake"
   "/opt/homebrew/share/cmake/Modules/Internal/CMakeCommonLinkerInformation.cmake"
   "/opt/homebrew/share/cmake/Modules/Internal/CMakeDetermineLinkerId.cmake"
   "/opt/homebrew/share/cmake/Modules/Internal/CMakeInspectCXXLinker.cmake"
+  "/opt/homebrew/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
   "/opt/homebrew/share/cmake/Modules/Internal/FeatureTesting.cmake"
   "/opt/homebrew/share/cmake/Modules/Linker/AppleClang-CXX.cmake"
   "/opt/homebrew/share/cmake/Modules/Linker/AppleClang.cmake"
@@ -116,10 +120,12 @@ set(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/4.2.0/CMakeCXXCompiler.cmake"
   "CMakeFiles/CMakeDirectoryInformation.cmake"
   "crypto_engine/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "cfd_engine/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/chimera.dir/DependInfo.cmake"
   "crypto_engine/CMakeFiles/crypto_engine.dir/DependInfo.cmake"
+  "cfd_engine/CMakeFiles/cfd_engine.dir/DependInfo.cmake"
   )

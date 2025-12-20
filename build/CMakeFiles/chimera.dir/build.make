@@ -95,9 +95,8 @@ chimera_EXTERNAL_OBJECTS =
 
 chimera: CMakeFiles/chimera.dir/main.cpp.o
 chimera: CMakeFiles/chimera.dir/build.make
-chimera: crypto_engine/libcrypto_engine.a
-chimera: /opt/homebrew/Cellar/openssl@3/3.6.0/lib/libssl.dylib
-chimera: /opt/homebrew/Cellar/openssl@3/3.6.0/lib/libcrypto.dylib
+chimera: lib/libcrypto_engine.a
+chimera: cfd_engine/libcfd_engine.a
 chimera: CMakeFiles/chimera.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/jo/omega_recovery/linux_rt/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable chimera"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/chimera.dir/link.txt --verbose=$(VERBOSE)

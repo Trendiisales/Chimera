@@ -72,10 +72,24 @@ include crypto_engine/CMakeFiles/crypto_engine.dir/flags.make
 crypto_engine/CMakeFiles/crypto_engine.dir/codegen:
 .PHONY : crypto_engine/CMakeFiles/crypto_engine.dir/codegen
 
+crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthFeed.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/flags.make
+crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthFeed.cpp.o: /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/BinanceDepthFeed.cpp
+crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthFeed.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/omega_recovery/linux_rt/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthFeed.cpp.o"
+	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthFeed.cpp.o -MF CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthFeed.cpp.o.d -o CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthFeed.cpp.o -c /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/BinanceDepthFeed.cpp
+
+crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthFeed.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthFeed.cpp.i"
+	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/BinanceDepthFeed.cpp > CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthFeed.cpp.i
+
+crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthFeed.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthFeed.cpp.s"
+	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/BinanceDepthFeed.cpp -o CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthFeed.cpp.s
+
 crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceRestClient.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/flags.make
 crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceRestClient.cpp.o: /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/BinanceRestClient.cpp
 crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceRestClient.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/omega_recovery/linux_rt/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceRestClient.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/omega_recovery/linux_rt/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceRestClient.cpp.o"
 	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceRestClient.cpp.o -MF CMakeFiles/crypto_engine.dir/src/binance/BinanceRestClient.cpp.o.d -o CMakeFiles/crypto_engine.dir/src/binance/BinanceRestClient.cpp.o -c /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/BinanceRestClient.cpp
 
 crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceRestClient.cpp.i: cmake_force
@@ -86,80 +100,10 @@ crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceRestClient.cpp.s: 
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/crypto_engine.dir/src/binance/BinanceRestClient.cpp.s"
 	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/BinanceRestClient.cpp -o CMakeFiles/crypto_engine.dir/src/binance/BinanceRestClient.cpp.s
 
-crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthParser.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/flags.make
-crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthParser.cpp.o: /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/BinanceDepthParser.cpp
-crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthParser.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/omega_recovery/linux_rt/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthParser.cpp.o"
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthParser.cpp.o -MF CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthParser.cpp.o.d -o CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthParser.cpp.o -c /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/BinanceDepthParser.cpp
-
-crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthParser.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthParser.cpp.i"
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/BinanceDepthParser.cpp > CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthParser.cpp.i
-
-crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthParser.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthParser.cpp.s"
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/BinanceDepthParser.cpp -o CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthParser.cpp.s
-
-crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/TlsWebSocket.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/flags.make
-crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/TlsWebSocket.cpp.o: /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/TlsWebSocket.cpp
-crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/TlsWebSocket.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/omega_recovery/linux_rt/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/TlsWebSocket.cpp.o"
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/TlsWebSocket.cpp.o -MF CMakeFiles/crypto_engine.dir/src/binance/TlsWebSocket.cpp.o.d -o CMakeFiles/crypto_engine.dir/src/binance/TlsWebSocket.cpp.o -c /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/TlsWebSocket.cpp
-
-crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/TlsWebSocket.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/crypto_engine.dir/src/binance/TlsWebSocket.cpp.i"
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/TlsWebSocket.cpp > CMakeFiles/crypto_engine.dir/src/binance/TlsWebSocket.cpp.i
-
-crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/TlsWebSocket.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/crypto_engine.dir/src/binance/TlsWebSocket.cpp.s"
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/TlsWebSocket.cpp -o CMakeFiles/crypto_engine.dir/src/binance/TlsWebSocket.cpp.s
-
-crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthAdapterWS.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/flags.make
-crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthAdapterWS.cpp.o: /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/BinanceDepthAdapterWS.cpp
-crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthAdapterWS.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/omega_recovery/linux_rt/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthAdapterWS.cpp.o"
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthAdapterWS.cpp.o -MF CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthAdapterWS.cpp.o.d -o CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthAdapterWS.cpp.o -c /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/BinanceDepthAdapterWS.cpp
-
-crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthAdapterWS.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthAdapterWS.cpp.i"
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/BinanceDepthAdapterWS.cpp > CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthAdapterWS.cpp.i
-
-crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthAdapterWS.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthAdapterWS.cpp.s"
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/BinanceDepthAdapterWS.cpp -o CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthAdapterWS.cpp.s
-
-crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceHFTFeed.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/flags.make
-crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceHFTFeed.cpp.o: /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/BinanceHFTFeed.cpp
-crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceHFTFeed.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/omega_recovery/linux_rt/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceHFTFeed.cpp.o"
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceHFTFeed.cpp.o -MF CMakeFiles/crypto_engine.dir/src/binance/BinanceHFTFeed.cpp.o.d -o CMakeFiles/crypto_engine.dir/src/binance/BinanceHFTFeed.cpp.o -c /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/BinanceHFTFeed.cpp
-
-crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceHFTFeed.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/crypto_engine.dir/src/binance/BinanceHFTFeed.cpp.i"
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/BinanceHFTFeed.cpp > CMakeFiles/crypto_engine.dir/src/binance/BinanceHFTFeed.cpp.i
-
-crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceHFTFeed.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/crypto_engine.dir/src/binance/BinanceHFTFeed.cpp.s"
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/BinanceHFTFeed.cpp -o CMakeFiles/crypto_engine.dir/src/binance/BinanceHFTFeed.cpp.s
-
-crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceReplay.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/flags.make
-crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceReplay.cpp.o: /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/BinanceReplay.cpp
-crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceReplay.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/omega_recovery/linux_rt/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceReplay.cpp.o"
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceReplay.cpp.o -MF CMakeFiles/crypto_engine.dir/src/binance/BinanceReplay.cpp.o.d -o CMakeFiles/crypto_engine.dir/src/binance/BinanceReplay.cpp.o -c /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/BinanceReplay.cpp
-
-crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceReplay.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/crypto_engine.dir/src/binance/BinanceReplay.cpp.i"
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/BinanceReplay.cpp > CMakeFiles/crypto_engine.dir/src/binance/BinanceReplay.cpp.i
-
-crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceReplay.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/crypto_engine.dir/src/binance/BinanceReplay.cpp.s"
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/BinanceReplay.cpp -o CMakeFiles/crypto_engine.dir/src/binance/BinanceReplay.cpp.s
-
 crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceSupervisor.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/flags.make
 crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceSupervisor.cpp.o: /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/BinanceSupervisor.cpp
 crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceSupervisor.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/omega_recovery/linux_rt/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceSupervisor.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/omega_recovery/linux_rt/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceSupervisor.cpp.o"
 	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceSupervisor.cpp.o -MF CMakeFiles/crypto_engine.dir/src/binance/BinanceSupervisor.cpp.o.d -o CMakeFiles/crypto_engine.dir/src/binance/BinanceSupervisor.cpp.o -c /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/BinanceSupervisor.cpp
 
 crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceSupervisor.cpp.i: cmake_force
@@ -173,7 +117,7 @@ crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceSupervisor.cpp.s: 
 crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinaryLogWriter.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/flags.make
 crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinaryLogWriter.cpp.o: /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/BinaryLogWriter.cpp
 crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinaryLogWriter.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/omega_recovery/linux_rt/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinaryLogWriter.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/omega_recovery/linux_rt/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinaryLogWriter.cpp.o"
 	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinaryLogWriter.cpp.o -MF CMakeFiles/crypto_engine.dir/src/binance/BinaryLogWriter.cpp.o.d -o CMakeFiles/crypto_engine.dir/src/binance/BinaryLogWriter.cpp.o -c /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/BinaryLogWriter.cpp
 
 crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinaryLogWriter.cpp.i: cmake_force
@@ -184,24 +128,38 @@ crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinaryLogWriter.cpp.s: cm
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/crypto_engine.dir/src/binance/BinaryLogWriter.cpp.s"
 	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/BinaryLogWriter.cpp -o CMakeFiles/crypto_engine.dir/src/binance/BinaryLogWriter.cpp.s
 
-crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/PrometheusMetrics.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/flags.make
-crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/PrometheusMetrics.cpp.o: /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/PrometheusMetrics.cpp
-crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/PrometheusMetrics.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/omega_recovery/linux_rt/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/PrometheusMetrics.cpp.o"
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/PrometheusMetrics.cpp.o -MF CMakeFiles/crypto_engine.dir/src/binance/PrometheusMetrics.cpp.o.d -o CMakeFiles/crypto_engine.dir/src/binance/PrometheusMetrics.cpp.o -c /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/PrometheusMetrics.cpp
+crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/DeltaGate.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/flags.make
+crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/DeltaGate.cpp.o: /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/DeltaGate.cpp
+crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/DeltaGate.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/omega_recovery/linux_rt/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/DeltaGate.cpp.o"
+	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/DeltaGate.cpp.o -MF CMakeFiles/crypto_engine.dir/src/binance/DeltaGate.cpp.o.d -o CMakeFiles/crypto_engine.dir/src/binance/DeltaGate.cpp.o -c /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/DeltaGate.cpp
 
-crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/PrometheusMetrics.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/crypto_engine.dir/src/binance/PrometheusMetrics.cpp.i"
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/PrometheusMetrics.cpp > CMakeFiles/crypto_engine.dir/src/binance/PrometheusMetrics.cpp.i
+crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/DeltaGate.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/crypto_engine.dir/src/binance/DeltaGate.cpp.i"
+	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/DeltaGate.cpp > CMakeFiles/crypto_engine.dir/src/binance/DeltaGate.cpp.i
 
-crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/PrometheusMetrics.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/crypto_engine.dir/src/binance/PrometheusMetrics.cpp.s"
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/PrometheusMetrics.cpp -o CMakeFiles/crypto_engine.dir/src/binance/PrometheusMetrics.cpp.s
+crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/DeltaGate.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/crypto_engine.dir/src/binance/DeltaGate.cpp.s"
+	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/DeltaGate.cpp -o CMakeFiles/crypto_engine.dir/src/binance/DeltaGate.cpp.s
+
+crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/OrderBook.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/flags.make
+crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/OrderBook.cpp.o: /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/OrderBook.cpp
+crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/OrderBook.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/omega_recovery/linux_rt/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/OrderBook.cpp.o"
+	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/OrderBook.cpp.o -MF CMakeFiles/crypto_engine.dir/src/binance/OrderBook.cpp.o.d -o CMakeFiles/crypto_engine.dir/src/binance/OrderBook.cpp.o -c /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/OrderBook.cpp
+
+crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/OrderBook.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/crypto_engine.dir/src/binance/OrderBook.cpp.i"
+	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/OrderBook.cpp > CMakeFiles/crypto_engine.dir/src/binance/OrderBook.cpp.i
+
+crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/OrderBook.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/crypto_engine.dir/src/binance/OrderBook.cpp.s"
+	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/OrderBook.cpp -o CMakeFiles/crypto_engine.dir/src/binance/OrderBook.cpp.s
 
 crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/PrometheusServer.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/flags.make
 crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/PrometheusServer.cpp.o: /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/PrometheusServer.cpp
 crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/PrometheusServer.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/omega_recovery/linux_rt/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/PrometheusServer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/omega_recovery/linux_rt/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/PrometheusServer.cpp.o"
 	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/PrometheusServer.cpp.o -MF CMakeFiles/crypto_engine.dir/src/binance/PrometheusServer.cpp.o.d -o CMakeFiles/crypto_engine.dir/src/binance/PrometheusServer.cpp.o -c /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/PrometheusServer.cpp
 
 crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/PrometheusServer.cpp.i: cmake_force
@@ -212,88 +170,50 @@ crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/PrometheusServer.cpp.s: c
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/crypto_engine.dir/src/binance/PrometheusServer.cpp.s"
 	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/PrometheusServer.cpp -o CMakeFiles/crypto_engine.dir/src/binance/PrometheusServer.cpp.s
 
-crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/ExecutionLogger.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/flags.make
-crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/ExecutionLogger.cpp.o: /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/ExecutionLogger.cpp
-crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/ExecutionLogger.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/omega_recovery/linux_rt/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/ExecutionLogger.cpp.o"
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/ExecutionLogger.cpp.o -MF CMakeFiles/crypto_engine.dir/src/binance/ExecutionLogger.cpp.o.d -o CMakeFiles/crypto_engine.dir/src/binance/ExecutionLogger.cpp.o -c /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/ExecutionLogger.cpp
+crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/VenueHealth.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/flags.make
+crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/VenueHealth.cpp.o: /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/VenueHealth.cpp
+crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/VenueHealth.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/omega_recovery/linux_rt/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/VenueHealth.cpp.o"
+	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/VenueHealth.cpp.o -MF CMakeFiles/crypto_engine.dir/src/binance/VenueHealth.cpp.o.d -o CMakeFiles/crypto_engine.dir/src/binance/VenueHealth.cpp.o -c /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/VenueHealth.cpp
 
-crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/ExecutionLogger.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/crypto_engine.dir/src/binance/ExecutionLogger.cpp.i"
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/ExecutionLogger.cpp > CMakeFiles/crypto_engine.dir/src/binance/ExecutionLogger.cpp.i
+crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/VenueHealth.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/crypto_engine.dir/src/binance/VenueHealth.cpp.i"
+	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/VenueHealth.cpp > CMakeFiles/crypto_engine.dir/src/binance/VenueHealth.cpp.i
 
-crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/ExecutionLogger.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/crypto_engine.dir/src/binance/ExecutionLogger.cpp.s"
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/ExecutionLogger.cpp -o CMakeFiles/crypto_engine.dir/src/binance/ExecutionLogger.cpp.s
-
-crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/MidPriceStrategy.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/flags.make
-crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/MidPriceStrategy.cpp.o: /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/MidPriceStrategy.cpp
-crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/MidPriceStrategy.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/omega_recovery/linux_rt/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/MidPriceStrategy.cpp.o"
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/MidPriceStrategy.cpp.o -MF CMakeFiles/crypto_engine.dir/src/binance/MidPriceStrategy.cpp.o.d -o CMakeFiles/crypto_engine.dir/src/binance/MidPriceStrategy.cpp.o -c /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/MidPriceStrategy.cpp
-
-crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/MidPriceStrategy.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/crypto_engine.dir/src/binance/MidPriceStrategy.cpp.i"
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/MidPriceStrategy.cpp > CMakeFiles/crypto_engine.dir/src/binance/MidPriceStrategy.cpp.i
-
-crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/MidPriceStrategy.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/crypto_engine.dir/src/binance/MidPriceStrategy.cpp.s"
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/MidPriceStrategy.cpp -o CMakeFiles/crypto_engine.dir/src/binance/MidPriceStrategy.cpp.s
-
-crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/StrategyBridge.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/flags.make
-crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/StrategyBridge.cpp.o: /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/StrategyBridge.cpp
-crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/StrategyBridge.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/omega_recovery/linux_rt/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/StrategyBridge.cpp.o"
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/StrategyBridge.cpp.o -MF CMakeFiles/crypto_engine.dir/src/binance/StrategyBridge.cpp.o.d -o CMakeFiles/crypto_engine.dir/src/binance/StrategyBridge.cpp.o -c /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/StrategyBridge.cpp
-
-crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/StrategyBridge.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/crypto_engine.dir/src/binance/StrategyBridge.cpp.i"
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/StrategyBridge.cpp > CMakeFiles/crypto_engine.dir/src/binance/StrategyBridge.cpp.i
-
-crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/StrategyBridge.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/crypto_engine.dir/src/binance/StrategyBridge.cpp.s"
-	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/StrategyBridge.cpp -o CMakeFiles/crypto_engine.dir/src/binance/StrategyBridge.cpp.s
+crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/VenueHealth.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/crypto_engine.dir/src/binance/VenueHealth.cpp.s"
+	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/src/binance/VenueHealth.cpp -o CMakeFiles/crypto_engine.dir/src/binance/VenueHealth.cpp.s
 
 # Object files for target crypto_engine
 crypto_engine_OBJECTS = \
+"CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthFeed.cpp.o" \
 "CMakeFiles/crypto_engine.dir/src/binance/BinanceRestClient.cpp.o" \
-"CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthParser.cpp.o" \
-"CMakeFiles/crypto_engine.dir/src/binance/TlsWebSocket.cpp.o" \
-"CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthAdapterWS.cpp.o" \
-"CMakeFiles/crypto_engine.dir/src/binance/BinanceHFTFeed.cpp.o" \
-"CMakeFiles/crypto_engine.dir/src/binance/BinanceReplay.cpp.o" \
 "CMakeFiles/crypto_engine.dir/src/binance/BinanceSupervisor.cpp.o" \
 "CMakeFiles/crypto_engine.dir/src/binance/BinaryLogWriter.cpp.o" \
-"CMakeFiles/crypto_engine.dir/src/binance/PrometheusMetrics.cpp.o" \
+"CMakeFiles/crypto_engine.dir/src/binance/DeltaGate.cpp.o" \
+"CMakeFiles/crypto_engine.dir/src/binance/OrderBook.cpp.o" \
 "CMakeFiles/crypto_engine.dir/src/binance/PrometheusServer.cpp.o" \
-"CMakeFiles/crypto_engine.dir/src/binance/ExecutionLogger.cpp.o" \
-"CMakeFiles/crypto_engine.dir/src/binance/MidPriceStrategy.cpp.o" \
-"CMakeFiles/crypto_engine.dir/src/binance/StrategyBridge.cpp.o"
+"CMakeFiles/crypto_engine.dir/src/binance/VenueHealth.cpp.o"
 
 # External object files for target crypto_engine
 crypto_engine_EXTERNAL_OBJECTS =
 
-crypto_engine/libcrypto_engine.a: crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceRestClient.cpp.o
-crypto_engine/libcrypto_engine.a: crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthParser.cpp.o
-crypto_engine/libcrypto_engine.a: crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/TlsWebSocket.cpp.o
-crypto_engine/libcrypto_engine.a: crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthAdapterWS.cpp.o
-crypto_engine/libcrypto_engine.a: crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceHFTFeed.cpp.o
-crypto_engine/libcrypto_engine.a: crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceReplay.cpp.o
-crypto_engine/libcrypto_engine.a: crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceSupervisor.cpp.o
-crypto_engine/libcrypto_engine.a: crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinaryLogWriter.cpp.o
-crypto_engine/libcrypto_engine.a: crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/PrometheusMetrics.cpp.o
-crypto_engine/libcrypto_engine.a: crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/PrometheusServer.cpp.o
-crypto_engine/libcrypto_engine.a: crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/ExecutionLogger.cpp.o
-crypto_engine/libcrypto_engine.a: crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/MidPriceStrategy.cpp.o
-crypto_engine/libcrypto_engine.a: crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/StrategyBridge.cpp.o
-crypto_engine/libcrypto_engine.a: crypto_engine/CMakeFiles/crypto_engine.dir/build.make
-crypto_engine/libcrypto_engine.a: crypto_engine/CMakeFiles/crypto_engine.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/jo/omega_recovery/linux_rt/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Linking CXX static library libcrypto_engine.a"
+lib/libcrypto_engine.a: crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthFeed.cpp.o
+lib/libcrypto_engine.a: crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceRestClient.cpp.o
+lib/libcrypto_engine.a: crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceSupervisor.cpp.o
+lib/libcrypto_engine.a: crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinaryLogWriter.cpp.o
+lib/libcrypto_engine.a: crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/DeltaGate.cpp.o
+lib/libcrypto_engine.a: crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/OrderBook.cpp.o
+lib/libcrypto_engine.a: crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/PrometheusServer.cpp.o
+lib/libcrypto_engine.a: crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/VenueHealth.cpp.o
+lib/libcrypto_engine.a: crypto_engine/CMakeFiles/crypto_engine.dir/build.make
+lib/libcrypto_engine.a: crypto_engine/CMakeFiles/crypto_engine.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/jo/omega_recovery/linux_rt/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX static library ../lib/libcrypto_engine.a"
 	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && $(CMAKE_COMMAND) -P CMakeFiles/crypto_engine.dir/cmake_clean_target.cmake
 	cd /Users/jo/omega_recovery/linux_rt/Chimera/build/crypto_engine && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/crypto_engine.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-crypto_engine/CMakeFiles/crypto_engine.dir/build: crypto_engine/libcrypto_engine.a
+crypto_engine/CMakeFiles/crypto_engine.dir/build: lib/libcrypto_engine.a
 .PHONY : crypto_engine/CMakeFiles/crypto_engine.dir/build
 
 crypto_engine/CMakeFiles/crypto_engine.dir/clean:

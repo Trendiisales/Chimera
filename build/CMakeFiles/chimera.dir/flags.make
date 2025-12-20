@@ -4,9 +4,9 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/include -isystem /opt/homebrew/Cellar/openssl@3/3.6.0/include
+CXX_INCLUDES = -I/Users/jo/omega_recovery/linux_rt/Chimera/crypto_engine/include -I/Users/jo/omega_recovery/linux_rt/Chimera/cfd_engine/include
 
-CXX_FLAGSarm64 = -O3 -DNDEBUG -std=gnu++20 -arch arm64
+CXX_FLAGSarm64 = -std=gnu++20 -arch arm64
 
-CXX_FLAGS = -O3 -DNDEBUG -std=gnu++20 -arch arm64
+CXX_FLAGS = -std=gnu++20 -arch arm64
 

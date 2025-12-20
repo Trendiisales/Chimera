@@ -1,6 +1,4 @@
 #pragma once
-
-#include <thread>
 #include <atomic>
 
 namespace binance {
@@ -11,14 +9,10 @@ public:
     ~PrometheusServer();
 
     void start();
-    void stop();
 
 private:
     int port;
-    std::atomic<bool> running{false};
-    std::thread server_thread;
-
-    void run();
+    std::atomic<bool> running;
 };
 
-} // namespace binance
+}

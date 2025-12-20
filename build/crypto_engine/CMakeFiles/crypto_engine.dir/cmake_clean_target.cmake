@@ -1,3 +1,3 @@
 file(REMOVE_RECURSE
-  "libcrypto_engine.a"
+  "../lib/libcrypto_engine.a"
 )

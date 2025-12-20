@@ -1,3 +1,5 @@
 build/
 logs/
 *.blog
+*.log
+*.bin
