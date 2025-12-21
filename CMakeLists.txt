@@ -16,7 +16,7 @@ add_executable(chimera
     src/strategy/LatencyGlobals.cpp
     src/engine/IntentQueue.cpp
     src/strategy/StrategyRegistry.cpp
-    src/strategy/DummyStrategy.cpp
+    src/strategy/HeartbeatStrategy.cpp
     src/metrics/HttpMetricsServer.cpp
 )
 
@@ -30,7 +30,7 @@ add_executable(chimera_full
     src/strategy/LatencyGlobals.cpp
     src/engine/IntentQueue.cpp
     src/strategy/StrategyRegistry.cpp
-    src/strategy/DummyStrategy.cpp
+    src/strategy/HeartbeatStrategy.cpp
     src/metrics/HttpMetricsServer.cpp
 )
 

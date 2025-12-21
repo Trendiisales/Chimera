@@ -8,7 +8,7 @@
 #include "execution/PositionTracker.hpp"
 #include "engine/IntentQueue.hpp"
 #include "strategy/StrategyRegistry.hpp"
-#include "strategy/DummyStrategy.hpp"
+#include "strategy/HeartbeatStrategy.hpp"
 
 static std::atomic<bool> g_running{true};
 static void on_signal(int){ g_running.store(false); }
@@ -25,11 +25,11 @@ int main() {
     exec.start(queue);
 
     StrategyRegistry registry;
-    registry.add(std::make_unique<DummyStrategy>(queue));
+    registry.add(std::make_unique<HeartbeatStrategy>(queue));
 
     while (g_running.load()) {
         registry.tick_all();
-        std::this_thread::sleep_for(std::chrono::milliseconds(200));
+        std::this_thread::sleep_for(std::chrono::milliseconds(50));
     }
     return 0;
 }
