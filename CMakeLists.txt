@@ -17,6 +17,7 @@ add_executable(chimera
     src/micro/MicrostructureEngine.cpp
     src/strategy/LatencyGlobals.cpp
     src/engine/IntentQueue.cpp
+    src/strategy/DummyStrategy.cpp
 )
 
 add_executable(chimera_full
@@ -28,6 +29,7 @@ add_executable(chimera_full
     src/micro/MicrostructureEngine.cpp
     src/strategy/LatencyGlobals.cpp
     src/engine/IntentQueue.cpp
+    src/strategy/DummyStrategy.cpp
 )
 
 target_include_directories(chimera PRIVATE
