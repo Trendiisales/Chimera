@@ -6,6 +6,9 @@
 #include "risk/RiskManager.hpp"
 #include "execution/PositionTracker.hpp"
 #include "engine/IntentQueue.hpp"
+#include "metrics/MetricsServer.hpp"
+
+static MetricsServer g_metrics;
 
 ExecutionEngine::ExecutionEngine(RiskManager& risk,
                                  PositionTracker& positions)
@@ -19,14 +22,15 @@ void ExecutionEngine::start(IntentQueue& queue) {
     worker_ = std::thread([this, &queue]() {
         std::cout << "[EXEC] execution thread started" << std::endl;
 
-        unsigned long long count = 0;
+        unsigned long long n = 0;
 
         while (running_.load(std::memory_order_acquire)) {
             Intent intent(Intent::BUY, "X", 0.0);
             if (queue.try_pop(intent)) {
-                ++count;
-                if ((count % 5) == 0) {
-                    std::cout << "[EXEC] consumed intents=" << count << std::endl;
+                g_metrics.inc();
+                ++n;
+                if ((n % 5) == 0) {
+                    std::cout << "[METRICS] intents=" << g_metrics.value() << std::endl;
                 }
             } else {
                 std::this_thread::sleep_for(std::chrono::milliseconds(1));
@@ -37,7 +41,5 @@ void ExecutionEngine::start(IntentQueue& queue) {
 
 ExecutionEngine::~ExecutionEngine() {
     running_.store(false, std::memory_order_release);
-    if (worker_.joinable()) {
-        worker_.join();
-    }
+    if (worker_.joinable()) worker_.join();
 }
