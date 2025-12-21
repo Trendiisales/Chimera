@@ -11,8 +11,11 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/Users/jo/Chimera/main.cpp" "CMakeFiles/chimera.dir/main.cpp.o" "gcc" "CMakeFiles/chimera.dir/main.cpp.o.d"
   "/Users/jo/Chimera/src/accounting/DailyPnlStore.cpp" "CMakeFiles/chimera.dir/src/accounting/DailyPnlStore.cpp.o" "gcc" "CMakeFiles/chimera.dir/src/accounting/DailyPnlStore.cpp.o.d"
   "/Users/jo/Chimera/src/accounting/PnlLedger.cpp" "CMakeFiles/chimera.dir/src/accounting/PnlLedger.cpp.o" "gcc" "CMakeFiles/chimera.dir/src/accounting/PnlLedger.cpp.o.d"
+  "/Users/jo/Chimera/src/execution/ExecutionEngine.cpp" "CMakeFiles/chimera.dir/src/execution/ExecutionEngine.cpp.o" "gcc" "CMakeFiles/chimera.dir/src/execution/ExecutionEngine.cpp.o.d"
   "/Users/jo/Chimera/src/gui/MetricsHttpServer.cpp" "CMakeFiles/chimera.dir/src/gui/MetricsHttpServer.cpp.o" "gcc" "CMakeFiles/chimera.dir/src/gui/MetricsHttpServer.cpp.o.d"
   "/Users/jo/Chimera/src/latency/LatencyRegistry.cpp" "CMakeFiles/chimera.dir/src/latency/LatencyRegistry.cpp.o" "gcc" "CMakeFiles/chimera.dir/src/latency/LatencyRegistry.cpp.o.d"
+  "/Users/jo/Chimera/src/micro/MicrostructureEngine.cpp" "CMakeFiles/chimera.dir/src/micro/MicrostructureEngine.cpp.o" "gcc" "CMakeFiles/chimera.dir/src/micro/MicrostructureEngine.cpp.o.d"
+  "/Users/jo/Chimera/src/strategy/StrategyEngine.cpp" "CMakeFiles/chimera.dir/src/strategy/StrategyEngine.cpp.o" "gcc" "CMakeFiles/chimera.dir/src/strategy/StrategyEngine.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

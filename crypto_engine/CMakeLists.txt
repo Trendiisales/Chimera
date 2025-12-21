@@ -4,6 +4,7 @@ project(crypto_engine LANGUAGES CXX)
 
 add_library(crypto_engine STATIC
     src/binance/BinanceDepthFeed.cpp
+    src/binance/BinanceDepthStream.cpp
     src/binance/BinanceRestClient.cpp
     src/binance/BinanceSupervisor.cpp
     src/binance/BinaryLogWriter.cpp

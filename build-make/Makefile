@@ -227,6 +227,30 @@ src/accounting/PnlLedger.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/accounting/PnlLedger.cpp.s
 .PHONY : src/accounting/PnlLedger.cpp.s
 
+src/execution/ExecutionEngine.o: src/execution/ExecutionEngine.cpp.o
+.PHONY : src/execution/ExecutionEngine.o
+
+# target to build an object file
+src/execution/ExecutionEngine.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/execution/ExecutionEngine.cpp.o
+.PHONY : src/execution/ExecutionEngine.cpp.o
+
+src/execution/ExecutionEngine.i: src/execution/ExecutionEngine.cpp.i
+.PHONY : src/execution/ExecutionEngine.i
+
+# target to preprocess a source file
+src/execution/ExecutionEngine.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/execution/ExecutionEngine.cpp.i
+.PHONY : src/execution/ExecutionEngine.cpp.i
+
+src/execution/ExecutionEngine.s: src/execution/ExecutionEngine.cpp.s
+.PHONY : src/execution/ExecutionEngine.s
+
+# target to generate assembly for a file
+src/execution/ExecutionEngine.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/execution/ExecutionEngine.cpp.s
+.PHONY : src/execution/ExecutionEngine.cpp.s
+
 src/gui/MetricsHttpServer.o: src/gui/MetricsHttpServer.cpp.o
 .PHONY : src/gui/MetricsHttpServer.o
 
@@ -275,6 +299,54 @@ src/latency/LatencyRegistry.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/latency/LatencyRegistry.cpp.s
 .PHONY : src/latency/LatencyRegistry.cpp.s
 
+src/micro/MicrostructureEngine.o: src/micro/MicrostructureEngine.cpp.o
+.PHONY : src/micro/MicrostructureEngine.o
+
+# target to build an object file
+src/micro/MicrostructureEngine.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/micro/MicrostructureEngine.cpp.o
+.PHONY : src/micro/MicrostructureEngine.cpp.o
+
+src/micro/MicrostructureEngine.i: src/micro/MicrostructureEngine.cpp.i
+.PHONY : src/micro/MicrostructureEngine.i
+
+# target to preprocess a source file
+src/micro/MicrostructureEngine.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/micro/MicrostructureEngine.cpp.i
+.PHONY : src/micro/MicrostructureEngine.cpp.i
+
+src/micro/MicrostructureEngine.s: src/micro/MicrostructureEngine.cpp.s
+.PHONY : src/micro/MicrostructureEngine.s
+
+# target to generate assembly for a file
+src/micro/MicrostructureEngine.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/micro/MicrostructureEngine.cpp.s
+.PHONY : src/micro/MicrostructureEngine.cpp.s
+
+src/strategy/StrategyEngine.o: src/strategy/StrategyEngine.cpp.o
+.PHONY : src/strategy/StrategyEngine.o
+
+# target to build an object file
+src/strategy/StrategyEngine.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/strategy/StrategyEngine.cpp.o
+.PHONY : src/strategy/StrategyEngine.cpp.o
+
+src/strategy/StrategyEngine.i: src/strategy/StrategyEngine.cpp.i
+.PHONY : src/strategy/StrategyEngine.i
+
+# target to preprocess a source file
+src/strategy/StrategyEngine.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/strategy/StrategyEngine.cpp.i
+.PHONY : src/strategy/StrategyEngine.cpp.i
+
+src/strategy/StrategyEngine.s: src/strategy/StrategyEngine.cpp.s
+.PHONY : src/strategy/StrategyEngine.s
+
+# target to generate assembly for a file
+src/strategy/StrategyEngine.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/strategy/StrategyEngine.cpp.s
+.PHONY : src/strategy/StrategyEngine.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -295,12 +367,21 @@ help:
 	@echo "... src/accounting/PnlLedger.o"
 	@echo "... src/accounting/PnlLedger.i"
 	@echo "... src/accounting/PnlLedger.s"
+	@echo "... src/execution/ExecutionEngine.o"
+	@echo "... src/execution/ExecutionEngine.i"
+	@echo "... src/execution/ExecutionEngine.s"
 	@echo "... src/gui/MetricsHttpServer.o"
 	@echo "... src/gui/MetricsHttpServer.i"
 	@echo "... src/gui/MetricsHttpServer.s"
 	@echo "... src/latency/LatencyRegistry.o"
 	@echo "... src/latency/LatencyRegistry.i"
 	@echo "... src/latency/LatencyRegistry.s"
+	@echo "... src/micro/MicrostructureEngine.o"
+	@echo "... src/micro/MicrostructureEngine.i"
+	@echo "... src/micro/MicrostructureEngine.s"
+	@echo "... src/strategy/StrategyEngine.o"
+	@echo "... src/strategy/StrategyEngine.i"
+	@echo "... src/strategy/StrategyEngine.s"
 .PHONY : help
 
 

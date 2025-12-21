@@ -86,10 +86,24 @@ crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthFeed.cpp.s: c
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthFeed.cpp.s"
 	cd /Users/jo/Chimera/build-make/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jo/Chimera/crypto_engine/src/binance/BinanceDepthFeed.cpp -o CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthFeed.cpp.s
 
+crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthStream.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/flags.make
+crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthStream.cpp.o: /Users/jo/Chimera/crypto_engine/src/binance/BinanceDepthStream.cpp
+crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthStream.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/Chimera/build-make/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthStream.cpp.o"
+	cd /Users/jo/Chimera/build-make/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthStream.cpp.o -MF CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthStream.cpp.o.d -o CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthStream.cpp.o -c /Users/jo/Chimera/crypto_engine/src/binance/BinanceDepthStream.cpp
+
+crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthStream.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthStream.cpp.i"
+	cd /Users/jo/Chimera/build-make/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jo/Chimera/crypto_engine/src/binance/BinanceDepthStream.cpp > CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthStream.cpp.i
+
+crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthStream.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthStream.cpp.s"
+	cd /Users/jo/Chimera/build-make/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jo/Chimera/crypto_engine/src/binance/BinanceDepthStream.cpp -o CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthStream.cpp.s
+
 crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceRestClient.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/flags.make
 crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceRestClient.cpp.o: /Users/jo/Chimera/crypto_engine/src/binance/BinanceRestClient.cpp
 crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceRestClient.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/Chimera/build-make/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceRestClient.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/Chimera/build-make/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceRestClient.cpp.o"
 	cd /Users/jo/Chimera/build-make/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceRestClient.cpp.o -MF CMakeFiles/crypto_engine.dir/src/binance/BinanceRestClient.cpp.o.d -o CMakeFiles/crypto_engine.dir/src/binance/BinanceRestClient.cpp.o -c /Users/jo/Chimera/crypto_engine/src/binance/BinanceRestClient.cpp
 
 crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceRestClient.cpp.i: cmake_force
@@ -103,7 +117,7 @@ crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceRestClient.cpp.s: 
 crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceSupervisor.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/flags.make
 crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceSupervisor.cpp.o: /Users/jo/Chimera/crypto_engine/src/binance/BinanceSupervisor.cpp
 crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceSupervisor.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/Chimera/build-make/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceSupervisor.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/Chimera/build-make/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceSupervisor.cpp.o"
 	cd /Users/jo/Chimera/build-make/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceSupervisor.cpp.o -MF CMakeFiles/crypto_engine.dir/src/binance/BinanceSupervisor.cpp.o.d -o CMakeFiles/crypto_engine.dir/src/binance/BinanceSupervisor.cpp.o -c /Users/jo/Chimera/crypto_engine/src/binance/BinanceSupervisor.cpp
 
 crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceSupervisor.cpp.i: cmake_force
@@ -117,7 +131,7 @@ crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceSupervisor.cpp.s: 
 crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinaryLogWriter.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/flags.make
 crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinaryLogWriter.cpp.o: /Users/jo/Chimera/crypto_engine/src/binance/BinaryLogWriter.cpp
 crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinaryLogWriter.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/Chimera/build-make/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinaryLogWriter.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/Chimera/build-make/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinaryLogWriter.cpp.o"
 	cd /Users/jo/Chimera/build-make/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinaryLogWriter.cpp.o -MF CMakeFiles/crypto_engine.dir/src/binance/BinaryLogWriter.cpp.o.d -o CMakeFiles/crypto_engine.dir/src/binance/BinaryLogWriter.cpp.o -c /Users/jo/Chimera/crypto_engine/src/binance/BinaryLogWriter.cpp
 
 crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinaryLogWriter.cpp.i: cmake_force
@@ -131,7 +145,7 @@ crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinaryLogWriter.cpp.s: cm
 crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/DeltaGate.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/flags.make
 crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/DeltaGate.cpp.o: /Users/jo/Chimera/crypto_engine/src/binance/DeltaGate.cpp
 crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/DeltaGate.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/Chimera/build-make/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/DeltaGate.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/Chimera/build-make/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/DeltaGate.cpp.o"
 	cd /Users/jo/Chimera/build-make/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/DeltaGate.cpp.o -MF CMakeFiles/crypto_engine.dir/src/binance/DeltaGate.cpp.o.d -o CMakeFiles/crypto_engine.dir/src/binance/DeltaGate.cpp.o -c /Users/jo/Chimera/crypto_engine/src/binance/DeltaGate.cpp
 
 crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/DeltaGate.cpp.i: cmake_force
@@ -145,7 +159,7 @@ crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/DeltaGate.cpp.s: cmake_fo
 crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/OrderBook.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/flags.make
 crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/OrderBook.cpp.o: /Users/jo/Chimera/crypto_engine/src/binance/OrderBook.cpp
 crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/OrderBook.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/Chimera/build-make/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/OrderBook.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/Chimera/build-make/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/OrderBook.cpp.o"
 	cd /Users/jo/Chimera/build-make/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/OrderBook.cpp.o -MF CMakeFiles/crypto_engine.dir/src/binance/OrderBook.cpp.o.d -o CMakeFiles/crypto_engine.dir/src/binance/OrderBook.cpp.o -c /Users/jo/Chimera/crypto_engine/src/binance/OrderBook.cpp
 
 crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/OrderBook.cpp.i: cmake_force
@@ -159,7 +173,7 @@ crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/OrderBook.cpp.s: cmake_fo
 crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/VenueHealth.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/flags.make
 crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/VenueHealth.cpp.o: /Users/jo/Chimera/crypto_engine/src/binance/VenueHealth.cpp
 crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/VenueHealth.cpp.o: crypto_engine/CMakeFiles/crypto_engine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/Chimera/build-make/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/VenueHealth.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/Chimera/build-make/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/VenueHealth.cpp.o"
 	cd /Users/jo/Chimera/build-make/crypto_engine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/VenueHealth.cpp.o -MF CMakeFiles/crypto_engine.dir/src/binance/VenueHealth.cpp.o.d -o CMakeFiles/crypto_engine.dir/src/binance/VenueHealth.cpp.o -c /Users/jo/Chimera/crypto_engine/src/binance/VenueHealth.cpp
 
 crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/VenueHealth.cpp.i: cmake_force
@@ -173,6 +187,7 @@ crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/VenueHealth.cpp.s: cmake_
 # Object files for target crypto_engine
 crypto_engine_OBJECTS = \
 "CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthFeed.cpp.o" \
+"CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthStream.cpp.o" \
 "CMakeFiles/crypto_engine.dir/src/binance/BinanceRestClient.cpp.o" \
 "CMakeFiles/crypto_engine.dir/src/binance/BinanceSupervisor.cpp.o" \
 "CMakeFiles/crypto_engine.dir/src/binance/BinaryLogWriter.cpp.o" \
@@ -184,6 +199,7 @@ crypto_engine_OBJECTS = \
 crypto_engine_EXTERNAL_OBJECTS =
 
 lib/libcrypto_engine.a: crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthFeed.cpp.o
+lib/libcrypto_engine.a: crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthStream.cpp.o
 lib/libcrypto_engine.a: crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceRestClient.cpp.o
 lib/libcrypto_engine.a: crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceSupervisor.cpp.o
 lib/libcrypto_engine.a: crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinaryLogWriter.cpp.o
@@ -192,7 +208,7 @@ lib/libcrypto_engine.a: crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/O
 lib/libcrypto_engine.a: crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/VenueHealth.cpp.o
 lib/libcrypto_engine.a: crypto_engine/CMakeFiles/crypto_engine.dir/build.make
 lib/libcrypto_engine.a: crypto_engine/CMakeFiles/crypto_engine.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/jo/Chimera/build-make/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX static library ../lib/libcrypto_engine.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/jo/Chimera/build-make/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX static library ../lib/libcrypto_engine.a"
 	cd /Users/jo/Chimera/build-make/crypto_engine && $(CMAKE_COMMAND) -P CMakeFiles/crypto_engine.dir/cmake_clean_target.cmake
 	cd /Users/jo/Chimera/build-make/crypto_engine && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/crypto_engine.dir/link.txt --verbose=$(VERBOSE)
 

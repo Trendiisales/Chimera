@@ -154,6 +154,30 @@ src/binance/BinanceDepthFeed.cpp.s:
 	cd /Users/jo/Chimera/build-make && $(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthFeed.cpp.s
 .PHONY : src/binance/BinanceDepthFeed.cpp.s
 
+src/binance/BinanceDepthStream.o: src/binance/BinanceDepthStream.cpp.o
+.PHONY : src/binance/BinanceDepthStream.o
+
+# target to build an object file
+src/binance/BinanceDepthStream.cpp.o:
+	cd /Users/jo/Chimera/build-make && $(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthStream.cpp.o
+.PHONY : src/binance/BinanceDepthStream.cpp.o
+
+src/binance/BinanceDepthStream.i: src/binance/BinanceDepthStream.cpp.i
+.PHONY : src/binance/BinanceDepthStream.i
+
+# target to preprocess a source file
+src/binance/BinanceDepthStream.cpp.i:
+	cd /Users/jo/Chimera/build-make && $(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthStream.cpp.i
+.PHONY : src/binance/BinanceDepthStream.cpp.i
+
+src/binance/BinanceDepthStream.s: src/binance/BinanceDepthStream.cpp.s
+.PHONY : src/binance/BinanceDepthStream.s
+
+# target to generate assembly for a file
+src/binance/BinanceDepthStream.cpp.s:
+	cd /Users/jo/Chimera/build-make && $(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthStream.cpp.s
+.PHONY : src/binance/BinanceDepthStream.cpp.s
+
 src/binance/BinanceRestClient.o: src/binance/BinanceRestClient.cpp.o
 .PHONY : src/binance/BinanceRestClient.o
 
@@ -310,6 +334,9 @@ help:
 	@echo "... src/binance/BinanceDepthFeed.o"
 	@echo "... src/binance/BinanceDepthFeed.i"
 	@echo "... src/binance/BinanceDepthFeed.s"
+	@echo "... src/binance/BinanceDepthStream.o"
+	@echo "... src/binance/BinanceDepthStream.i"
+	@echo "... src/binance/BinanceDepthStream.s"
 	@echo "... src/binance/BinanceRestClient.o"
 	@echo "... src/binance/BinanceRestClient.i"
 	@echo "... src/binance/BinanceRestClient.s"

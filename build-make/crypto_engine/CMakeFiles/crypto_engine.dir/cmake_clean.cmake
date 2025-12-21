@@ -3,6 +3,8 @@ file(REMOVE_RECURSE
   "../lib/libcrypto_engine.pdb"
   "CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthFeed.cpp.o"
   "CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthFeed.cpp.o.d"
+  "CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthStream.cpp.o"
+  "CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthStream.cpp.o.d"
   "CMakeFiles/crypto_engine.dir/src/binance/BinanceRestClient.cpp.o"
   "CMakeFiles/crypto_engine.dir/src/binance/BinanceRestClient.cpp.o.d"
   "CMakeFiles/crypto_engine.dir/src/binance/BinanceSupervisor.cpp.o"
