@@ -9,6 +9,11 @@
 
 static HttpMetricsServer g_http_metrics(9102);
 
+static inline std::uint64_t now_ns() {
+    return std::chrono::duration_cast<std::chrono::nanoseconds>(
+        std::chrono::steady_clock::now().time_since_epoch()).count();
+}
+
 ExecutionEngine::ExecutionEngine(RiskManager& risk,
                                  PositionTracker& positions)
 : risk_(risk),
@@ -20,8 +25,8 @@ ExecutionEngine::ExecutionEngine(RiskManager& risk,
 void ExecutionEngine::start(IntentQueue& queue) {
     running_.store(true, std::memory_order_release);
     worker_ = std::thread([this, &queue]() {
-        Intent intent(Intent::BUY, "X", 0.0);
         while (running_.load(std::memory_order_acquire)) {
+            Intent intent(Intent::BUY, "X", 0.0, now_ns());
             if (queue.try_pop(intent)) {
                 g_http_metrics.inc_intents();
             } else {
@@ -32,7 +37,7 @@ void ExecutionEngine::start(IntentQueue& queue) {
 }
 
 ExecutionEngine::~ExecutionEngine() {
-    running_.store(false);
+    running_.store(false, std::memory_order_release);
     if (worker_.joinable()) worker_.join();
     g_http_metrics.stop();
 }

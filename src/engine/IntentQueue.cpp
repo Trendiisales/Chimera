@@ -7,9 +7,7 @@ void IntentQueue::push(const Intent& intent) {
 
 bool IntentQueue::try_pop(Intent& out) {
     std::lock_guard<std::mutex> lock(m_);
-    if (q_.empty()) {
-        return false;
-    }
+    if (q_.empty()) return false;
     out = q_.front();
     q_.pop();
     return true;
