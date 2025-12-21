@@ -1,0 +1,2 @@
+/usr/bin/ar qc ../lib/libcrypto_engine.a CMakeFiles/crypto_engine.dir/src/binance/BinanceDepthFeed.cpp.o CMakeFiles/crypto_engine.dir/src/binance/BinanceRestClient.cpp.o CMakeFiles/crypto_engine.dir/src/binance/BinanceSupervisor.cpp.o CMakeFiles/crypto_engine.dir/src/binance/BinaryLogWriter.cpp.o CMakeFiles/crypto_engine.dir/src/binance/DeltaGate.cpp.o CMakeFiles/crypto_engine.dir/src/binance/OrderBook.cpp.o CMakeFiles/crypto_engine.dir/src/binance/VenueHealth.cpp.o
+/usr/bin/ranlib ../lib/libcrypto_engine.a

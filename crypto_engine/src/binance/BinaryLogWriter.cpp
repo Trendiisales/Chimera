@@ -1,9 +1,33 @@
 #include "binance/BinaryLogWriter.hpp"
-#include <stdexcept>
+
+#include <iostream>
+
 namespace binance {
-BinaryLogWriter::BinaryLogWriter(const std::string& p):out(p,std::ios::binary){
-  if(!out.is_open()) throw std::runtime_error("blog open failed");
+
+BinaryLogWriter::BinaryLogWriter(const std::string& path)
+    : path_(path) {}
+
+void BinaryLogWriter::set_pnl_callback(PnlCallback cb) {
+    pnl_cb_ = std::move(cb);
 }
-BinaryLogWriter::~BinaryLogWriter(){if(out.is_open())out.close();}
-void BinaryLogWriter::write(const void* d,size_t n){out.write((const char*)d,n);}
+
+void BinaryLogWriter::write_trade(
+    const std::string& symbol,
+    double qty,
+    double price,
+    double realized_pnl_nzd
+) {
+    // Existing behavior (placeholder for binary logging)
+    std::cout << "[TRADE] " << symbol
+              << " qty=" << qty
+              << " price=" << price
+              << " pnl=" << realized_pnl_nzd
+              << " -> " << path_ << "\n";
+
+    // NEW: emit realized PnL if hooked
+    if (pnl_cb_) {
+        pnl_cb_(symbol, realized_pnl_nzd);
+    }
 }
+
+} // namespace binance

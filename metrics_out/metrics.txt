@@ -1,0 +1,6 @@
+chimera_pnl_nzd 0
+chimera_daily_loss_limit_nzd -200
+chimera_latency_crypto_ns 0
+chimera_latency_cfd_ns 0
+chimera_latency_metrics_ns 761417
+chimera_uptime_seconds 190

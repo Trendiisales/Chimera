@@ -9,6 +9,10 @@ add_subdirectory(cfd_engine)
 
 add_executable(chimera
     main.cpp
+    src/accounting/PnlLedger.cpp
+    src/accounting/DailyPnlStore.cpp
+    src/gui/MetricsHttpServer.cpp
+    src/latency/LatencyRegistry.cpp
 )
 
 target_link_libraries(chimera
@@ -17,5 +21,7 @@ target_link_libraries(chimera
 )
 
 target_include_directories(chimera PUBLIC
+    include
+    src
     crypto_engine/include
 )

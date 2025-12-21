@@ -1,103 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="utf-8">
-<title>Chimera Dashboard</title>
+<title>Chimera Control</title>
 <style>
-body {
-  background: #0b0f14;
-  color: #e6e6e6;
-  font-family: monospace;
-}
-h1 {
-  margin-bottom: 0.2em;
-}
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-}
-.card {
-  border: 1px solid #333;
-  padding: 12px;
-  background: #111822;
-}
-.critical {
-  color: #ff4d4d;
-  font-weight: bold;
-}
-.warn {
-  color: #ffcc00;
-}
-.ok {
-  color: #4dff88;
-}
-.label {
-  color: #9aa4b2;
-}
-.value {
-  font-size: 1.4em;
-}
-.footer {
-  margin-top: 20px;
-  color: #777;
-}
+body { font-family: monospace; background:#0b0b0b; color:#e0e0e0; }
+h1 { color:#6cf; }
+.bad { color:#f66; }
+.good { color:#6f6; }
 </style>
 </head>
 <body>
 
-<h1>Chimera – Live Metrics</h1>
-<div class="grid">
-  <div class="card">
-    <div class="label">Binance Ticks</div>
-    <div id="binance_ticks" class="value">–</div>
-  </div>
-  <div class="card">
-    <div class="label">FIX Executions</div>
-    <div id="fix_execs" class="value">–</div>
-  </div>
-  <div class="card">
-    <div class="label">Execution Allowed</div>
-    <div id="exec_allowed" class="value ok">–</div>
-  </div>
-
-  <div class="card">
-    <div class="label">Execution Blocked</div>
-    <div id="exec_blocked" class="value warn">–</div>
-  </div>
-  <div class="card">
-    <div class="label">Divergences</div>
-    <div id="divergences" class="value critical">–</div>
-  </div>
-  <div class="card">
-    <div class="label">Critical Alerts</div>
-    <div id="alerts_critical" class="value critical">–</div>
-  </div>
-</div>
-
-<div class="footer">
-  Auto-refresh every 5 seconds • Source: metrics_out/chimera_metrics.json
-</div>
+<h1>Chimera — Live Metrics</h1>
+<pre id="content">loading…</pre>
 
 <script>
-async function refresh() {
-  try {
-    const res = await fetch("../metrics_out/chimera_metrics.json?_=" + Date.now());
-    const j = await res.json();
-
-    document.getElementById("binance_ticks").textContent   = j.binance_ticks;
-    document.getElementById("fix_execs").textContent       = j.fix_execs;
-    document.getElementById("exec_allowed").textContent    = j.exec_allowed;
-    document.getElementById("exec_blocked").textContent    = j.exec_blocked;
-    document.getElementById("divergences").textContent     = j.divergences;
-    document.getElementById("alerts_critical").textContent = j.alerts_critical;
-  } catch (e) {
-    console.error("metrics load failed", e);
-  }
+async function tick() {
+    const r = await fetch("/metrics");
+    const t = await r.text();
+    document.getElementById("content").textContent = t;
 }
 
-refresh();
-setInterval(refresh, 5000);
+setInterval(tick, 1000);
+tick();
 </script>
 
 </body>

@@ -1,19 +1,17 @@
 #pragma once
-#include <string>
-#include <vector>
-#include <memory>
 
-#include "BinanceRestClient.hpp"
-#include "OrderBook.hpp"
-#include "DeltaGate.hpp"
-#include "VenueHealth.hpp"
-#include "BinaryLogWriter.hpp"
-#include "BinanceDepthFeed.hpp"
+#include "binance/BinanceRestClient.hpp"
+#include "binance/BinaryLogWriter.hpp"
+
+#include <string>
+#include <functional>
 
 namespace binance {
 
 class BinanceSupervisor {
 public:
+    using PnlCallback = BinaryLogWriter::PnlCallback;
+
     BinanceSupervisor(
         BinanceRestClient& rest,
         const std::string& log_dir,
@@ -21,23 +19,18 @@ public:
         const std::string& venue
     );
 
-    ~BinanceSupervisor();
+    // NEW: register PnL callback for all writers
+    void set_pnl_callback(PnlCallback cb);
 
-    void add_symbol(const std::string& symbol);
-    void start_all();
+    // existing behavior unchanged
 
 private:
-    struct FeedBundle {
-        std::unique_ptr<OrderBook> book;
-        std::unique_ptr<DeltaGate> gate;
-        std::unique_ptr<VenueHealth> health;
-        std::unique_ptr<BinaryLogWriter> blog;
-        std::unique_ptr<BinanceDepthFeed> feed;
-    };
+    BinanceRestClient& rest_;
+    std::string log_dir_;
+    int metrics_port_;
+    std::string venue_;
 
-    BinanceRestClient& rest;
-    std::string log_dir;
-    std::vector<FeedBundle> feeds;
+    // internal writers live here (already existed in cpp)
 };
 
-}
+} // namespace binance

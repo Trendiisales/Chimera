@@ -1,36 +1,42 @@
 #include "binance/BinanceSupervisor.hpp"
+
 #include <iostream>
+#include <memory>
+#include <unordered_map>
 
 namespace binance {
 
+struct BookCtx {
+    std::unique_ptr<BinaryLogWriter> blog;
+};
+
+static std::unordered_map<std::string, BookCtx> g_books;
+
 BinanceSupervisor::BinanceSupervisor(
-    BinanceRestClient& r,
-    const std::string& dir,
-    int,
-    const std::string&
+    BinanceRestClient& rest,
+    const std::string& log_dir,
+    int metrics_port,
+    const std::string& venue
 )
-: rest(r), log_dir(dir) {}
-
-BinanceSupervisor::~BinanceSupervisor() = default;
-
-void BinanceSupervisor::add_symbol(const std::string& symbol) {
-    FeedBundle b;
-    b.book   = std::make_unique<OrderBook>();
-    b.gate   = std::make_unique<DeltaGate>();
-    b.health = std::make_unique<VenueHealth>();
-    b.blog   = std::make_unique<BinaryLogWriter>(log_dir + "/" + symbol + ".blog");
-    b.feed   = std::make_unique<BinanceDepthFeed>(
-        rest, *b.book, *b.gate, *b.health, *b.blog
-    );
-
-    feeds.push_back(std::move(b));
-    std::cout << "[SUPERVISOR] Added symbol " << symbol << "\n";
-}
-
-void BinanceSupervisor::start_all() {
-    for (auto& f : feeds) {
-        f.feed->start();
+    : rest_(rest),
+      log_dir_(log_dir),
+      metrics_port_(metrics_port),
+      venue_(venue)
+{
+    for (const auto& symbol : {"BTCUSDT", "ETHUSDT"}) {
+        BookCtx b;
+        b.blog = std::make_unique<BinaryLogWriter>(
+            log_dir_ + "/" + symbol + ".blog"
+        );
+        g_books.emplace(symbol, std::move(b));
+        std::cout << "[SUPERVISOR] Added symbol " << symbol << "\n";
     }
 }
 
+void BinanceSupervisor::set_pnl_callback(PnlCallback cb) {
+    for (auto& kv : g_books) {
+        kv.second.blog->set_pnl_callback(cb);
+    }
 }
+
+} // namespace binance
