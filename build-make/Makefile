@@ -117,6 +117,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named crypto_engine
+
+# Build rule for target.
+crypto_engine: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 crypto_engine
+.PHONY : crypto_engine
+
+# fast build rule for target.
+crypto_engine/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/crypto_engine.dir/build.make CMakeFiles/crypto_engine.dir/build
+.PHONY : crypto_engine/fast
+
+#=============================================================================
 # Target rules for targets named chimera
 
 # Build rule for target.
@@ -129,31 +142,173 @@ chimera/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/build
 .PHONY : chimera/fast
 
-#=============================================================================
-# Target rules for targets named crypto_engine
+crypto_engine/src/binance/BinanceDepthFeed.o: crypto_engine/src/binance/BinanceDepthFeed.cpp.o
+.PHONY : crypto_engine/src/binance/BinanceDepthFeed.o
 
-# Build rule for target.
-crypto_engine: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 crypto_engine
-.PHONY : crypto_engine
+# target to build an object file
+crypto_engine/src/binance/BinanceDepthFeed.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/crypto_engine/src/binance/BinanceDepthFeed.cpp.o
+.PHONY : crypto_engine/src/binance/BinanceDepthFeed.cpp.o
 
-# fast build rule for target.
-crypto_engine/fast:
-	$(MAKE) $(MAKESILENT) -f crypto_engine/CMakeFiles/crypto_engine.dir/build.make crypto_engine/CMakeFiles/crypto_engine.dir/build
-.PHONY : crypto_engine/fast
+crypto_engine/src/binance/BinanceDepthFeed.i: crypto_engine/src/binance/BinanceDepthFeed.cpp.i
+.PHONY : crypto_engine/src/binance/BinanceDepthFeed.i
 
-#=============================================================================
-# Target rules for targets named cfd_engine
+# target to preprocess a source file
+crypto_engine/src/binance/BinanceDepthFeed.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/crypto_engine/src/binance/BinanceDepthFeed.cpp.i
+.PHONY : crypto_engine/src/binance/BinanceDepthFeed.cpp.i
 
-# Build rule for target.
-cfd_engine: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 cfd_engine
-.PHONY : cfd_engine
+crypto_engine/src/binance/BinanceDepthFeed.s: crypto_engine/src/binance/BinanceDepthFeed.cpp.s
+.PHONY : crypto_engine/src/binance/BinanceDepthFeed.s
 
-# fast build rule for target.
-cfd_engine/fast:
-	$(MAKE) $(MAKESILENT) -f cfd_engine/CMakeFiles/cfd_engine.dir/build.make cfd_engine/CMakeFiles/cfd_engine.dir/build
-.PHONY : cfd_engine/fast
+# target to generate assembly for a file
+crypto_engine/src/binance/BinanceDepthFeed.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/crypto_engine/src/binance/BinanceDepthFeed.cpp.s
+.PHONY : crypto_engine/src/binance/BinanceDepthFeed.cpp.s
+
+crypto_engine/src/binance/BinanceRestClient.o: crypto_engine/src/binance/BinanceRestClient.cpp.o
+.PHONY : crypto_engine/src/binance/BinanceRestClient.o
+
+# target to build an object file
+crypto_engine/src/binance/BinanceRestClient.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/crypto_engine.dir/build.make CMakeFiles/crypto_engine.dir/crypto_engine/src/binance/BinanceRestClient.cpp.o
+.PHONY : crypto_engine/src/binance/BinanceRestClient.cpp.o
+
+crypto_engine/src/binance/BinanceRestClient.i: crypto_engine/src/binance/BinanceRestClient.cpp.i
+.PHONY : crypto_engine/src/binance/BinanceRestClient.i
+
+# target to preprocess a source file
+crypto_engine/src/binance/BinanceRestClient.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/crypto_engine.dir/build.make CMakeFiles/crypto_engine.dir/crypto_engine/src/binance/BinanceRestClient.cpp.i
+.PHONY : crypto_engine/src/binance/BinanceRestClient.cpp.i
+
+crypto_engine/src/binance/BinanceRestClient.s: crypto_engine/src/binance/BinanceRestClient.cpp.s
+.PHONY : crypto_engine/src/binance/BinanceRestClient.s
+
+# target to generate assembly for a file
+crypto_engine/src/binance/BinanceRestClient.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/crypto_engine.dir/build.make CMakeFiles/crypto_engine.dir/crypto_engine/src/binance/BinanceRestClient.cpp.s
+.PHONY : crypto_engine/src/binance/BinanceRestClient.cpp.s
+
+crypto_engine/src/binance/BinanceSupervisor.o: crypto_engine/src/binance/BinanceSupervisor.cpp.o
+.PHONY : crypto_engine/src/binance/BinanceSupervisor.o
+
+# target to build an object file
+crypto_engine/src/binance/BinanceSupervisor.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/crypto_engine.dir/build.make CMakeFiles/crypto_engine.dir/crypto_engine/src/binance/BinanceSupervisor.cpp.o
+.PHONY : crypto_engine/src/binance/BinanceSupervisor.cpp.o
+
+crypto_engine/src/binance/BinanceSupervisor.i: crypto_engine/src/binance/BinanceSupervisor.cpp.i
+.PHONY : crypto_engine/src/binance/BinanceSupervisor.i
+
+# target to preprocess a source file
+crypto_engine/src/binance/BinanceSupervisor.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/crypto_engine.dir/build.make CMakeFiles/crypto_engine.dir/crypto_engine/src/binance/BinanceSupervisor.cpp.i
+.PHONY : crypto_engine/src/binance/BinanceSupervisor.cpp.i
+
+crypto_engine/src/binance/BinanceSupervisor.s: crypto_engine/src/binance/BinanceSupervisor.cpp.s
+.PHONY : crypto_engine/src/binance/BinanceSupervisor.s
+
+# target to generate assembly for a file
+crypto_engine/src/binance/BinanceSupervisor.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/crypto_engine.dir/build.make CMakeFiles/crypto_engine.dir/crypto_engine/src/binance/BinanceSupervisor.cpp.s
+.PHONY : crypto_engine/src/binance/BinanceSupervisor.cpp.s
+
+crypto_engine/src/binance/BinaryLogWriter.o: crypto_engine/src/binance/BinaryLogWriter.cpp.o
+.PHONY : crypto_engine/src/binance/BinaryLogWriter.o
+
+# target to build an object file
+crypto_engine/src/binance/BinaryLogWriter.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/crypto_engine.dir/build.make CMakeFiles/crypto_engine.dir/crypto_engine/src/binance/BinaryLogWriter.cpp.o
+.PHONY : crypto_engine/src/binance/BinaryLogWriter.cpp.o
+
+crypto_engine/src/binance/BinaryLogWriter.i: crypto_engine/src/binance/BinaryLogWriter.cpp.i
+.PHONY : crypto_engine/src/binance/BinaryLogWriter.i
+
+# target to preprocess a source file
+crypto_engine/src/binance/BinaryLogWriter.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/crypto_engine.dir/build.make CMakeFiles/crypto_engine.dir/crypto_engine/src/binance/BinaryLogWriter.cpp.i
+.PHONY : crypto_engine/src/binance/BinaryLogWriter.cpp.i
+
+crypto_engine/src/binance/BinaryLogWriter.s: crypto_engine/src/binance/BinaryLogWriter.cpp.s
+.PHONY : crypto_engine/src/binance/BinaryLogWriter.s
+
+# target to generate assembly for a file
+crypto_engine/src/binance/BinaryLogWriter.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/crypto_engine.dir/build.make CMakeFiles/crypto_engine.dir/crypto_engine/src/binance/BinaryLogWriter.cpp.s
+.PHONY : crypto_engine/src/binance/BinaryLogWriter.cpp.s
+
+crypto_engine/src/binance/DeltaGate.o: crypto_engine/src/binance/DeltaGate.cpp.o
+.PHONY : crypto_engine/src/binance/DeltaGate.o
+
+# target to build an object file
+crypto_engine/src/binance/DeltaGate.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/crypto_engine.dir/build.make CMakeFiles/crypto_engine.dir/crypto_engine/src/binance/DeltaGate.cpp.o
+.PHONY : crypto_engine/src/binance/DeltaGate.cpp.o
+
+crypto_engine/src/binance/DeltaGate.i: crypto_engine/src/binance/DeltaGate.cpp.i
+.PHONY : crypto_engine/src/binance/DeltaGate.i
+
+# target to preprocess a source file
+crypto_engine/src/binance/DeltaGate.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/crypto_engine.dir/build.make CMakeFiles/crypto_engine.dir/crypto_engine/src/binance/DeltaGate.cpp.i
+.PHONY : crypto_engine/src/binance/DeltaGate.cpp.i
+
+crypto_engine/src/binance/DeltaGate.s: crypto_engine/src/binance/DeltaGate.cpp.s
+.PHONY : crypto_engine/src/binance/DeltaGate.s
+
+# target to generate assembly for a file
+crypto_engine/src/binance/DeltaGate.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/crypto_engine.dir/build.make CMakeFiles/crypto_engine.dir/crypto_engine/src/binance/DeltaGate.cpp.s
+.PHONY : crypto_engine/src/binance/DeltaGate.cpp.s
+
+crypto_engine/src/binance/OrderBook.o: crypto_engine/src/binance/OrderBook.cpp.o
+.PHONY : crypto_engine/src/binance/OrderBook.o
+
+# target to build an object file
+crypto_engine/src/binance/OrderBook.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/crypto_engine.dir/build.make CMakeFiles/crypto_engine.dir/crypto_engine/src/binance/OrderBook.cpp.o
+.PHONY : crypto_engine/src/binance/OrderBook.cpp.o
+
+crypto_engine/src/binance/OrderBook.i: crypto_engine/src/binance/OrderBook.cpp.i
+.PHONY : crypto_engine/src/binance/OrderBook.i
+
+# target to preprocess a source file
+crypto_engine/src/binance/OrderBook.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/crypto_engine.dir/build.make CMakeFiles/crypto_engine.dir/crypto_engine/src/binance/OrderBook.cpp.i
+.PHONY : crypto_engine/src/binance/OrderBook.cpp.i
+
+crypto_engine/src/binance/OrderBook.s: crypto_engine/src/binance/OrderBook.cpp.s
+.PHONY : crypto_engine/src/binance/OrderBook.s
+
+# target to generate assembly for a file
+crypto_engine/src/binance/OrderBook.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/crypto_engine.dir/build.make CMakeFiles/crypto_engine.dir/crypto_engine/src/binance/OrderBook.cpp.s
+.PHONY : crypto_engine/src/binance/OrderBook.cpp.s
+
+crypto_engine/src/binance/VenueHealth.o: crypto_engine/src/binance/VenueHealth.cpp.o
+.PHONY : crypto_engine/src/binance/VenueHealth.o
+
+# target to build an object file
+crypto_engine/src/binance/VenueHealth.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/crypto_engine.dir/build.make CMakeFiles/crypto_engine.dir/crypto_engine/src/binance/VenueHealth.cpp.o
+.PHONY : crypto_engine/src/binance/VenueHealth.cpp.o
+
+crypto_engine/src/binance/VenueHealth.i: crypto_engine/src/binance/VenueHealth.cpp.i
+.PHONY : crypto_engine/src/binance/VenueHealth.i
+
+# target to preprocess a source file
+crypto_engine/src/binance/VenueHealth.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/crypto_engine.dir/build.make CMakeFiles/crypto_engine.dir/crypto_engine/src/binance/VenueHealth.cpp.i
+.PHONY : crypto_engine/src/binance/VenueHealth.cpp.i
+
+crypto_engine/src/binance/VenueHealth.s: crypto_engine/src/binance/VenueHealth.cpp.s
+.PHONY : crypto_engine/src/binance/VenueHealth.s
+
+# target to generate assembly for a file
+crypto_engine/src/binance/VenueHealth.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/crypto_engine.dir/build.make CMakeFiles/crypto_engine.dir/crypto_engine/src/binance/VenueHealth.cpp.s
+.PHONY : crypto_engine/src/binance/VenueHealth.cpp.s
 
 main.o: main.cpp.o
 .PHONY : main.o
@@ -203,30 +358,6 @@ src/accounting/DailyPnlStore.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/accounting/DailyPnlStore.cpp.s
 .PHONY : src/accounting/DailyPnlStore.cpp.s
 
-src/accounting/PnlLedger.o: src/accounting/PnlLedger.cpp.o
-.PHONY : src/accounting/PnlLedger.o
-
-# target to build an object file
-src/accounting/PnlLedger.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/accounting/PnlLedger.cpp.o
-.PHONY : src/accounting/PnlLedger.cpp.o
-
-src/accounting/PnlLedger.i: src/accounting/PnlLedger.cpp.i
-.PHONY : src/accounting/PnlLedger.i
-
-# target to preprocess a source file
-src/accounting/PnlLedger.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/accounting/PnlLedger.cpp.i
-.PHONY : src/accounting/PnlLedger.cpp.i
-
-src/accounting/PnlLedger.s: src/accounting/PnlLedger.cpp.s
-.PHONY : src/accounting/PnlLedger.s
-
-# target to generate assembly for a file
-src/accounting/PnlLedger.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/accounting/PnlLedger.cpp.s
-.PHONY : src/accounting/PnlLedger.cpp.s
-
 src/execution/ExecutionEngine.o: src/execution/ExecutionEngine.cpp.o
 .PHONY : src/execution/ExecutionEngine.o
 
@@ -251,53 +382,29 @@ src/execution/ExecutionEngine.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/execution/ExecutionEngine.cpp.s
 .PHONY : src/execution/ExecutionEngine.cpp.s
 
-src/gui/MetricsHttpServer.o: src/gui/MetricsHttpServer.cpp.o
-.PHONY : src/gui/MetricsHttpServer.o
+src/execution/PositionTracker.o: src/execution/PositionTracker.cpp.o
+.PHONY : src/execution/PositionTracker.o
 
 # target to build an object file
-src/gui/MetricsHttpServer.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/gui/MetricsHttpServer.cpp.o
-.PHONY : src/gui/MetricsHttpServer.cpp.o
+src/execution/PositionTracker.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/execution/PositionTracker.cpp.o
+.PHONY : src/execution/PositionTracker.cpp.o
 
-src/gui/MetricsHttpServer.i: src/gui/MetricsHttpServer.cpp.i
-.PHONY : src/gui/MetricsHttpServer.i
-
-# target to preprocess a source file
-src/gui/MetricsHttpServer.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/gui/MetricsHttpServer.cpp.i
-.PHONY : src/gui/MetricsHttpServer.cpp.i
-
-src/gui/MetricsHttpServer.s: src/gui/MetricsHttpServer.cpp.s
-.PHONY : src/gui/MetricsHttpServer.s
-
-# target to generate assembly for a file
-src/gui/MetricsHttpServer.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/gui/MetricsHttpServer.cpp.s
-.PHONY : src/gui/MetricsHttpServer.cpp.s
-
-src/latency/LatencyRegistry.o: src/latency/LatencyRegistry.cpp.o
-.PHONY : src/latency/LatencyRegistry.o
-
-# target to build an object file
-src/latency/LatencyRegistry.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/latency/LatencyRegistry.cpp.o
-.PHONY : src/latency/LatencyRegistry.cpp.o
-
-src/latency/LatencyRegistry.i: src/latency/LatencyRegistry.cpp.i
-.PHONY : src/latency/LatencyRegistry.i
+src/execution/PositionTracker.i: src/execution/PositionTracker.cpp.i
+.PHONY : src/execution/PositionTracker.i
 
 # target to preprocess a source file
-src/latency/LatencyRegistry.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/latency/LatencyRegistry.cpp.i
-.PHONY : src/latency/LatencyRegistry.cpp.i
+src/execution/PositionTracker.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/execution/PositionTracker.cpp.i
+.PHONY : src/execution/PositionTracker.cpp.i
 
-src/latency/LatencyRegistry.s: src/latency/LatencyRegistry.cpp.s
-.PHONY : src/latency/LatencyRegistry.s
+src/execution/PositionTracker.s: src/execution/PositionTracker.cpp.s
+.PHONY : src/execution/PositionTracker.s
 
 # target to generate assembly for a file
-src/latency/LatencyRegistry.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/latency/LatencyRegistry.cpp.s
-.PHONY : src/latency/LatencyRegistry.cpp.s
+src/execution/PositionTracker.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/execution/PositionTracker.cpp.s
+.PHONY : src/execution/PositionTracker.cpp.s
 
 src/micro/MicrostructureEngine.o: src/micro/MicrostructureEngine.cpp.o
 .PHONY : src/micro/MicrostructureEngine.o
@@ -322,6 +429,54 @@ src/micro/MicrostructureEngine.s: src/micro/MicrostructureEngine.cpp.s
 src/micro/MicrostructureEngine.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/micro/MicrostructureEngine.cpp.s
 .PHONY : src/micro/MicrostructureEngine.cpp.s
+
+src/risk/RiskManager.o: src/risk/RiskManager.cpp.o
+.PHONY : src/risk/RiskManager.o
+
+# target to build an object file
+src/risk/RiskManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/risk/RiskManager.cpp.o
+.PHONY : src/risk/RiskManager.cpp.o
+
+src/risk/RiskManager.i: src/risk/RiskManager.cpp.i
+.PHONY : src/risk/RiskManager.i
+
+# target to preprocess a source file
+src/risk/RiskManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/risk/RiskManager.cpp.i
+.PHONY : src/risk/RiskManager.cpp.i
+
+src/risk/RiskManager.s: src/risk/RiskManager.cpp.s
+.PHONY : src/risk/RiskManager.s
+
+# target to generate assembly for a file
+src/risk/RiskManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/risk/RiskManager.cpp.s
+.PHONY : src/risk/RiskManager.cpp.s
+
+src/strategy/LatencyGlobals.o: src/strategy/LatencyGlobals.cpp.o
+.PHONY : src/strategy/LatencyGlobals.o
+
+# target to build an object file
+src/strategy/LatencyGlobals.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/strategy/LatencyGlobals.cpp.o
+.PHONY : src/strategy/LatencyGlobals.cpp.o
+
+src/strategy/LatencyGlobals.i: src/strategy/LatencyGlobals.cpp.i
+.PHONY : src/strategy/LatencyGlobals.i
+
+# target to preprocess a source file
+src/strategy/LatencyGlobals.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/strategy/LatencyGlobals.cpp.i
+.PHONY : src/strategy/LatencyGlobals.cpp.i
+
+src/strategy/LatencyGlobals.s: src/strategy/LatencyGlobals.cpp.s
+.PHONY : src/strategy/LatencyGlobals.s
+
+# target to generate assembly for a file
+src/strategy/LatencyGlobals.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/strategy/LatencyGlobals.cpp.s
+.PHONY : src/strategy/LatencyGlobals.cpp.s
 
 src/strategy/StrategyEngine.o: src/strategy/StrategyEngine.cpp.o
 .PHONY : src/strategy/StrategyEngine.o
@@ -355,30 +510,50 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... cfd_engine"
 	@echo "... chimera"
 	@echo "... crypto_engine"
+	@echo "... crypto_engine/src/binance/BinanceDepthFeed.o"
+	@echo "... crypto_engine/src/binance/BinanceDepthFeed.i"
+	@echo "... crypto_engine/src/binance/BinanceDepthFeed.s"
+	@echo "... crypto_engine/src/binance/BinanceRestClient.o"
+	@echo "... crypto_engine/src/binance/BinanceRestClient.i"
+	@echo "... crypto_engine/src/binance/BinanceRestClient.s"
+	@echo "... crypto_engine/src/binance/BinanceSupervisor.o"
+	@echo "... crypto_engine/src/binance/BinanceSupervisor.i"
+	@echo "... crypto_engine/src/binance/BinanceSupervisor.s"
+	@echo "... crypto_engine/src/binance/BinaryLogWriter.o"
+	@echo "... crypto_engine/src/binance/BinaryLogWriter.i"
+	@echo "... crypto_engine/src/binance/BinaryLogWriter.s"
+	@echo "... crypto_engine/src/binance/DeltaGate.o"
+	@echo "... crypto_engine/src/binance/DeltaGate.i"
+	@echo "... crypto_engine/src/binance/DeltaGate.s"
+	@echo "... crypto_engine/src/binance/OrderBook.o"
+	@echo "... crypto_engine/src/binance/OrderBook.i"
+	@echo "... crypto_engine/src/binance/OrderBook.s"
+	@echo "... crypto_engine/src/binance/VenueHealth.o"
+	@echo "... crypto_engine/src/binance/VenueHealth.i"
+	@echo "... crypto_engine/src/binance/VenueHealth.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
 	@echo "... src/accounting/DailyPnlStore.o"
 	@echo "... src/accounting/DailyPnlStore.i"
 	@echo "... src/accounting/DailyPnlStore.s"
-	@echo "... src/accounting/PnlLedger.o"
-	@echo "... src/accounting/PnlLedger.i"
-	@echo "... src/accounting/PnlLedger.s"
 	@echo "... src/execution/ExecutionEngine.o"
 	@echo "... src/execution/ExecutionEngine.i"
 	@echo "... src/execution/ExecutionEngine.s"
-	@echo "... src/gui/MetricsHttpServer.o"
-	@echo "... src/gui/MetricsHttpServer.i"
-	@echo "... src/gui/MetricsHttpServer.s"
-	@echo "... src/latency/LatencyRegistry.o"
-	@echo "... src/latency/LatencyRegistry.i"
-	@echo "... src/latency/LatencyRegistry.s"
+	@echo "... src/execution/PositionTracker.o"
+	@echo "... src/execution/PositionTracker.i"
+	@echo "... src/execution/PositionTracker.s"
 	@echo "... src/micro/MicrostructureEngine.o"
 	@echo "... src/micro/MicrostructureEngine.i"
 	@echo "... src/micro/MicrostructureEngine.s"
+	@echo "... src/risk/RiskManager.o"
+	@echo "... src/risk/RiskManager.i"
+	@echo "... src/risk/RiskManager.s"
+	@echo "... src/strategy/LatencyGlobals.o"
+	@echo "... src/strategy/LatencyGlobals.i"
+	@echo "... src/strategy/LatencyGlobals.s"
 	@echo "... src/strategy/StrategyEngine.o"
 	@echo "... src/strategy/StrategyEngine.i"
 	@echo "... src/strategy/StrategyEngine.s"

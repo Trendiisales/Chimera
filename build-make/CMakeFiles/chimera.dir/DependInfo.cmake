@@ -8,13 +8,14 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/Users/jo/Chimera/crypto_engine/src/binance/BinanceDepthFeed.cpp" "CMakeFiles/chimera.dir/crypto_engine/src/binance/BinanceDepthFeed.cpp.o" "gcc" "CMakeFiles/chimera.dir/crypto_engine/src/binance/BinanceDepthFeed.cpp.o.d"
   "/Users/jo/Chimera/main.cpp" "CMakeFiles/chimera.dir/main.cpp.o" "gcc" "CMakeFiles/chimera.dir/main.cpp.o.d"
   "/Users/jo/Chimera/src/accounting/DailyPnlStore.cpp" "CMakeFiles/chimera.dir/src/accounting/DailyPnlStore.cpp.o" "gcc" "CMakeFiles/chimera.dir/src/accounting/DailyPnlStore.cpp.o.d"
-  "/Users/jo/Chimera/src/accounting/PnlLedger.cpp" "CMakeFiles/chimera.dir/src/accounting/PnlLedger.cpp.o" "gcc" "CMakeFiles/chimera.dir/src/accounting/PnlLedger.cpp.o.d"
   "/Users/jo/Chimera/src/execution/ExecutionEngine.cpp" "CMakeFiles/chimera.dir/src/execution/ExecutionEngine.cpp.o" "gcc" "CMakeFiles/chimera.dir/src/execution/ExecutionEngine.cpp.o.d"
-  "/Users/jo/Chimera/src/gui/MetricsHttpServer.cpp" "CMakeFiles/chimera.dir/src/gui/MetricsHttpServer.cpp.o" "gcc" "CMakeFiles/chimera.dir/src/gui/MetricsHttpServer.cpp.o.d"
-  "/Users/jo/Chimera/src/latency/LatencyRegistry.cpp" "CMakeFiles/chimera.dir/src/latency/LatencyRegistry.cpp.o" "gcc" "CMakeFiles/chimera.dir/src/latency/LatencyRegistry.cpp.o.d"
+  "/Users/jo/Chimera/src/execution/PositionTracker.cpp" "CMakeFiles/chimera.dir/src/execution/PositionTracker.cpp.o" "gcc" "CMakeFiles/chimera.dir/src/execution/PositionTracker.cpp.o.d"
   "/Users/jo/Chimera/src/micro/MicrostructureEngine.cpp" "CMakeFiles/chimera.dir/src/micro/MicrostructureEngine.cpp.o" "gcc" "CMakeFiles/chimera.dir/src/micro/MicrostructureEngine.cpp.o.d"
+  "/Users/jo/Chimera/src/risk/RiskManager.cpp" "CMakeFiles/chimera.dir/src/risk/RiskManager.cpp.o" "gcc" "CMakeFiles/chimera.dir/src/risk/RiskManager.cpp.o.d"
+  "/Users/jo/Chimera/src/strategy/LatencyGlobals.cpp" "CMakeFiles/chimera.dir/src/strategy/LatencyGlobals.cpp.o" "gcc" "CMakeFiles/chimera.dir/src/strategy/LatencyGlobals.cpp.o.d"
   "/Users/jo/Chimera/src/strategy/StrategyEngine.cpp" "CMakeFiles/chimera.dir/src/strategy/StrategyEngine.cpp.o" "gcc" "CMakeFiles/chimera.dir/src/strategy/StrategyEngine.cpp.o.d"
   )
 

@@ -1,22 +1,11 @@
 #include "risk/RiskManager.hpp"
+#include "execution/Fill.hpp"
 
-RiskManager::RiskManager(double daily_loss_limit_nzd)
-: daily_limit_(daily_loss_limit_nzd) {}
+void RiskManager::on_fill(const Fill& f) {
+    double delta =
+        (f.side == "SELL")
+            ? (f.price * f.qty)
+            : -(f.price * f.qty);
 
-void RiskManager::on_pnl_update(double total_pnl) {
-    last_pnl_.store(total_pnl, std::memory_order_relaxed);
-
-    if (!killed_.load(std::memory_order_relaxed) &&
-        total_pnl <= -daily_limit_) {
-        killed_.store(true, std::memory_order_relaxed);
-        reason_ = "DAILY_LOSS_LIMIT_BREACH";
-    }
-}
-
-bool RiskManager::is_killed() const {
-    return killed_.load(std::memory_order_relaxed);
-}
-
-const std::string& RiskManager::kill_reason() const {
-    return reason_;
+    pnl_ += delta;
 }

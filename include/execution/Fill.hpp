@@ -1,11 +1,9 @@
 #pragma once
 #include <string>
-#include <cstdint>
 
 struct Fill {
     std::string symbol;
-    double qty;
+    std::string side;   // BUY / SELL
     double price;
-    double fee;
-    int64_t ts_ns;
+    double qty;
 };

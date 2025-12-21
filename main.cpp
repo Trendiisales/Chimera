@@ -1,18 +1,39 @@
+#include <iostream>
+#include <thread>
+#include <chrono>
+#include <unordered_map>
+
 #include "binance/BinanceSupervisor.hpp"
 #include "binance/OrderBook.hpp"
 
 #include "micro/MicrostructureEngine.hpp"
 #include "strategy/StrategyEngine.hpp"
-#include "gui/MetricsHttpServer.hpp"
+#include "execution/ExecutionEngine.hpp"
+#include "execution/PositionTracker.hpp"
 
-#include <thread>
-#include <chrono>
-#include <unordered_map>
+#include "accounting/PnlLedger.hpp"
+#include "accounting/DailyPnlStore.hpp"
+#include "risk/RiskManager.hpp"
+
+using namespace std::chrono_literals;
 
 int main() {
-    // -------------------------------------------------
-    // Binance supervisor (self-managed, no lifecycle)
-    // -------------------------------------------------
+    // ----------------------------
+    // Accounting + Risk
+    // ----------------------------
+    PnlLedger pnl;
+    DailyPnlStore daily_pnl(0.0);
+    RiskManager risk(1000.0);
+
+    // ----------------------------
+    // Execution
+    // ----------------------------
+    PositionTracker positions;
+    ExecutionEngine exec(risk, positions);
+
+    // ----------------------------
+    // Binance
+    // ----------------------------
     binance::BinanceRestClient rest;
     binance::BinanceSupervisor binance(
         rest,
@@ -21,39 +42,40 @@ int main() {
         "BINANCE"
     );
 
-    // -------------------------------------------------
-    // Local order books (engine-main only)
-    // -------------------------------------------------
-    binance::OrderBook btc_book;
-    binance::OrderBook eth_book;
-
-    std::unordered_map<std::string, binance::OrderBook*> books {
-        {"BTCUSDT", &btc_book},
-        {"ETHUSDT", &eth_book}
-    };
-
-    // -------------------------------------------------
-    // Microstructure + strategies (no execution yet)
-    // -------------------------------------------------
-    MicrostructureEngine micro(books);
-
-    // ExecutionEngine intentionally NOT constructed here
-    // StrategyEngine will be engine-only (signals only)
-    StrategyEngine strategies(micro);
-
-    // -------------------------------------------------
-    // GUI
-    // -------------------------------------------------
-    MetricsHttpServer gui(8080);
-    gui.start();
-
-    // -------------------------------------------------
-    // Engine loop (pure signal generation)
-    // -------------------------------------------------
-    while (true) {
-        strategies.update();
-        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+    // ----------------------------
+    // Build OrderBook* map (FIXED)
+    // ----------------------------
+    std::unordered_map<std::string, binance::OrderBook*> book_ptrs;
+    for (auto& kv : binance.books()) {
+        book_ptrs.emplace(
+            kv.first,
+            const_cast<binance::OrderBook*>(&kv.second)
+        );
     }
 
+    // ----------------------------
+    // Microstructure
+    // ----------------------------
+    MicrostructureEngine micro(book_ptrs);
+
+    // ----------------------------
+    // Strategies
+    // ----------------------------
+    StrategyEngine strategies(micro, exec);
+
+    // ----------------------------
+    // Start feeds
+    // ----------------------------
+    binance.start();
+
+    std::cout << "[CHIMERA] running\n";
+
+    while (risk.ok()) {
+        micro.update();
+        strategies.update();
+        std::this_thread::sleep_for(10ms);
+    }
+
+    std::cout << "[CHIMERA] risk stop\n";
     return 0;
 }

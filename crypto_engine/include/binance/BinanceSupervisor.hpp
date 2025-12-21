@@ -1,17 +1,19 @@
 #pragma once
 
 #include "binance/BinanceRestClient.hpp"
+#include "binance/BinanceDepthFeed.hpp"
+#include "binance/OrderBook.hpp"
+#include "binance/DeltaGate.hpp"
+#include "binance/VenueHealth.hpp"
 #include "binance/BinaryLogWriter.hpp"
 
 #include <string>
-#include <functional>
+#include <unordered_map>
 
 namespace binance {
 
 class BinanceSupervisor {
 public:
-    using PnlCallback = BinaryLogWriter::PnlCallback;
-
     BinanceSupervisor(
         BinanceRestClient& rest,
         const std::string& log_dir,
@@ -19,10 +21,10 @@ public:
         const std::string& venue
     );
 
-    // NEW: register PnL callback for all writers
-    void set_pnl_callback(PnlCallback cb);
+    void add_symbol(const std::string& symbol);
+    void start();
 
-    // existing behavior unchanged
+    const std::unordered_map<std::string, OrderBook>& books() const;
 
 private:
     BinanceRestClient& rest_;
@@ -30,7 +32,11 @@ private:
     int metrics_port_;
     std::string venue_;
 
-    // internal writers live here (already existed in cpp)
+    std::unordered_map<std::string, OrderBook> books_;
+    std::unordered_map<std::string, DeltaGate> gates_;
+    std::unordered_map<std::string, VenueHealth> health_;
+    std::unordered_map<std::string, BinaryLogWriter> logs_;
+    std::unordered_map<std::string, BinanceDepthFeed> feeds_;
 };
 
 } // namespace binance

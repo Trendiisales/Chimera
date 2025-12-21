@@ -1,16 +1,9 @@
 #include "binance/BinanceSupervisor.hpp"
 
 #include <iostream>
-#include <memory>
-#include <unordered_map>
+#include <utility>
 
 namespace binance {
-
-struct BookCtx {
-    std::unique_ptr<BinaryLogWriter> blog;
-};
-
-static std::unordered_map<std::string, BookCtx> g_books;
 
 BinanceSupervisor::BinanceSupervisor(
     BinanceRestClient& rest,
@@ -18,25 +11,66 @@ BinanceSupervisor::BinanceSupervisor(
     int metrics_port,
     const std::string& venue
 )
-    : rest_(rest),
-      log_dir_(log_dir),
-      metrics_port_(metrics_port),
-      venue_(venue)
-{
-    for (const auto& symbol : {"BTCUSDT", "ETHUSDT"}) {
-        BookCtx b;
-        b.blog = std::make_unique<BinaryLogWriter>(
-            log_dir_ + "/" + symbol + ".blog"
-        );
-        g_books.emplace(symbol, std::move(b));
-        std::cout << "[SUPERVISOR] Added symbol " << symbol << "\n";
+: rest_(rest),
+  log_dir_(log_dir),
+  metrics_port_(metrics_port),
+  venue_(venue)
+{}
+
+void BinanceSupervisor::add_symbol(const std::string& symbol) {
+    // Order book
+    books_.emplace(
+        std::piecewise_construct,
+        std::forward_as_tuple(symbol),
+        std::forward_as_tuple()
+    );
+
+    // Delta gate
+    gates_.emplace(
+        std::piecewise_construct,
+        std::forward_as_tuple(symbol),
+        std::forward_as_tuple()
+    );
+
+    // Venue health (non-copyable atomics)
+    health_.emplace(
+        std::piecewise_construct,
+        std::forward_as_tuple(symbol),
+        std::forward_as_tuple()
+    );
+
+    // Binary log writer (by value, as per header)
+    logs_.emplace(
+        std::piecewise_construct,
+        std::forward_as_tuple(symbol),
+        std::forward_as_tuple(log_dir_ + "/" + symbol + ".blog")
+    );
+
+    // Depth feed (by value, snapshot-only)
+    feeds_.emplace(
+        std::piecewise_construct,
+        std::forward_as_tuple(symbol),
+        std::forward_as_tuple(
+            rest_,
+            books_.at(symbol),
+            gates_.at(symbol),
+            health_.at(symbol),
+            logs_.at(symbol)
+        )
+    );
+
+    std::cout << "[SUPERVISOR] Added symbol " << symbol << "\n";
+}
+
+void BinanceSupervisor::start() {
+    for (auto& kv : feeds_) {
+        kv.second.start();
     }
 }
 
-void BinanceSupervisor::set_pnl_callback(PnlCallback cb) {
-    for (auto& kv : g_books) {
-        kv.second.blog->set_pnl_callback(cb);
-    }
+const std::unordered_map<std::string, OrderBook>&
+BinanceSupervisor::books() const {
+    return books_;
 }
 
 } // namespace binance

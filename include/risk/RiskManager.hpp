@@ -1,20 +1,15 @@
 #pragma once
-
-#include <atomic>
-#include <string>
+#include "execution/Fill.hpp"
 
 class RiskManager {
 public:
-    explicit RiskManager(double daily_loss_limit_nzd);
+    explicit RiskManager(double daily_loss_limit)
+    : limit_(daily_loss_limit) {}
 
-    void on_pnl_update(double total_pnl);
-    bool is_killed() const;
-    const std::string& kill_reason() const;
+    void on_fill(const Fill& f);
+    bool ok() const { return pnl_ > -limit_; }
 
 private:
-    double daily_limit_;
-
-    std::atomic<bool> killed_{false};
-    std::atomic<double> last_pnl_{0.0};
-    std::string reason_;
+    double pnl_ = 0.0;
+    double limit_;
 };

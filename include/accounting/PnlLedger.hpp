@@ -1,21 +1,20 @@
 #pragma once
 
 #include <atomic>
-#include <string>
-#include <unordered_map>
-#include <mutex>
+#include "execution/Fill.hpp"
 
 class PnlLedger {
 public:
-    void record(const std::string& strategy, double delta_nzd);
+    void on_fill(const Fill& f) {
+        double cur = realized_.load(std::memory_order_relaxed);
+        realized_.store(cur + (f.qty * f.price),
+                        std::memory_order_relaxed);
+    }
 
-    double total_nzd() const;
-
-    // NEW: snapshot per-strategy totals
-    std::unordered_map<std::string, double> snapshot() const;
+    double realized() const {
+        return realized_.load(std::memory_order_relaxed);
+    }
 
 private:
-    mutable std::mutex mtx_;
-    std::unordered_map<std::string, double> per_strategy_;
-    std::atomic<double> total_{0.0};
+    std::atomic<double> realized_{0.0};
 };

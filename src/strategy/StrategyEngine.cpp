@@ -1,26 +1,32 @@
 #include "strategy/StrategyEngine.hpp"
-#include "micro/MicrostructureEngine.hpp"
-#include "execution/ExecutionEngine.hpp"
+#include "latency/LatencyRegistry.hpp"
 
-StrategyEngine::StrategyEngine(MicrostructureEngine& micro)
-: micro_(micro), exec_(nullptr) {
-    pnl_["spread_capture"] = 0.0;
-    pnl_["mean_revert"]    = 0.0;
-}
+#include <chrono>
 
-StrategyEngine::StrategyEngine(MicrostructureEngine& micro, ExecutionEngine& exec)
-: micro_(micro), exec_(&exec) {
-    pnl_["spread_capture"] = 0.0;
-    pnl_["mean_revert"]    = 0.0;
-}
+using clock_type = std::chrono::steady_clock;
+
+StrategyEngine::StrategyEngine(
+    MicrostructureEngine& micro,
+    ExecutionEngine& exec
+)
+: micro_(micro),
+  exec_(exec)
+{}
 
 void StrategyEngine::update() {
-    run_for_symbol("BTCUSDT");
-    run_for_symbol("ETHUSDT");
+    auto t_start = clock_type::now();
 
-    double sum = 0.0;
-    for (const auto& kv : pnl_) sum += kv.second;
-    total_.store(sum, std::memory_order_relaxed);
+    for (const auto& kv : micro_.symbols()) {
+        run_for_symbol(kv.first);
+    }
+
+    auto t_end = clock_type::now();
+    g_latency.strategy_to_exec_ns.store(
+        std::chrono::duration_cast<std::chrono::nanoseconds>(
+            t_end - t_start
+        ).count(),
+        std::memory_order_relaxed
+    );
 }
 
 void StrategyEngine::run_for_symbol(const std::string& symbol) {
@@ -31,17 +37,15 @@ void StrategyEngine::run_for_symbol(const std::string& symbol) {
 void StrategyEngine::strategy_spread_capture(const std::string& symbol) {
     double spread_bps = micro_.spread_bps(symbol);
     if (spread_bps > 5.0) {
-        pnl_["spread_capture"] += 0.01;
-
-        if (exec_) {
-            double mid = micro_.mid(symbol);
-            exec_->submit_intent(symbol, "BUY", mid, 0.01);
-        }
+        exec_.submit_intent(symbol, "BUY", micro_.mid(symbol), 0.01);
     }
 }
 
 void StrategyEngine::strategy_mean_revert(const std::string& symbol) {
-    (void)symbol;
+    double spread_bps = micro_.spread_bps(symbol);
+    if (spread_bps < 1.0) {
+        exec_.submit_intent(symbol, "SELL", micro_.mid(symbol), 0.01);
+    }
 }
 
 double StrategyEngine::total_pnl() const {

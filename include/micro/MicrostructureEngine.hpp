@@ -1,18 +1,9 @@
 #pragma once
 
-#include <atomic>
+#include "binance/OrderBook.hpp"
+
 #include <string>
 #include <unordered_map>
-
-namespace binance {
-class OrderBook;
-}
-
-struct MicroSnapshot {
-    std::atomic<double> mid{0.0};
-    std::atomic<double> spread{0.0};
-    std::atomic<double> spread_bps{0.0};
-};
 
 class MicrostructureEngine {
 public:
@@ -25,7 +16,15 @@ public:
     double mid(const std::string& symbol) const;
     double spread_bps(const std::string& symbol) const;
 
+    const std::unordered_map<std::string, binance::OrderBook*>& symbols() const {
+        return books_;
+    }
+
 private:
-    std::unordered_map<std::string, binance::OrderBook*> books_;
-    std::unordered_map<std::string, MicroSnapshot> snaps_;
+    const std::unordered_map<std::string, binance::OrderBook*>& books_;
+
+    std::unordered_map<std::string, double> mid_;
+    std::unordered_map<std::string, double> spread_;
+    std::unordered_map<std::string, double> spread_bps_;
+    std::unordered_map<std::string, double> imbalance_;
 };

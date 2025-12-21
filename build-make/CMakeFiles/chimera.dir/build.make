@@ -86,33 +86,33 @@ CMakeFiles/chimera.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/main.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jo/Chimera/main.cpp -o CMakeFiles/chimera.dir/main.cpp.s
 
-CMakeFiles/chimera.dir/src/accounting/PnlLedger.cpp.o: CMakeFiles/chimera.dir/flags.make
-CMakeFiles/chimera.dir/src/accounting/PnlLedger.cpp.o: /Users/jo/Chimera/src/accounting/PnlLedger.cpp
-CMakeFiles/chimera.dir/src/accounting/PnlLedger.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/Chimera/build-make/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/chimera.dir/src/accounting/PnlLedger.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/accounting/PnlLedger.cpp.o -MF CMakeFiles/chimera.dir/src/accounting/PnlLedger.cpp.o.d -o CMakeFiles/chimera.dir/src/accounting/PnlLedger.cpp.o -c /Users/jo/Chimera/src/accounting/PnlLedger.cpp
+CMakeFiles/chimera.dir/src/micro/MicrostructureEngine.cpp.o: CMakeFiles/chimera.dir/flags.make
+CMakeFiles/chimera.dir/src/micro/MicrostructureEngine.cpp.o: /Users/jo/Chimera/src/micro/MicrostructureEngine.cpp
+CMakeFiles/chimera.dir/src/micro/MicrostructureEngine.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/Chimera/build-make/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/chimera.dir/src/micro/MicrostructureEngine.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/micro/MicrostructureEngine.cpp.o -MF CMakeFiles/chimera.dir/src/micro/MicrostructureEngine.cpp.o.d -o CMakeFiles/chimera.dir/src/micro/MicrostructureEngine.cpp.o -c /Users/jo/Chimera/src/micro/MicrostructureEngine.cpp
 
-CMakeFiles/chimera.dir/src/accounting/PnlLedger.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/accounting/PnlLedger.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jo/Chimera/src/accounting/PnlLedger.cpp > CMakeFiles/chimera.dir/src/accounting/PnlLedger.cpp.i
+CMakeFiles/chimera.dir/src/micro/MicrostructureEngine.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/micro/MicrostructureEngine.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jo/Chimera/src/micro/MicrostructureEngine.cpp > CMakeFiles/chimera.dir/src/micro/MicrostructureEngine.cpp.i
 
-CMakeFiles/chimera.dir/src/accounting/PnlLedger.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/accounting/PnlLedger.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jo/Chimera/src/accounting/PnlLedger.cpp -o CMakeFiles/chimera.dir/src/accounting/PnlLedger.cpp.s
+CMakeFiles/chimera.dir/src/micro/MicrostructureEngine.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/micro/MicrostructureEngine.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jo/Chimera/src/micro/MicrostructureEngine.cpp -o CMakeFiles/chimera.dir/src/micro/MicrostructureEngine.cpp.s
 
-CMakeFiles/chimera.dir/src/accounting/DailyPnlStore.cpp.o: CMakeFiles/chimera.dir/flags.make
-CMakeFiles/chimera.dir/src/accounting/DailyPnlStore.cpp.o: /Users/jo/Chimera/src/accounting/DailyPnlStore.cpp
-CMakeFiles/chimera.dir/src/accounting/DailyPnlStore.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/Chimera/build-make/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/chimera.dir/src/accounting/DailyPnlStore.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/accounting/DailyPnlStore.cpp.o -MF CMakeFiles/chimera.dir/src/accounting/DailyPnlStore.cpp.o.d -o CMakeFiles/chimera.dir/src/accounting/DailyPnlStore.cpp.o -c /Users/jo/Chimera/src/accounting/DailyPnlStore.cpp
+CMakeFiles/chimera.dir/src/strategy/StrategyEngine.cpp.o: CMakeFiles/chimera.dir/flags.make
+CMakeFiles/chimera.dir/src/strategy/StrategyEngine.cpp.o: /Users/jo/Chimera/src/strategy/StrategyEngine.cpp
+CMakeFiles/chimera.dir/src/strategy/StrategyEngine.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/Chimera/build-make/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/chimera.dir/src/strategy/StrategyEngine.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/strategy/StrategyEngine.cpp.o -MF CMakeFiles/chimera.dir/src/strategy/StrategyEngine.cpp.o.d -o CMakeFiles/chimera.dir/src/strategy/StrategyEngine.cpp.o -c /Users/jo/Chimera/src/strategy/StrategyEngine.cpp
 
-CMakeFiles/chimera.dir/src/accounting/DailyPnlStore.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/accounting/DailyPnlStore.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jo/Chimera/src/accounting/DailyPnlStore.cpp > CMakeFiles/chimera.dir/src/accounting/DailyPnlStore.cpp.i
+CMakeFiles/chimera.dir/src/strategy/StrategyEngine.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/strategy/StrategyEngine.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jo/Chimera/src/strategy/StrategyEngine.cpp > CMakeFiles/chimera.dir/src/strategy/StrategyEngine.cpp.i
 
-CMakeFiles/chimera.dir/src/accounting/DailyPnlStore.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/accounting/DailyPnlStore.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jo/Chimera/src/accounting/DailyPnlStore.cpp -o CMakeFiles/chimera.dir/src/accounting/DailyPnlStore.cpp.s
+CMakeFiles/chimera.dir/src/strategy/StrategyEngine.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/strategy/StrategyEngine.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jo/Chimera/src/strategy/StrategyEngine.cpp -o CMakeFiles/chimera.dir/src/strategy/StrategyEngine.cpp.s
 
 CMakeFiles/chimera.dir/src/execution/ExecutionEngine.cpp.o: CMakeFiles/chimera.dir/flags.make
 CMakeFiles/chimera.dir/src/execution/ExecutionEngine.cpp.o: /Users/jo/Chimera/src/execution/ExecutionEngine.cpp
@@ -128,89 +128,104 @@ CMakeFiles/chimera.dir/src/execution/ExecutionEngine.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/execution/ExecutionEngine.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jo/Chimera/src/execution/ExecutionEngine.cpp -o CMakeFiles/chimera.dir/src/execution/ExecutionEngine.cpp.s
 
-CMakeFiles/chimera.dir/src/micro/MicrostructureEngine.cpp.o: CMakeFiles/chimera.dir/flags.make
-CMakeFiles/chimera.dir/src/micro/MicrostructureEngine.cpp.o: /Users/jo/Chimera/src/micro/MicrostructureEngine.cpp
-CMakeFiles/chimera.dir/src/micro/MicrostructureEngine.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/Chimera/build-make/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/chimera.dir/src/micro/MicrostructureEngine.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/micro/MicrostructureEngine.cpp.o -MF CMakeFiles/chimera.dir/src/micro/MicrostructureEngine.cpp.o.d -o CMakeFiles/chimera.dir/src/micro/MicrostructureEngine.cpp.o -c /Users/jo/Chimera/src/micro/MicrostructureEngine.cpp
+CMakeFiles/chimera.dir/src/execution/PositionTracker.cpp.o: CMakeFiles/chimera.dir/flags.make
+CMakeFiles/chimera.dir/src/execution/PositionTracker.cpp.o: /Users/jo/Chimera/src/execution/PositionTracker.cpp
+CMakeFiles/chimera.dir/src/execution/PositionTracker.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/Chimera/build-make/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/chimera.dir/src/execution/PositionTracker.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/execution/PositionTracker.cpp.o -MF CMakeFiles/chimera.dir/src/execution/PositionTracker.cpp.o.d -o CMakeFiles/chimera.dir/src/execution/PositionTracker.cpp.o -c /Users/jo/Chimera/src/execution/PositionTracker.cpp
 
-CMakeFiles/chimera.dir/src/micro/MicrostructureEngine.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/micro/MicrostructureEngine.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jo/Chimera/src/micro/MicrostructureEngine.cpp > CMakeFiles/chimera.dir/src/micro/MicrostructureEngine.cpp.i
+CMakeFiles/chimera.dir/src/execution/PositionTracker.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/execution/PositionTracker.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jo/Chimera/src/execution/PositionTracker.cpp > CMakeFiles/chimera.dir/src/execution/PositionTracker.cpp.i
 
-CMakeFiles/chimera.dir/src/micro/MicrostructureEngine.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/micro/MicrostructureEngine.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jo/Chimera/src/micro/MicrostructureEngine.cpp -o CMakeFiles/chimera.dir/src/micro/MicrostructureEngine.cpp.s
+CMakeFiles/chimera.dir/src/execution/PositionTracker.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/execution/PositionTracker.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jo/Chimera/src/execution/PositionTracker.cpp -o CMakeFiles/chimera.dir/src/execution/PositionTracker.cpp.s
 
-CMakeFiles/chimera.dir/src/strategy/StrategyEngine.cpp.o: CMakeFiles/chimera.dir/flags.make
-CMakeFiles/chimera.dir/src/strategy/StrategyEngine.cpp.o: /Users/jo/Chimera/src/strategy/StrategyEngine.cpp
-CMakeFiles/chimera.dir/src/strategy/StrategyEngine.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/Chimera/build-make/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/chimera.dir/src/strategy/StrategyEngine.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/strategy/StrategyEngine.cpp.o -MF CMakeFiles/chimera.dir/src/strategy/StrategyEngine.cpp.o.d -o CMakeFiles/chimera.dir/src/strategy/StrategyEngine.cpp.o -c /Users/jo/Chimera/src/strategy/StrategyEngine.cpp
+CMakeFiles/chimera.dir/src/accounting/DailyPnlStore.cpp.o: CMakeFiles/chimera.dir/flags.make
+CMakeFiles/chimera.dir/src/accounting/DailyPnlStore.cpp.o: /Users/jo/Chimera/src/accounting/DailyPnlStore.cpp
+CMakeFiles/chimera.dir/src/accounting/DailyPnlStore.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/Chimera/build-make/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/chimera.dir/src/accounting/DailyPnlStore.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/accounting/DailyPnlStore.cpp.o -MF CMakeFiles/chimera.dir/src/accounting/DailyPnlStore.cpp.o.d -o CMakeFiles/chimera.dir/src/accounting/DailyPnlStore.cpp.o -c /Users/jo/Chimera/src/accounting/DailyPnlStore.cpp
 
-CMakeFiles/chimera.dir/src/strategy/StrategyEngine.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/strategy/StrategyEngine.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jo/Chimera/src/strategy/StrategyEngine.cpp > CMakeFiles/chimera.dir/src/strategy/StrategyEngine.cpp.i
+CMakeFiles/chimera.dir/src/accounting/DailyPnlStore.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/accounting/DailyPnlStore.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jo/Chimera/src/accounting/DailyPnlStore.cpp > CMakeFiles/chimera.dir/src/accounting/DailyPnlStore.cpp.i
 
-CMakeFiles/chimera.dir/src/strategy/StrategyEngine.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/strategy/StrategyEngine.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jo/Chimera/src/strategy/StrategyEngine.cpp -o CMakeFiles/chimera.dir/src/strategy/StrategyEngine.cpp.s
+CMakeFiles/chimera.dir/src/accounting/DailyPnlStore.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/accounting/DailyPnlStore.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jo/Chimera/src/accounting/DailyPnlStore.cpp -o CMakeFiles/chimera.dir/src/accounting/DailyPnlStore.cpp.s
 
-CMakeFiles/chimera.dir/src/latency/LatencyRegistry.cpp.o: CMakeFiles/chimera.dir/flags.make
-CMakeFiles/chimera.dir/src/latency/LatencyRegistry.cpp.o: /Users/jo/Chimera/src/latency/LatencyRegistry.cpp
-CMakeFiles/chimera.dir/src/latency/LatencyRegistry.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/Chimera/build-make/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/chimera.dir/src/latency/LatencyRegistry.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/latency/LatencyRegistry.cpp.o -MF CMakeFiles/chimera.dir/src/latency/LatencyRegistry.cpp.o.d -o CMakeFiles/chimera.dir/src/latency/LatencyRegistry.cpp.o -c /Users/jo/Chimera/src/latency/LatencyRegistry.cpp
+CMakeFiles/chimera.dir/src/risk/RiskManager.cpp.o: CMakeFiles/chimera.dir/flags.make
+CMakeFiles/chimera.dir/src/risk/RiskManager.cpp.o: /Users/jo/Chimera/src/risk/RiskManager.cpp
+CMakeFiles/chimera.dir/src/risk/RiskManager.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/Chimera/build-make/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/chimera.dir/src/risk/RiskManager.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/risk/RiskManager.cpp.o -MF CMakeFiles/chimera.dir/src/risk/RiskManager.cpp.o.d -o CMakeFiles/chimera.dir/src/risk/RiskManager.cpp.o -c /Users/jo/Chimera/src/risk/RiskManager.cpp
 
-CMakeFiles/chimera.dir/src/latency/LatencyRegistry.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/latency/LatencyRegistry.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jo/Chimera/src/latency/LatencyRegistry.cpp > CMakeFiles/chimera.dir/src/latency/LatencyRegistry.cpp.i
+CMakeFiles/chimera.dir/src/risk/RiskManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/risk/RiskManager.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jo/Chimera/src/risk/RiskManager.cpp > CMakeFiles/chimera.dir/src/risk/RiskManager.cpp.i
 
-CMakeFiles/chimera.dir/src/latency/LatencyRegistry.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/latency/LatencyRegistry.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jo/Chimera/src/latency/LatencyRegistry.cpp -o CMakeFiles/chimera.dir/src/latency/LatencyRegistry.cpp.s
+CMakeFiles/chimera.dir/src/risk/RiskManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/risk/RiskManager.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jo/Chimera/src/risk/RiskManager.cpp -o CMakeFiles/chimera.dir/src/risk/RiskManager.cpp.s
 
-CMakeFiles/chimera.dir/src/gui/MetricsHttpServer.cpp.o: CMakeFiles/chimera.dir/flags.make
-CMakeFiles/chimera.dir/src/gui/MetricsHttpServer.cpp.o: /Users/jo/Chimera/src/gui/MetricsHttpServer.cpp
-CMakeFiles/chimera.dir/src/gui/MetricsHttpServer.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/Chimera/build-make/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/chimera.dir/src/gui/MetricsHttpServer.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/gui/MetricsHttpServer.cpp.o -MF CMakeFiles/chimera.dir/src/gui/MetricsHttpServer.cpp.o.d -o CMakeFiles/chimera.dir/src/gui/MetricsHttpServer.cpp.o -c /Users/jo/Chimera/src/gui/MetricsHttpServer.cpp
+CMakeFiles/chimera.dir/src/strategy/LatencyGlobals.cpp.o: CMakeFiles/chimera.dir/flags.make
+CMakeFiles/chimera.dir/src/strategy/LatencyGlobals.cpp.o: /Users/jo/Chimera/src/strategy/LatencyGlobals.cpp
+CMakeFiles/chimera.dir/src/strategy/LatencyGlobals.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/Chimera/build-make/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/chimera.dir/src/strategy/LatencyGlobals.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/strategy/LatencyGlobals.cpp.o -MF CMakeFiles/chimera.dir/src/strategy/LatencyGlobals.cpp.o.d -o CMakeFiles/chimera.dir/src/strategy/LatencyGlobals.cpp.o -c /Users/jo/Chimera/src/strategy/LatencyGlobals.cpp
 
-CMakeFiles/chimera.dir/src/gui/MetricsHttpServer.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/gui/MetricsHttpServer.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jo/Chimera/src/gui/MetricsHttpServer.cpp > CMakeFiles/chimera.dir/src/gui/MetricsHttpServer.cpp.i
+CMakeFiles/chimera.dir/src/strategy/LatencyGlobals.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/strategy/LatencyGlobals.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jo/Chimera/src/strategy/LatencyGlobals.cpp > CMakeFiles/chimera.dir/src/strategy/LatencyGlobals.cpp.i
 
-CMakeFiles/chimera.dir/src/gui/MetricsHttpServer.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/gui/MetricsHttpServer.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jo/Chimera/src/gui/MetricsHttpServer.cpp -o CMakeFiles/chimera.dir/src/gui/MetricsHttpServer.cpp.s
+CMakeFiles/chimera.dir/src/strategy/LatencyGlobals.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/strategy/LatencyGlobals.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jo/Chimera/src/strategy/LatencyGlobals.cpp -o CMakeFiles/chimera.dir/src/strategy/LatencyGlobals.cpp.s
+
+CMakeFiles/chimera.dir/crypto_engine/src/binance/BinanceDepthFeed.cpp.o: CMakeFiles/chimera.dir/flags.make
+CMakeFiles/chimera.dir/crypto_engine/src/binance/BinanceDepthFeed.cpp.o: /Users/jo/Chimera/crypto_engine/src/binance/BinanceDepthFeed.cpp
+CMakeFiles/chimera.dir/crypto_engine/src/binance/BinanceDepthFeed.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/jo/Chimera/build-make/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/chimera.dir/crypto_engine/src/binance/BinanceDepthFeed.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/crypto_engine/src/binance/BinanceDepthFeed.cpp.o -MF CMakeFiles/chimera.dir/crypto_engine/src/binance/BinanceDepthFeed.cpp.o.d -o CMakeFiles/chimera.dir/crypto_engine/src/binance/BinanceDepthFeed.cpp.o -c /Users/jo/Chimera/crypto_engine/src/binance/BinanceDepthFeed.cpp
+
+CMakeFiles/chimera.dir/crypto_engine/src/binance/BinanceDepthFeed.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/crypto_engine/src/binance/BinanceDepthFeed.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jo/Chimera/crypto_engine/src/binance/BinanceDepthFeed.cpp > CMakeFiles/chimera.dir/crypto_engine/src/binance/BinanceDepthFeed.cpp.i
+
+CMakeFiles/chimera.dir/crypto_engine/src/binance/BinanceDepthFeed.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/crypto_engine/src/binance/BinanceDepthFeed.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jo/Chimera/crypto_engine/src/binance/BinanceDepthFeed.cpp -o CMakeFiles/chimera.dir/crypto_engine/src/binance/BinanceDepthFeed.cpp.s
 
 # Object files for target chimera
 chimera_OBJECTS = \
 "CMakeFiles/chimera.dir/main.cpp.o" \
-"CMakeFiles/chimera.dir/src/accounting/PnlLedger.cpp.o" \
-"CMakeFiles/chimera.dir/src/accounting/DailyPnlStore.cpp.o" \
-"CMakeFiles/chimera.dir/src/execution/ExecutionEngine.cpp.o" \
 "CMakeFiles/chimera.dir/src/micro/MicrostructureEngine.cpp.o" \
 "CMakeFiles/chimera.dir/src/strategy/StrategyEngine.cpp.o" \
-"CMakeFiles/chimera.dir/src/latency/LatencyRegistry.cpp.o" \
-"CMakeFiles/chimera.dir/src/gui/MetricsHttpServer.cpp.o"
+"CMakeFiles/chimera.dir/src/execution/ExecutionEngine.cpp.o" \
+"CMakeFiles/chimera.dir/src/execution/PositionTracker.cpp.o" \
+"CMakeFiles/chimera.dir/src/accounting/DailyPnlStore.cpp.o" \
+"CMakeFiles/chimera.dir/src/risk/RiskManager.cpp.o" \
+"CMakeFiles/chimera.dir/src/strategy/LatencyGlobals.cpp.o" \
+"CMakeFiles/chimera.dir/crypto_engine/src/binance/BinanceDepthFeed.cpp.o"
 
 # External object files for target chimera
 chimera_EXTERNAL_OBJECTS =
 
 chimera: CMakeFiles/chimera.dir/main.cpp.o
-chimera: CMakeFiles/chimera.dir/src/accounting/PnlLedger.cpp.o
-chimera: CMakeFiles/chimera.dir/src/accounting/DailyPnlStore.cpp.o
-chimera: CMakeFiles/chimera.dir/src/execution/ExecutionEngine.cpp.o
 chimera: CMakeFiles/chimera.dir/src/micro/MicrostructureEngine.cpp.o
 chimera: CMakeFiles/chimera.dir/src/strategy/StrategyEngine.cpp.o
-chimera: CMakeFiles/chimera.dir/src/latency/LatencyRegistry.cpp.o
-chimera: CMakeFiles/chimera.dir/src/gui/MetricsHttpServer.cpp.o
+chimera: CMakeFiles/chimera.dir/src/execution/ExecutionEngine.cpp.o
+chimera: CMakeFiles/chimera.dir/src/execution/PositionTracker.cpp.o
+chimera: CMakeFiles/chimera.dir/src/accounting/DailyPnlStore.cpp.o
+chimera: CMakeFiles/chimera.dir/src/risk/RiskManager.cpp.o
+chimera: CMakeFiles/chimera.dir/src/strategy/LatencyGlobals.cpp.o
+chimera: CMakeFiles/chimera.dir/crypto_engine/src/binance/BinanceDepthFeed.cpp.o
 chimera: CMakeFiles/chimera.dir/build.make
-chimera: lib/libcrypto_engine.a
-chimera: cfd_engine/libcfd_engine.a
+chimera: libcrypto_engine.a
 chimera: CMakeFiles/chimera.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/jo/Chimera/build-make/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable chimera"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/jo/Chimera/build-make/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable chimera"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/chimera.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

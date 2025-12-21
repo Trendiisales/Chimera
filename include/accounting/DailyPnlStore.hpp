@@ -1,19 +1,13 @@
 #pragma once
-
-#include <string>
+#include "execution/Fill.hpp"
 
 class DailyPnlStore {
 public:
-    explicit DailyPnlStore(const std::string& path);
+    explicit DailyPnlStore(double start = 0.0) : pnl_(start) {}
 
-    // Load persisted pnl (or 0 if new day / missing)
-    double load();
-
-    // Persist pnl for today
-    void save(double pnl);
+    void on_fill(const Fill& f);
+    double pnl() const { return pnl_; }
 
 private:
-    std::string path_;
-
-    std::string today_ymd() const;
+    double pnl_;
 };

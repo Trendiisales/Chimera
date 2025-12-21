@@ -1,19 +1,18 @@
 #pragma once
 
+#include "micro/MicrostructureEngine.hpp"
+#include "execution/ExecutionEngine.hpp"
+
 #include <string>
 #include <unordered_map>
 #include <atomic>
 
-class MicrostructureEngine;
-class ExecutionEngine;
-
 class StrategyEngine {
 public:
-    // ENGINE-MAIN (no execution)
-    explicit StrategyEngine(MicrostructureEngine& micro);
-
-    // FULL (execution-enabled)
-    StrategyEngine(MicrostructureEngine& micro, ExecutionEngine& exec);
+    StrategyEngine(
+        MicrostructureEngine& micro,
+        ExecutionEngine& exec
+    );
 
     void update();
 
@@ -22,7 +21,7 @@ public:
 
 private:
     MicrostructureEngine& micro_;
-    ExecutionEngine* exec_; // nullable in engine-main
+    ExecutionEngine& exec_;
 
     std::unordered_map<std::string,double> pnl_;
     std::atomic<double> total_{0.0};

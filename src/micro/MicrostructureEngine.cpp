@@ -4,19 +4,22 @@
 MicrostructureEngine::MicrostructureEngine(
     const std::unordered_map<std::string, binance::OrderBook*>& books
 )
-: books_(books) {}
+: books_(books)
+{
+    for (const auto& kv : books_) {
+        mid_[kv.first] = 0.0;
+        spread_bps_[kv.first] = 0.0;
+    }
+}
 
 void MicrostructureEngine::update() {
     for (const auto& kv : books_) {
         const std::string& symbol = kv.first;
-        binance::OrderBook* book = kv.second;
+        const binance::OrderBook* book = kv.second;
 
-        auto& snap = snaps_[symbol];
-
-        if (book->empty()) {
-            snap.mid.store(0.0, std::memory_order_relaxed);
-            snap.spread.store(0.0, std::memory_order_relaxed);
-            snap.spread_bps.store(0.0, std::memory_order_relaxed);
+        if (!book) {
+            mid_[symbol] = 0.0;
+            spread_bps_[symbol] = 0.0;
             continue;
         }
 
@@ -24,29 +27,27 @@ void MicrostructureEngine::update() {
         double ask = book->best_ask();
 
         if (bid <= 0.0 || ask <= 0.0 || ask <= bid) {
+            mid_[symbol] = 0.0;
+            spread_bps_[symbol] = 0.0;
             continue;
         }
 
-        double mid = 0.5 * (bid + ask);
+        double m = 0.5 * (bid + ask);
         double spread = ask - bid;
-        double spread_bps = (spread / mid) * 10000.0;
 
-        snap.mid.store(mid, std::memory_order_relaxed);
-        snap.spread.store(spread, std::memory_order_relaxed);
-        snap.spread_bps.store(spread_bps, std::memory_order_relaxed);
+        mid_[symbol] = m;
+        spread_bps_[symbol] = (spread / m) * 10000.0;
     }
 }
 
 double MicrostructureEngine::mid(const std::string& symbol) const {
-    auto it = snaps_.find(symbol);
-    return (it != snaps_.end())
-        ? it->second.mid.load(std::memory_order_relaxed)
-        : 0.0;
+    auto it = mid_.find(symbol);
+    if (it == mid_.end()) return 0.0;
+    return it->second;
 }
 
 double MicrostructureEngine::spread_bps(const std::string& symbol) const {
-    auto it = snaps_.find(symbol);
-    return (it != snaps_.end())
-        ? it->second.spread_bps.load(std::memory_order_relaxed)
-        : 0.0;
+    auto it = spread_bps_.find(symbol);
+    if (it == spread_bps_.end()) return 0.0;
+    return it->second;
 }
