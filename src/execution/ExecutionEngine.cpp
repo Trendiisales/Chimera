@@ -1,37 +1,29 @@
 #include "execution/ExecutionEngine.hpp"
 
-#include <iostream>
 #include <chrono>
 
 #include "risk/RiskManager.hpp"
 #include "execution/PositionTracker.hpp"
 #include "engine/IntentQueue.hpp"
-#include "metrics/MetricsServer.hpp"
+#include "metrics/HttpMetricsServer.hpp"
 
-static MetricsServer g_metrics;
+static HttpMetricsServer g_http_metrics(9102);
 
 ExecutionEngine::ExecutionEngine(RiskManager& risk,
                                  PositionTracker& positions)
 : risk_(risk),
   positions_(positions),
-  running_(false) {}
+  running_(false) {
+    g_http_metrics.start();
+}
 
 void ExecutionEngine::start(IntentQueue& queue) {
     running_.store(true, std::memory_order_release);
-
     worker_ = std::thread([this, &queue]() {
-        std::cout << "[EXEC] execution thread started" << std::endl;
-
-        unsigned long long n = 0;
-
+        Intent intent(Intent::BUY, "X", 0.0);
         while (running_.load(std::memory_order_acquire)) {
-            Intent intent(Intent::BUY, "X", 0.0);
             if (queue.try_pop(intent)) {
-                g_metrics.inc();
-                ++n;
-                if ((n % 5) == 0) {
-                    std::cout << "[METRICS] intents=" << g_metrics.value() << std::endl;
-                }
+                g_http_metrics.inc_intents();
             } else {
                 std::this_thread::sleep_for(std::chrono::milliseconds(1));
             }
@@ -40,6 +32,7 @@ void ExecutionEngine::start(IntentQueue& queue) {
 }
 
 ExecutionEngine::~ExecutionEngine() {
-    running_.store(false, std::memory_order_release);
+    running_.store(false);
     if (worker_.joinable()) worker_.join();
+    g_http_metrics.stop();
 }
