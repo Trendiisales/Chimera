@@ -16,6 +16,7 @@ add_executable(chimera
     src/accounting/DailyPnlStore.cpp
     src/micro/MicrostructureEngine.cpp
     src/strategy/LatencyGlobals.cpp
+    src/engine/IntentQueue.cpp
 )
 
 add_executable(chimera_full
@@ -26,6 +27,7 @@ add_executable(chimera_full
     src/accounting/DailyPnlStore.cpp
     src/micro/MicrostructureEngine.cpp
     src/strategy/LatencyGlobals.cpp
+    src/engine/IntentQueue.cpp
 )
 
 target_include_directories(chimera PRIVATE
