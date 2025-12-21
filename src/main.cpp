@@ -8,7 +8,8 @@
 #include "execution/PositionTracker.hpp"
 #include "engine/IntentQueue.hpp"
 #include "strategy/StrategyRegistry.hpp"
-#include "strategy/HeartbeatStrategy.hpp"
+#include "strategy/StrategyContext.hpp"
+#include "strategy/MeanReversionStrategy.hpp"
 
 static std::atomic<bool> g_running{true};
 static void on_signal(int){ g_running.store(false); }
@@ -24,8 +25,9 @@ int main() {
     ExecutionEngine exec(risk, positions);
     exec.start(queue);
 
+    StrategyContext ctx{queue};
     StrategyRegistry registry;
-    registry.add(std::make_unique<HeartbeatStrategy>(queue));
+    registry.add(std::make_unique<MeanReversionStrategy>(ctx));
 
     while (g_running.load()) {
         registry.tick_all();
