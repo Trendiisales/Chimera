@@ -1,10 +1,10 @@
 #pragma once
-#include "engine/IntentQueue.hpp"
+#include "strategy/Strategy.hpp"
 
-class DummyStrategy {
+class DummyStrategy final : public Strategy {
 public:
     explicit DummyStrategy(IntentQueue& q) : q_(q), n_(0) {}
-    void tick();
+    void tick() override;
 private:
     IntentQueue& q_;
     int n_;

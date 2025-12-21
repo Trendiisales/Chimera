@@ -7,6 +7,7 @@
 #include "risk/RiskManager.hpp"
 #include "execution/PositionTracker.hpp"
 #include "engine/IntentQueue.hpp"
+#include "strategy/StrategyRegistry.hpp"
 #include "strategy/DummyStrategy.hpp"
 
 static std::atomic<bool> g_running{true};
@@ -23,10 +24,11 @@ int main() {
     ExecutionEngine exec(risk, positions);
     exec.start(queue);
 
-    DummyStrategy strat(queue);
+    StrategyRegistry registry;
+    registry.add(std::make_unique<DummyStrategy>(queue));
 
     while (g_running.load()) {
-        strat.tick();
+        registry.tick_all();
         std::this_thread::sleep_for(std::chrono::milliseconds(200));
     }
     return 0;
