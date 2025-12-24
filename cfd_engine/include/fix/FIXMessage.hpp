@@ -648,9 +648,10 @@ inline std::string buildNewOrderSingleMessage(const FIXConfig& cfg,
     msg.setField(FIXTag::OrdType, ordType);
     msg.setField(FIXTag::TimeInForce, timeInForce);
     
-    // v6.88 FIX: PositionEffect (Tag 77) - REQUIRED for cTrader CFDs
-    // O = Open new position, C = Close existing position
-    msg.setField(FIXTag::PositionEffect, positionEffect);
+    // v7.10 FIX: PositionEffect (Tag 77) REMOVED - cTrader REJECTS this tag
+    // Error was: "Tag not defined for this message type, field=77"
+    // msg.setField(FIXTag::PositionEffect, positionEffect);
+    (void)positionEffect;  // Suppress unused parameter warning
     
     // Set TransactTime (NO milliseconds for cTrader)
     auto now = std::chrono::system_clock::now();

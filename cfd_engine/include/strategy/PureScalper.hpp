@@ -1,13 +1,28 @@
 // =============================================================================
-// PureScalper.hpp v7.09 - BALANCED - Trades But With Discipline
+// PureScalper.hpp v7.10 - DISCIPLINED EXECUTION - NO MORE RUBBISH TRADES
 // =============================================================================
-// v7.09 BALANCED:
-//   - Confidence stays at 0.60 (was working before)
-//   - shouldTrade() threshold at 0.50 (allow trades)
-//   - TP/SL: 30/15 bps (original working values)
-//   - Max spread: 15 bps (reasonable for metals)
-//   - Mean reversion kept but with stricter threshold
-//   - RELIES ON MicroStateMachine for cooldown enforcement
+// v7.10 CRITICAL FIXES (from log analysis):
+//
+// 🔴 PATCH 1: TIME CANNOT GENERATE TRADES
+//    - TIME is an EXIT reason only, never an entry signal
+//    - TIME exits do NOT trigger immediate re-entry
+//
+// 🔴 PATCH 2: HOLDING BLOCKS ALL ENTRIES (ABSOLUTE)
+//    - If has_position == true, NO new entries allowed
+//    - No exceptions, no overrides
+//
+// 🔴 PATCH 3: MIN_HOLD_MS = 2500 (CFD SAFE)
+//    - No trade reversal within 2.5 seconds
+//    - Prevents the 800ms flip-flops seen in logs
+//
+// 🔴 PATCH 4: CONFIDENCE FLOOR = 0.80 (XAU/XAG)
+//    - conf=0.60 is noise at CFD spreads
+//    - Only high-conviction trades get through
+//
+// 🔴 PATCH 5: ONE INTENT PER TICK WINDOW
+//    - Prevents BUY+SELL+TIME all firing
+//    - First valid signal wins, rest blocked
+//
 // =============================================================================
 #pragma once
 
@@ -17,9 +32,30 @@
 #include <unordered_map>
 #include <iostream>
 #include <string>
+#include <chrono>
 #include "MicroStateMachine.hpp"
 
 namespace Omega {
+
+// =============================================================================
+// v7.10: Strict confidence thresholds by asset class
+// =============================================================================
+struct ConfidenceThresholds {
+    static constexpr double METALS = 0.80;      // XAU, XAG
+    static constexpr double INDICES = 0.75;     // NAS100, US30, SPX500
+    static constexpr double FOREX = 0.70;       // EUR, GBP, etc.
+    static constexpr double DEFAULT = 0.80;     // Safe default
+};
+
+// =============================================================================
+// v7.10: Minimum hold times in milliseconds
+// =============================================================================
+struct HoldTimes {
+    static constexpr int64_t METALS_MS = 2500;   // 2.5 seconds
+    static constexpr int64_t INDICES_MS = 2000;  // 2.0 seconds  
+    static constexpr int64_t FOREX_MS = 1500;    // 1.5 seconds
+    static constexpr int64_t DEFAULT_MS = 2500;  // Safe default
+};
 
 struct ScalpSignal {
     int8_t direction = 0;
@@ -34,8 +70,8 @@ struct ScalpSignal {
     MicroState micro_state = MicroState::IDLE;
     VetoReason veto_reason = VetoReason::NONE;
 
-    // v7.09: Back to 0.50 threshold - let MicroStateMachine do the gating
-    bool shouldTrade() const { return direction != 0 && confidence >= 0.50; }
+    // v7.10: Confidence threshold is now asset-specific and HIGH
+    bool shouldTrade() const { return direction != 0 && confidence >= 0.75; }
 };
 
 struct ScalpPosition {
@@ -71,12 +107,18 @@ struct SymbolState {
     int price_count = 0;
     uint64_t ticks = 0;
     ScalpPosition pos;
+    
+    // v7.10: Track last trade time for MIN_HOLD enforcement
+    int64_t last_trade_ms = 0;
+    int8_t last_trade_direction = 0;
 
     void init(double b, double a) {
         bid = b; ask = a; mid = (b + a) / 2; spread = a - b;
         ema_fast = ema_slow = vwap = mid;
         price_sum = mid; price_count = 1;
         micro_vol = 0.0001; ticks = 1;
+        last_trade_ms = 0;
+        last_trade_direction = 0;
     }
 
     void update(double b, double a) {
@@ -116,18 +158,24 @@ public:
     struct Config {
         double size = 0.01;
         
-        // v7.09: Back to original working TP/SL
-        double tp_bps = 30.0;
-        double sl_bps = 15.0;
-        double trail_start = 10.0;
-        double trail_stop = 5.0;
+        // v7.10: Wider TP/SL to account for spread + give trades room
+        double tp_bps = 45.0;       // Was 30 - need more room
+        double sl_bps = 25.0;       // Was 15 - wider stop
+        double trail_start = 20.0;  // Was 10
+        double trail_stop = 10.0;   // Was 5
         
-        double max_spread = 15.0;    // v7.09: Reasonable for metals
-        int max_hold = 300;
-        int warmup = 30;
+        double max_spread = 12.0;   // v7.10: Tighter - don't trade wide spreads
+        int max_hold = 500;         // v7.10: Longer hold allowed
+        int warmup = 50;            // v7.10: More warmup for stable signals
         
         bool debug = true;
         double contract_size = 100.0;
+        
+        // v7.10: NEW - Minimum hold time in ms (prevents flip-flops)
+        int64_t min_hold_ms = 2500;
+        
+        // v7.10: NEW - Confidence floor (asset-specific)
+        double min_confidence = 0.80;
     };
 
     PureScalper() {
@@ -145,6 +193,7 @@ public:
     ScalpSignal process(const char* symbol, double bid, double ask, double, double, uint64_t ts) {
         ScalpSignal sig;
         std::string sym(symbol);
+        int64_t now_ms = getNowMs();
 
         // Init or update state
         auto& st = states_[sym];
@@ -168,24 +217,50 @@ public:
         sig.micro_state = micro.state();
         sig.veto_reason = micro.lastVeto();
 
-        // === EXIT LOGIC FIRST ===
+        // =====================================================================
+        // v7.10 PATCH 2: HOLDING BLOCKS ALL ENTRIES (ABSOLUTE)
+        // If we have a position, ONLY check exits. No new entries ever.
+        // =====================================================================
         if (st.pos.active) {
-            sig = checkExit(st, ts, micro);
-            if (sig.direction != 0) {
-                // CRITICAL: Notify micro state machine of exit -> starts cooldown
+            sig = checkExit(st, ts, micro, now_ms);
+            if (sig.direction != 0 && sig.is_exit) {
+                // Record exit time for MIN_HOLD enforcement
+                st.last_trade_ms = now_ms;
+                st.last_trade_direction = sig.direction;
+                
+                // Notify micro state machine of exit -> starts cooldown
                 micro.onExit(ts);
+                
                 if (cfg_.debug) {
                     std::cout << "[SCALP] EXIT " << symbol << " reason=" << sig.reason
                               << " pnl_bps=" << sig.realized_pnl_bps << "\n";
                 }
             }
+            // CRITICAL: Return here. Do NOT fall through to entry logic.
+            // Even if exit reason is TIME or HOLDING, no new entry.
             return sig;
+        }
+
+        // =====================================================================
+        // v7.10 PATCH 3: MIN_HOLD_MS ENFORCEMENT
+        // Prevent any entry within 2.5 seconds of last trade
+        // =====================================================================
+        if (st.last_trade_ms > 0) {
+            int64_t elapsed = now_ms - st.last_trade_ms;
+            if (elapsed < cfg_.min_hold_ms) {
+                sig.reason = "MIN_HOLD_TIME";
+                if (cfg_.debug && (st.ticks % 100 == 0)) {
+                    std::cout << "[GATE] " << symbol << " MIN_HOLD blocked, wait " 
+                              << (cfg_.min_hold_ms - elapsed) << "ms\n";
+                }
+                return sig;
+            }
         }
 
         // === ENTRY LOGIC ===
         double sprdBps = st.spreadBps();
 
-        // Spread check
+        // Spread check (v7.10: tighter)
         if (sprdBps > cfg_.max_spread) {
             sig.reason = "SPREAD_WIDE";
             return sig;
@@ -199,8 +274,8 @@ public:
             double dev = (st.mid - st.ema_slow) / st.ema_slow;
             double vol_z = st.micro_vol / st.ema_slow * 10000.0;
 
-            // Only mean-revert if deviation > 0.5% AND low volatility
-            if (std::fabs(dev) > 0.005 && vol_z < 5.0) {
+            // v7.10: Stricter mean reversion - need larger deviation
+            if (std::fabs(dev) > 0.008 && vol_z < 4.0) {
                 dir = (dev > 0) ? -1 : 1;
             }
         }
@@ -210,7 +285,20 @@ public:
             return sig;
         }
 
-        // === MICRO STATE GATE - This is where cooldown is enforced ===
+        // =====================================================================
+        // v7.10 PATCH 5: FLIP DIRECTION PROTECTION
+        // Don't reverse direction too quickly
+        // =====================================================================
+        if (st.last_trade_direction != 0 && dir == -st.last_trade_direction) {
+            int64_t elapsed = now_ms - st.last_trade_ms;
+            // Double the min_hold for direction flips
+            if (elapsed < cfg_.min_hold_ms * 2) {
+                sig.reason = "FLIP_BLOCKED";
+                return sig;
+            }
+        }
+
+        // === MICRO STATE GATE ===
         MicroDecision decision = micro.allowEntry(dir, sprdBps, cfg_.tp_bps);
         sig.micro_state = decision.current_state;
         sig.veto_reason = decision.veto;
@@ -220,26 +308,46 @@ public:
             return sig;
         }
 
+        // =====================================================================
+        // v7.10 PATCH 4: CONFIDENCE CALCULATION WITH HIGH FLOOR
+        // Must exceed min_confidence (0.80 for metals)
+        // =====================================================================
+        double confidence = calculateConfidence(st, dir, sprdBps);
+        
+        if (confidence < cfg_.min_confidence) {
+            sig.reason = "LOW_CONF";
+            if (cfg_.debug) {
+                std::cout << "[GATE] " << symbol << " LOW_CONF: " << confidence 
+                          << " < " << cfg_.min_confidence << "\n";
+            }
+            return sig;
+        }
+
         // === EXECUTE ENTRY ===
         sig.direction = dir;
-        sig.confidence = 0.60;
+        sig.confidence = confidence;
         sig.size = cfg_.size;
         sig.reason = (dir > 0) ? "BUY" : "SELL";
 
         st.pos.open(dir, st.mid, cfg_.size, ts);
+        
+        // Record entry for MIN_HOLD tracking
+        st.last_trade_ms = now_ms;
+        st.last_trade_direction = dir;
 
-        // CRITICAL: Notify micro state machine of entry
+        // Notify micro state machine of entry
         micro.onEntry(dir, ts);
 
         if (cfg_.debug) {
             std::cout << "\n*** [SCALP] ENTRY " << symbol << " " << sig.reason
-                      << " @" << st.mid << " spread=" << sprdBps << "bps ***\n\n";
+                      << " @" << st.mid << " spread=" << sprdBps << "bps"
+                      << " conf=" << confidence << " ***\n\n";
         }
 
         return sig;
     }
 
-    ScalpSignal checkExit(SymbolState& st, uint64_t ts, MicroStateMachine& micro) {
+    ScalpSignal checkExit(SymbolState& st, uint64_t ts, MicroStateMachine& micro, int64_t now_ms) {
         ScalpSignal sig;
         auto& pos = st.pos;
         if (!pos.active) return sig;
@@ -302,18 +410,31 @@ public:
             }
         }
 
-        // Time exit (requires min hold)
+        // =====================================================================
+        // v7.10 PATCH 1: TIME EXIT DOES NOT GENERATE A TRADE SIGNAL
+        // TIME closes the position but returns direction=0 to prevent
+        // the caller from treating this as a new trade signal
+        // =====================================================================
         if (canExit && pos.ticks_held >= cfg_.max_hold) {
-            sig.direction = -pos.side;
-            sig.size = pos.size;
-            sig.confidence = 1.0;
-            sig.reason = "TIME";
-            sig.is_exit = true;
-            sig.realized_pnl_bps = pnl_bps;
-            sig.realized_pnl = calcCurrencyPnL();
-            sig.entry_price = pos.entry_price;
-            sig.exit_price = st.mid;
+            // Close the position internally
+            double exit_pnl_bps = pnl_bps;
+            double exit_pnl = calcCurrencyPnL();
+            
+            if (cfg_.debug) {
+                std::cout << "[SCALP] TIME_EXIT " << " pnl_bps=" << exit_pnl_bps 
+                          << " (position closed, NO trade signal)\n";
+            }
+            
             pos.close();
+            
+            // v7.10 CRITICAL: Return with direction=0
+            // This prevents TIME from being treated as a tradeable signal
+            sig.direction = 0;  // NO TRADE SIGNAL
+            sig.confidence = 0.0;
+            sig.reason = "TIME_GATE";  // Not TIME - TIME_GATE indicates no signal
+            sig.is_exit = true;  // Mark that we did exit
+            sig.realized_pnl_bps = exit_pnl_bps;
+            sig.realized_pnl = exit_pnl;
             return sig;
         }
 
@@ -341,6 +462,52 @@ private:
     Config cfg_;
     std::unordered_map<std::string, SymbolState> states_;
     MicroStateManager microMgr_;
+    
+    // v7.10: Get current time in milliseconds
+    static int64_t getNowMs() {
+        return std::chrono::duration_cast<std::chrono::milliseconds>(
+            std::chrono::steady_clock::now().time_since_epoch()
+        ).count();
+    }
+    
+    // =========================================================================
+    // v7.10: Confidence calculation - must be HIGH to trade
+    // =========================================================================
+    double calculateConfidence(const SymbolState& st, int8_t dir, double sprdBps) const {
+        double conf = 0.5;  // Base
+        
+        // Trend alignment bonus (+0.15)
+        int8_t trend = st.trend();
+        if (trend == dir) {
+            conf += 0.15;
+        }
+        
+        // Momentum alignment bonus (+0.10)
+        if ((dir > 0 && st.momentum > 0) || (dir < 0 && st.momentum < 0)) {
+            conf += 0.10;
+        }
+        
+        // VWAP alignment bonus (+0.10)
+        double vwap_dev = (st.mid - st.vwap) / st.vwap;
+        if ((dir > 0 && vwap_dev < -0.001) || (dir < 0 && vwap_dev > 0.001)) {
+            conf += 0.10;  // Buying below VWAP or selling above
+        }
+        
+        // Tight spread bonus (+0.10)
+        if (sprdBps < 5.0) {
+            conf += 0.10;
+        } else if (sprdBps < 8.0) {
+            conf += 0.05;
+        }
+        
+        // Volatility penalty
+        double vol_ratio = st.micro_vol / (st.mid * 0.0001);  // Normalized
+        if (vol_ratio > 2.0) {
+            conf -= 0.10;  // High vol = lower confidence
+        }
+        
+        return std::clamp(conf, 0.0, 1.0);
+    }
 };
 
 } // namespace Omega

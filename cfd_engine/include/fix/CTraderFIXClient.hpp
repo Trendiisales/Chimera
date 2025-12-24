@@ -519,12 +519,29 @@ public:
             return false;
         }
         
-        std::cout << "[CTraderFIX] Sending MARKET order: " << symbol 
-                  << " " << (side == FIXSide::Buy ? "BUY" : "SELL") 
-                  << " " << qty 
-                  << " posEffect=" << positionEffect << "\n";
+        // v7.10 FIX: cTrader requires NUMERIC symbol ID, not name string
+        // Error was: "Symbol(55) must be numeric. But it is XAUUSD"
+        std::string symbolId = symbol;  // Default: use as-is (might already be numeric)
         
-        return tradeSession_.sendNewOrder(symbol, side, qty, FIXOrdType::Market, 0.0, positionEffect);
+        // Try to convert symbol name to numeric ID
+        {
+            std::lock_guard<std::mutex> lock(securityMtx_);
+            std::string normalized = normalizeSymbol(symbol);
+            auto it = symbolToId_.find(normalized);
+            if (it != symbolToId_.end()) {
+                symbolId = std::to_string(it->second);
+                std::cout << "[CTraderFIX] Symbol " << symbol << " -> ID " << symbolId << "\n";
+            } else {
+                std::cerr << "[CTraderFIX] WARNING: No ID mapping for " << symbol << ", using as-is\n";
+            }
+        }
+        
+        std::cout << "[CTraderFIX] Sending MARKET order: " << symbol 
+                  << " (ID=" << symbolId << ")"
+                  << " " << (side == FIXSide::Buy ? "BUY" : "SELL") 
+                  << " " << qty << "\n";
+        
+        return tradeSession_.sendNewOrder(symbolId, side, qty, FIXOrdType::Market, 0.0, positionEffect);
     }
     
     bool sendLimitOrder(const std::string& symbol, char side, double qty, double price,
@@ -534,12 +551,27 @@ public:
             return false;
         }
         
-        std::cout << "[CTraderFIX] Sending LIMIT order: " << symbol 
-                  << " " << (side == FIXSide::Buy ? "BUY" : "SELL") 
-                  << " " << qty << " @ " << price 
-                  << " posEffect=" << positionEffect << "\n";
+        // v7.10 FIX: cTrader requires NUMERIC symbol ID, not name string
+        std::string symbolId = symbol;
         
-        return tradeSession_.sendNewOrder(symbol, side, qty, FIXOrdType::Limit, price, positionEffect);
+        {
+            std::lock_guard<std::mutex> lock(securityMtx_);
+            std::string normalized = normalizeSymbol(symbol);
+            auto it = symbolToId_.find(normalized);
+            if (it != symbolToId_.end()) {
+                symbolId = std::to_string(it->second);
+                std::cout << "[CTraderFIX] Symbol " << symbol << " -> ID " << symbolId << "\n";
+            } else {
+                std::cerr << "[CTraderFIX] WARNING: No ID mapping for " << symbol << ", using as-is\n";
+            }
+        }
+        
+        std::cout << "[CTraderFIX] Sending LIMIT order: " << symbol 
+                  << " (ID=" << symbolId << ")"
+                  << " " << (side == FIXSide::Buy ? "BUY" : "SELL") 
+                  << " " << qty << " @ " << price << "\n";
+        
+        return tradeSession_.sendNewOrder(symbolId, side, qty, FIXOrdType::Limit, price, positionEffect);
     }
     
     // =========================================================================
