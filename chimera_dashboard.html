@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Chimera HFT Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+        body { font-family: 'JetBrains Mono', monospace; background: #0a0a0c; }
+        .card { background: linear-gradient(135deg, #1a1a1f 0%, #12121a 100%); border: 1px solid #2a2a35; border-radius: 8px; }
+        .status-dot { width: 8px; height: 8px; border-radius: 50%; }
+        .status-dot.up { background: #22c55e; box-shadow: 0 0 6px #22c55e; }
+        .status-dot.down { background: #ef4444; box-shadow: 0 0 6px #ef4444; }
+        .symbol-row { cursor: pointer; transition: all 0.15s; padding: 3px 6px; border-radius: 4px; margin: 1px 0; font-size: 0.75rem; }
+        .symbol-row:hover { background: rgba(255,255,255,0.08); }
+        .symbol-row.selected { background: rgba(59, 130, 246, 0.3); border: 1px solid #3b82f6; }
+        .config-input { background: #1f2937; border: 1px solid #374151; border-radius: 4px; padding: 2px 6px; font-size: 0.7rem; width: 70px; color: #e5e7eb; }
+        .config-input:focus { outline: none; border-color: #3b82f6; }
+        .preset-btn { padding: 4px 12px; border-radius: 4px; font-size: 0.7rem; transition: all 0.15s; cursor: pointer; }
+        .preset-btn.active { background: #3b82f6; color: white; }
+        .preset-btn:not(.active) { background: #374151; color: #9ca3af; }
+        .preset-btn:hover:not(.active) { background: #4b5563; }
+        .asset-tab { padding: 4px 10px; font-size: 0.65rem; border-radius: 4px; cursor: pointer; }
+        .asset-tab.active { background: #3b82f6; color: white; }
+        .asset-tab:not(.active) { background: #1f2937; color: #9ca3af; }
+        .latency-hero { font-size: 2rem; font-weight: 700; }
+        .section-title { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.1em; color: #6b7280; margin-bottom: 4px; }
+        .alert-item { animation: pulse-border 2s infinite; }
+        @keyframes pulse-border { 0%, 100% { border-color: rgba(234, 179, 8, 0.3); } 50% { border-color: rgba(234, 179, 8, 0.8); } }
+        .trade-row { font-size: 0.65rem; padding: 2px 4px; border-bottom: 1px solid #1f2937; }
+        .trade-row:hover { background: rgba(255,255,255,0.05); }
+        .scrollable { max-height: 300px; overflow-y: auto; }
+        .scrollable-tall { max-height: 400px; overflow-y: auto; }
+        .scrollable::-webkit-scrollbar { width: 4px; }
+        .scrollable::-webkit-scrollbar-track { background: #1a1a1f; }
+        .scrollable::-webkit-scrollbar-thumb { background: #374151; border-radius: 2px; }
+        .apply-success { animation: flash-green 0.5s ease-out; }
+        @keyframes flash-green { 0% { background: #22c55e; } 100% { background: #16a34a; } }
+        .latency-badge { font-size: 0.6rem; padding: 1px 4px; border-radius: 3px; }
+        .latency-fast { background: #166534; color: #86efac; }
+        .latency-ok { background: #854d0e; color: #fde047; }
+        .latency-slow { background: #991b1b; color: #fca5a5; }
+        .live-badge { animation: live-pulse 1s infinite; }
+        @keyframes live-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .trade-active { background: rgba(34, 197, 94, 0.3); border: 1px solid #22c55e; }
+        .hotkey-hint { position: fixed; bottom: 10px; right: 10px; background: rgba(0,0,0,0.8); padding: 8px 12px; border-radius: 6px; font-size: 0.65rem; color: #888; z-index: 1000; }
+    </style>
+</head>
+<body class="text-gray-300 min-h-screen p-2">
+    <!-- Hotkey hints -->
+    <div class="hotkey-hint">
+        <span class="text-yellow-400">R</span>=Reconnect | 
+        <span class="text-yellow-400">F5</span>=Reload | 
+        <span class="text-yellow-400">Space</span>=Pause
+    </div>
+    <div class="max-w-[1800px] mx-auto">
+        <!-- Header -->
+        <div class="flex items-center justify-between mb-2">
+            <div class="flex items-center gap-2">
+                <h1 class="text-lg font-bold text-white">CHIMERA</h1>
+                <span id="version-badge" class="text-xs bg-blue-600 px-2 py-0.5 rounded">--</span>
+                <span class="text-xs bg-red-600 px-2 py-0.5 rounded live-badge">LIVE</span>
+                <span class="text-xs bg-green-600 px-2 py-0.5 rounded">ANTI-CHURN</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <div class="flex items-center gap-1">
+                    <div id="ws-dot" class="status-dot down"></div>
+                    <span id="ws-text" class="text-xs">Disconnected</span>
+                </div>
+                <input id="ws-url" type="text" value="ws://45.85.3.38:7777" 
+                       class="bg-gray-800 text-xs px-2 py-1 rounded border border-gray-700 w-40">
+                <button onclick="reconnect()" class="bg-blue-600 text-xs px-2 py-1 rounded hover:bg-blue-500">Connect</button>
+                <button onclick="disconnectWs()" class="bg-gray-600 text-xs px-2 py-1 rounded hover:bg-gray-500">Disconnect</button>
+                <button onclick="killSwitch()" id="kill-btn" class="bg-red-700 text-xs px-3 py-1 rounded hover:bg-red-600 font-bold">⚠️ KILL</button>
+            </div>
+        </div>
+
+        <!-- Network Latency Hero -->
+        <div class="card p-3 mb-2 bg-gradient-to-r from-cyan-900/30 to-blue-900/30 border-cyan-700/50">
+            <div class="flex items-center justify-between">
+                <div>
+                    <div class="text-xs text-cyan-400 uppercase tracking-wider">Network Latency (NY Co-Located)</div>
+                    <div class="flex items-baseline gap-2">
+                        <div class="latency-hero text-cyan-400" id="net-lat-current">--</div>
+                        <span class="text-lg text-gray-400">ms</span>
+                    </div>
+                </div>
+                <div class="flex gap-6 text-center">
+                    <div><div class="text-xl font-bold text-green-400" id="net-lat-min">--</div><div class="text-xs text-gray-500">MIN</div></div>
+                    <div><div class="text-xl font-bold text-yellow-400" id="net-lat-avg">--</div><div class="text-xs text-gray-500">AVG</div></div>
+                    <div><div class="text-xl font-bold text-red-400" id="net-lat-max">--</div><div class="text-xs text-gray-500">MAX</div></div>
+                </div>
+                <div id="lat-status" class="text-lg font-bold text-green-400">ULTRA-LOW</div>
+            </div>
+        </div>
+
+        <!-- WHY NO TRADE DIAGNOSTICS - v6.81 COMPACT -->
+        <div class="card p-2 mb-2 bg-gradient-to-r from-orange-900/20 to-red-900/20 border border-orange-600/50">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <span class="text-orange-400 text-xs font-bold">⚠️ BLOCK:</span>
+                    <span id="diag-reason-big" class="text-lg font-bold text-red-400 font-mono">--</span>
+                    <span id="diag-reason-detail" class="text-xs text-gray-400">--</span>
+                </div>
+                <div class="flex items-center gap-4 text-xs">
+                    <span><span class="text-gray-500">State:</span> <span id="diag-state" class="font-bold">--</span></span>
+                    <span><span class="text-gray-500">Intent:</span> <span id="diag-intent" class="font-bold">--</span></span>
+                    <span><span class="text-gray-500">Conv:</span> <span id="diag-conviction" class="font-bold">0</span></span>
+                    <span><span class="text-gray-500">Votes:</span> <span id="diag-consensus" class="font-bold">0/0</span></span>
+                    <span><span class="text-gray-500">Gated:</span> <span id="diag-gated" class="font-bold text-yellow-400">0</span></span>
+                    <span id="diag-aligned" class="hidden">--</span>
+                    <span id="diag-reason" class="hidden">--</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main 4-Column Layout -->
+        <div class="grid grid-cols-12 gap-2">
+            
+            <!-- LEFT COLUMN: Live Prices (2 cols) -->
+            <div class="col-span-2 card p-2">
+                <div class="section-title flex justify-between">
+                    <span>LIVE PRICES</span>
+                    <span id="symbol-count" class="text-cyan-400">0 symbols</span>
+                </div>
+                
+                <div class="text-xs text-gray-500 mt-2 mb-1">🪙 CRYPTO</div>
+                <div id="symbols-crypto"></div>
+                
+                <div class="text-xs text-gray-500 mt-2 mb-1">💱 FOREX</div>
+                <div id="symbols-forex"></div>
+                
+                <div class="text-xs text-gray-500 mt-2 mb-1">🥇 METALS</div>
+                <div id="symbols-metals"></div>
+                
+                <div class="text-xs text-gray-500 mt-2 mb-1">📈 INDICES</div>
+                <div id="symbols-indices"></div>
+            </div>
+
+            <!-- MIDDLE-LEFT: Metrics + Alerts (4 cols) -->
+            <div class="col-span-4 space-y-2">
+                <!-- Connection Status -->
+                <div class="grid grid-cols-2 gap-2">
+                    <div class="card p-2">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-gray-400">BINANCE</span>
+                            <div id="binance-dot" class="status-dot down"></div>
+                        </div>
+                        <div id="binance-text" class="text-sm font-bold">Disconnected</div>
+                    </div>
+                    <div class="card p-2">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-gray-400">CTRADER FIX</span>
+                            <div id="ctrader-dot" class="status-dot down"></div>
+                        </div>
+                        <div id="ctrader-text" class="text-sm font-bold">Disconnected</div>
+                    </div>
+                </div>
+
+                <!-- Core Metrics -->
+                <div class="card p-2">
+                    <div class="section-title">CORE METRICS</div>
+                    <div class="grid grid-cols-5 gap-2 text-center">
+                        <div><div class="text-lg font-bold text-cyan-400" id="ticks">0</div><div class="text-xs text-gray-500">Ticks</div></div>
+                        <div><div class="text-lg font-bold text-blue-400" id="orders-sent">0</div><div class="text-xs text-gray-500">Orders</div></div>
+                        <div><div class="text-lg font-bold text-green-400" id="orders-filled">0</div><div class="text-xs text-gray-500">Fills</div></div>
+                        <div><div class="text-lg font-bold" id="pnl">$0.00</div><div class="text-xs text-gray-500">PnL</div></div>
+                        <div><div class="text-lg font-bold text-purple-400" id="state-gated">0</div><div class="text-xs text-gray-500">Gated</div></div>
+                    </div>
+                </div>
+
+                <!-- OPPORTUNITY ALERTS - NO SCROLL, FULL HEIGHT -->
+                <div class="card p-2 border-yellow-700/50">
+                    <div class="section-title text-yellow-400">🔔 OPPORTUNITY ALERTS</div>
+                    <div id="alerts-container" class="space-y-1">
+                        <div class="text-xs text-gray-500 text-center py-2">Waiting for high-conviction setups...</div>
+                    </div>
+                </div>
+
+                <!-- Microstructure -->
+                <div class="card p-2">
+                    <div class="section-title">MICROSTRUCTURE SIGNALS</div>
+                    <div class="grid grid-cols-4 gap-2 text-center text-xs">
+                        <div><div class="text-sm font-bold" id="micro-ofi">0</div><div class="text-gray-500">OFI</div></div>
+                        <div><div class="text-sm font-bold" id="micro-vpin">0</div><div class="text-gray-500">VPIN</div></div>
+                        <div><div class="text-sm font-bold text-yellow-400" id="micro-spread">0</div><div class="text-gray-500">Spread</div></div>
+                        <div><div class="text-sm font-bold" id="micro-pressure">0</div><div class="text-gray-500">Pressure</div></div>
+                    </div>
+                </div>
+
+                <!-- Bucket Voting -->
+                <div class="card p-2">
+                    <div class="section-title">BUCKET VOTING</div>
+                    <div class="grid grid-cols-3 gap-2 text-center">
+                        <div><div class="text-lg font-bold text-green-400" id="buy-votes">0</div><div class="text-xs text-gray-500">BUY</div></div>
+                        <div><div class="text-lg font-bold" id="signal">NONE</div><div class="text-xs text-gray-500">Signal</div></div>
+                        <div><div class="text-lg font-bold text-red-400" id="sell-votes">0</div><div class="text-xs text-gray-500">SELL</div></div>
+                    </div>
+                </div>
+                
+                <!-- BRING-UP VISIBILITY PANEL -->
+                <div class="card p-2 border-purple-700/50">
+                    <div class="section-title text-purple-400">📊 BRING-UP STATUS</div>
+                    
+                    <!-- Venue Health Table -->
+                    <div class="mt-1">
+                        <table class="w-full text-xs">
+                            <thead>
+                                <tr class="text-gray-400">
+                                    <th class="text-left p-1">Symbol</th>
+                                    <th class="text-left p-1">Venue</th>
+                                    <th class="text-center p-1">Health</th>
+                                    <th class="text-center p-1">Ladder</th>
+                                    <th class="text-center p-1">Scale</th>
+                                    <th class="text-center p-1">Fills</th>
+                                    <th class="text-left p-1">Blocker</th>
+                                </tr>
+                            </thead>
+                            <tbody id="venue-health-table">
+                                <tr><td colspan="7" class="text-center text-gray-500 py-2">Loading...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Suppression Counters -->
+                    <div class="mt-2 p-2 bg-gray-800/50 rounded">
+                        <div class="text-xs text-gray-400 mb-1">SUPPRESSION COUNTS (session)</div>
+                        <div id="suppression-counters" class="flex flex-wrap gap-1">
+                            <span class="text-xs text-gray-500">No suppressions yet</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Last Suppression Event -->
+                    <div class="mt-2 p-2 bg-red-900/20 rounded border border-red-800/50">
+                        <div class="text-xs text-red-400 mb-1">LAST BLOCK REASON</div>
+                        <div id="last-suppression" class="text-sm font-mono text-red-300">
+                            None
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MIDDLE-RIGHT: Config Panel (3 cols) -->
+            <div class="col-span-3 card p-2">
+                <div class="section-title flex justify-between items-center">
+                    <span>TRADING CONFIG</span>
+                    <div class="flex gap-1">
+                        <button onclick="setPreset(0)" id="preset-0" class="preset-btn active">CONSERVATIVE</button>
+                        <button onclick="setPreset(1)" id="preset-1" class="preset-btn">BALANCED</button>
+                        <button onclick="setPreset(2)" id="preset-2" class="preset-btn">AGGRESSIVE</button>
+                    </div>
+                </div>
+
+                <!-- Global Settings -->
+                <div class="mt-2 p-2 bg-gray-800/50 rounded">
+                    <div class="text-xs text-gray-400 mb-2">GLOBAL LIMITS</div>
+                    <div class="grid grid-cols-2 gap-2 text-xs">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">Daily Loss:</span>
+                            <input type="number" id="cfg-daily-loss" class="config-input" value="-500">
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">Max DD %:</span>
+                            <input type="number" id="cfg-max-dd" class="config-input" value="10" step="0.5">
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">Max Exposure:</span>
+                            <input type="number" id="cfg-max-exposure" class="config-input" value="0.05" step="0.01">
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">Max Positions:</span>
+                            <input type="number" id="cfg-max-pos" class="config-input" value="3">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Asset Class Tabs -->
+                <div class="flex gap-1 mt-2">
+                    <div onclick="selectAssetClass(0)" id="ac-tab-0" class="asset-tab active">🪙 Crypto</div>
+                    <div onclick="selectAssetClass(1)" id="ac-tab-1" class="asset-tab">💱 Forex</div>
+                    <div onclick="selectAssetClass(2)" id="ac-tab-2" class="asset-tab">🥇 Metals</div>
+                    <div onclick="selectAssetClass(3)" id="ac-tab-3" class="asset-tab">📈 Indices</div>
+                </div>
+
+                <!-- Asset Class Config -->
+                <div class="mt-2 p-2 bg-gray-800/50 rounded">
+                    <div class="text-xs text-gray-400 mb-2" id="ac-config-title">CRYPTO DEFAULTS</div>
+                    <div class="grid grid-cols-2 gap-2 text-xs">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">Size:</span>
+                            <input type="number" id="ac-size" class="config-input" value="0.0005" step="0.0001">
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">SL (bps):</span>
+                            <input type="number" id="ac-sl" class="config-input" value="25" step="1">
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">TP (bps):</span>
+                            <input type="number" id="ac-tp" class="config-input" value="45" step="1">
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">Max Spread:</span>
+                            <input type="number" id="ac-spread" class="config-input" value="4" step="0.5">
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">VPIN Max:</span>
+                            <input type="number" id="ac-vpin" class="config-input" value="0.60" step="0.05">
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">Cooldown:</span>
+                            <input type="number" id="ac-cooldown" class="config-input" value="250" step="50">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Selected Symbol Config -->
+                <div class="mt-2 p-2 bg-gray-800/50 rounded">
+                    <div class="text-xs text-gray-400 mb-2">SYMBOL: <span id="selected-symbol-name" class="text-cyan-400">Select a symbol</span></div>
+                    <div class="grid grid-cols-2 gap-2 text-xs">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">Enabled:</span>
+                            <input type="checkbox" id="sym-enabled" checked class="w-4 h-4">
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">Size:</span>
+                            <input type="number" id="sym-size" class="config-input" value="0.0005" step="0.0001">
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">SL (bps):</span>
+                            <input type="number" id="sym-sl" class="config-input" value="25">
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">TP (bps):</span>
+                            <input type="number" id="sym-tp" class="config-input" value="45">
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">VPIN Max:</span>
+                            <input type="number" id="sym-vpin" class="config-input" value="0.60" step="0.05">
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">Cooldown:</span>
+                            <input type="number" id="sym-cooldown" class="config-input" value="250">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Apply/Save Buttons with Status -->
+                <div class="mt-2 grid grid-cols-2 gap-2">
+                    <button onclick="applyConfig()" id="apply-btn" class="bg-green-600 hover:bg-green-500 text-white py-2 rounded text-sm font-bold">
+                        APPLY
+                    </button>
+                    <button onclick="saveConfig()" id="save-btn" class="bg-blue-600 hover:bg-blue-500 text-white py-2 rounded text-sm font-bold">
+                        💾 SAVE TO DISK
+                    </button>
+                </div>
+                <div id="config-status" class="mt-1 text-xs text-center text-gray-500"></div>
+
+                <!-- ENABLED SYMBOLS PANEL -->
+                <div class="mt-2 p-2 bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded border border-blue-700/50">
+                    <div class="section-title text-blue-400 flex justify-between">
+                        <span>✓ ENABLED SYMBOLS (click=trade, dblclick=edit)</span>
+                        <span id="active-trading-count" class="text-green-400">0 active</span>
+                    </div>
+                    <div id="enabled-symbols" class="flex flex-wrap gap-1 mt-1">
+                        <span class="text-xs text-gray-500">Loading...</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: Trade History + System (3 cols) -->
+            <div class="col-span-3 space-y-2">
+                <!-- Trade Blotter with Session PnL - v6.81 COMPACT -->
+                <div class="card p-2">
+                    <div class="flex justify-between items-center mb-1">
+                        <div class="flex items-center gap-2">
+                            <span class="section-title mb-0">📋 TRADES</span>
+                            <span class="text-cyan-400 text-xs" id="trade-count">0</span>
+                        </div>
+                        <!-- Inline Session Stats -->
+                        <div class="flex items-center gap-3 text-xs">
+                            <span>PnL: <span id="session-pnl" class="font-bold">$0.00</span></span>
+                            <span class="text-green-400"><span id="session-wins">0</span>W</span>
+                            <span class="text-red-400"><span id="session-losses">0</span>L</span>
+                            <span class="text-yellow-400"><span id="session-winrate">0%</span></span>
+                            <button onclick="exportTrades()" class="bg-gray-700 px-1 py-0.5 rounded hover:bg-gray-600">📥</button>
+                            <button onclick="clearTrades()" class="bg-red-800 px-1 py-0.5 rounded hover:bg-red-700">🗑️</button>
+                        </div>
+                    </div>
+                    <!-- Hidden elements for compatibility -->
+                    <span id="session-avg-win" class="hidden">0</span>
+                    <span id="session-avg-loss" class="hidden">0</span>
+                    <div class="text-xs grid grid-cols-6 gap-1 text-gray-500 border-b border-gray-700 pb-1 mb-1">
+                        <div>Time</div>
+                        <div>Symbol</div>
+                        <div>Side</div>
+                        <div>Qty</div>
+                        <div>Price</div>
+                        <div>PnL</div>
+                    </div>
+                    <div id="trade-blotter" class="scrollable-tall">
+                        <div class="text-xs text-gray-500 text-center py-4">No trades yet</div>
+                    </div>
+                </div>
+
+                <!-- Processing Latency -->
+                <div class="card p-2">
+                    <div class="section-title">PROCESSING LATENCY</div>
+                    <div class="grid grid-cols-4 gap-2 text-center text-xs">
+                        <div><div class="text-sm font-bold text-cyan-400" id="lat-avg">0</div><div class="text-gray-500">AVG μs</div></div>
+                        <div><div class="text-sm font-bold text-green-400" id="lat-min">0</div><div class="text-gray-500">MIN μs</div></div>
+                        <div><div class="text-sm font-bold text-red-400" id="lat-max">0</div><div class="text-gray-500">MAX μs</div></div>
+                        <div><div class="text-sm font-bold text-yellow-400" id="lat-p99">0</div><div class="text-gray-500">P99 μs</div></div>
+                    </div>
+                </div>
+
+                <!-- Regime & System -->
+                <div class="grid grid-cols-2 gap-2">
+                    <div class="card p-2">
+                        <div class="section-title">REGIME</div>
+                        <div class="text-xs space-y-0.5">
+                            <div class="flex justify-between"><span>Session:</span><span id="regime-session" class="text-cyan-400">--</span></div>
+                            <div class="flex justify-between"><span>Trending:</span><span id="regime-trending">--</span></div>
+                            <div class="flex justify-between"><span>Volatile:</span><span id="regime-volatile">--</span></div>
+                            <div class="flex justify-between"><span>Veto:</span><span id="regime-veto" class="text-green-400">CLEAR</span></div>
+                        </div>
+                    </div>
+                    <div class="card p-2">
+                        <div class="section-title">SYSTEM</div>
+                        <div class="text-xs space-y-0.5">
+                            <div class="flex justify-between"><span>Heartbeat:</span><span id="sys-heartbeat">0</span></div>
+                            <div class="flex justify-between"><span>Loop:</span><span id="sys-loop">0ms</span></div>
+                            <div class="flex justify-between"><span>Uptime:</span><span id="sys-uptime">0s</span></div>
+                            <div class="flex justify-between"><span>DD Buffer:</span><span id="dd-buffer" class="text-blue-400">100%</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ML Feature Logger Status -->
+                <div class="card p-2 bg-gradient-to-r from-green-900/20 to-emerald-900/20 border-green-700/50">
+                    <div class="section-title text-green-400">🧠 ML FEATURE LOGGER</div>
+                    <div class="grid grid-cols-2 gap-2 text-xs">
+                        <div class="flex justify-between"><span class="text-gray-400">Features/sec:</span><span id="ml-features-sec" class="text-green-400">0</span></div>
+                        <div class="flex justify-between"><span class="text-gray-400">Total logged:</span><span id="ml-total-logged">0</span></div>
+                        <div class="flex justify-between"><span class="text-gray-400">Labels ready:</span><span id="ml-labels-ready">0</span></div>
+                        <div class="flex justify-between"><span class="text-gray-400">Model score:</span><span id="ml-model-score">--</span></div>
+                    </div>
+                    <div class="mt-1 text-xs text-gray-500">
+                        Capturing: OFI, VPIN, spread, vol_z, trend, momentum
+                    </div>
+                </div>
+
+                <!-- LIVE DIAGNOSTIC CONSOLE - v6.79 -->
+                <div class="card p-2 bg-gradient-to-r from-red-900/30 to-orange-900/30 border-red-700/50">
+                    <div class="section-title text-red-400 flex justify-between items-center">
+                        <span>🔴 LIVE DIAGNOSTICS</span>
+                        <button onclick="clearDiagnostics()" class="text-xs bg-gray-700 px-2 py-0.5 rounded hover:bg-gray-600">Clear</button>
+                    </div>
+                    <div id="diag-console" class="font-mono text-xs space-y-0.5 max-h-32 overflow-y-auto bg-black/50 rounded p-1 mt-1">
+                        <div class="text-gray-500">Waiting for diagnostic data...</div>
+                    </div>
+                </div>
+
+                <!-- Market State Machine (MOVED BELOW ML) -->
+                <div class="card p-2 bg-gradient-to-r from-purple-900/30 to-indigo-900/30 border-purple-700/50">
+                    <div class="section-title text-purple-400">MARKET STATE MACHINE</div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs text-gray-400">State:</span>
+                                <span class="text-sm font-bold" id="mkt-state">DEAD</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs text-gray-400">Intent:</span>
+                                <span class="text-sm font-bold" id="mkt-intent">NO_TRADE</span>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs text-gray-400">Conviction:</span>
+                                <span class="text-sm font-bold" id="mkt-conviction">0</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs text-gray-400">Size Mult:</span>
+                                <span class="text-sm font-bold text-cyan-400" id="mkt-size-mult">0.0x</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-2 p-2 bg-black/30 rounded">
+                        <div class="text-xs text-gray-400">Reason:</div>
+                        <div class="text-sm font-mono text-yellow-400 truncate" id="mkt-reason" title="">--</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let ws = null;
+        let selectedSymbol = localStorage.getItem('chimera_selected_symbol') || null;
+        let selectedAssetClass = 0;
+        let currentConfig = null;
+        let reconnectTimer = null;
+        let reconnectAttempts = 0;
+        let trades = [];
+        let alerts = [];
+        let lastDataTime = 0;
+        let symbolLatencies = {};  // Track per-symbol latency
+        let diagLogs = [];  // Diagnostic log entries
+        const MAX_DIAG_LOGS = 50;
+        const MAX_TRADES = 10000;  // v6.80: Keep up to 10000 trades for scalping
+        let lastBlockReason = '';
+        let lastBuyVotes = 0;
+        let lastSellVotes = 0;
+        
+        // v6.80: Session PnL tracking
+        let sessionStats = {
+            totalPnl: 0,
+            wins: 0,
+            losses: 0,
+            totalWinAmount: 0,
+            totalLossAmount: 0
+        };
+        
+        // Diagnostic console functions
+        function addDiagLog(level, msg) {
+            const time = new Date().toLocaleTimeString('en-US', {hour12: false});
+            const colors = {
+                'INFO': 'text-cyan-400',
+                'WARN': 'text-yellow-400', 
+                'ERROR': 'text-red-400',
+                'TRADE': 'text-green-400',
+                'BLOCK': 'text-orange-400'
+            };
+            diagLogs.unshift({time, level, msg, color: colors[level] || 'text-gray-400'});
+            if (diagLogs.length > MAX_DIAG_LOGS) diagLogs.pop();
+            renderDiagnostics();
+        }
+        
+        function renderDiagnostics() {
+            const el = document.getElementById('diag-console');
+            if (!el) return;
+            if (diagLogs.length === 0) {
+                el.innerHTML = '<div class="text-gray-500">Waiting for diagnostic data...</div>';
+                return;
+            }
+            el.innerHTML = diagLogs.map(d => 
+                `<div class="${d.color}"><span class="text-gray-600">${d.time}</span> [${d.level}] ${d.msg}</div>`
+            ).join('');
+        }
+        
+        function clearDiagnostics() {
+            diagLogs = [];
+            renderDiagnostics();
+        }
+        
+        // Multi-select for active trading
+        let activeTrading = new Set(JSON.parse(localStorage.getItem('chimera_active_trading') || '[]'));
+
+        function connect() {
+            const url = document.getElementById('ws-url').value;
+            try {
+                if (ws) { ws.close(); ws = null; }
+                document.getElementById('ws-text').textContent = 'Connecting...';
+                ws = new WebSocket(url);
+                
+                ws.onopen = () => {
+                    console.log('[WS] Connection opened to ' + url);
+                    document.getElementById('ws-dot').className = 'status-dot up';
+                    document.getElementById('ws-text').textContent = 'Connected';
+                    reconnectAttempts = 0;
+                    if (reconnectTimer) { clearTimeout(reconnectTimer); reconnectTimer = null; }
+                    
+                    // v7.06: CRITICAL - Sync active trading symbols with engine on connect
+                    // Without this, engine uses hardcoded defaults instead of user's selection
+                    if (activeTrading.size > 0) {
+                        ws.send(JSON.stringify({
+                            cmd: 'set_active_trading',
+                            symbols: [...activeTrading]
+                        }));
+                        console.log('[WS] Synced active trading on connect:', [...activeTrading]);
+                    } else {
+                        // No symbols selected - disable all trading
+                        ws.send(JSON.stringify({
+                            cmd: 'set_active_trading',
+                            symbols: []
+                        }));
+                        console.log('[WS] No symbols active - disabled all trading');
+                    }
+                };
+                
+                ws.onclose = () => {
+                    document.getElementById('ws-dot').className = 'status-dot down';
+                    reconnectAttempts++;
+                    const delay = Math.min(1000 * Math.pow(1.5, reconnectAttempts), 10000);
+                    document.getElementById('ws-text').textContent = `Reconnecting (${reconnectAttempts})...`;
+                    reconnectTimer = setTimeout(connect, delay);
+                };
+                
+                ws.onerror = (err) => {
+                    console.error('WS error:', err);
+                    document.getElementById('ws-dot').className = 'status-dot down';
+                };
+                
+                ws.onmessage = (e) => {
+                    // v6.74: Integrated pause check and debug logging
+                    console.log('[WS] Message received, length=' + e.data.length);
+                    if (typeof paused !== 'undefined' && paused) {
+                        console.log('[WS] Paused, ignoring');
+                        return;
+                    }
+                    lastDataTime = Date.now();
+                    try { 
+                        const parsed = JSON.parse(e.data);
+                        console.log('[WS] Parsed OK, system:', parsed.system ? 'yes' : 'no');
+                        updateDashboard(parsed); 
+                    } catch(err) { 
+                        console.error('[WS] Parse/update error:', err); 
+                    }
+                };
+            } catch(e) { 
+                console.error('WS error:', e);
+                reconnectAttempts++;
+                const delay = Math.min(1000 * Math.pow(1.5, reconnectAttempts), 10000);
+                reconnectTimer = setTimeout(connect, delay);
+            }
+        }
+        
+        // Health check - reconnect if no data for 10 seconds
+        setInterval(() => {
+            if (ws && ws.readyState === WebSocket.OPEN && lastDataTime > 0) {
+                if (Date.now() - lastDataTime > 10000) {
+                    console.log('No data for 10s, reconnecting...');
+                    ws.close();
+                }
+            }
+        }, 5000);
+
+        function reconnect() { if (ws) ws.close(); connect(); }
+        
+        function disconnectWs() { 
+            if (ws) { 
+                ws.close(); 
+                ws = null; 
+            }
+            document.getElementById('ws-dot').className = 'status-dot down';
+            document.getElementById('ws-text').textContent = 'Disconnected';
+        }
+        
+        function killSwitch() {
+            if (!confirm('⚠️ KILL SWITCH: This will halt ALL trading immediately!\n\nAre you sure?')) return;
+            
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                ws.send(JSON.stringify({ type: 'kill_switch', action: 'activate' }));
+                document.getElementById('kill-btn').textContent = '🔴 KILLED';
+                document.getElementById('kill-btn').className = 'bg-red-900 text-xs px-3 py-1 rounded font-bold cursor-not-allowed';
+                addDiagLog('KILL', 'Kill switch activated - all trading halted');
+            } else {
+                alert('Not connected to server');
+            }
+        }
+
+        function selectSymbol(sym) {
+            selectedSymbol = sym;
+            localStorage.setItem('chimera_selected_symbol', sym);
+            document.querySelectorAll('.symbol-row').forEach(el => {
+                el.classList.toggle('selected', el.dataset.symbol === sym);
+            });
+            document.getElementById('selected-symbol-name').textContent = sym;
+            
+            const ac = guessAssetClass(sym);
+            if (ac !== selectedAssetClass) {
+                selectAssetClass(ac);
+            }
+            
+            updateSymbolConfigUI(sym);
+        }
+        
+        function guessAssetClass(symbol) {
+            if (symbol.includes('USDT') || symbol.includes('BTC') || symbol.includes('ETH') || symbol.includes('SOL')) return 0;
+            if (symbol.includes('XAU') || symbol.includes('XAG')) return 2;
+            if (symbol.includes('US30') || symbol.includes('NAS') || symbol.includes('SPX')) return 3;
+            return 1;
+        }
+
+        function selectAssetClass(ac) {
+            selectedAssetClass = ac;
+            for (let i = 0; i < 4; i++) {
+                document.getElementById('ac-tab-' + i).classList.toggle('active', i === ac);
+            }
+            const names = ['CRYPTO', 'FOREX', 'METALS', 'INDICES'];
+            document.getElementById('ac-config-title').textContent = names[ac] + ' DEFAULTS';
+            updateAssetClassConfigUI(ac);
+        }
+
+        function setPreset(level) {
+            for (let i = 0; i < 3; i++) {
+                document.getElementById('preset-' + i).classList.toggle('active', i === level);
+            }
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                ws.send(JSON.stringify({cmd: 'set_preset', level: level}));
+                showConfigStatus('Preset applied: ' + ['CONSERVATIVE', 'BALANCED', 'AGGRESSIVE'][level], 'success');
+            }
+        }
+
+        function applyConfig() {
+            const config = {
+                cmd: 'update_config',
+                daily_loss: parseFloat(document.getElementById('cfg-daily-loss').value),
+                max_dd: parseFloat(document.getElementById('cfg-max-dd').value),
+                max_exposure: parseFloat(document.getElementById('cfg-max-exposure').value),
+                max_positions: parseInt(document.getElementById('cfg-max-pos').value),
+                asset_class: selectedAssetClass,
+                ac_size: parseFloat(document.getElementById('ac-size').value),
+                ac_sl: parseFloat(document.getElementById('ac-sl').value),
+                ac_tp: parseFloat(document.getElementById('ac-tp').value),
+                ac_spread: parseFloat(document.getElementById('ac-spread').value),
+                ac_vpin: parseFloat(document.getElementById('ac-vpin').value),
+                ac_cooldown: parseInt(document.getElementById('ac-cooldown').value),
+                symbol: selectedSymbol,
+                sym_enabled: document.getElementById('sym-enabled').checked,
+                sym_size: parseFloat(document.getElementById('sym-size').value),
+                sym_sl: parseFloat(document.getElementById('sym-sl').value),
+                sym_tp: parseFloat(document.getElementById('sym-tp').value),
+                sym_vpin: parseFloat(document.getElementById('sym-vpin').value),
+                sym_cooldown: parseInt(document.getElementById('sym-cooldown').value)
+            };
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                ws.send(JSON.stringify(config));
+                const btn = document.getElementById('apply-btn');
+                btn.textContent = '✓ APPLIED';
+                btn.classList.add('apply-success');
+                showConfigStatus('Config applied to engine', 'success');
+                setTimeout(() => {
+                    btn.textContent = 'APPLY';
+                    btn.classList.remove('apply-success');
+                }, 2000);
+            } else {
+                showConfigStatus('Not connected to engine', 'error');
+            }
+        }
+
+        function saveConfig() {
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                ws.send(JSON.stringify({cmd: 'save_config'}));
+                const btn = document.getElementById('save-btn');
+                btn.textContent = '✓ SAVED';
+                btn.className = 'bg-green-700 text-white py-2 rounded text-sm font-bold';
+                showConfigStatus('Config saved to disk', 'success');
+                setTimeout(() => {
+                    btn.textContent = '💾 SAVE TO DISK';
+                    btn.className = 'bg-blue-600 hover:bg-blue-500 text-white py-2 rounded text-sm font-bold';
+                }, 2000);
+            } else {
+                showConfigStatus('Not connected to engine', 'error');
+            }
+        }
+        
+        function showConfigStatus(msg, type) {
+            const el = document.getElementById('config-status');
+            el.textContent = msg;
+            el.className = 'mt-1 text-xs text-center ' + (type === 'success' ? 'text-green-400' : 'text-red-400');
+            setTimeout(() => { el.textContent = ''; el.className = 'mt-1 text-xs text-center text-gray-500'; }, 3000);
+        }
+
+        function updateSymbolConfigUI(symbol) {
+            if (!currentConfig || !currentConfig.symbols) return;
+            const sym = currentConfig.symbols.find(s => s.symbol === symbol);
+            if (sym) {
+                document.getElementById('sym-enabled').checked = sym.enabled;
+                document.getElementById('sym-size').value = sym.position_size;
+                document.getElementById('sym-sl').value = sym.sl_bps;
+                document.getElementById('sym-tp').value = sym.tp_bps;
+                document.getElementById('sym-vpin').value = sym.vpin;
+                document.getElementById('sym-cooldown').value = sym.cooldown_ms;
+            }
+        }
+
+        function updateAssetClassConfigUI(ac) {
+            if (!currentConfig || !currentConfig.asset_classes) return;
+            const cfg = currentConfig.asset_classes[ac];
+            if (cfg) {
+                document.getElementById('ac-size').value = cfg.size;
+                document.getElementById('ac-sl').value = cfg.sl_bps;
+                document.getElementById('ac-tp').value = cfg.tp_bps;
+                document.getElementById('ac-spread').value = cfg.max_spread_bps;
+                document.getElementById('ac-vpin').value = cfg.vpin;
+                document.getElementById('ac-cooldown').value = cfg.cooldown_ms;
+            }
+        }
+        
+        function updateEnabledSymbols() {
+            const container = document.getElementById('enabled-symbols');
+            // v7.05: Show ALL symbols, highlight active ones
+            // Active = user clicked to trade (green)
+            // Inactive = available but not trading (gray)
+            
+            const allSymbols = ['BTCUSDT', 'ETHUSDT', 'SOLUSDT', 'EURUSD', 'GBPUSD', 'USDJPY', 
+                               'AUDUSD', 'USDCAD', 'AUDNZD', 'USDCHF', 'XAUUSD', 'XAGUSD',
+                               'NAS100', 'SPX500', 'US30'];
+            
+            container.innerHTML = allSymbols.map(sym => {
+                const isActive = activeTrading.has(sym);
+                const isSelected = sym === selectedSymbol;
+                // Green = active trading, Blue = selected for editing, Gray = not active
+                let classes = 'text-xs px-2 py-0.5 rounded cursor-pointer mr-1 mb-1 ';
+                if (isActive) {
+                    classes += 'bg-green-600 text-white border border-green-400';
+                } else if (isSelected) {
+                    classes += 'bg-blue-600 text-white';
+                } else {
+                    classes += 'bg-gray-700 text-gray-400 hover:bg-gray-600';
+                }
+                return `<span class="${classes}" onclick="toggleActiveTrading('${sym}')" ondblclick="selectSymbol('${sym}')">${sym}</span>`;
+            }).join('');
+            
+            // Update count
+            const countEl = document.getElementById('active-trading-count');
+            if (countEl) countEl.textContent = activeTrading.size + ' ACTIVE';
+        }
+        
+        function toggleActiveTrading(symbol) {
+            if (activeTrading.has(symbol)) {
+                activeTrading.delete(symbol);
+                console.log('[UI] Disabled:', symbol, 'Active:', [...activeTrading]);
+            } else {
+                activeTrading.add(symbol);
+                console.log('[UI] Enabled:', symbol, 'Active:', [...activeTrading]);
+            }
+            localStorage.setItem('chimera_active_trading', JSON.stringify([...activeTrading]));
+            updateEnabledSymbols();
+            renderSymbols(lastSymbols || []);
+            
+            // Send to engine
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                ws.send(JSON.stringify({
+                    cmd: 'set_active_trading',
+                    symbols: [...activeTrading]
+                }));
+                console.log('[UI] Sent to engine:', [...activeTrading]);
+            } else {
+                console.log('[UI] WARNING: WebSocket not connected!');
+            }
+        }
+        
+        let lastSymbols = [];
+
+        function formatPrice(price, symbol) {
+            if (!price || price === 0) return '--';
+            if (symbol.includes('JPY')) return price.toFixed(3);
+            if (symbol.includes('XAU') || symbol.includes('NAS') || symbol.includes('US30') || symbol.includes('SPX')) return price.toFixed(2);
+            if (symbol.includes('BTC') || symbol.includes('ETH') || symbol.includes('SOL')) return price.toFixed(2);
+            return price.toFixed(5);
+        }
+        
+        function getLatencyBadge(latMs) {
+            if (latMs < 0.3) return '<span class="latency-badge latency-fast">' + latMs.toFixed(2) + 'ms</span>';
+            if (latMs < 1.0) return '<span class="latency-badge latency-ok">' + latMs.toFixed(2) + 'ms</span>';
+            return '<span class="latency-badge latency-slow">' + latMs.toFixed(2) + 'ms</span>';
+        }
+
+        function renderSymbols(symbols) {
+            lastSymbols = symbols;  // Store for re-render
+            const crypto = symbols.filter(s => s.asset_class === 0);
+            const forex = symbols.filter(s => s.asset_class === 1);
+            const metals = symbols.filter(s => s.asset_class === 2);
+            const indices = symbols.filter(s => s.asset_class === 3);
+
+            document.getElementById('symbol-count').textContent = symbols.length + ' symbols';
+
+            // Get enabled symbols from config
+            const enabledSymbols = new Set();
+            if (currentConfig && currentConfig.symbols) {
+                currentConfig.symbols.filter(s => s.enabled).forEach(s => enabledSymbols.add(s.symbol));
+            }
+
+            const renderGroup = (arr, containerId) => {
+                const container = document.getElementById(containerId);
+                if (!arr.length) { container.innerHTML = '<div class="text-xs text-gray-600 px-2">No data</div>'; return; }
+                container.innerHTML = arr.map(s => {
+                    const isSelected = s.symbol === selectedSymbol;
+                    const isActive = activeTrading.has(s.symbol);
+                    const isEnabled = enabledSymbols.has(s.symbol);
+                    // Track real latency per symbol
+                    const lat = s.network_latency_ms || symbolLatencies[s.symbol] || 0;
+                    if (s.ticks > 0 && lat > 0) symbolLatencies[s.symbol] = lat;
+                    const latBadge = lat > 0 ? getLatencyBadge(lat) : '<span class="text-xs text-gray-500">--</span>';
+                    
+                    // Green border = active trading, Blue = selected, normal = just data
+                    let rowClass = 'symbol-row';
+                    if (isActive) rowClass += ' trade-active';
+                    else if (isSelected) rowClass += ' selected';
+                    
+                    const textClass = isActive ? 'text-green-400 font-bold' : (isSelected ? 'text-white' : 'text-gray-300');
+                    const indicator = isActive ? ' 🔥' : (isEnabled ? ' ●' : '');
+                    
+                    return `<div class="${rowClass}" data-symbol="${s.symbol}" onclick="selectSymbol('${s.symbol}')">
+                        <div class="flex justify-between items-center">
+                            <span class="${textClass}">${s.symbol}${indicator}</span>
+                            <span class="font-bold text-cyan-400">${formatPrice(s.mid, s.symbol)}</span>
+                        </div>
+                        <div class="flex justify-between text-xs text-gray-500">
+                            <span>Spd: ${s.spread ? s.spread.toFixed(5) : '--'}</span>
+                            ${latBadge}
+                        </div>
+                    </div>`;
+                }).join('');
+            };
+
+            renderGroup(crypto, 'symbols-crypto');
+            renderGroup(forex, 'symbols-forex');
+            renderGroup(metals, 'symbols-metals');
+            renderGroup(indices, 'symbols-indices');
+        }
+
+        function addTrade(trade) {
+            trades.unshift(trade);
+            // v6.81: Keep up to MAX_TRADES (10000) instead of just 50
+            if (trades.length > MAX_TRADES) trades.pop();
+            
+            // v6.81: Update session stats - PnL is in price points, track even tiny values
+            const pnl = parseFloat(trade.pnl) || 0;
+            if (pnl !== 0) {
+                sessionStats.totalPnl += pnl;
+                if (pnl > 0) {
+                    sessionStats.wins++;
+                    sessionStats.totalWinAmount += pnl;
+                } else {
+                    sessionStats.losses++;
+                    sessionStats.totalLossAmount += Math.abs(pnl);
+                }
+                updateSessionStats();
+            }
+            
+            renderTrades();
+        }
+        
+        // v6.80: Update session statistics display
+        function updateSessionStats() {
+            const pnlEl = document.getElementById('session-pnl');
+            pnlEl.textContent = '$' + sessionStats.totalPnl.toFixed(2);
+            pnlEl.className = 'text-lg font-bold ' + (sessionStats.totalPnl >= 0 ? 'text-green-400' : 'text-red-400');
+            
+            document.getElementById('session-wins').textContent = sessionStats.wins;
+            document.getElementById('session-losses').textContent = sessionStats.losses;
+            
+            const totalTrades = sessionStats.wins + sessionStats.losses;
+            const winRate = totalTrades > 0 ? (sessionStats.wins / totalTrades * 100) : 0;
+            document.getElementById('session-winrate').textContent = winRate.toFixed(1) + '%';
+            
+            const avgWin = sessionStats.wins > 0 ? (sessionStats.totalWinAmount / sessionStats.wins) : 0;
+            const avgLoss = sessionStats.losses > 0 ? (sessionStats.totalLossAmount / sessionStats.losses) : 0;
+            document.getElementById('session-avg-win').textContent = '$' + avgWin.toFixed(2);
+            document.getElementById('session-avg-loss').textContent = '$' + avgLoss.toFixed(2);
+        }
+        
+        // v6.80: Export trades to CSV
+        function exportTrades() {
+            if (trades.length === 0) {
+                alert('No trades to export');
+                return;
+            }
+            let csv = 'Time,Symbol,Side,Qty,Price,PnL\n';
+            trades.forEach(t => {
+                csv += `${t.time},${t.symbol},${t.side},${t.qty},${t.price},${t.pnl || 0}\n`;
+            });
+            const blob = new Blob([csv], {type: 'text/csv'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'chimera_trades_' + new Date().toISOString().split('T')[0] + '.csv';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+        
+        // v6.80: Clear trades and reset stats
+        function clearTrades() {
+            if (confirm('Clear all trades and reset session stats?')) {
+                trades = [];
+                sessionStats = { totalPnl: 0, wins: 0, losses: 0, totalWinAmount: 0, totalLossAmount: 0 };
+                updateSessionStats();
+                renderTrades();
+            }
+        }
+
+        function renderTrades() {
+            const container = document.getElementById('trade-blotter');
+            document.getElementById('trade-count').textContent = trades.length + ' trades';
+            if (!trades.length) {
+                container.innerHTML = '<div class="text-xs text-gray-500 text-center py-4">No trades yet</div>';
+                return;
+            }
+            // v6.80: Show PnL column, limit display to last 500 for performance
+            const displayTrades = trades.slice(0, 500);
+            container.innerHTML = displayTrades.map(t => {
+                const sideColor = t.side === 'BUY' ? 'text-green-400' : 'text-red-400';
+                const pnl = t.pnl || 0;
+                const pnlColor = pnl > 0 ? 'text-green-400' : (pnl < 0 ? 'text-red-400' : 'text-gray-500');
+                const pnlStr = pnl !== 0 ? (pnl > 0 ? '+' : '') + pnl.toFixed(4) : '--';
+                return `<div class="trade-row grid grid-cols-6 gap-1">
+                    <div class="text-gray-400">${t.time}</div>
+                    <div class="text-cyan-400">${t.symbol}</div>
+                    <div class="${sideColor}">${t.side}</div>
+                    <div>${t.qty}</div>
+                    <div>${t.price}</div>
+                    <div class="${pnlColor}">${pnlStr}</div>
+                </div>`;
+            }).join('');
+            if (trades.length > 500) {
+                container.innerHTML += `<div class="text-xs text-gray-500 text-center py-2">... and ${trades.length - 500} more (export for full list)</div>`;
+            }
+        }
+
+        function addAlert(alert) {
+            // Check for duplicate
+            const existing = alerts.findIndex(a => a.symbol === alert.symbol);
+            if (existing >= 0) {
+                alerts[existing] = alert;  // Update existing
+            } else {
+                alerts.unshift(alert);
+                if (alerts.length > 8) alerts.pop();  // Keep max 8 alerts (no scroll)
+            }
+            renderAlerts();
+        }
+
+        function renderAlerts() {
+            const container = document.getElementById('alerts-container');
+            if (!alerts.length) {
+                container.innerHTML = '<div class="text-xs text-gray-500 text-center py-2">Waiting for high-conviction setups...</div>';
+                return;
+            }
+            container.innerHTML = alerts.map(a => {
+                const intentColor = a.intent === 'MOMENTUM' ? 'border-green-500 bg-green-900/20' : 'border-purple-500 bg-purple-900/20';
+                const convColor = a.conviction >= 8 ? 'text-green-400' : a.conviction >= 6 ? 'text-yellow-400' : 'text-orange-400';
+                return `<div class="alert-item p-2 rounded border ${intentColor} text-xs">
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold text-white">${a.symbol}</span>
+                        <span class="${convColor}">Conv: ${a.conviction}</span>
+                    </div>
+                    <div class="flex justify-between text-gray-400 mt-1">
+                        <span>${a.intent}</span>
+                        <span>${a.reason}</span>
+                    </div>
+                </div>`;
+            }).join('');
+        }
+
+        function getSizeMultiplier(conviction) {
+            if (conviction >= 9) return '2.0x';
+            if (conviction >= 8) return '1.5x';
+            if (conviction >= 6) return '1.0x';
+            if (conviction >= 4) return '0.5x';
+            return '0.0x';
+        }
+
+        function updateDashboard(d) {
+            // Version from server
+            if (d.version) {
+                document.getElementById('version-badge').textContent = d.version;
+                document.title = 'Chimera HFT Dashboard ' + d.version;
+            }
+            
+            // Network Latency
+            if (d.network_latency) {
+                const curr = d.network_latency.current_ms || 0;
+                document.getElementById('net-lat-current').textContent = curr.toFixed(2);
+                document.getElementById('net-lat-avg').textContent = (d.network_latency.avg_ms || 0).toFixed(2);
+                document.getElementById('net-lat-min').textContent = (d.network_latency.min_ms || 0).toFixed(2);
+                document.getElementById('net-lat-max').textContent = (d.network_latency.max_ms || 0).toFixed(2);
+                const statusEl = document.getElementById('lat-status');
+                if (curr < 0.3) { statusEl.textContent = 'ULTRA-LOW'; statusEl.className = 'text-lg font-bold text-green-400'; }
+                else if (curr < 0.5) { statusEl.textContent = 'OPTIMAL'; statusEl.className = 'text-lg font-bold text-cyan-400'; }
+                else if (curr < 1.0) { statusEl.textContent = 'NORMAL'; statusEl.className = 'text-lg font-bold text-yellow-400'; }
+                else { statusEl.textContent = 'DEGRADED'; statusEl.className = 'text-lg font-bold text-red-400'; }
+            }
+
+            if (d.symbols && d.symbols.length > 0) renderSymbols(d.symbols);
+
+            if (d.system) {
+                document.getElementById('binance-dot').className = 'status-dot ' + (d.system.binance ? 'up' : 'down');
+                document.getElementById('binance-text').textContent = d.system.binance ? 'Connected' : 'Disconnected';
+                document.getElementById('ctrader-dot').className = 'status-dot ' + (d.system.ctrader ? 'up' : 'down');
+                document.getElementById('ctrader-text').textContent = d.system.ctrader ? 'Connected' : 'Disconnected';
+                document.getElementById('sys-uptime').textContent = (d.system.uptime || 0) + 's';
+            }
+
+            if (d.engine) {
+                document.getElementById('sys-heartbeat').textContent = d.engine.heartbeat || 0;
+                document.getElementById('sys-loop').textContent = (d.engine.loop_ms || 0).toFixed(1) + 'ms';
+            }
+
+            if (d.orderflow) {
+                document.getElementById('ticks').textContent = (d.orderflow.ticks || 0).toLocaleString();
+                document.getElementById('orders-sent').textContent = d.orderflow.orders_sent || 0;
+                document.getElementById('orders-filled').textContent = d.orderflow.orders_filled || 0;
+            }
+
+            if (d.risk) {
+                const pnl = d.risk.pnl || 0;
+                const pnlEl = document.getElementById('pnl');
+                pnlEl.textContent = '$' + pnl.toFixed(2);
+                pnlEl.className = 'text-lg font-bold ' + (pnl >= 0 ? 'text-green-400' : 'text-red-400');
+                document.getElementById('dd-buffer').textContent = ((1 - (d.risk.dd_used || 0)) * 100).toFixed(0) + '%';
+            }
+
+            if (d.latency) {
+                document.getElementById('lat-avg').textContent = (d.latency.avg_us || 0).toFixed(0);
+                document.getElementById('lat-min').textContent = (d.latency.min_us || 0).toFixed(0);
+                document.getElementById('lat-max').textContent = (d.latency.max_us || 0).toFixed(0);
+                document.getElementById('lat-p99').textContent = (d.latency.p99_us || 0).toFixed(0);
+            }
+
+            if (d.micro) {
+                document.getElementById('micro-ofi').textContent = (d.micro.ofi || 0).toFixed(4);
+                document.getElementById('micro-vpin').textContent = (d.micro.vpin || 0).toFixed(4);
+                document.getElementById('micro-spread').textContent = (d.micro.spread || 0).toFixed(6);
+                document.getElementById('micro-pressure').textContent = (d.micro.pressure || 0).toFixed(4);
+            }
+
+            if (d.buckets) {
+                document.getElementById('buy-votes').textContent = d.buckets.buy_votes || 0;
+                document.getElementById('sell-votes').textContent = d.buckets.sell_votes || 0;
+                const consensus = d.buckets.consensus || 0;
+                const signalEl = document.getElementById('signal');
+                if (consensus > 0) { signalEl.textContent = 'BUY'; signalEl.className = 'text-lg font-bold text-green-400'; }
+                else if (consensus < 0) { signalEl.textContent = 'SELL'; signalEl.className = 'text-lg font-bold text-red-400'; }
+                else { signalEl.textContent = 'NONE'; signalEl.className = 'text-lg font-bold text-gray-400'; }
+            }
+
+            if (d.regime) {
+                const hour = d.regime.utc_hour || 0;
+                let session = 'ASIA';
+                if (hour >= 8 && hour < 12) session = 'LONDON';
+                else if (hour >= 12 && hour < 17) session = 'NY';
+                else if (hour >= 17 && hour < 21) session = 'LATE';
+                document.getElementById('regime-session').textContent = session;
+                document.getElementById('regime-trending').textContent = d.regime.is_trending ? 'YES' : 'NO';
+                document.getElementById('regime-trending').className = d.regime.is_trending ? 'text-green-400' : 'text-gray-400';
+                document.getElementById('regime-volatile').textContent = d.regime.is_volatile ? 'YES' : 'NO';
+                document.getElementById('regime-volatile').className = d.regime.is_volatile ? 'text-red-400' : 'text-gray-400';
+                document.getElementById('regime-veto').textContent = d.regime.vetoed ? d.regime.veto_reason : 'CLEAR';
+                document.getElementById('regime-veto').className = d.regime.vetoed ? 'text-red-400' : 'text-green-400';
+            }
+
+            // Market State
+            if (d.market_state) {
+                const stateEl = document.getElementById('mkt-state');
+                const state = d.market_state.state || 'DEAD';
+                stateEl.textContent = state;
+                if (state === 'TRENDING') stateEl.className = 'text-sm font-bold text-green-400';
+                else if (state === 'RANGING') stateEl.className = 'text-sm font-bold text-blue-400';
+                else if (state === 'VOLATILE') stateEl.className = 'text-sm font-bold text-red-400';
+                else stateEl.className = 'text-sm font-bold text-gray-500';
+                
+                const intentEl = document.getElementById('mkt-intent');
+                const intent = d.market_state.intent || 'NO_TRADE';
+                intentEl.textContent = intent;
+                if (intent === 'MOMENTUM') intentEl.className = 'text-sm font-bold text-green-400';
+                else if (intent === 'MEAN_REVERSION') intentEl.className = 'text-sm font-bold text-purple-400';
+                else intentEl.className = 'text-sm font-bold text-gray-500';
+                
+                const conviction = d.market_state.conviction || 0;
+                const convEl = document.getElementById('mkt-conviction');
+                convEl.textContent = conviction;
+                if (conviction >= 8) convEl.className = 'text-sm font-bold text-green-400';
+                else if (conviction >= 6) convEl.className = 'text-sm font-bold text-yellow-400';
+                else if (conviction >= 4) convEl.className = 'text-sm font-bold text-orange-400';
+                else convEl.className = 'text-sm font-bold text-gray-500';
+                
+                document.getElementById('mkt-size-mult').textContent = getSizeMultiplier(conviction);
+                
+                const reason = d.market_state.reason || '--';
+                const reasonEl = document.getElementById('mkt-reason');
+                reasonEl.textContent = reason;
+                reasonEl.title = reason;
+                
+                // Generate alert for high conviction setups - ONLY for active trading symbols
+                const alertSymbol = d.micro?.tick?.symbol || selectedSymbol || 'MARKET';
+                if (conviction >= 6 && intent !== 'NO_TRADE' && activeTrading.has(alertSymbol)) {
+                    addAlert({
+                        symbol: alertSymbol,
+                        intent: intent,
+                        conviction: conviction,
+                        reason: reason,
+                        time: new Date().toLocaleTimeString()
+                    });
+                }
+            }
+            
+            if (d.stats && d.stats.state_gated !== undefined) {
+                document.getElementById('state-gated').textContent = d.stats.state_gated;
+                document.getElementById('diag-gated').textContent = d.stats.state_gated;
+            }
+
+            // Update WHY NO TRADE diagnostics - v6.73 FIXED
+            if (d.market_state || d.buckets || d.system) {
+                const state = d.market_state?.state || 'DEAD';
+                const intent = d.market_state?.intent || 'NO_TRADE';
+                const conviction = d.market_state?.conviction || 0;
+                const buyVotes = d.buckets?.buy_votes || 0;
+                const sellVotes = d.buckets?.sell_votes || 0;
+                const binanceUp = d.system?.binance || false;
+                const ctraderUp = d.system?.ctrader || false;
+                
+                // v6.73: Get ACTUAL scalper reason from C++ code
+                const scalperReason = d.market_state?.reason || 'UNKNOWN';
+                
+                // Update diag fields
+                document.getElementById('diag-state').textContent = state;
+                document.getElementById('diag-state').className = 'text-sm font-bold ' + 
+                    (state === 'TRENDING' ? 'text-green-400' : state === 'RANGING' ? 'text-blue-400' : 
+                     state === 'VOLATILE' ? 'text-red-400' : 'text-gray-500');
+                
+                document.getElementById('diag-intent').textContent = intent;
+                document.getElementById('diag-intent').className = 'text-sm font-bold ' + 
+                    (intent === 'MOMENTUM' ? 'text-green-400' : intent === 'MEAN_REVERSION' ? 'text-purple-400' : 'text-gray-500');
+                
+                document.getElementById('diag-conviction').textContent = conviction;
+                document.getElementById('diag-conviction').className = 'text-sm font-bold ' + 
+                    (conviction >= 8 ? 'text-green-400' : conviction >= 6 ? 'text-yellow-400' : 'text-gray-500');
+                
+                document.getElementById('diag-consensus').textContent = buyVotes + '/' + sellVotes;
+                
+                // Check intent/state alignment
+                let aligned = 'N/A';
+                if (intent === 'MOMENTUM' && state === 'TRENDING') aligned = 'YES';
+                else if (intent === 'MEAN_REVERSION' && (state === 'RANGING' || state === 'VOLATILE')) aligned = 'YES';
+                else if (intent !== 'NO_TRADE') aligned = 'NO';
+                document.getElementById('diag-aligned').textContent = aligned;
+                document.getElementById('diag-aligned').className = 'text-sm font-bold ' + 
+                    (aligned === 'YES' ? 'text-green-400' : aligned === 'NO' ? 'text-red-400' : 'text-gray-500');
+                
+                // v6.73: USE ACTUAL SCALPER REASON (not computed)
+                let blockReason = scalperReason;
+                let blockClass = 'text-yellow-400';
+                let blockDetail = '';
+                
+                // Color code based on reason
+                if (!binanceUp && !ctraderUp) { 
+                    blockReason = 'DISCONNECTED'; 
+                    blockClass = 'text-red-500';
+                    blockDetail = 'Both engines disconnected';
+                } else if (scalperReason === 'INIT' || scalperReason === 'WARMUP') {
+                    blockClass = 'text-blue-400';
+                    blockDetail = 'Building EMAs, need more ticks';
+                } else if (scalperReason === 'IN_POS' || scalperReason === 'IN_POSITION') {
+                    blockClass = 'text-cyan-400';
+                    blockDetail = 'Already holding a position';
+                } else if (scalperReason === 'SPREAD_WIDE' || scalperReason === 'SPREAD_NOT_TIGHT') {
+                    blockClass = 'text-orange-400';
+                    blockDetail = 'Spread too wide for entry';
+                } else if (scalperReason === 'NO_SIGNAL' || scalperReason === 'NO_SETUP') {
+                    blockClass = 'text-yellow-400';
+                    blockDetail = 'No trend or momentum detected';
+                } else if (scalperReason === 'LOW_CONF') {
+                    blockClass = 'text-yellow-400';
+                    blockDetail = 'Signal confidence too low';
+                } else if (scalperReason.includes('LONG') || scalperReason.includes('SHORT')) {
+                    blockClass = 'text-green-400';
+                    blockDetail = 'TRADING! Signal generated';
+                } else if (scalperReason.includes('TP') || scalperReason.includes('SL') || scalperReason.includes('EXIT')) {
+                    blockClass = 'text-purple-400';
+                    blockDetail = 'Position closed';
+                }
+                
+                // Update the BIG prominent display
+                document.getElementById('diag-reason-big').textContent = blockReason;
+                document.getElementById('diag-reason-big').className = 'text-2xl font-bold font-mono ' + blockClass;
+                document.getElementById('diag-reason-detail').textContent = blockDetail + 
+                    ' | State=' + state + ' Intent=' + intent + ' Conv=' + conviction;
+                
+                // Update old small display too
+                document.getElementById('diag-reason').textContent = blockReason;
+                document.getElementById('diag-reason').className = 'text-sm font-bold ' + blockClass;
+                
+                // Update the last-suppression element in the bring-up panel
+                document.getElementById('last-suppression').textContent = blockReason;
+                document.getElementById('last-suppression').className = 'text-sm font-mono ' + blockClass;
+                
+                // Add to diagnostic console for visibility
+                if (blockReason !== lastBlockReason && blockReason !== 'WARMUP' && blockReason !== 'INIT') {
+                    addDiagLog('BLOCK', `${blockReason} | State=${state} Intent=${intent} Conv=${conviction} Votes=${buyVotes}B/${sellVotes}S`);
+                }
+                lastBlockReason = blockReason;
+                
+                // Log vote changes
+                if ((buyVotes > 0 || sellVotes > 0) && (buyVotes !== lastBuyVotes || sellVotes !== lastSellVotes)) {
+                    addDiagLog('INFO', `Votes: ${buyVotes} BUY / ${sellVotes} SELL | Conv=${conviction}`);
+                }
+                lastBuyVotes = buyVotes;
+                lastSellVotes = sellVotes;
+            }
+
+            if (d.trade) {
+                addTrade({
+                    time: new Date().toLocaleTimeString(),
+                    symbol: d.trade.symbol,
+                    side: d.trade.side,
+                    qty: d.trade.qty.toFixed(4),
+                    price: d.trade.price.toFixed(5),
+                    pnl: d.trade.pnl || 0  // v6.80: Include PnL from server
+                });
+                const pnlStr = d.trade.pnl ? ` PnL=${d.trade.pnl.toFixed(4)}` : '';
+                addDiagLog('TRADE', `${d.trade.side} ${d.trade.qty.toFixed(4)} ${d.trade.symbol} @ ${d.trade.price.toFixed(5)}${pnlStr}`);
+            }
+
+            if (d.ml) {
+                document.getElementById('ml-features-sec').textContent = d.ml.features_sec || 0;
+                document.getElementById('ml-total-logged').textContent = (d.ml.total_logged || 0).toLocaleString();
+                document.getElementById('ml-labels-ready').textContent = d.ml.labels_ready || 0;
+                document.getElementById('ml-model-score').textContent = d.ml.model_score ? d.ml.model_score.toFixed(3) : '--';
+            }
+
+            if (d.config) {
+                currentConfig = d.config;
+                document.getElementById('cfg-daily-loss').value = d.config.daily_loss_limit || -500;
+                document.getElementById('cfg-max-dd').value = d.config.max_drawdown_pct || 10;
+                document.getElementById('cfg-max-exposure').value = d.config.max_exposure || 0.05;
+                document.getElementById('cfg-max-pos').value = d.config.max_positions || 3;
+                const level = d.config.risk_level || 0;
+                for (let i = 0; i < 3; i++) {
+                    document.getElementById('preset-' + i).classList.toggle('active', i === level);
+                }
+                updateAssetClassConfigUI(selectedAssetClass);
+                if (selectedSymbol) updateSymbolConfigUI(selectedSymbol);
+                updateEnabledSymbols();
+            }
+            
+            // BRING-UP VISIBILITY UPDATE
+            if (d.bring_up) {
+                // Update venue health table
+                const tableBody = document.getElementById('venue-health-table');
+                if (d.bring_up.venues && d.bring_up.venues.length > 0) {
+                    tableBody.innerHTML = d.bring_up.venues.map(v => {
+                        const healthColor = v.health === 'GREEN' ? 'text-green-400' : 
+                                           v.health === 'YELLOW' ? 'text-yellow-400' : 'text-red-400';
+                        const healthBg = v.health === 'GREEN' ? 'bg-green-900/30' : 
+                                        v.health === 'YELLOW' ? 'bg-yellow-900/30' : 'bg-red-900/30';
+                        const ladderPct = (v.ladder_scale * 100).toFixed(0) + '%';
+                        const fillProgress = v.required_fills > 0 ? 
+                            `${v.clean_fills}/${v.required_fills}` : '--';
+                        return `<tr class="${healthBg}">
+                            <td class="p-1 font-bold text-cyan-300">${v.symbol}</td>
+                            <td class="p-1">${v.venue}</td>
+                            <td class="p-1 text-center ${healthColor} font-bold">${v.health}</td>
+                            <td class="p-1 text-center">L${v.ladder_level}</td>
+                            <td class="p-1 text-center">${ladderPct}</td>
+                            <td class="p-1 text-center">${fillProgress}</td>
+                            <td class="p-1 text-red-300 text-xs">${v.last_blocker !== 'NONE' ? v.last_blocker : '--'}</td>
+                        </tr>`;
+                    }).join('');
+                } else {
+                    tableBody.innerHTML = '<tr><td colspan="7" class="text-center text-gray-500 py-2">No venue data</td></tr>';
+                }
+                
+                // Update suppression counters
+                const countersEl = document.getElementById('suppression-counters');
+                if (d.bring_up.suppression_counts && Object.keys(d.bring_up.suppression_counts).length > 0) {
+                    const counters = Object.entries(d.bring_up.suppression_counts)
+                        .sort((a, b) => b[1] - a[1])
+                        .slice(0, 6);
+                    countersEl.innerHTML = counters.map(([reason, count]) => {
+                        const barWidth = Math.min(100, count / 10);
+                        return `<div class="flex items-center gap-1 text-xs">
+                            <span class="text-gray-400 w-24 truncate">${reason}</span>
+                            <div class="flex-1 bg-gray-700 rounded h-2">
+                                <div class="bg-red-500 h-2 rounded" style="width: ${barWidth}%"></div>
+                            </div>
+                            <span class="text-red-400 font-bold w-8 text-right">${count}</span>
+                        </div>`;
+                    }).join('');
+                } else {
+                    countersEl.innerHTML = '<span class="text-xs text-gray-500">No suppressions yet</span>';
+                }
+                
+                // Total suppressions
+                if (d.bring_up.total_suppressions > 0) {
+                    countersEl.innerHTML += `<div class="text-xs text-gray-400 mt-1">Total: ${d.bring_up.total_suppressions}</div>`;
+                }
+            }
+        }
+
+        // =====================================================================
+        // KEYBOARD SHORTCUTS
+        // =====================================================================
+        let paused = false;
+        document.addEventListener('keydown', (e) => {
+            // Don't trigger if typing in input
+            if (e.target.tagName === 'INPUT') return;
+            
+            switch(e.key.toLowerCase()) {
+                case 'r':
+                    // R = Reconnect WebSocket
+                    console.log('Reconnecting...');
+                    document.getElementById('ws-text').textContent = 'Reconnecting...';
+                    reconnect();
+                    break;
+                case ' ':
+                    // Space = Pause/Resume updates
+                    e.preventDefault();
+                    paused = !paused;
+                    document.getElementById('ws-text').textContent = paused ? 'PAUSED' : 'Connected';
+                    break;
+                case 'c':
+                    // C = Clear trades (with confirmation)
+                    clearTrades();
+                    break;
+            }
+        });
+
+        // v6.74: Simplified - pause check is now in the main onmessage handler
+        // No override needed
+
+        connect();
+        
+        const savedSymbol = localStorage.getItem('chimera_selected_symbol');
+        if (savedSymbol) {
+            selectedSymbol = savedSymbol;
+            document.getElementById('selected-symbol-name').textContent = savedSymbol;
+        }
+    </script>
+</body>
+</html>
