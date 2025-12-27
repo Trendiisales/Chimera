@@ -3,7 +3,7 @@
 // ═══════════════════════════════════════════════════════════════════════════════
 // VERSION: 1.0.0
 // PURPOSE: Serve real-time data to the dashboard HTML
-// PROTOCOL: Simple JSON over WebSocket (port 8765)
+// PROTOCOL: Simple JSON over WebSocket (port 8080)
 // ═══════════════════════════════════════════════════════════════════════════════
 #pragma once
 
@@ -18,6 +18,7 @@
 #include <iomanip>
 #include <cstring>
 #include <functional>
+#include <fstream>
 
 // Platform includes
 #ifdef _WIN32
@@ -199,7 +200,7 @@ struct TradeRecord {
 
 class DashboardServer {
 public:
-    DashboardServer(uint16_t port = 8765) noexcept 
+    DashboardServer(uint16_t port = 8080) noexcept 
         : port_(port), running_(false), server_socket_(INVALID_SOCKET) {}
     
     ~DashboardServer() {
@@ -355,11 +356,20 @@ private:
         if (received <= 0) return false;
         buffer[received] = '\0';
         
-        // Find Sec-WebSocket-Key
         std::string request(buffer);
-        size_t key_pos = request.find("Sec-WebSocket-Key: ");
-        if (key_pos == std::string::npos) return false;
         
+        // Check if this is a WebSocket upgrade request
+        size_t key_pos = request.find("Sec-WebSocket-Key: ");
+        
+        if (key_pos == std::string::npos) {
+            // Regular HTTP request - serve the dashboard HTML
+            if (request.find("GET ") == 0) {
+                serve_http(client, request);
+            }
+            return false;  // Don't add to WebSocket clients
+        }
+        
+        // WebSocket upgrade
         key_pos += 19;
         size_t key_end = request.find("\r\n", key_pos);
         if (key_end == std::string::npos) return false;
@@ -380,6 +390,83 @@ private:
         std::string resp = response.str();
         return send(client, resp.c_str(), (int)resp.length(), 0) > 0;
     }
+    
+    void serve_http(SOCKET client, const std::string& request) noexcept {
+        // Extract path
+        size_t path_start = request.find("GET ") + 4;
+        size_t path_end = request.find(" HTTP");
+        std::string path = request.substr(path_start, path_end - path_start);
+        
+        // Serve dashboard HTML
+        if (path == "/" || path == "/alpha_dashboard.html" || path.find("dashboard") != std::string::npos) {
+            std::string html = load_dashboard_file();
+            
+            std::ostringstream response;
+            response << "HTTP/1.1 200 OK\r\n";
+            response << "Content-Type: text/html\r\n";
+            response << "Content-Length: " << html.length() << "\r\n";
+            response << "Connection: close\r\n";
+            response << "\r\n";
+            response << html;
+            
+            std::string resp = response.str();
+            send(client, resp.c_str(), (int)resp.length(), 0);
+        } else {
+            // 404
+            std::string body = "<html><body><h1>404 Not Found</h1></body></html>";
+            std::ostringstream response;
+            response << "HTTP/1.1 404 Not Found\r\n";
+            response << "Content-Type: text/html\r\n";
+            response << "Content-Length: " << body.length() << "\r\n";
+            response << "Connection: close\r\n";
+            response << "\r\n";
+            response << body;
+            
+            std::string resp = response.str();
+            send(client, resp.c_str(), (int)resp.length(), 0);
+        }
+        
+        CLOSE_SOCKET(client);
+    }
+    
+    std::string load_dashboard_file() noexcept {
+        // Try multiple paths
+        const char* paths[] = {
+            "alpha_dashboard.html",
+            "./alpha_dashboard.html",
+            "../alpha_dashboard.html",
+            "/mnt/c/Alpha/alpha_dashboard.html"
+        };
+        
+        for (const char* path : paths) {
+            std::ifstream file(path);
+            if (file.is_open()) {
+                std::ostringstream ss;
+                ss << file.rdbuf();
+                std::cout << "[Dashboard] Loaded HTML from: " << path << "\n";
+                return ss.str();
+            }
+        }
+        
+        std::cerr << "[Dashboard] WARNING: Could not find alpha_dashboard.html, using fallback\n";
+        return get_fallback_html();
+    }
+    
+    std::string get_fallback_html() noexcept {
+        return R"HTML(<!DOCTYPE html>
+<html><head><title>Alpha Dashboard</title>
+<style>body{background:#0a0a0f;color:#e0e0e0;font-family:monospace;padding:20px;}
+h1{color:#ffd700;}.error{color:#ff6666;}</style></head>
+<body><h1>Alpha Trading System</h1>
+<p class="error">Dashboard HTML file not found. Place alpha_dashboard.html in the working directory.</p>
+<p>WebSocket connecting to ws://localhost:8080</p>
+<script>
+let ws = new WebSocket('ws://' + location.host);
+ws.onmessage = e => { document.body.innerHTML += '<pre>' + e.data + '</pre>'; };
+ws.onerror = () => { document.body.innerHTML += '<p class="error">WebSocket error</p>'; };
+</script></body></html>)HTML";
+    }
+    
     
     std::string generate_accept_key(const std::string& client_key) noexcept {
         std::string magic = client_key + "258EAFA5-E914-47DA-95CA-C5AB0DC85B11";
@@ -427,7 +514,7 @@ private:
 // ═══════════════════════════════════════════════════════════════════════════════
 
 inline DashboardServer& getDashboardServer() noexcept {
-    static DashboardServer instance(8765);
+    static DashboardServer instance(8080);
     return instance;
 }
 

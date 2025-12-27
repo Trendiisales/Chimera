@@ -161,12 +161,21 @@ struct SessionStats {
 class MLLogger {
 public:
     struct Config {
-        bool enabled = true;
-        bool log_ticks = true;
-        bool log_trades = true;
-        bool log_sessions = true;
-        int tick_sample_rate = 100;    // Log every N ticks
-        std::string output_dir = ".";
+        bool enabled;
+        bool log_ticks;
+        bool log_trades;
+        bool log_sessions;
+        int tick_sample_rate;
+        std::string output_dir;
+        
+        Config() noexcept 
+            : enabled(true)
+            , log_ticks(true)
+            , log_trades(true)
+            , log_sessions(true)
+            , tick_sample_rate(100)
+            , output_dir(".")
+        {}
     };
     
     explicit MLLogger(const Config& config = Config{}) noexcept 

@@ -63,7 +63,7 @@
                     <div id="ws-dot" class="status-dot down"></div>
                     <span id="ws-text" class="text-xs">Disconnected</span>
                 </div>
-                <input id="ws-url" type="text" value="ws://localhost:8765" 
+                <input id="ws-url" type="text" value="ws://localhost:8080" 
                        class="bg-gray-800 text-xs px-2 py-1 rounded border border-gray-700 w-44">
                 <button onclick="reconnect()" class="bg-blue-600 text-xs px-3 py-1 rounded hover:bg-blue-500">Connect</button>
                 <button onclick="killSwitch()" id="kill-btn" class="bg-red-700 text-xs px-3 py-1 rounded hover:bg-red-600 font-bold">⚠️ KILL ALL</button>
@@ -857,6 +857,10 @@
         updateSessionIndicators();
 
         // Auto-connect on load
+        // Set WebSocket URL based on page host
+        if (window.location.hostname && window.location.hostname !== 'localhost') {
+            document.getElementById('ws-url').value = 'ws://' + window.location.host;
+        }
         setTimeout(connect, 500);
     </script>
 </body>

@@ -81,8 +81,12 @@ struct Colors {
     static uint32_t for_session(SessionType s) {
         switch (s) {
             case SessionType::ASIA: return ASIA;
-            case SessionType::LONDON: return LONDON;
-            case SessionType::NY: return NY;
+            case SessionType::LONDON_OPEN:
+            case SessionType::LONDON_PM: return LONDON;
+            case SessionType::CASH_OPEN:
+            case SessionType::NY_AFTERNOON:
+            case SessionType::US_DATA:
+            case SessionType::POWER_HOUR: return NY;
             default: return TEXT_DIM;
         }
     }
@@ -391,10 +395,9 @@ private:
         // Current session info
         auto session = current_session(Instrument::XAUUSD);
         ss << "║  Session: " << session_str(session.session)
-           << " (" << session_type_str(session.type) << ")"
            << "  Multiplier: " << std::fixed << std::setprecision(1) << session.size_multiplier
            << "  Peak: " << (session.is_peak ? "YES" : "NO");
-        ss << std::string(80 - 55, ' ') << "║\n";
+        ss << std::string(80 - 45, ' ') << "║\n";
         
         ss << "╚══════════════════════════════════════════════════════════════════════════════╝\n";
         

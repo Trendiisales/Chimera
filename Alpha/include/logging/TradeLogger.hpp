@@ -199,14 +199,25 @@ struct EventEntry {
 class TradeLogger {
 public:
     struct Config {
-        bool enabled = true;
-        bool log_signals = true;
-        bool log_trades = true;
-        bool log_ticks = false;    // Binary tick log (can be large)
-        bool log_events = true;
-        LogLevel min_level = LogLevel::INFO;
-        std::string output_dir = ".";
-        bool console_output = true;
+        bool enabled;
+        bool log_signals;
+        bool log_trades;
+        bool log_ticks;
+        bool log_events;
+        LogLevel min_level;
+        std::string output_dir;
+        bool console_output;
+        
+        Config() noexcept 
+            : enabled(true)
+            , log_signals(true)
+            , log_trades(true)
+            , log_ticks(false)
+            , log_events(true)
+            , min_level(LogLevel::INFO)
+            , output_dir(".")
+            , console_output(true)
+        {}
     };
     
     explicit TradeLogger(const Config& config = Config{}) noexcept 
@@ -405,8 +416,9 @@ private:
         {
             std::lock_guard<std::mutex> lock(tick_mutex_);
             if (tick_file_.is_open() && !tick_queue_.empty()) {
-                tick_file_.write(reinterpret_cast<const char*>(tick_queue_.data()),
-                                 tick_queue_.size() * sizeof(TickRecord));
+                for (const auto& tick : tick_queue_) {
+                    tick_file_.write(reinterpret_cast<const char*>(&tick), sizeof(TickRecord));
+                }
                 tick_file_.flush();
             }
             tick_queue_.clear();

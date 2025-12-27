@@ -69,28 +69,28 @@ include CMakeFiles/alpha.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/alpha.dir/flags.make
 
-CMakeFiles/alpha.dir/src/main.cpp.o: CMakeFiles/alpha.dir/flags.make
-CMakeFiles/alpha.dir/src/main.cpp.o: /mnt/c/Alpha/src/main.cpp
-CMakeFiles/alpha.dir/src/main.cpp.o: CMakeFiles/alpha.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Alpha/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/alpha.dir/src/main.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/alpha.dir/src/main.cpp.o -MF CMakeFiles/alpha.dir/src/main.cpp.o.d -o CMakeFiles/alpha.dir/src/main.cpp.o -c /mnt/c/Alpha/src/main.cpp
+CMakeFiles/alpha.dir/src/main_v1.2.0.cpp.o: CMakeFiles/alpha.dir/flags.make
+CMakeFiles/alpha.dir/src/main_v1.2.0.cpp.o: /mnt/c/Alpha/src/main_v1.2.0.cpp
+CMakeFiles/alpha.dir/src/main_v1.2.0.cpp.o: CMakeFiles/alpha.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Alpha/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/alpha.dir/src/main_v1.2.0.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/alpha.dir/src/main_v1.2.0.cpp.o -MF CMakeFiles/alpha.dir/src/main_v1.2.0.cpp.o.d -o CMakeFiles/alpha.dir/src/main_v1.2.0.cpp.o -c /mnt/c/Alpha/src/main_v1.2.0.cpp
 
-CMakeFiles/alpha.dir/src/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/alpha.dir/src/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Alpha/src/main.cpp > CMakeFiles/alpha.dir/src/main.cpp.i
+CMakeFiles/alpha.dir/src/main_v1.2.0.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/alpha.dir/src/main_v1.2.0.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Alpha/src/main_v1.2.0.cpp > CMakeFiles/alpha.dir/src/main_v1.2.0.cpp.i
 
-CMakeFiles/alpha.dir/src/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/alpha.dir/src/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Alpha/src/main.cpp -o CMakeFiles/alpha.dir/src/main.cpp.s
+CMakeFiles/alpha.dir/src/main_v1.2.0.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/alpha.dir/src/main_v1.2.0.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Alpha/src/main_v1.2.0.cpp -o CMakeFiles/alpha.dir/src/main_v1.2.0.cpp.s
 
 # Object files for target alpha
 alpha_OBJECTS = \
-"CMakeFiles/alpha.dir/src/main.cpp.o"
+"CMakeFiles/alpha.dir/src/main_v1.2.0.cpp.o"
 
 # External object files for target alpha
 alpha_EXTERNAL_OBJECTS =
 
-alpha: CMakeFiles/alpha.dir/src/main.cpp.o
+alpha: CMakeFiles/alpha.dir/src/main_v1.2.0.cpp.o
 alpha: CMakeFiles/alpha.dir/build.make
 alpha: /usr/lib/x86_64-linux-gnu/libssl.so
 alpha: /usr/lib/x86_64-linux-gnu/libcrypto.so

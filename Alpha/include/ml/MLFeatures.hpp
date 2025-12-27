@@ -319,8 +319,8 @@ public:
         // ═══════════════════════════════════════════════════════════════════
         auto session = current_session_type();
         fv.features[idx++] = (session == SessionType::ASIA) ? 1.0 : 0.0;  // session_asia
-        fv.features[idx++] = (session == SessionType::LONDON) ? 1.0 : 0.0; // session_london
-        fv.features[idx++] = (session == SessionType::NY) ? 1.0 : 0.0;    // session_ny
+        fv.features[idx++] = (session == SessionType::LONDON_OPEN || session == SessionType::LONDON_PM) ? 1.0 : 0.0; // session_london
+        fv.features[idx++] = (session == SessionType::CASH_OPEN || session == SessionType::NY_AFTERNOON) ? 1.0 : 0.0;    // session_ny
         fv.features[idx++] = (session == SessionType::OFF) ? 1.0 : 0.0;   // session_off
         
         // ═══════════════════════════════════════════════════════════════════

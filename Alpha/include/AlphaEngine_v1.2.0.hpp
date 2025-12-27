@@ -92,7 +92,7 @@ struct AlphaConfig {
     
     // Dashboard settings
     bool dashboard_enabled = true;
-    uint16_t dashboard_port = 8765;
+    uint16_t dashboard_port = 8080;
     
     // Loaded from config.ini
     std::string config_path = "config.ini";
@@ -560,7 +560,7 @@ private:
         }
         
         auto session = current_session(inst);
-        data.session = session.type;
+        data.session = current_session_type();
         data.session_multiplier = session.size_multiplier;
         data.is_peak = session.is_peak;
         

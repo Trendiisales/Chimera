@@ -34,7 +34,7 @@ find_package(Threads REQUIRED)
 
 # Main executable
 add_executable(alpha
-    src/main.cpp
+    src/main_v1.2.0.cpp
 )
 
 # Link libraries
