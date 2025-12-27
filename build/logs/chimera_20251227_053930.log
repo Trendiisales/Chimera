@@ -367,3 +367,972 @@ TRANSITION → STABLE spread=0.00114282bps std=0.649886 flip=0.1 (hysteresis: 14
 [HFT-OPUSDT] t=2100 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=3.70 edge=10.0 vol=4.1 disp=0.0 imb=0.998 dir=1 pos=N WR=0% (0/0)
 [HFT-ETHUSDT] t=8900 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=7.8 vol=0.5 disp=0.0 imb=0.778 dir=1 pos=N WR=0% (0/0)
 [HFT-AVAXUSDT] t=3300 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.04 edge=7.5 vol=0.4 disp=0.0 imb=0.750 dir=1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=9400 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=8.0 vol=1.1 disp=0.0 imb=-0.803 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=13300 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=10.0 vol=0.0 disp=0.0 imb=0.997 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=6600 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.81 edge=5.7 vol=1.5 disp=0.0 imb=0.570 dir=1 pos=N WR=0% (0/0)
+[REGIME-ETHUSDT] STABLE → TRANSITION spread=0bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-ETHUSDT] t=9600 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.03 edge=7.1 vol=1.1 disp=1.0 imb=-0.707 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=13600 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=2.6 vol=0.4 disp=0.0 imb=-0.256 dir=-1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=10000 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.03 edge=5.3 vol=1.0 disp=0.0 imb=-0.532 dir=-1 pos=N WR=0% (0/0)
+[HFT-AVAXUSDT] t=3400 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.04 edge=7.2 vol=0.4 disp=0.0 imb=0.718 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=6801 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.81 edge=5.0 vol=1.5 disp=0.8 imb=-0.486 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=6901 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.81 edge=9.8 vol=1.4 disp=0.8 imb=0.918 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=14000 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=3.2 vol=0.5 disp=0.0 imb=-0.317 dir=-1 pos=N WR=0% (0/0)
+[REGIME-ETHUSDT] TRANSITION → TOXIC spread=0bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-ETHUSDT] t=10100 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.03 edge=5.7 vol=0.8 disp=0.0 imb=-0.571 dir=-1 pos=N WR=0% (0/0)
+[REGIME-SOLUSDT] TRANSITION → TOXIC spread=1bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-SOLUSDT] t=7200 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=7.4 vol=1.3 disp=0.0 imb=-0.740 dir=-1 pos=N WR=0% (0/0)
+[HFT-OPUSDT] t=2300 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=7.40 edge=4.9 vol=3.6 disp=1.8 imb=0.373 dir=1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=2700 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.19 edge=0.6 vol=0.0 disp=0.0 imb=0.061 dir=0 pos=N WR=0% (0/0)
+[CHIMERA] Status @ 240s:
+  Binance: ticks=44186 orders=0 fills=0
+  cTrader: ticks=12 orders=0 fills=0 latency=110μs state_gated=0
+  Combined PnL: $0 NZD
+  GUI clients: 1
+
+[FIX-TICK-STATS] ═══════════════════════════════════════════
+[FIX-TICK-STATS] ═══════════════════════════════════════════
+
+[HFT-BTCUSDT] t=14900 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=4.5 vol=0.4 disp=0.0 imb=-0.451 dir=-1 pos=N WR=0% (0/0)
+[BOOTSTRAP-SOLUSDT] State=WAIT_EDGE | DATA: book=248601ms/30000 ticks=2001/100 spread=2001/200 | EDGE: intents=0/40 churn=0.0% persist=50.0% edge=0.00bps | SAFETY: kill=Y spread=Y
+[HFT-BTCUSDT] t=15000 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=4.5 vol=0.3 disp=0.0 imb=-0.455 dir=-1 pos=N WR=0% (0/0)
+[HFT-ARBUSDT] t=3000 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=5.17 edge=6.2 vol=3.7 disp=0.0 imb=0.616 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=15300 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=4.7 vol=0.3 disp=0.0 imb=-0.467 dir=-1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=10800 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.03 edge=7.3 vol=0.5 disp=0.0 imb=0.730 dir=1 pos=N WR=0% (0/0)
+[HFT-OPUSDT] t=2400 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=3.70 edge=10.3 vol=3.9 disp=0.0 imb=0.950 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=7600 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=9.0 vol=1.0 disp=0.0 imb=-0.897 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=15500 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=4.6 vol=0.2 disp=0.0 imb=-0.462 dir=-1 pos=N WR=0% (0/0)
+[HFT-ARBUSDT] t=3100 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=5.17 edge=7.4 vol=3.5 disp=0.0 imb=-0.738 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=7800 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=4.0 vol=1.0 disp=0.0 imb=0.398 dir=1 pos=N WR=0% (0/0)
+[BOOTSTRAP-BTCUSDT] State=WAIT_EDGE | DATA: book=265373ms/30000 ticks=4001/100 spread=4001/200 | EDGE: intents=0/40 churn=0.0% persist=50.0% edge=0.00bps | SAFETY: kill=Y spread=Y
+[HFT-BTCUSDT] t=15800 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=5.1 vol=0.2 disp=0.0 imb=-0.510 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=7900 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=3.9 vol=1.0 disp=0.0 imb=0.393 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=16200 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=4.9 vol=0.1 disp=0.0 imb=-0.490 dir=-1 pos=N WR=0% (0/0)
+[HFT-OPUSDT] t=2600 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=3.70 edge=9.5 vol=3.9 disp=0.0 imb=0.951 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=16700 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=5.3 vol=0.1 disp=0.0 imb=-0.532 dir=-1 pos=N WR=0% (0/0)
+[HFT-OPUSDT] t=2700 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=3.70 edge=11.2 vol=3.9 disp=3.7 imb=0.951 dir=1 pos=N WR=0% (0/0)
+[HFT-OPUSDT] t=2800 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=3.70 edge=4.5 vol=3.8 disp=3.7 imb=-0.265 dir=-1 pos=N WR=0% (0/0)
+[REGIME-ETHUSDT] TOXIC → TRANSITION spread=0bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-ETHUSDT] t=11600 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.03 edge=6.9 vol=0.2 disp=0.0 imb=0.694 dir=1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=11700 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.03 edge=5.8 vol=0.2 disp=0.0 imb=0.580 dir=1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=3200 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.19 edge=0.3 vol=0.0 disp=0.0 imb=-0.028 dir=0 pos=N WR=0% (0/0)
+[REGIME-ETHUSDT] TRANSITION → STABLE spread=0bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-ETHUSDT] t=11800 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=6.6 vol=0.2 disp=0.0 imb=0.665 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=17600 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=6.3 vol=0.0 disp=0.0 imb=-0.626 dir=-1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=11900 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=7.0 vol=0.1 disp=0.0 imb=0.700 dir=1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=12100 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=7.1 vol=0.1 disp=0.0 imb=0.713 dir=1 pos=N WR=0% (0/0)
+[HFT-ARBUSDT] t=3400 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=5.17 edge=7.5 vol=3.6 disp=0.0 imb=0.748 dir=1 pos=N WR=0% (0/0)
+[CHIMERA] Status @ 300s:
+  Binance: ticks=55209 orders=0 fills=0
+  cTrader: ticks=12 orders=0 fills=0 latency=110μs state_gated=0
+  Combined PnL: $0 NZD
+  GUI clients: 1
+
+[FIX-TICK-STATS] ═══════════════════════════════════════════
+[FIX-TICK-STATS] ═══════════════════════════════════════════
+
+[HFT-BTCUSDT] t=18100 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=4.2 vol=0.0 disp=0.0 imb=-0.420 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=18400 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=3.0 vol=0.0 disp=0.0 imb=-0.299 dir=-1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=12400 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=4.6 vol=0.1 disp=0.0 imb=0.461 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=18800 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=3.1 vol=0.0 disp=0.0 imb=-0.306 dir=-1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=12500 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=4.4 vol=0.1 disp=0.0 imb=0.441 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=18900 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=2.4 vol=0.0 disp=0.0 imb=-0.243 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=19000 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=2.5 vol=0.0 disp=0.0 imb=-0.246 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=19200 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=2.4 vol=0.0 disp=0.0 imb=-0.240 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=19600 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=0.6 vol=0.0 disp=0.0 imb=-0.061 dir=0 pos=N WR=0% (0/0)
+[HFT-OPUSDT] t=3200 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=7.40 edge=0.4 vol=2.7 disp=0.0 imb=0.043 dir=0 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=3700 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.19 edge=6.9 vol=0.0 disp=0.0 imb=0.686 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=19700 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=0.6 vol=0.0 disp=0.0 imb=-0.065 dir=0 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=11100 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=3.5 vol=1.4 disp=0.0 imb=0.349 dir=1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=3801 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.19 edge=7.0 vol=0.0 disp=0.0 imb=0.699 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=20100 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=0.4 vol=0.0 disp=0.0 imb=-0.044 dir=0 pos=N WR=0% (0/0)
+[HFT-ARBUSDT] t=3900 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=5.17 edge=6.2 vol=3.1 disp=0.0 imb=0.621 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=20400 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=1.0 vol=0.0 disp=0.0 imb=-0.096 dir=0 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=3900 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.19 edge=6.7 vol=0.0 disp=0.0 imb=0.675 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=11400 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=1.6 vol=1.1 disp=0.0 imb=0.156 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=20800 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=1.5 vol=0.0 disp=0.0 imb=-0.145 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=20900 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=1.5 vol=0.0 disp=0.0 imb=-0.153 dir=-1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=4000 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.19 edge=6.7 vol=0.0 disp=0.0 imb=0.674 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=21200 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=1.0 vol=0.0 disp=0.0 imb=-0.100 dir=0 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=11600 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=0.2 vol=0.9 disp=0.0 imb=0.019 dir=0 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=13600 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=6.9 vol=0.0 disp=0.0 imb=0.687 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=21400 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=0.6 vol=0.0 disp=0.0 imb=-0.062 dir=0 pos=N WR=0% (0/0)
+[HFT-AVAXUSDT] t=5400 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.04 edge=0.8 vol=1.8 disp=0.0 imb=-0.079 dir=0 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=11700 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=1.0 vol=0.8 disp=0.0 imb=0.098 dir=0 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=13700 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=7.0 vol=0.0 disp=0.0 imb=0.698 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=21600 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=0.7 vol=0.0 disp=0.0 imb=-0.065 dir=0 pos=N WR=0% (0/0)[HFT-LINKUSDT] t=4100 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.19 edge=7.0 vol=0.0 disp=0.0 imb=0.702 dir=1 pos=N WR=0% (0/0)
+
+[CHIMERA] Status @ 360s:
+  Binance: ticks=64064 orders=0 fills=0
+  cTrader: ticks=12 orders=0 fills=0 latency=110μs state_gated=0
+  Combined PnL: $0 NZD
+  GUI clients: 1
+
+[FIX-TICK-STATS] ═══════════════════════════════════════════
+[FIX-TICK-STATS] ═══════════════════════════════════════════
+
+[HFT-SOLUSDT] t=11800 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=1.4 vol=0.7 disp=0.0 imb=0.139 dir=0 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=13800 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=5.6 vol=0.0 disp=0.0 imb=0.560 dir=1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=13900 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=7.3 vol=0.0 disp=0.0 imb=0.730 dir=1 pos=N WR=0% (0/0)
+[REGIME-SOLUSDT] TOXIC → TRANSITION spread=1bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-ETHUSDT] t=14000 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=4.7 vol=0.0 disp=0.0 imb=0.472 dir=1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=4200 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.19 edge=7.0 vol=0.0 disp=0.0 imb=0.700 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=22400 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=0.9 vol=0.0 disp=0.0 imb=-0.085 dir=0 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=22500 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=1.1 vol=0.0 disp=0.0 imb=-0.105 dir=-1 pos=N WR=0% (0/0)
+[HFT-AVAXUSDT] t=5500 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.04 edge=0.7 vol=1.5 disp=0.0 imb=-0.068 dir=0 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=22600 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=1.1 vol=0.0 disp=0.0 imb=-0.115 dir=-1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=4300 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.19 edge=6.6 vol=0.0 disp=0.0 imb=0.658 dir=1 pos=N WR=0% (0/0)
+[BOOTSTRAP-BTCUSDT] State=WAIT_EDGE | DATA: book=388610ms/30000 ticks=6001/100 spread=6001/200 | EDGE: intents=0/40 churn=0.0% persist=50.0% edge=0.00bps | SAFETY: kill=Y spread=Y
+[BOOTSTRAP-ETHUSDT] State=WAIT_EDGE | DATA: book=389056ms/30000 ticks=4001/100 spread=4001/200 | EDGE: intents=0/40 churn=0.0% persist=50.0% edge=0.00bps | SAFETY: kill=Y spread=Y
+[HFT-SOLUSDT] t=12300 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.81 edge=3.0 vol=0.4 disp=0.0 imb=-0.297 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=22800 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=1.2 vol=0.0 disp=0.0 imb=-0.116 dir=-1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=14600 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=5.7 vol=0.0 disp=0.0 imb=-0.573 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=22900 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=1.0 vol=0.0 disp=0.0 imb=-0.105 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=12400 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.81 edge=1.6 vol=0.3 disp=0.0 imb=0.160 dir=1 pos=N WR=0% (0/0)
+[REGIME-SOLUSDT] TRANSITION → STABLE spread=1bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-SOLUSDT] t=12500 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.81 edge=2.0 vol=0.3 disp=0.0 imb=-0.203 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=23200 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=0.8 vol=0.0 disp=0.0 imb=-0.083 dir=0 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=14900 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=7.7 vol=0.0 disp=0.1 imb=0.770 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=23500 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=3.3 vol=0.0 disp=0.0 imb=0.330 dir=1 pos=N WR=0% (0/0)
+[HFT-AVAXUSDT] t=5800 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.04 edge=2.2 vol=1.2 disp=0.0 imb=0.218 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=23800 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=1.4 vol=0.0 disp=0.0 imb=0.138 dir=1 pos=N WR=0% (0/0)
+[REGIME-ETHUSDT] STABLE → TRANSITION spread=0bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-ETHUSDT] t=15700 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.03 edge=3.1 vol=0.5 disp=0.0 imb=0.312 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=24200 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=0.8 vol=0.0 disp=0.0 imb=0.079 dir=0 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=15900 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.03 edge=1.3 vol=0.4 disp=0.0 imb=0.125 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=24600 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=1.5 vol=0.0 disp=0.0 imb=0.146 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=24900 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=0.1 vol=0.0 disp=0.0 imb=-0.011 dir=0 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=25000 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=2.8 vol=0.0 disp=0.0 imb=0.278 dir=1 pos=N WR=0% (0/0)
+[REGIME-ETHUSDT] TRANSITION → STABLE spread=0bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-ETHUSDT] t=16100 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=2.7 vol=0.4 disp=0.0 imb=0.270 dir=1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=4800 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.19 edge=7.4 vol=0.0 disp=0.0 imb=0.741 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=25400 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=4.7 vol=0.0 disp=0.0 imb=-0.468 dir=-1 pos=N WR=0% (0/0)
+[CHIMERA] Status @ 420s:
+  Binance: ticks=74651 orders=0 fills=0
+  cTrader: ticks=12 orders=0 fills=0 latency=110μs state_gated=0
+  Combined PnL: $0 NZD
+  GUI clients: 1
+
+[FIX-TICK-STATS] ═══════════════════════════════════════════
+[FIX-TICK-STATS] ═══════════════════════════════════════════
+
+[HFT-OPUSDT] t=3600 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=3.70 edge=6.0 vol=2.2 disp=0.0 imb=-0.596 dir=-1 pos=N WR=0% (0/0)
+[HFT-AVAXUSDT] t=6100 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.04 edge=3.6 vol=0.7 disp=0.0 imb=0.362 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=25700 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=2.6 vol=0.0 disp=0.0 imb=-0.261 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=25800 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=0.1 vol=0.0 disp=0.0 imb=0.010 dir=0 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=16400 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=6.3 vol=0.3 disp=0.0 imb=0.632 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=26000 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=0.5 vol=0.0 disp=0.0 imb=0.054 dir=0 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=26100 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=2.6 vol=0.0 disp=0.0 imb=-0.262 dir=-1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=16600 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=0.8 vol=0.2 disp=0.0 imb=-0.081 dir=0 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=16800 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=1.6 vol=0.2 disp=0.0 imb=-0.162 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=26800 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=2.4 vol=0.0 disp=0.0 imb=-0.244 dir=-1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=5100 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.19 edge=7.5 vol=0.0 disp=0.0 imb=0.753 dir=1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=16900 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=3.6 vol=0.2 disp=0.0 imb=-0.364 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=27000 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=2.7 vol=0.0 disp=0.0 imb=-0.267 dir=-1 pos=N WR=0% (0/0)
+[REGIME-SOLUSDT] STABLE → TRANSITION spread=1bps std=0 flip=0 (hysteresis: 58253ms)
+[HFT-ARBUSDT] t=4400 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=5.17 edge=1.1 vol=3.3 disp=0.0 imb=-0.111 dir=-1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=17100 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=2.8 vol=0.1 disp=0.0 imb=-0.284 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=27300 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=2.9 vol=0.0 disp=0.0 imb=-0.287 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=15000 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.81 edge=4.4 vol=0.6 disp=0.0 imb=0.437 dir=1 pos=N WR=0% (0/0)
+[BOOTSTRAP-SOLUSDT] State=WAIT_EDGE | DATA: book=463406ms/30000 ticks=4001/100 spread=4001/200 | EDGE: intents=0/40 churn=0.0% persist=50.0% edge=0.00bps | SAFETY: kill=Y spread=Y
+[HFT-ETHUSDT] t=17400 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=1.7 vol=0.1 disp=0.0 imb=0.174 dir=1 pos=N WR=0% (0/0)
+[REGIME-SOLUSDT] TRANSITION → TOXIC spread=1bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-SOLUSDT] t=15200 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=4.1 vol=0.6 disp=0.0 imb=0.408 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=27800 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=1.4 vol=0.0 disp=0.0 imb=-0.145 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=15300 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=6.9 vol=0.5 disp=0.0 imb=0.690 dir=1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=5500 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.19 edge=9.4 vol=0.0 disp=0.0 imb=0.938 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=16000 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=5.0 vol=0.8 disp=0.0 imb=0.500 dir=1 pos=N WR=0% (0/0)
+[HFT-AVAXUSDT] t=6900 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.04 edge=0.6 vol=2.7 disp=0.0 imb=-0.064 dir=0 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=28800 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=3.1 vol=0.0 disp=0.0 imb=-0.308 dir=-1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=5800 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=4.1 vol=3.8 disp=0.0 imb=0.407 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=28900 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=2.5 vol=0.0 disp=0.0 imb=-0.253 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=29000 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=0.1 vol=0.0 disp=0.0 imb=-0.010 dir=0 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=29100 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=2.7 vol=0.0 disp=0.0 imb=-0.267 dir=-1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=5900 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=4.1 vol=4.1 disp=0.0 imb=0.409 dir=1 pos=N WR=0% (0/0)
+[HFT-AVAXUSDT] t=7000 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.04 edge=1.1 vol=3.8 disp=0.0 imb=-0.108 dir=-1 pos=N WR=0% (0/0)
+[CHIMERA] Status @ 480s:
+  Binance: ticks=86172 orders=0 fills=0
+  cTrader: ticks=12 orders=0 fills=0 latency=110μs state_gated=0
+  Combined PnL: $0 NZD
+  GUI clients: 1
+
+[FIX-TICK-STATS] ═══════════════════════════════════════════
+[FIX-TICK-STATS] ═══════════════════════════════════════════
+
+[HFT-BTCUSDT] t=29300 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=2.6 vol=0.0 disp=0.0 imb=-0.262 dir=-1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=18300 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=1.6 vol=0.0 disp=0.0 imb=0.160 dir=1 pos=N WR=0% (0/0)
+[BOOTSTRAP-LINKUSDT] State=WAIT_EDGE | DATA: book=492701ms/30000 ticks=2001/100 spread=2001/200 | EDGE: intents=0/40 churn=0.0% persist=50.0% edge=0.00bps | SAFETY: kill=Y spread=Y
+[HFT-BTCUSDT] t=29500 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=2.5 vol=0.0 disp=0.0 imb=-0.255 dir=-1 pos=N WR=0% (0/0)
+[HFT-OPUSDT] t=3900 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=3.70 edge=3.4 vol=4.5 disp=0.0 imb=-0.341 dir=-1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=6000 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=4.1 vol=4.1 disp=0.0 imb=0.414 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=17500 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=8.5 vol=1.9 disp=0.0 imb=-0.854 dir=-1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=18500 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=1.8 vol=0.0 disp=0.0 imb=0.181 dir=1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=6100 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=4.0 vol=3.9 disp=0.0 imb=0.397 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=30100 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=2.3 vol=0.0 disp=0.0 imb=-0.230 dir=-1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=18700 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=2.0 vol=0.0 disp=0.0 imb=0.198 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=30200 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=0.7 vol=0.0 disp=0.0 imb=0.069 dir=0 pos=N WR=0% (0/0)
+[BOOTSTRAP-BTCUSDT] State=WAIT_EDGE | DATA: book=510930ms/30000 ticks=8001/100 spread=8001/200 | EDGE: intents=0/40 churn=0.0% persist=50.0% edge=0.00bps | SAFETY: kill=Y spread=Y
+[HFT-LINKUSDT] t=6200 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=4.1 vol=3.6 disp=0.0 imb=0.409 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=30600 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=0.2 vol=0.0 disp=0.0 imb=0.023 dir=0 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=17800 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=6.1 vol=1.3 disp=0.0 imb=-0.607 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=30900 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=4.3 vol=0.0 disp=0.0 imb=0.427 dir=1 pos=N WR=0% (0/0)
+[HFT-OPUSDT] t=4100 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=3.69 edge=10.0 vol=4.9 disp=0.0 imb=0.996 dir=1 pos=N WR=0% (0/0)
+[HFT-ARBUSDT] t=4600 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=5.17 edge=5.8 vol=2.6 disp=0.0 imb=0.582 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=31400 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=2.0 vol=0.0 disp=0.0 imb=0.197 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=18700 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=5.7 vol=1.2 disp=0.0 imb=-0.570 dir=-1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=20000 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=8.0 vol=0.9 disp=0.0 imb=0.798 dir=1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=20100 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=8.0 vol=0.9 disp=0.0 imb=0.800 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=31700 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=1.9 vol=0.0 disp=0.0 imb=0.187 dir=1 pos=N WR=0% (0/0)
+[HFT-OPUSDT] t=4200 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=3.70 edge=9.7 vol=4.8 disp=0.0 imb=0.972 dir=1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=6600 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=6.2 vol=2.8 disp=0.0 imb=0.622 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=18900 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=9.7 vol=1.0 disp=0.0 imb=-0.973 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=32100 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=3.0 vol=0.0 disp=0.0 imb=-0.295 dir=-1 pos=N WR=0% (0/0)
+[REGIME-ETHUSDT] STABLE → TRANSITION spread=0bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-ETHUSDT] t=20700 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.03 edge=8.7 vol=0.6 disp=0.1 imb=-0.863 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=19000 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=5.6 vol=0.9 disp=0.0 imb=-0.557 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=32300 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=4.1 vol=0.0 disp=0.0 imb=-0.413 dir=-1 pos=N WR=0% (0/0)
+[HFT-AVAXUSDT] t=7500 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.04 edge=0.3 vol=3.4 disp=8.0 imb=0.026 dir=0 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=21400 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.03 edge=7.9 vol=0.7 disp=0.0 imb=-0.785 dir=-1 pos=N WR=0% (0/0)
+[BOOTSTRAP-AVAXUSDT] State=WAIT_EDGE | DATA: book=545683ms/30000 ticks=2001/100 spread=2001/200 | EDGE: intents=0/40 churn=0.0% persist=50.0% edge=0.00bps | SAFETY: kill=Y spread=Y
+[HFT-AVAXUSDT] t=7700 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.04 edge=1.1 vol=4.0 disp=0.0 imb=0.105 dir=1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=22601 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.03 edge=10.1 vol=0.6 disp=0.1 imb=1.000 dir=1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=6900 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=7.6 vol=2.0 disp=0.0 imb=0.763 dir=1 pos=N WR=0% (0/0)
+[CHIMERA] Status @ 540s:
+  Binance: ticks=99262 orders=0 fills=0
+  cTrader: ticks=12 orders=0 fills=0 latency=110μs state_gated=0
+  Combined PnL: $0 NZD
+  GUI clients: 1
+
+[FIX-TICK-STATS] ═══════════════════════════════════════════
+[FIX-TICK-STATS] ═══════════════════════════════════════════
+
+[HFT-ETHUSDT] t=22900 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.03 edge=6.1 vol=0.6 disp=0.0 imb=0.612 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=33300 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=5.9 vol=0.0 disp=0.0 imb=-0.588 dir=-1 pos=N WR=0% (0/0)
+[REGIME-ETHUSDT] TRANSITION → TOXIC spread=0bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-ETHUSDT] t=23000 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.03 edge=7.9 vol=0.6 disp=0.0 imb=-0.789 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=33400 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=9.6 vol=0.0 disp=0.0 imb=-0.961 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=33900 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=10.0 vol=0.1 disp=0.0 imb=-0.999 dir=-1 pos=N WR=0% (0/0)
+[HFT-ARBUSDT] t=4800 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=5.17 edge=2.5 vol=1.9 disp=0.0 imb=0.253 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=19800 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=8.2 vol=0.6 disp=0.0 imb=-0.817 dir=-1 pos=N WR=0% (0/0)
+[REGIME-BTCUSDT] STABLE → TRANSITION spread=0bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-BTCUSDT] t=34800 ST=INIT EN=Y WARMUP=OK REGIME=TRANSITION spread=0.00 edge=8.7 vol=0.4 disp=0.0 imb=-0.872 dir=-1 pos=N WR=0% (0/0)
+[BOOTSTRAP-ETHUSDT] State=WAIT_EDGE | DATA: book=571023ms/30000 ticks=6001/100 spread=6001/200 | EDGE: intents=0/40 churn=0.0% persist=50.0% edge=0.00bps | SAFETY: kill=Y spread=Y
+[HFT-BTCUSDT] t=34900 ST=INIT EN=Y WARMUP=OK REGIME=TRANSITION spread=0.00 edge=8.8 vol=0.4 disp=0.0 imb=-0.884 dir=-1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=23800 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.03 edge=2.0 vol=0.5 disp=0.0 imb=0.197 dir=1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=23900 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.03 edge=2.7 vol=0.5 disp=0.0 imb=-0.267 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=20700 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=6.1 vol=1.3 disp=0.0 imb=-0.610 dir=-1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=7500 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=1.5 vol=1.0 disp=0.0 imb=-0.152 dir=-1 pos=N WR=0% (0/0)
+[REGIME-BTCUSDT] TRANSITION → TOXIC spread=0bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-ETHUSDT] t=24300 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.03 edge=6.6 vol=0.3 disp=0.0 imb=-0.662 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=20800 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=4.9 vol=1.4 disp=0.0 imb=-0.492 dir=-1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=24400 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.03 edge=7.0 vol=0.3 disp=0.0 imb=-0.700 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=37300 ST=INIT EN=Y WARMUP=OK REGIME=TOXIC spread=0.00 edge=8.8 vol=0.1 disp=0.0 imb=-0.878 dir=-1 pos=N WR=0% (0/0)
+[HFT-ARBUSDT] t=5100 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=5.18 edge=5.7 vol=2.8 disp=0.0 imb=-0.574 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=37500 ST=INIT EN=Y WARMUP=OK REGIME=TOXIC spread=0.00 edge=8.0 vol=0.1 disp=0.0 imb=-0.799 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=37600 ST=INIT EN=Y WARMUP=OK REGIME=TOXIC spread=0.00 edge=8.0 vol=0.1 disp=0.0 imb=-0.802 dir=-1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=24600 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.03 edge=7.0 vol=0.2 disp=0.0 imb=-0.700 dir=-1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=7700 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=8.1 vol=0.8 disp=0.0 imb=-0.812 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=21000 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=5.2 vol=1.2 disp=0.0 imb=-0.517 dir=-1 pos=N WR=0% (0/0)
+[BOOTSTRAP-ARBUSDT] State=WAIT_EDGE | DATA: book=608510ms/30000 ticks=2001/100 spread=2001/200 | EDGE: intents=0/40 churn=0.0% persist=50.0% edge=0.00bps | SAFETY: kill=Y spread=Y
+[REGIME-BTCUSDT] TOXIC → TRANSITION spread=0.00bps std=0.00 flip=0.25 (hysteresis: 0ms)
+[HFT-BTCUSDT] t=38200 ST=INIT EN=Y WARMUP=OK REGIME=TRANSITION spread=0.00 edge=8.4 vol=0.0 disp=0.0 imb=-0.840 dir=-1 pos=N WR=0% (0/0)
+[REGIME-ETHUSDT] TOXIC → TRANSITION spread=0bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-ETHUSDT] t=24900 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.03 edge=7.2 vol=0.1 disp=0.0 imb=-0.717 dir=-1 pos=N WR=0% (0/0)
+[CHIMERA] Status @ 600s:
+  Binance: ticks=110327 orders=0 fills=0
+  cTrader: ticks=12 orders=0 fills=0 latency=110μs state_gated=0
+  Combined PnL: $0 NZD
+  GUI clients: 1
+
+[FIX-TICK-STATS] ═══════════════════════════════════════════
+[FIX-TICK-STATS] ═══════════════════════════════════════════
+
+[HFT-OPUSDT] t=4800 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=3.70 edge=6.9 vol=3.0 disp=0.0 imb=0.683 dir=1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=7800 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=8.1 vol=0.7 disp=0.0 imb=-0.810 dir=-1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=25100 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.03 edge=5.2 vol=0.1 disp=0.0 imb=-0.521 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=21200 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=1.3 vol=0.9 disp=0.0 imb=-0.125 dir=0 pos=N WR=0% (0/0)
+[HFT-ARBUSDT] t=5300 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=5.18 edge=6.3 vol=2.8 disp=0.0 imb=-0.634 dir=-1 pos=N WR=0% (0/0)
+[REGIME-ETHUSDT] TRANSITION → STABLE spread=0bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-ETHUSDT] t=25200 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=5.3 vol=0.1 disp=0.0 imb=-0.531 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=38900 ST=INIT EN=Y WARMUP=OK REGIME=TRANSITION spread=0.00 edge=8.7 vol=0.0 disp=0.0 imb=-0.865 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=39000 ST=INIT EN=Y WARMUP=OK REGIME=TRANSITION spread=0.00 edge=6.3 vol=0.0 disp=0.0 imb=-0.632 dir=-1 pos=N WR=0% (0/0)
+[REGIME-BTCUSDT] TRANSITION → STABLE spread=0bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-BTCUSDT] t=39100 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=6.3 vol=0.0 disp=0.0 imb=-0.632 dir=-1 pos=N WR=0% (0/0)
+[BOOTSTRAP-BTCUSDT] State=WAIT_EDGE | DATA: book=632109ms/30000 ticks=10001/100 spread=10001/200 | EDGE: intents=0/40 churn=0.0% persist=50.0% edge=0.00bps | SAFETY: kill=Y spread=Y
+[HFT-LINKUSDT] t=8000 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=3.0 vol=0.6 disp=0.0 imb=-0.302 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=39800 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=2.0 vol=0.0 disp=0.0 imb=0.201 dir=1 pos=N WR=0% (0/0)
+[HFT-OPUSDT] t=5200 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=3.70 edge=10.0 vol=3.4 disp=0.0 imb=0.999 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=40000 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=1.9 vol=0.0 disp=0.0 imb=0.185 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=21600 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=5.5 vol=0.6 disp=0.0 imb=0.549 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=21700 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=0.0 vol=0.5 disp=0.0 imb=-0.001 dir=0 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=8100 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=4.2 vol=0.5 disp=0.0 imb=-0.423 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=40400 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=0.8 vol=0.0 disp=0.0 imb=-0.076 dir=0 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=40700 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=1.6 vol=0.0 disp=0.0 imb=-0.157 dir=-1 pos=N WR=0% (0/0)
+[HFT-OPUSDT] t=5300 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=3.70 edge=8.2 vol=3.0 disp=0.0 imb=0.822 dir=1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=26000 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=1.8 vol=0.0 disp=0.0 imb=-0.176 dir=-1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=26300 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=0.8 vol=0.0 disp=0.0 imb=0.082 dir=0 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=26400 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=3.4 vol=0.0 disp=0.0 imb=0.337 dir=1 pos=N WR=0% (0/0)
+[HFT-AVAXUSDT] t=8800 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.04 edge=3.2 vol=1.7 disp=0.0 imb=0.322 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=22500 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=7.2 vol=0.8 disp=0.0 imb=0.717 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=41500 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=5.4 vol=0.0 disp=0.0 imb=-0.537 dir=-1 pos=N WR=0% (0/0)
+[HFT-AVAXUSDT] t=8900 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.04 edge=3.2 vol=1.5 disp=0.0 imb=0.323 dir=1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=26700 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=2.8 vol=0.0 disp=0.0 imb=0.279 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=41600 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=6.3 vol=0.0 disp=0.0 imb=-0.628 dir=-1 pos=N WR=0% (0/0)
+[HFT-OPUSDT] t=5400 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=3.70 edge=10.0 vol=2.7 disp=0.0 imb=0.999 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=22700 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=8.9 vol=0.7 disp=0.0 imb=0.888 dir=1 pos=N WR=0% (0/0)
+[CHIMERA] Status @ 660s:
+  Binance: ticks=119611 orders=0 fills=0
+  cTrader: ticks=12 orders=0 fills=0 latency=110μs state_gated=0
+  Combined PnL: $0 NZD
+  GUI clients: 1
+
+[FIX-TICK-STATS] ═══════════════════════════════════════════
+[FIX-TICK-STATS] ═══════════════════════════════════════════
+
+[HFT-BTCUSDT] t=41900 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=6.6 vol=0.0 disp=0.0 imb=-0.658 dir=-1 pos=N WR=0% (0/0)
+[BOOTSTRAP-SOLUSDT] State=WAIT_EDGE | DATA: book=683866ms/30000 ticks=6001/100 spread=6001/200 | EDGE: intents=0/40 churn=0.0% persist=50.0% edge=0.00bps | SAFETY: kill=Y spread=Y
+[HFT-BTCUSDT] t=42100 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=6.3 vol=0.0 disp=0.0 imb=-0.630 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=42200 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=6.4 vol=0.0 disp=0.0 imb=-0.639 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=23600 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=5.0 vol=0.7 disp=0.8 imb=0.498 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=23800 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=9.3 vol=0.8 disp=0.0 imb=-0.928 dir=-1 pos=N WR=0% (0/0)
+[HFT-OPUSDT] t=5600 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=3.69 edge=1.9 vol=3.3 disp=0.0 imb=-0.193 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=24000 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=4.2 vol=0.7 disp=0.0 imb=-0.422 dir=-1 pos=N WR=0% (0/0)
+[HFT-AVAXUSDT] t=9200 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.04 edge=5.1 vol=1.0 disp=0.0 imb=0.514 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=24100 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=2.4 vol=0.6 disp=0.0 imb=-0.244 dir=-1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=8900 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=8.1 vol=0.2 disp=0.0 imb=0.808 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=43100 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=3.9 vol=0.0 disp=0.0 imb=-0.388 dir=-1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=9000 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=9.0 vol=0.2 disp=0.0 imb=0.902 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=43200 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=0.6 vol=0.0 disp=0.0 imb=-0.056 dir=0 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=9100 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=7.9 vol=0.2 disp=0.0 imb=0.790 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=43600 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=2.8 vol=0.0 disp=0.0 imb=-0.276 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=25000 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=8.6 vol=1.2 disp=0.0 imb=0.857 dir=1 pos=N WR=0% (0/0)
+[BOOTSTRAP-OPUSDT] State=WAIT_EDGE | DATA: book=718688ms/30000 ticks=2001/100 spread=2001/200 | EDGE: intents=0/40 churn=0.0% persist=50.0% edge=0.00bps | SAFETY: kill=Y spread=Y
+[HFT-LINKUSDT] t=9200 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=9.3 vol=0.1 disp=0.0 imb=0.926 dir=1 pos=N WR=0% (0/0)
+[HFT-OPUSDT] t=5700 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=3.69 edge=0.7 vol=4.4 disp=0.0 imb=0.073 dir=0 pos=N WR=0% (0/0)
+[REGIME-ETHUSDT] STABLE → TRANSITION spread=0bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-ETHUSDT] t=28400 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.03 edge=8.3 vol=0.1 disp=0.0 imb=0.826 dir=1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=9300 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=9.5 vol=0.1 disp=0.0 imb=0.951 dir=1 pos=N WR=0% (0/0)
+[HFT-AVAXUSDT] t=9800 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.04 edge=1.6 vol=3.6 disp=0.0 imb=0.163 dir=1 pos=N WR=0% (0/0)
+[REGIME-ETHUSDT] TRANSITION → STABLE spread=0bps std=0 flip=0 (hysteresis: 3206ms)
+[HFT-ETHUSDT] t=28500 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=7.7 vol=0.2 disp=0.0 imb=0.768 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=25300 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=8.4 vol=1.0 disp=0.0 imb=0.844 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=25500 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=5.9 vol=0.8 disp=0.0 imb=0.588 dir=1 pos=N WR=0% (0/0)
+[HFT-OPUSDT] t=5900 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=7.39 edge=8.7 vol=4.3 disp=0.0 imb=0.866 dir=1 pos=N WR=0% (0/0)
+[CHIMERA] Status @ 720s:
+  Binance: ticks=130365 orders=0 fills=0
+  cTrader: ticks=12 orders=0 fills=0 latency=110μs state_gated=0
+  Combined PnL: $0 NZD
+  GUI clients: 1
+
+[FIX-TICK-STATS] ═══════════════════════════════════════════
+[FIX-TICK-STATS] ═══════════════════════════════════════════
+
+[HFT-LINKUSDT] t=9800 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=8.1 vol=2.8 disp=0.0 imb=0.811 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=44700 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=5.3 vol=0.0 disp=0.0 imb=0.527 dir=1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=29000 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=7.5 vol=0.2 disp=0.0 imb=0.748 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=25700 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=8.4 vol=0.6 disp=0.0 imb=0.836 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=25800 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=8.4 vol=0.5 disp=0.0 imb=0.835 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=44900 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=7.4 vol=0.0 disp=0.0 imb=0.735 dir=1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=29300 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=7.9 vol=0.1 disp=0.0 imb=0.786 dir=1 pos=N WR=0% (0/0)
+[BOOTSTRAP-ETHUSDT] State=WAIT_EDGE | DATA: book=754426ms/30000 ticks=8001/100 spread=8001/200 | EDGE: intents=0/40 churn=0.0% persist=50.0% edge=0.00bps | SAFETY: kill=Y spread=Y
+[HFT-AVAXUSDT] t=10200 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.04 edge=2.5 vol=3.7 disp=0.0 imb=-0.245 dir=-1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=10000 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=8.1 vol=2.2 disp=0.0 imb=0.812 dir=1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=10100 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=8.1 vol=2.1 disp=0.0 imb=0.811 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=46200 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=8.0 vol=0.5 disp=0.0 imb=0.797 dir=1 pos=N WR=0% (0/0)
+[HFT-AVAXUSDT] t=10300 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.04 edge=1.6 vol=3.4 disp=0.0 imb=0.164 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=26800 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=2.9 vol=2.2 disp=0.0 imb=-0.294 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=26900 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=5.1 vol=2.1 disp=0.8 imb=-0.505 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=46500 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=6.1 vol=0.5 disp=0.0 imb=0.613 dir=1 pos=N WR=0% (0/0)
+[REGIME-ETHUSDT] STABLE → TRANSITION spread=0bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-ETHUSDT] t=30000 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.03 edge=8.1 vol=0.3 disp=0.0 imb=0.806 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=46600 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=6.1 vol=0.5 disp=0.0 imb=0.614 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=27100 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=6.9 vol=1.8 disp=0.0 imb=-0.689 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=46700 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=6.3 vol=0.4 disp=0.0 imb=0.634 dir=1 pos=N WR=0% (0/0)
+[HFT-ARBUSDT] t=6101 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=5.18 edge=6.9 vol=1.6 disp=0.0 imb=-0.687 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=46800 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=6.3 vol=0.4 disp=0.0 imb=0.630 dir=1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=30200 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.03 edge=8.3 vol=0.3 disp=0.0 imb=0.827 dir=1 pos=N WR=0% (0/0)
+[BOOTSTRAP-BTCUSDT] State=WAIT_EDGE | DATA: book=778460ms/30000 ticks=12001/100 spread=12001/200 | EDGE: intents=0/40 churn=0.0% persist=50.0% edge=0.00bps | SAFETY: kill=Y spread=Y
+[REGIME-ETHUSDT] TRANSITION → STABLE spread=0.03bps std=0.00 flip=0.19 (hysteresis: 0ms)
+[HFT-ETHUSDT] t=30400 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=8.3 vol=0.2 disp=0.0 imb=0.833 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=27800 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=2.7 vol=1.9 disp=0.0 imb=0.268 dir=1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=10400 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=7.8 vol=1.4 disp=0.0 imb=0.776 dir=1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=30600 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=8.5 vol=0.2 disp=0.0 imb=0.853 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=47300 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=7.5 vol=0.3 disp=0.0 imb=0.746 dir=1 pos=N WR=0% (0/0)
+[REGIME-ETHUSDT] STABLE → TRANSITION spread=0bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-ETHUSDT] t=30800 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.03 edge=8.6 vol=0.2 disp=0.0 imb=0.858 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=47700 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=7.8 vol=0.2 disp=0.0 imb=0.785 dir=1 pos=N WR=0% (0/0)
+[CHIMERA] Status @ 780s:
+  Binance: ticks=140567 orders=0 fills=0
+  cTrader: ticks=12 orders=0 fills=0 latency=110μs state_gated=0
+  Combined PnL: $0 NZD
+  GUI clients: 1
+
+[FIX-TICK-STATS] ═══════════════════════════════════════════
+[FIX-TICK-STATS] ═══════════════════════════════════════════
+
+[HFT-ARBUSDT] t=6200 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=5.18 edge=6.7 vol=1.4 disp=0.0 imb=-0.674 dir=-1 pos=N WR=0% (0/0)
+[HFT-OPUSDT] t=6500 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=3.70 edge=4.8 vol=2.6 disp=0.0 imb=0.480 dir=1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=31200 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.03 edge=8.5 vol=0.2 disp=0.0 imb=0.847 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=28100 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=1.1 vol=1.6 disp=0.0 imb=0.109 dir=0 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=31400 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.03 edge=8.0 vol=0.2 disp=0.0 imb=0.796 dir=1 pos=N WR=0% (0/0)
+[HFT-AVAXUSDT] t=10500 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.04 edge=1.1 vol=2.7 disp=0.0 imb=0.114 dir=1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=10800 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=7.7 vol=0.8 disp=0.0 imb=0.772 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=48200 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=10.0 vol=0.1 disp=0.0 imb=1.000 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=28200 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=0.1 vol=1.4 disp=0.0 imb=-0.008 dir=0 pos=N WR=0% (0/0)
+[REGIME-BTCUSDT] STABLE → TRANSITION spread=0bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-BTCUSDT] t=48900 ST=INIT EN=Y WARMUP=OK REGIME=TRANSITION spread=0.00 edge=9.8 vol=0.2 disp=0.0 imb=0.975 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=28300 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=5.6 vol=1.3 disp=0.0 imb=0.558 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=50100 ST=INIT EN=Y WARMUP=OK REGIME=TRANSITION spread=0.00 edge=8.1 vol=0.5 disp=0.0 imb=0.814 dir=1 pos=N WR=0% (0/0)
+[REGIME-ETHUSDT] TRANSITION → STABLE spread=0bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-SOLUSDT] t=28900 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=7.4 vol=1.5 disp=0.0 imb=0.735 dir=1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=32200 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=6.8 vol=0.1 disp=0.0 imb=0.685 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=29000 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=7.7 vol=1.5 disp=0.0 imb=0.771 dir=1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=11400 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.17 edge=2.4 vol=2.9 disp=0.0 imb=-0.244 dir=-1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=11500 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.17 edge=9.3 vol=3.7 disp=0.0 imb=-0.932 dir=-1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=32400 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=7.8 vol=0.1 disp=0.0 imb=0.776 dir=1 pos=N WR=0% (0/0)
+[HFT-OPUSDT] t=6700 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=3.70 edge=9.5 vol=2.1 disp=0.0 imb=0.948 dir=1 pos=N WR=0% (0/0)
+[REGIME-BTCUSDT] TRANSITION → TOXIC spread=0bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-SOLUSDT] t=29200 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=7.7 vol=1.2 disp=0.0 imb=0.771 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=51200 ST=INIT EN=Y WARMUP=OK REGIME=TOXIC spread=0.00 edge=6.9 vol=0.2 disp=0.0 imb=0.694 dir=1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=32700 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=9.3 vol=0.0 disp=0.0 imb=0.927 dir=1 pos=N WR=0% (0/0)
+[REGIME-BTCUSDT] TOXIC → TRANSITION spread=0bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-BTCUSDT] t=51400 ST=INIT EN=Y WARMUP=OK REGIME=TRANSITION spread=0.00 edge=6.1 vol=0.2 disp=0.0 imb=0.606 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=51500 ST=INIT EN=Y WARMUP=OK REGIME=TRANSITION spread=0.00 edge=3.7 vol=0.2 disp=0.0 imb=0.369 dir=1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=11600 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.17 edge=9.9 vol=4.1 disp=0.0 imb=-0.994 dir=-1 pos=N WR=0% (0/0)
+[HFT-OPUSDT] t=6800 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=3.70 edge=9.6 vol=1.9 disp=0.0 imb=0.963 dir=1 pos=N WR=0% (0/0)
+[CHIMERA] Status @ 840s:
+  Binance: ticks=150311 orders=0 fills=0
+  cTrader: ticks=12 orders=0 fills=0 latency=110μs state_gated=0
+  Combined PnL: $0 NZD
+  GUI clients: 1
+
+[FIX-TICK-STATS] ═══════════════════════════════════════════
+[FIX-TICK-STATS] ═══════════════════════════════════════════
+
+[HFT-SOLUSDT] t=29500 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=8.7 vol=0.9 disp=0.0 imb=0.869 dir=1 pos=N WR=0% (0/0)
+[HFT-AVAXUSDT] t=10900 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.04 edge=2.3 vol=2.2 disp=8.0 imb=0.224 dir=1 pos=N WR=0% (0/0)
+[HFT-AVAXUSDT] t=11000 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.04 edge=5.7 vol=3.3 disp=0.0 imb=0.570 dir=1 pos=N WR=0% (0/0)
+[REGIME-BTCUSDT] TRANSITION → STABLE spread=0bps std=0 flip=0 (hysteresis: 20714ms)
+[HFT-BTCUSDT] t=52600 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=6.8 vol=0.1 disp=0.0 imb=-0.678 dir=-1 pos=N WR=0% (0/0)
+[HFT-ARBUSDT] t=6500 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=5.18 edge=7.2 vol=1.0 disp=5.2 imb=0.354 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=52700 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=9.4 vol=0.1 disp=0.0 imb=-0.941 dir=-1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=11900 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=4.4 vol=4.0 disp=0.0 imb=0.440 dir=1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=33800 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=8.5 vol=0.2 disp=0.0 imb=-0.850 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=30500 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=7.5 vol=1.1 disp=0.0 imb=-0.747 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=53000 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=9.7 vol=0.0 disp=0.0 imb=-0.972 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=53200 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=9.8 vol=0.0 disp=0.0 imb=-0.978 dir=-1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=34100 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=9.5 vol=0.2 disp=0.0 imb=-0.952 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=30700 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=8.1 vol=1.4 disp=0.0 imb=-0.812 dir=-1 pos=N WR=0% (0/0)
+[HFT-ARBUSDT] t=6700 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=5.18 edge=6.6 vol=2.5 disp=0.0 imb=0.663 dir=1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=35200 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=7.4 vol=0.4 disp=0.0 imb=-0.743 dir=-1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=35300 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=6.5 vol=0.6 disp=0.0 imb=-0.653 dir=-1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=12100 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=4.3 vol=3.9 disp=0.0 imb=0.435 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=31200 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=7.0 vol=1.7 disp=0.0 imb=0.703 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=31300 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=5.2 vol=1.7 disp=0.0 imb=-0.521 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=54000 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=9.4 vol=0.0 disp=0.0 imb=-0.941 dir=-1 pos=N WR=0% (0/0)
+[BOOTSTRAP-SOLUSDT] State=WAIT_EDGE | DATA: book=890834ms/30000 ticks=8001/100 spread=8001/200 | EDGE: intents=0/40 churn=0.0% persist=50.0% edge=0.00bps | SAFETY: kill=Y spread=Y
+[HFT-ETHUSDT] t=35500 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=7.0 vol=0.7 disp=0.0 imb=-0.703 dir=-1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=35600 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=5.6 vol=0.7 disp=0.0 imb=-0.562 dir=-1 pos=N WR=0% (0/0)
+[BOOTSTRAP-LINKUSDT] State=WAIT_EDGE | DATA: book=895599ms/30000 ticks=4001/100 spread=4001/200 | EDGE: intents=0/40 churn=0.0% persist=50.0% edge=0.00bps | SAFETY: kill=Y spread=Y
+[HFT-AVAXUSDT] t=11900 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.04 edge=5.6 vol=3.7 disp=0.0 imb=0.555 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=32300 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=9.2 vol=2.0 disp=0.8 imb=-0.923 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=54500 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=9.9 vol=0.0 disp=0.0 imb=-0.993 dir=-1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=35800 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=9.0 vol=0.7 disp=0.0 imb=-0.895 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=33300 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=5.9 vol=3.4 disp=0.0 imb=0.589 dir=1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=12300 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=4.0 vol=3.4 disp=0.0 imb=-0.404 dir=-1 pos=N WR=0% (0/0)
+[REGIME-BTCUSDT] STABLE → TRANSITION spread=0bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-BTCUSDT] t=55000 ST=INIT EN=Y WARMUP=OK REGIME=TRANSITION spread=0.00 edge=8.9 vol=0.0 disp=0.0 imb=-0.888 dir=-1 pos=N WR=0% (0/0)
+[HFT-AVAXUSDT] t=12000 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.04 edge=5.1 vol=3.3 disp=0.0 imb=0.513 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=33500 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=8.0 vol=3.5 disp=0.0 imb=-0.798 dir=-1 pos=N WR=0% (0/0)
+[BOOTSTRAP-BTCUSDT] State=WAIT_EDGE | DATA: book=908793ms/30000 ticks=14001/100 spread=14001/200 | EDGE: intents=0/40 churn=0.0% persist=50.0% edge=0.00bps | SAFETY: kill=Y spread=Y
+[REGIME-BTCUSDT] TRANSITION → STABLE spread=0.00bps std=0.00 flip=0.19 (hysteresis: 4393ms)
+[HFT-BTCUSDT] t=55300 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=9.0 vol=0.0 disp=0.0 imb=-0.897 dir=-1 pos=N WR=0% (0/0)
+[REGIME-BTCUSDT] STABLE → TRANSITION spread=0bps std=0 flip=0 (hysteresis: 10848ms)
+[HFT-BTCUSDT] t=56400 ST=INIT EN=Y WARMUP=OK REGIME=TRANSITION spread=0.00 edge=9.6 vol=0.1 disp=0.0 imb=-0.958 dir=-1 pos=N WR=0% (0/0)
+[HFT-ARBUSDT] t=7200 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=5.18 edge=5.0 vol=2.1 disp=0.0 imb=-0.497 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=34200 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=5.0 vol=2.9 disp=0.0 imb=0.499 dir=1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=36500 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=8.4 vol=0.4 disp=0.0 imb=-0.838 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=56700 ST=INIT EN=Y WARMUP=OK REGIME=TRANSITION spread=0.00 edge=8.6 vol=0.1 disp=0.0 imb=-0.862 dir=-1 pos=N WR=0% (0/0)
+[CHIMERA] Status @ 900s:
+  Binance: ticks=166627 orders=0 fills=0
+  cTrader: ticks=12 orders=0 fills=0 latency=110μs state_gated=0
+  Combined PnL: $0 NZD
+  GUI clients: 1
+
+[FIX-TICK-STATS] ═══════════════════════════════════════════
+[FIX-TICK-STATS] ═══════════════════════════════════════════
+
+[HFT-LINKUSDT] t=12500 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=8.7 vol=2.8 disp=0.0 imb=-0.865 dir=-1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=36600 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=3.8 vol=0.3 disp=0.0 imb=-0.378 dir=-1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=36700 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=8.8 vol=0.3 disp=0.0 imb=-0.879 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=57000 ST=INIT EN=Y WARMUP=OK REGIME=TRANSITION spread=0.00 edge=10.0 vol=0.1 disp=0.0 imb=-1.000 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=57300 ST=INIT EN=Y WARMUP=OK REGIME=TRANSITION spread=0.00 edge=10.0 vol=0.1 disp=0.0 imb=-0.999 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=57400 ST=INIT EN=Y WARMUP=OK REGIME=TRANSITION spread=0.00 edge=10.1 vol=0.1 disp=0.0 imb=-0.997 dir=-1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=12600 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=9.1 vol=2.5 disp=0.0 imb=-0.909 dir=-1 pos=N WR=0% (0/0)
+[HFT-OPUSDT] t=7200 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=3.70 edge=8.9 vol=4.4 disp=0.0 imb=0.889 dir=1 pos=N WR=0% (0/0)
+[BOOTSTRAP-ETHUSDT] State=WAIT_EDGE | DATA: book=930659ms/30000 ticks=10001/100 spread=10001/200 | EDGE: intents=0/40 churn=0.0% persist=50.0% edge=0.00bps | SAFETY: kill=Y spread=Y
+[HFT-SOLUSDT] t=34800 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=5.7 vol=1.7 disp=0.0 imb=-0.566 dir=-1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=12700 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=7.5 vol=2.3 disp=0.0 imb=-0.746 dir=-1 pos=N WR=0% (0/0)
+[REGIME-BTCUSDT] TRANSITION → TOXIC spread=0bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-BTCUSDT] t=58100 ST=INIT EN=Y WARMUP=OK REGIME=TOXIC spread=0.00 edge=8.3 vol=0.2 disp=0.0 imb=-0.831 dir=-1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=37200 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=9.6 vol=0.2 disp=0.0 imb=-0.957 dir=-1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=37400 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=9.3 vol=0.2 disp=0.0 imb=-0.925 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=34900 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=5.2 vol=1.5 disp=0.0 imb=-0.517 dir=-1 pos=N WR=0% (0/0)
+[REGIME-ETHUSDT] STABLE → TRANSITION spread=0bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-ETHUSDT] t=37600 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.03 edge=9.4 vol=0.4 disp=0.0 imb=-0.940 dir=-1 pos=N WR=0% (0/0)
+[HFT-ARBUSDT] t=7400 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=5.18 edge=2.8 vol=1.6 disp=0.0 imb=-0.276 dir=-1 pos=N WR=0% (0/0)
+[HFT-AVAXUSDT] t=12200 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.04 edge=4.9 vol=2.5 disp=0.0 imb=0.490 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=58600 ST=INIT EN=Y WARMUP=OK REGIME=TOXIC spread=0.00 edge=7.7 vol=0.2 disp=0.0 imb=-0.769 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=35200 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=2.4 vol=1.5 disp=0.0 imb=-0.244 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=58900 ST=INIT EN=Y WARMUP=OK REGIME=TOXIC spread=0.00 edge=8.0 vol=0.1 disp=0.0 imb=-0.797 dir=-1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=38000 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.03 edge=4.3 vol=0.4 disp=0.0 imb=-0.435 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=59200 ST=INIT EN=Y WARMUP=OK REGIME=TOXIC spread=0.00 edge=8.2 vol=0.1 disp=0.0 imb=-0.822 dir=-1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=13000 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=9.8 vol=1.6 disp=0.0 imb=-0.983 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=35500 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=0.1 vol=1.3 disp=0.0 imb=-0.015 dir=0 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=38100 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.03 edge=6.5 vol=0.4 disp=0.0 imb=-0.646 dir=-1 pos=N WR=0% (0/0)
+[REGIME-BTCUSDT] TOXIC → TRANSITION spread=0bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-BTCUSDT] t=59400 ST=INIT EN=Y WARMUP=OK REGIME=TRANSITION spread=0.00 edge=8.3 vol=0.1 disp=0.0 imb=-0.834 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=35600 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=8.7 vol=1.2 disp=0.0 imb=-0.869 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=59700 ST=INIT EN=Y WARMUP=OK REGIME=TRANSITION spread=0.00 edge=8.6 vol=0.1 disp=0.0 imb=-0.860 dir=-1 pos=N WR=0% (0/0)
+[HFT-ARBUSDT] t=7500 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=5.18 edge=0.9 vol=1.3 disp=0.0 imb=-0.092 dir=0 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=36200 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=1.1 vol=1.1 disp=0.0 imb=0.112 dir=0 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=60000 ST=INIT EN=Y WARMUP=OK REGIME=TRANSITION spread=0.00 edge=8.9 vol=0.0 disp=0.0 imb=-0.886 dir=-1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=13300 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=9.9 vol=1.2 disp=0.0 imb=-0.991 dir=-1 pos=N WR=0% (0/0)
+[CHIMERA] Status @ 960s:
+  Binance: ticks=176428 orders=0 fills=0
+  cTrader: ticks=12 orders=0 fills=0 latency=110μs state_gated=0
+  Combined PnL: $0 NZD
+  GUI clients: 1
+
+[FIX-TICK-STATS] ═══════════════════════════════════════════
+[FIX-TICK-STATS] ═══════════════════════════════════════════
+
+[HFT-AVAXUSDT] t=12400 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.04 edge=5.1 vol=1.9 disp=0.0 imb=0.510 dir=1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=38900 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.03 edge=8.1 vol=0.2 disp=0.0 imb=-0.814 dir=-1 pos=N WR=0% (0/0)
+[REGIME-BTCUSDT] TRANSITION → STABLE spread=0bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-BTCUSDT] t=60600 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=9.1 vol=0.0 disp=0.0 imb=-0.914 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=36500 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=2.1 vol=0.7 disp=0.0 imb=-0.214 dir=-1 pos=N WR=0% (0/0)
+[HFT-ARBUSDT] t=7600 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=5.18 edge=2.0 vol=1.2 disp=0.0 imb=-0.203 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=61200 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=0.6 vol=0.0 disp=0.0 imb=0.056 dir=0 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=37000 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=4.7 vol=1.4 disp=0.0 imb=0.475 dir=1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=39600 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.03 edge=3.7 vol=0.2 disp=0.0 imb=0.365 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=37200 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=3.6 vol=1.6 disp=0.0 imb=-0.364 dir=-1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=39700 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.03 edge=1.6 vol=0.2 disp=0.0 imb=0.158 dir=1 pos=N WR=0% (0/0)
+[HFT-AVAXUSDT] t=12600 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.04 edge=6.7 vol=1.5 disp=0.0 imb=0.672 dir=1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=39800 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.03 edge=3.7 vol=0.2 disp=0.0 imb=0.368 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=62400 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=1.9 vol=0.0 disp=0.0 imb=0.186 dir=1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=40000 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.03 edge=4.2 vol=0.2 disp=0.0 imb=0.424 dir=1 pos=N WR=0% (0/0)
+[HFT-ARBUSDT] t=7700 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=5.18 edge=0.3 vol=1.0 disp=0.0 imb=0.031 dir=0 pos=N WR=0% (0/0)
+[HFT-OPUSDT] t=7700 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=3.70 edge=10.0 vol=3.7 disp=0.0 imb=0.999 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=37400 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=2.5 vol=1.7 disp=0.0 imb=-0.246 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=37600 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=8.8 vol=1.5 disp=0.0 imb=-0.875 dir=-1 pos=N WR=0% (0/0)
+[REGIME-ETHUSDT] TRANSITION → STABLE spread=0bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-ETHUSDT] t=40300 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=2.3 vol=0.1 disp=0.0 imb=0.227 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=63100 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=1.5 vol=0.0 disp=0.0 imb=0.151 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=37700 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=7.7 vol=1.4 disp=0.0 imb=-0.767 dir=-1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=40401 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=5.1 vol=0.1 disp=0.0 imb=0.514 dir=1 pos=N WR=0% (0/0)
+[BOOTSTRAP-BTCUSDT] State=WAIT_EDGE | DATA: book=1033805ms/30000 ticks=16001/100 spread=16001/200 | EDGE: intents=0/40 churn=0.0% persist=50.0% edge=0.00bps | SAFETY: kill=Y spread=Y
+[HFT-BTCUSDT] t=63400 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=1.5 vol=0.0 disp=0.0 imb=0.148 dir=1 pos=N WR=0% (0/0)
+[HFT-AVAXUSDT] t=13100 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.04 edge=3.3 vol=3.8 disp=0.0 imb=-0.331 dir=-1 pos=N WR=0% (0/0)
+[HFT-OPUSDT] t=7900 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=3.70 edge=9.4 vol=3.1 disp=0.0 imb=0.942 dir=1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=13900 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=1.0 vol=0.6 disp=0.0 imb=0.098 dir=0 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=63800 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=0.6 vol=0.0 disp=0.0 imb=-0.056 dir=0 pos=N WR=0% (0/0)
+[CHIMERA] Status @ 1020s:
+  Binance: ticks=185174 orders=0 fills=0
+  cTrader: ticks=12 orders=0 fills=0 latency=110μs state_gated=0
+  Combined PnL: $0 NZD
+  GUI clients: 1
+
+[FIX-TICK-STATS] ═══════════════════════════════════════════
+[FIX-TICK-STATS] ═══════════════════════════════════════════
+
+[HFT-OPUSDT] t=8000 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=3.70 edge=5.9 vol=2.9 disp=0.0 imb=-0.591 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=37900 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=1.5 vol=1.0 disp=0.0 imb=0.150 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=64200 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=2.8 vol=0.0 disp=0.0 imb=0.282 dir=1 pos=N WR=0% (0/0)
+[HFT-ARBUSDT] t=7800 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=5.18 edge=0.8 vol=0.9 disp=0.0 imb=0.082 dir=0 pos=N WR=0% (0/0)
+[REGIME-ETHUSDT] STABLE → TRANSITION spread=0bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-ETHUSDT] t=41000 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.03 edge=7.3 vol=0.1 disp=0.0 imb=0.734 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=64300 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=2.9 vol=0.0 disp=0.0 imb=0.289 dir=1 pos=N WR=0% (0/0)
+[HFT-AVAXUSDT] t=13200 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.04 edge=1.7 vol=4.0 disp=0.0 imb=-0.165 dir=-1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=41100 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.03 edge=7.3 vol=0.2 disp=0.0 imb=0.734 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=38300 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=6.7 vol=1.0 disp=0.0 imb=0.675 dir=1 pos=N WR=0% (0/0)
+[HFT-ARBUSDT] t=7900 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=5.18 edge=3.9 vol=1.8 disp=0.0 imb=0.386 dir=1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=41200 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.03 edge=7.4 vol=0.2 disp=0.0 imb=0.740 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=64900 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=2.8 vol=0.0 disp=0.0 imb=0.283 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=38500 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=4.2 vol=1.3 disp=0.0 imb=0.423 dir=1 pos=N WR=0% (0/0)
+[REGIME-ETHUSDT] TRANSITION → STABLE spread=0bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-LINKUSDT] t=14200 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=1.2 vol=0.4 disp=0.0 imb=0.122 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=38700 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=7.1 vol=1.2 disp=0.0 imb=-0.707 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=65400 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=0.4 vol=0.0 disp=0.0 imb=-0.037 dir=0 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=41800 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=3.9 vol=0.1 disp=0.0 imb=0.386 dir=1 pos=N WR=0% (0/0)
+[HFT-OPUSDT] t=8500 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=7.40 edge=7.7 vol=2.4 disp=0.0 imb=0.766 dir=1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=14300 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=1.2 vol=0.4 disp=0.0 imb=0.118 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=66100 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=0.1 vol=0.0 disp=0.0 imb=-0.013 dir=0 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=39000 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=3.8 vol=0.8 disp=0.0 imb=-0.383 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=39100 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=6.9 vol=0.7 disp=0.0 imb=-0.694 dir=-1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=14400 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=0.8 vol=0.3 disp=0.0 imb=0.083 dir=0 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=42400 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=6.1 vol=0.1 disp=0.0 imb=0.612 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=66800 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=2.6 vol=0.0 disp=0.0 imb=-0.258 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=67000 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=2.4 vol=0.0 disp=0.0 imb=-0.245 dir=-1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=42600 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=5.9 vol=0.0 disp=0.0 imb=0.589 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=39300 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=4.6 vol=0.6 disp=0.0 imb=0.459 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=67300 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=2.3 vol=0.0 disp=0.0 imb=-0.232 dir=-1 pos=N WR=0% (0/0)
+[CHIMERA] Status @ 1080s:
+  Binance: ticks=194326 orders=0 fills=0
+  cTrader: ticks=12 orders=0 fills=0 latency=110μs state_gated=0
+  Combined PnL: $0 NZD
+  GUI clients: 1
+
+[FIX-TICK-STATS] ═══════════════════════════════════════════
+[FIX-TICK-STATS] ═══════════════════════════════════════════
+
+[HFT-AVAXUSDT] t=13600 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.04 edge=3.4 vol=3.0 disp=0.0 imb=-0.341 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=67400 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=2.6 vol=0.0 disp=0.0 imb=-0.257 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=39400 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=4.7 vol=0.5 disp=0.0 imb=0.466 dir=1 pos=N WR=0% (0/0)
+[BOOTSTRAP-SOLUSDT] State=WAIT_EDGE | DATA: book=1106466ms/30000 ticks=10001/100 spread=10001/200 | EDGE: intents=0/40 churn=0.0% persist=50.0% edge=0.00bps | SAFETY: kill=Y spread=Y
+[HFT-ETHUSDT] t=42900 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=7.6 vol=0.0 disp=0.0 imb=0.757 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=67600 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=5.7 vol=0.0 disp=0.0 imb=-0.574 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=67700 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=0.5 vol=0.0 disp=0.0 imb=-0.054 dir=0 pos=N WR=0% (0/0)
+[BOOTSTRAP-ETHUSDT] State=WAIT_EDGE | DATA: book=1111461ms/30000 ticks=12001/100 spread=12001/200 | EDGE: intents=0/40 churn=0.0% persist=50.0% edge=0.00bps | SAFETY: kill=Y spread=Y
+[HFT-LINKUSDT] t=14600 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=1.0 vol=0.3 disp=0.0 imb=0.102 dir=1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=43100 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=7.5 vol=0.0 disp=0.0 imb=0.747 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=68300 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=2.8 vol=0.0 disp=0.0 imb=-0.275 dir=-1 pos=N WR=0% (0/0)
+[REGIME-SOLUSDT] TOXIC → TRANSITION spread=1bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-SOLUSDT] t=39600 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.81 edge=8.2 vol=0.4 disp=0.0 imb=0.817 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=68600 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=0.0 vol=0.0 disp=0.0 imb=0.002 dir=0 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=68700 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=0.0 vol=0.0 disp=0.0 imb=-0.005 dir=0 pos=N WR=0% (0/0)
+[HFT-AVAXUSDT] t=13700 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.04 edge=3.0 vol=2.7 disp=0.0 imb=-0.302 dir=-1 pos=N WR=0% (0/0)
+[HFT-ARBUSDT] t=8200 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=5.18 edge=3.7 vol=2.3 disp=0.0 imb=0.370 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=39700 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.81 edge=8.9 vol=0.3 disp=0.0 imb=0.894 dir=1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=43500 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=6.7 vol=0.0 disp=0.0 imb=0.668 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=69000 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=0.0 vol=0.0 disp=0.0 imb=0.004 dir=0 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=69100 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=0.6 vol=0.0 disp=0.0 imb=-0.062 dir=0 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=39900 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.81 edge=7.8 vol=0.4 disp=0.0 imb=0.785 dir=1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=14800 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=1.9 vol=0.2 disp=0.0 imb=0.191 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=69600 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=0.5 vol=0.0 disp=0.0 imb=0.052 dir=0 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=14900 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=6.7 vol=0.2 disp=0.0 imb=0.669 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=69700 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=0.1 vol=0.0 disp=0.0 imb=0.013 dir=0 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=43900 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=8.6 vol=0.0 disp=0.0 imb=0.860 dir=1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=44000 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=8.6 vol=0.0 disp=0.0 imb=0.865 dir=1 pos=N WR=0% (0/0)
+[REGIME-SOLUSDT] TRANSITION → TOXIC spread=1bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-SOLUSDT] t=40200 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=1.6 vol=0.9 disp=0.0 imb=-0.162 dir=-1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=15000 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=5.9 vol=0.2 disp=0.0 imb=0.589 dir=1 pos=N WR=0% (0/0)
+[BOOTSTRAP-BTCUSDT] State=WAIT_EDGE | DATA: book=1145719ms/30000 ticks=18001/100 spread=18001/200 | EDGE: intents=0/40 churn=0.0% persist=50.0% edge=0.00bps | SAFETY: kill=Y spread=Y
+[HFT-BTCUSDT] t=70400 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=0.4 vol=0.0 disp=0.0 imb=0.037 dir=0 pos=N WR=0% (0/0)
+[BOOTSTRAP-AVAXUSDT] State=WAIT_EDGE | DATA: book=1149115ms/30000 ticks=4001/100 spread=4001/200 | EDGE: intents=0/40 churn=0.0% persist=50.0% edge=0.00bps | SAFETY: kill=Y spread=Y
+[HFT-BTCUSDT] t=70500 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=1.2 vol=0.0 disp=0.0 imb=0.119 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=40500 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=1.3 vol=1.3 disp=0.0 imb=0.135 dir=0 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=44500 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=4.4 vol=0.3 disp=0.0 imb=0.441 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=70800 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=1.1 vol=0.0 disp=0.0 imb=0.111 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=40700 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=1.9 vol=1.2 disp=0.0 imb=-0.185 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=40801 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=2.9 vol=1.1 disp=0.0 imb=-0.294 dir=-1 pos=N WR=0% (0/0)
+[CHIMERA] Status @ 1140s:
+  Binance: ticks=203968 orders=0 fills=0
+  cTrader: ticks=12 orders=0 fills=0 latency=110μs state_gated=0
+  Combined PnL: $0 NZD
+  GUI clients: 1
+
+[FIX-TICK-STATS] ═══════════════════════════════════════════
+[FIX-TICK-STATS] ═══════════════════════════════════════════
+
+[HFT-SOLUSDT] t=40900 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=2.8 vol=0.9 disp=0.0 imb=-0.284 dir=-1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=44900 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=5.1 vol=0.2 disp=0.0 imb=0.512 dir=1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=45000 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=2.5 vol=0.2 disp=0.0 imb=0.248 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=72000 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=4.2 vol=0.0 disp=0.0 imb=-0.423 dir=-1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=15300 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=5.9 vol=0.1 disp=0.0 imb=0.592 dir=1 pos=N WR=0% (0/0)
+[HFT-OPUSDT] t=8900 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=3.70 edge=9.1 vol=2.9 disp=0.0 imb=-0.906 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=72400 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=0.1 vol=0.0 disp=0.0 imb=0.010 dir=0 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=41300 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=6.3 vol=0.8 disp=0.0 imb=0.627 dir=1 pos=N WR=0% (0/0)
+[HFT-AVAXUSDT] t=14300 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.04 edge=4.4 vol=1.2 disp=0.0 imb=-0.436 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=72600 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=3.6 vol=0.0 disp=0.0 imb=-0.355 dir=-1 pos=N WR=0% (0/0)
+[REGIME-ETHUSDT] STABLE → TRANSITION spread=0bps std=0 flip=0 (hysteresis: 0ms)
+[REGIME-ETHUSDT] TRANSITION → STABLE spread=0bps std=0 flip=0 (hysteresis: 885ms)
+[HFT-ETHUSDT] t=45700 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=9.7 vol=0.1 disp=0.0 imb=-0.968 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=41800 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=5.1 vol=1.3 disp=0.0 imb=0.514 dir=1 pos=N WR=0% (0/0)
+[HFT-AVAXUSDT] t=14400 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.04 edge=3.9 vol=1.1 disp=0.0 imb=-0.389 dir=-1 pos=N WR=0% (0/0)
+[HFT-OPUSDT] t=9001 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=3.70 edge=8.5 vol=2.9 disp=0.0 imb=-0.849 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=73600 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=1.2 vol=0.0 disp=0.0 imb=-0.118 dir=-1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=46000 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=9.7 vol=0.1 disp=0.0 imb=-0.966 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=73700 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=1.2 vol=0.0 disp=0.0 imb=-0.118 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=42100 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=5.4 vol=1.1 disp=0.0 imb=0.541 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=42300 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=6.2 vol=1.0 disp=0.0 imb=0.621 dir=1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=46200 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=9.1 vol=0.1 disp=0.0 imb=-0.915 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=74200 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=1.2 vol=0.0 disp=0.0 imb=-0.123 dir=-1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=46300 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=9.2 vol=0.1 disp=0.0 imb=-0.918 dir=-1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=15700 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=6.0 vol=0.1 disp=0.0 imb=0.602 dir=1 pos=N WR=0% (0/0)
+[REGIME-ETHUSDT] STABLE → TRANSITION spread=0bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-ETHUSDT] t=46700 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.03 edge=6.1 vol=0.2 disp=0.0 imb=-0.607 dir=-1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=15800 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=6.0 vol=0.1 disp=0.0 imb=0.595 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=42600 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=3.7 vol=0.8 disp=0.0 imb=0.368 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=75100 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=1.4 vol=0.0 disp=0.0 imb=-0.138 dir=-1 pos=N WR=0% (0/0)
+[REGIME-ETHUSDT] TRANSITION → STABLE spread=0bps std=0 flip=0 (hysteresis: 4030ms)
+[HFT-ETHUSDT] t=46800 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=6.2 vol=0.2 disp=0.0 imb=-0.618 dir=-1 pos=N WR=0% (0/0)
+[HFT-AVAXUSDT] t=14700 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.04 edge=4.0 vol=0.7 disp=0.0 imb=-0.400 dir=-1 pos=N WR=0% (0/0)
+[CHIMERA] Status @ 1200s:
+  Binance: ticks=213124 orders=0 fills=0
+  cTrader: ticks=14 orders=0 fills=0 latency=186μs state_gated=0
+  Combined PnL: $0 NZD
+  GUI clients: 1
+
+[FIX-TICK-STATS] ═══════════════════════════════════════════
+[FIX-TICK-STATS] ═══════════════════════════════════════════
+
+[HFT-OPUSDT] t=9100 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=3.70 edge=5.7 vol=2.7 disp=0.0 imb=-0.568 dir=-1 pos=N WR=0% (0/0)
+[HFT-ARBUSDT] t=8700 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=5.17 edge=2.1 vol=3.1 disp=0.0 imb=0.205 dir=1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=46900 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=7.8 vol=0.2 disp=0.0 imb=-0.776 dir=-1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=15900 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=7.2 vol=0.1 disp=0.0 imb=0.724 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=75400 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=1.4 vol=0.0 disp=0.0 imb=-0.137 dir=-1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=47200 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=3.6 vol=0.2 disp=0.0 imb=-0.363 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=77000 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=2.9 vol=0.5 disp=0.0 imb=0.289 dir=1 pos=N WR=0% (0/0)
+[HFT-ARBUSDT] t=8900 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=5.17 edge=2.3 vol=3.6 disp=5.2 imb=0.227 dir=1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=47500 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=8.8 vol=0.1 disp=0.0 imb=-0.881 dir=-1 pos=N WR=0% (0/0)
+[HFT-ARBUSDT] t=9000 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=5.17 edge=0.5 vol=3.0 disp=0.0 imb=-0.045 dir=0 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=77700 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=9.8 vol=0.5 disp=0.0 imb=-0.976 dir=-1 pos=N WR=0% (0/0)
+[HFT-OPUSDT] t=9200 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=3.70 edge=7.9 vol=2.4 disp=0.0 imb=0.786 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=78000 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=8.2 vol=0.4 disp=0.0 imb=-0.820 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=78300 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=7.4 vol=0.3 disp=0.0 imb=-0.736 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=78600 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=8.4 vol=0.2 disp=0.0 imb=-0.835 dir=-1 pos=N WR=0% (0/0)
+[HFT-OPUSDT] t=9300 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=3.70 edge=5.0 vol=2.3 disp=0.0 imb=0.496 dir=1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=48100 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=9.5 vol=0.1 disp=0.0 imb=-0.947 dir=-1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=16300 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=7.5 vol=0.0 disp=0.0 imb=0.754 dir=1 pos=N WR=0% (0/0)
+[HFT-ARBUSDT] t=9100 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=5.17 edge=2.1 vol=2.6 disp=0.0 imb=0.210 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=78900 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=7.2 vol=0.2 disp=0.0 imb=-0.725 dir=-1 pos=N WR=0% (0/0)
+[BOOTSTRAP-BTCUSDT] State=WAIT_EDGE | DATA: book=1268161ms/30000 ticks=20001/100 spread=20001/200 | EDGE: intents=0/40 churn=0.0% persist=50.0% edge=0.00bps | SAFETY: kill=Y spread=Y
+[HFT-SOLUSDT] t=43900 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=8.1 vol=0.5 disp=0.0 imb=-0.809 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=79200 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=1.9 vol=0.1 disp=0.0 imb=-0.192 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=79300 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=1.7 vol=0.1 disp=0.0 imb=-0.165 dir=-1 pos=N WR=0% (0/0)
+[HFT-AVAXUSDT] t=15400 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.04 edge=5.4 vol=3.9 disp=0.0 imb=0.545 dir=1 pos=N WR=0% (0/0)
+[REGIME-ETHUSDT] STABLE → TRANSITION spread=0bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-ETHUSDT] t=48600 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.03 edge=5.1 vol=0.3 disp=0.0 imb=-0.507 dir=-1 pos=N WR=0% (0/0)
+[REGIME-ETHUSDT] TRANSITION → STABLE spread=0bps std=0 flip=0 (hysteresis: 2965ms)
+[HFT-ETHUSDT] t=48700 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=6.6 vol=0.3 disp=0.0 imb=-0.659 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=44100 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=9.0 vol=0.5 disp=0.0 imb=-0.903 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=80100 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=4.9 vol=0.1 disp=0.0 imb=-0.489 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=44500 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=7.7 vol=0.9 disp=0.0 imb=-0.775 dir=-1 pos=N WR=0% (0/0)
+[HFT-OPUSDT] t=9400 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=3.70 edge=6.4 vol=2.0 disp=0.0 imb=-0.639 dir=-1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=49000 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=6.1 vol=0.2 disp=0.0 imb=-0.606 dir=-1 pos=N WR=0% (0/0)
+[CHIMERA] Status @ 1260s:
+  Binance: ticks=224696 orders=0 fills=0
+  cTrader: ticks=14 orders=0 fills=0 latency=186μs state_gated=0
+  Combined PnL: $0 NZD
+  GUI clients: 1
+
+[FIX-TICK-STATS] ═══════════════════════════════════════════
+[FIX-TICK-STATS] ═══════════════════════════════════════════
+
+[HFT-SOLUSDT] t=44600 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=9.8 vol=1.0 disp=0.0 imb=-0.976 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=80500 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=6.6 vol=0.0 disp=0.0 imb=-0.657 dir=-1 pos=N WR=0% (0/0)
+[HFT-AVAXUSDT] t=15500 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.04 edge=5.5 vol=3.5 disp=0.0 imb=0.552 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=45100 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=10.0 vol=1.6 disp=0.0 imb=-0.998 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=45200 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=4.2 vol=1.9 disp=0.0 imb=-0.422 dir=-1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=16700 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=4.7 vol=0.0 disp=0.0 imb=0.468 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=81100 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=10.0 vol=0.0 disp=0.0 imb=-1.000 dir=-1 pos=N WR=0% (0/0)
+[BOOTSTRAP-ETHUSDT] State=WAIT_EDGE | DATA: book=1296468ms/30000 ticks=14001/100 spread=14001/200 | EDGE: intents=0/40 churn=0.0% persist=50.0% edge=0.00bps | SAFETY: kill=Y spread=Y
+[HFT-SOLUSDT] t=45400 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=7.4 vol=2.4 disp=0.0 imb=-0.736 dir=-1 pos=N WR=0% (0/0)
+[REGIME-BTCUSDT] STABLE → TRANSITION spread=0bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-BTCUSDT] t=81500 ST=INIT EN=Y WARMUP=OK REGIME=TRANSITION spread=0.00 edge=10.0 vol=0.1 disp=0.0 imb=-1.000 dir=-1 pos=N WR=0% (0/0)
+[HFT-ARBUSDT] t=9400 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=5.18 edge=0.4 vol=2.7 disp=0.0 imb=0.040 dir=0 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=45600 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=3.9 vol=2.8 disp=0.0 imb=-0.390 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=82200 ST=INIT EN=Y WARMUP=OK REGIME=TRANSITION spread=0.00 edge=10.0 vol=0.1 disp=0.0 imb=-1.000 dir=-1 pos=N WR=0% (0/0)
+[REGIME-BTCUSDT] TRANSITION → TOXIC spread=0bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-BTCUSDT] t=82400 ST=INIT EN=Y WARMUP=OK REGIME=TOXIC spread=0.00 edge=10.0 vol=0.1 disp=0.0 imb=-1.000 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=82600 ST=INIT EN=Y WARMUP=OK REGIME=TOXIC spread=0.00 edge=9.8 vol=0.1 disp=0.0 imb=-0.981 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=83100 ST=INIT EN=Y WARMUP=OK REGIME=TOXIC spread=0.00 edge=9.9 vol=0.1 disp=0.0 imb=-0.985 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=45800 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=8.2 vol=2.5 disp=0.0 imb=0.824 dir=1 pos=N WR=0% (0/0)
+[REGIME-ETHUSDT] STABLE → TRANSITION spread=0bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-ETHUSDT] t=50100 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.03 edge=10.0 vol=0.1 disp=0.0 imb=-0.998 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=83400 ST=INIT EN=Y WARMUP=OK REGIME=TOXIC spread=0.00 edge=10.0 vol=0.1 disp=0.0 imb=-1.000 dir=-1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=16900 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=5.2 vol=0.0 disp=0.0 imb=0.520 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=84100 ST=INIT EN=Y WARMUP=OK REGIME=TOXIC spread=0.00 edge=6.6 vol=0.3 disp=0.0 imb=-0.656 dir=-1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=50400 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.03 edge=6.7 vol=0.1 disp=0.0 imb=-0.669 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=46300 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=6.2 vol=2.2 disp=0.8 imb=-0.624 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=84400 ST=INIT EN=Y WARMUP=OK REGIME=TOXIC spread=0.00 edge=7.3 vol=0.3 disp=0.0 imb=-0.727 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=46800 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=6.1 vol=2.0 disp=0.0 imb=-0.606 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=84500 ST=INIT EN=Y WARMUP=OK REGIME=TOXIC spread=0.00 edge=7.5 vol=0.3 disp=0.0 imb=-0.752 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=84700 ST=INIT EN=Y WARMUP=OK REGIME=TOXIC spread=0.00 edge=7.6 vol=0.3 disp=0.0 imb=-0.757 dir=-1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=50900 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.03 edge=9.3 vol=0.1 disp=0.0 imb=-0.928 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=84800 ST=INIT EN=Y WARMUP=OK REGIME=TOXIC spread=0.00 edge=7.6 vol=0.3 disp=0.0 imb=-0.760 dir=-1 pos=N WR=0% (0/0)
+[HFT-AVAXUSDT] t=15700 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.04 edge=5.1 vol=2.8 disp=0.0 imb=0.513 dir=1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=17100 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=2.5 vol=0.0 disp=0.0 imb=0.253 dir=1 pos=N WR=0% (0/0)
+[HFT-OPUSDT] t=9700 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=3.70 edge=0.6 vol=2.1 disp=0.0 imb=0.064 dir=0 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=51100 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.03 edge=6.4 vol=0.2 disp=0.0 imb=-0.644 dir=-1 pos=N WR=0% (0/0)
+[REGIME-BTCUSDT] TOXIC → TRANSITION spread=0bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-BTCUSDT] t=85200 ST=INIT EN=Y WARMUP=OK REGIME=TRANSITION spread=0.00 edge=8.6 vol=0.2 disp=0.0 imb=-0.855 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=85300 ST=INIT EN=Y WARMUP=OK REGIME=TRANSITION spread=0.00 edge=8.6 vol=0.2 disp=0.0 imb=-0.860 dir=-1 pos=N WR=0% (0/0)
+[BOOTSTRAP-SOLUSDT] State=WAIT_EDGE | DATA: book=1341468ms/30000 ticks=12001/100 spread=12001/200 | EDGE: intents=0/40 churn=0.0% persist=50.0% edge=0.00bps | SAFETY: kill=Y spread=Y
+[HFT-BTCUSDT] t=85600 ST=INIT EN=Y WARMUP=OK REGIME=TRANSITION spread=0.00 edge=7.2 vol=0.3 disp=0.0 imb=-0.716 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=85900 ST=INIT EN=Y WARMUP=OK REGIME=TRANSITION spread=0.00 edge=6.0 vol=0.3 disp=0.0 imb=-0.603 dir=-1 pos=N WR=0% (0/0)
+[CHIMERA] Status @ 1320s:
+  Binance: ticks=237053 orders=0 fills=0
+  cTrader: ticks=14 orders=0 fills=0 latency=186μs state_gated=0
+  Combined PnL: $0 NZD
+  GUI clients: 1
+
+[FIX-TICK-STATS] ═══════════════════════════════════════════
+[FIX-TICK-STATS] ═══════════════════════════════════════════
+
+[HFT-ETHUSDT] t=51400 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.03 edge=7.3 vol=0.2 disp=0.0 imb=-0.728 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=47400 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=4.3 vol=1.1 disp=0.0 imb=0.431 dir=1 pos=N WR=0% (0/0)
+[HFT-AVAXUSDT] t=15800 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.04 edge=5.3 vol=2.5 disp=0.0 imb=0.527 dir=1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=17300 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=1.4 vol=0.0 disp=0.0 imb=0.142 dir=1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=51500 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.03 edge=7.3 vol=0.2 disp=0.0 imb=-0.728 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=47500 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=4.3 vol=0.9 disp=0.0 imb=0.431 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=86600 ST=INIT EN=Y WARMUP=OK REGIME=TRANSITION spread=0.00 edge=6.2 vol=0.2 disp=0.0 imb=-0.617 dir=-1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=51601 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.03 edge=7.3 vol=0.2 disp=0.0 imb=-0.728 dir=-1 pos=N WR=0% (0/0)
+[REGIME-ETHUSDT] TRANSITION → STABLE spread=0bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-ETHUSDT] t=51700 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=7.3 vol=0.1 disp=0.0 imb=-0.725 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=87000 ST=INIT EN=Y WARMUP=OK REGIME=TRANSITION spread=0.00 edge=6.9 vol=0.1 disp=0.0 imb=-0.688 dir=-1 pos=N WR=0% (0/0)
+[HFT-ARBUSDT] t=9600 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=5.18 edge=1.2 vol=2.8 disp=0.0 imb=0.116 dir=1 pos=N WR=0% (0/0)
+[HFT-AVAXUSDT] t=15900 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.04 edge=5.3 vol=2.1 disp=0.0 imb=0.527 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=47800 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=2.5 vol=0.6 disp=0.0 imb=0.250 dir=1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=52000 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=9.0 vol=0.1 disp=0.0 imb=-0.898 dir=-1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=17600 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=6.0 vol=0.0 disp=0.0 imb=-0.595 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=88900 ST=INIT EN=Y WARMUP=OK REGIME=TRANSITION spread=0.00 edge=9.3 vol=0.4 disp=0.0 imb=-0.929 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=48700 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=4.8 vol=1.5 disp=0.8 imb=-0.464 dir=-1 pos=N WR=0% (0/0)
+[REGIME-BTCUSDT] TRANSITION → TOXIC spread=0bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-BTCUSDT] t=89400 ST=INIT EN=Y WARMUP=OK REGIME=TOXIC spread=0.00 edge=9.5 vol=0.4 disp=0.0 imb=-0.948 dir=-1 pos=N WR=0% (0/0)
+[BOOTSTRAP-BTCUSDT] State=WAIT_EDGE | DATA: book=1396872ms/30000 ticks=22001/100 spread=22001/200 | EDGE: intents=0/40 churn=0.0% persist=50.0% edge=0.00bps | SAFETY: kill=Y spread=Y
+[HFT-BTCUSDT] t=89700 ST=INIT EN=Y WARMUP=OK REGIME=TOXIC spread=0.00 edge=9.9 vol=0.4 disp=0.0 imb=-0.993 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=89800 ST=INIT EN=Y WARMUP=OK REGIME=TOXIC spread=0.00 edge=10.0 vol=0.4 disp=0.0 imb=-0.997 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=49000 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=6.8 vol=2.1 disp=0.0 imb=-0.683 dir=-1 pos=N WR=0% (0/0)
+[REGIME-ETHUSDT] STABLE → TRANSITION spread=0bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-ETHUSDT] t=54100 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.03 edge=8.7 vol=1.1 disp=0.0 imb=-0.867 dir=-1 pos=N WR=0% (0/0)
+[HFT-ARBUSDT] t=9800 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=5.18 edge=6.9 vol=2.3 disp=0.0 imb=-0.690 dir=-1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=17800 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=6.0 vol=0.0 disp=0.0 imb=-0.597 dir=-1 pos=N WR=0% (0/0)
+[HFT-AVAXUSDT] t=16200 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.04 edge=1.7 vol=1.7 disp=0.0 imb=0.168 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=90800 ST=INIT EN=Y WARMUP=OK REGIME=TOXIC spread=0.00 edge=10.0 vol=0.6 disp=0.0 imb=-1.000 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=91100 ST=INIT EN=Y WARMUP=OK REGIME=TOXIC spread=0.00 edge=10.0 vol=0.6 disp=0.0 imb=-1.000 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=49900 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=6.6 vol=3.5 disp=0.0 imb=0.655 dir=1 pos=N WR=0% (0/0)
+[CHIMERA] Status @ 1380s:
+  Binance: ticks=251797 orders=0 fills=0
+  cTrader: ticks=14 orders=0 fills=0 latency=186μs state_gated=0
+  Combined PnL: $0 NZD
+  GUI clients: 1
+
+[FIX-TICK-STATS] ═══════════════════════════════════════════
+[FIX-TICK-STATS] ═══════════════════════════════════════════
+
+[HFT-SOLUSDT] t=50200 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=9.1 vol=3.5 disp=0.0 imb=0.907 dir=1 pos=N WR=0% (0/0)
+[HFT-OPUSDT] t=10100 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=3.70 edge=4.6 vol=5.0 disp=0.0 imb=-0.463 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=50300 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=9.0 vol=3.2 disp=0.0 imb=0.901 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=92900 ST=INIT EN=Y WARMUP=OK REGIME=TOXIC spread=0.00 edge=2.5 vol=0.9 disp=0.0 imb=0.254 dir=1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=55200 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.03 edge=1.8 vol=0.8 disp=0.0 imb=-0.177 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=93000 ST=INIT EN=Y WARMUP=OK REGIME=TOXIC spread=0.00 edge=2.8 vol=0.9 disp=0.0 imb=0.285 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=50600 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=3.6 vol=2.9 disp=0.0 imb=0.357 dir=1 pos=N WR=0% (0/0)
+[BOOTSTRAP-LINKUSDT] State=WAIT_EDGE | DATA: book=1419919ms/30000 ticks=6001/100 spread=6001/200 | EDGE: intents=0/40 churn=0.0% persist=50.0% edge=0.00bps | SAFETY: kill=Y spread=Y
+[HFT-BTCUSDT] t=93200 ST=INIT EN=Y WARMUP=OK REGIME=TOXIC spread=0.00 edge=3.5 vol=0.7 disp=0.0 imb=0.349 dir=1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=18200 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.19 edge=5.8 vol=4.1 disp=0.0 imb=0.581 dir=1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=55400 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.03 edge=0.1 vol=0.6 disp=0.0 imb=-0.012 dir=0 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=93700 ST=INIT EN=Y WARMUP=OK REGIME=TOXIC spread=0.00 edge=5.2 vol=0.5 disp=0.0 imb=0.517 dir=1 pos=N WR=0% (0/0)
+[HFT-AVAXUSDT] t=16500 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.04 edge=4.0 vol=1.2 disp=0.0 imb=0.403 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=93802 ST=INIT EN=Y WARMUP=OK REGIME=TOXIC spread=0.00 edge=3.7 vol=0.4 disp=0.0 imb=0.370 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=50900 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=2.2 vol=2.1 disp=0.0 imb=0.217 dir=1 pos=N WR=0% (0/0)
+[BOOTSTRAP-ARBUSDT] State=WAIT_EDGE | DATA: book=1437819ms/30000 ticks=4001/100 spread=4001/200 | EDGE: intents=0/40 churn=0.0% persist=50.0% edge=0.00bps | SAFETY: kill=Y spread=Y
+[HFT-SOLUSDT] t=51000 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=1.2 vol=1.9 disp=0.0 imb=-0.124 dir=0 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=56000 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.03 edge=1.3 vol=0.3 disp=0.0 imb=-0.132 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=51200 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=0.3 vol=1.5 disp=0.0 imb=0.030 dir=0 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=56200 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.03 edge=1.9 vol=0.2 disp=0.0 imb=-0.192 dir=-1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=18500 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.19 edge=5.8 vol=3.6 disp=0.0 imb=0.583 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=94900 ST=INIT EN=Y WARMUP=OK REGIME=TOXIC spread=0.00 edge=5.2 vol=0.1 disp=0.0 imb=0.516 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=51300 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=0.3 vol=1.3 disp=0.0 imb=0.033 dir=0 pos=N WR=0% (0/0)
+[HFT-OPUSDT] t=10300 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=3.70 edge=9.6 vol=5.6 disp=0.0 imb=0.959 dir=1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=56300 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.03 edge=0.9 vol=0.2 disp=0.0 imb=0.094 dir=0 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=95100 ST=INIT EN=Y WARMUP=OK REGIME=TOXIC spread=0.00 edge=6.0 vol=0.1 disp=0.0 imb=0.597 dir=1 pos=N WR=0% (0/0)
+[HFT-ARBUSDT] t=10300 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=5.18 edge=1.3 vol=3.3 disp=0.0 imb=-0.133 dir=-1 pos=N WR=0% (0/0)
+[REGIME-ETHUSDT] TRANSITION → STABLE spread=0bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-ETHUSDT] t=56500 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=0.8 vol=0.1 disp=0.0 imb=-0.077 dir=0 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=95400 ST=INIT EN=Y WARMUP=OK REGIME=TOXIC spread=0.00 edge=4.6 vol=0.1 disp=0.0 imb=0.459 dir=1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=18600 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.19 edge=5.2 vol=3.2 disp=0.0 imb=0.519 dir=1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=56600 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=6.3 vol=0.1 disp=0.0 imb=-0.633 dir=-1 pos=N WR=0% (0/0)
+[REGIME-BTCUSDT] TOXIC → TRANSITION spread=0bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-AVAXUSDT] t=16700 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.04 edge=0.8 vol=1.0 disp=0.0 imb=0.084 dir=0 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=56700 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=3.9 vol=0.1 disp=0.0 imb=-0.389 dir=-1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=18700 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.19 edge=4.7 vol=3.0 disp=0.0 imb=0.471 dir=1 pos=N WR=0% (0/0)
+[CHIMERA] Status @ 1440s:
+  Binance: ticks=260618 orders=0 fills=0
+  cTrader: ticks=14 orders=0 fills=0 latency=186μs state_gated=0
+  Combined PnL: $0 NZD
+  GUI clients: 1
+
+[FIX-TICK-STATS] ═══════════════════════════════════════════
+[FIX-TICK-STATS] ═══════════════════════════════════════════
+
+[HFT-SOLUSDT] t=51700 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=3.0 vol=0.9 disp=0.0 imb=-0.302 dir=-1 pos=N WR=0% (0/0)
+[BOOTSTRAP-ETHUSDT] State=WAIT_EDGE | DATA: book=1474274ms/30000 ticks=16001/100 spread=16001/200 | EDGE: intents=0/40 churn=0.0% persist=50.0% edge=0.00bps | SAFETY: kill=Y spread=Y
+[HFT-AVAXUSDT] t=16900 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.04 edge=0.2 vol=0.8 disp=0.0 imb=-0.023 dir=0 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=96200 ST=INIT EN=Y WARMUP=OK REGIME=TRANSITION spread=0.00 edge=0.2 vol=0.0 disp=0.0 imb=0.018 dir=0 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=57000 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=1.8 vol=0.1 disp=0.0 imb=-0.175 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=96300 ST=INIT EN=Y WARMUP=OK REGIME=TRANSITION spread=0.00 edge=1.6 vol=0.0 disp=0.0 imb=0.158 dir=1 pos=N WR=0% (0/0)
+[HFT-OPUSDT] t=10400 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=3.70 edge=2.8 vol=5.0 disp=0.0 imb=0.283 dir=1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=57100 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=1.2 vol=0.1 disp=0.0 imb=0.118 dir=0 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=19000 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=4.1 vol=3.4 disp=0.0 imb=0.412 dir=1 pos=N WR=0% (0/0)
+[HFT-AVAXUSDT] t=17000 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.04 edge=1.6 vol=0.7 disp=0.0 imb=0.163 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=52200 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=1.4 vol=0.9 disp=0.0 imb=0.142 dir=0 pos=N WR=0% (0/0)
+[REGIME-BTCUSDT] TRANSITION → STABLE spread=0bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-BTCUSDT] t=96600 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=1.7 vol=0.0 disp=0.0 imb=0.165 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=96800 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=1.6 vol=0.0 disp=0.0 imb=0.165 dir=1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=57600 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=1.4 vol=0.0 disp=0.0 imb=-0.141 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=52700 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=4.6 vol=1.8 disp=0.0 imb=0.457 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=97100 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=0.5 vol=0.0 disp=0.0 imb=-0.050 dir=0 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=97200 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=1.8 vol=0.0 disp=0.0 imb=0.179 dir=1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=57800 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=2.0 vol=0.0 disp=0.0 imb=0.198 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=52800 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=4.1 vol=2.2 disp=0.0 imb=0.410 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=97300 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=1.7 vol=0.0 disp=0.0 imb=0.172 dir=1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=57900 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=2.1 vol=0.0 disp=0.0 imb=0.214 dir=1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=58100 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=2.5 vol=0.0 disp=0.0 imb=-0.252 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=97900 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=0.2 vol=0.0 disp=0.0 imb=-0.022 dir=0 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=58300 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=0.9 vol=0.0 disp=0.0 imb=-0.086 dir=0 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=98300 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=2.4 vol=0.0 disp=0.0 imb=-0.242 dir=-1 pos=N WR=0% (0/0)
+[HFT-AVAXUSDT] t=17400 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.04 edge=3.5 vol=0.4 disp=0.0 imb=0.354 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=53200 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=5.4 vol=2.0 disp=0.0 imb=-0.537 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=98500 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=1.6 vol=0.0 disp=0.0 imb=0.159 dir=1 pos=N WR=0% (0/0)
+[BOOTSTRAP-BTCUSDT] State=WAIT_EDGE | DATA: book=1521445ms/30000 ticks=24001/100 spread=24001/200 | EDGE: intents=0/40 churn=0.0% persist=50.0% edge=0.00bps | SAFETY: kill=Y spread=Y
+[HFT-BTCUSDT] t=98600 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=1.6 vol=0.0 disp=0.0 imb=0.156 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=98900 ST=INIT EN=Y WARMUP=OK REGIME=STABLE spread=0.00 edge=1.4 vol=0.0 disp=0.0 imb=0.139 dir=1 pos=N WR=0% (0/0)
+[CHIMERA] Status @ 1500s:
+  Binance: ticks=270937 orders=0 fills=0
+  cTrader: ticks=14 orders=0 fills=0 latency=186μs state_gated=0
+  Combined PnL: $0 NZD
+  GUI clients: 1
+
+[FIX-TICK-STATS] ═══════════════════════════════════════════
+[FIX-TICK-STATS] ═══════════════════════════════════════════
+
+[HFT-ETHUSDT] t=59400 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=2.1 vol=0.2 disp=0.0 imb=-0.214 dir=-1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=19600 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.18 edge=8.4 vol=3.2 disp=0.0 imb=-0.837 dir=-1 pos=N WR=0% (0/0)
+[HFT-AVAXUSDT] t=17500 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.04 edge=4.0 vol=0.4 disp=0.0 imb=0.395 dir=1 pos=N WR=0% (0/0)
+[HFT-ETHUSDT] t=59600 ST=INIT EN=N WARMUP=OK REGIME=STABLE spread=0.03 edge=6.4 vol=0.2 disp=0.0 imb=-0.635 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=53800 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=0.5 vol=1.1 disp=0.0 imb=-0.054 dir=0 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=19700 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.19 edge=14.5 vol=3.0 disp=8.2 imb=0.876 dir=1 pos=N WR=0% (0/0)
+[HFT-LINKUSDT] t=19800 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=8.19 edge=8.1 vol=3.8 disp=0.0 imb=0.811 dir=1 pos=N WR=0% (0/0)
+[REGIME-BTCUSDT] STABLE → TRANSITION spread=0bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-BTCUSDT] t=100800 ST=INIT EN=Y WARMUP=OK REGIME=TRANSITION spread=0.00 edge=5.8 vol=0.3 disp=0.0 imb=0.576 dir=1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=100900 ST=INIT EN=Y WARMUP=OK REGIME=TRANSITION spread=0.00 edge=5.0 vol=0.3 disp=0.0 imb=0.500 dir=1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=54300 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=8.9 vol=1.4 disp=0.0 imb=-0.893 dir=-1 pos=N WR=0% (0/0)
+[HFT-BTCUSDT] t=101200 ST=INIT EN=Y WARMUP=OK REGIME=TRANSITION spread=0.00 edge=3.8 vol=0.2 disp=0.0 imb=0.382 dir=1 pos=N WR=0% (0/0)
+[REGIME-ETHUSDT] STABLE → TRANSITION spread=0bps std=0 flip=0 (hysteresis: 0ms)
+[HFT-ETHUSDT] t=60600 ST=INIT EN=N WARMUP=OK REGIME=TRANSITION spread=0.03 edge=5.9 vol=0.6 disp=0.0 imb=-0.592 dir=-1 pos=N WR=0% (0/0)
+[HFT-SOLUSDT] t=54500 ST=INIT EN=N WARMUP=OK REGIME=TOXIC spread=0.81 edge=8.0 vol=1.5 disp=0.0 imb=-0.795 dir=-1 pos=N WR=0% (0/0)
+
+[CHIMERA] Signal 2 received - initiating graceful shutdown...
+[CHIMERA] Press Ctrl+C again to force immediate exit.
+[CHIMERA] Stopping CFD engine immediately...
+[CfdEngine] Stop requested...
+[CTraderFIX] Disconnecting...
+[QUOTE] Sending LOGOUT
+[CfdEngine] Loop stopped
+[QUOTE] RX: 8=FIX.4.4|9=91|35=5|34=68|49=cServer|50=QUOTE|52=20251227-06:05:26.673|56=demo.blackbull.2067070|57=QUOTE|10=118|
+[QUOTE] LOGOUT received: 
+[CTraderFIX] QUOTE session logged out: 
+[BINANCE] Global kill triggered
+[BINANCE] Dispatcher stopped
+
+[CHIMERA] Second signal - forcing exit in 2 seconds...
+[TRADE] Sending LOGOUT
+[TRADE] RX: 8=FIX.4.4|9=91|35=5|34=53|49=cServer|50=TRADE|52=20251227-06:05:27.429|56=demo.blackbull.2067070|57=TRADE|10=052|
+[TRADE] LOGOUT received: 
+[CTraderFIX] *** TRADE session logged out:  ***
+[CTraderFIX] Fully disconnected
+[CfdEngine] Stopped. Ticks: 14
+[CHIMERA] Stopping Binance engine immediately...
+[CHIMERA] Force exit!
