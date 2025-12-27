@@ -1,0 +1,1 @@
+/usr/bin/c++  -Wall -Wextra -O3 -DNDEBUG -march=native CMakeFiles/alpha.dir/src/main.cpp.o -o alpha  /usr/lib/x86_64-linux-gnu/libssl.so /usr/lib/x86_64-linux-gnu/libcrypto.so 

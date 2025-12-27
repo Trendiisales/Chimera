@@ -1,0 +1,7 @@
+/mnt/c/Alpha/build/CMakeFiles/alpha.dir
+/mnt/c/Alpha/build/CMakeFiles/edit_cache.dir
+/mnt/c/Alpha/build/CMakeFiles/rebuild_cache.dir
+/mnt/c/Alpha/build/CMakeFiles/list_install_components.dir
+/mnt/c/Alpha/build/CMakeFiles/install.dir
+/mnt/c/Alpha/build/CMakeFiles/install/local.dir
+/mnt/c/Alpha/build/CMakeFiles/install/strip.dir

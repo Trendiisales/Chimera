@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <title>Alpha Trading System - Dual Engine Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+        body { font-family: 'JetBrains Mono', monospace; background: #0a0a0c; }
+        .card { background: linear-gradient(135deg, #1a1a1f 0%, #12121a 100%); border: 1px solid #2a2a35; border-radius: 8px; }
+        .status-dot { width: 8px; height: 8px; border-radius: 50%; }
+        .status-dot.up { background: #22c55e; box-shadow: 0 0 6px #22c55e; }
+        .status-dot.down { background: #ef4444; box-shadow: 0 0 6px #ef4444; }
+        .status-dot.warn { background: #eab308; box-shadow: 0 0 6px #eab308; }
+        .section-title { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.1em; color: #6b7280; margin-bottom: 4px; }
+        .live-badge { animation: live-pulse 1s infinite; }
+        @keyframes live-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .trade-row { font-size: 0.7rem; padding: 4px 6px; border-bottom: 1px solid #1f2937; }
+        .trade-row:hover { background: rgba(255,255,255,0.05); }
+        .scrollable { max-height: 300px; overflow-y: auto; }
+        .scrollable::-webkit-scrollbar { width: 4px; }
+        .scrollable::-webkit-scrollbar-track { background: #1a1a1f; }
+        .scrollable::-webkit-scrollbar-thumb { background: #374151; border-radius: 2px; }
+        .hotkey-hint { position: fixed; bottom: 10px; right: 10px; background: rgba(0,0,0,0.8); padding: 8px 12px; border-radius: 6px; font-size: 0.65rem; color: #888; z-index: 1000; }
+        .engine-card { transition: all 0.3s ease; }
+        .engine-card:hover { border-color: #3b82f6; }
+        .engine-card.xauusd { border-left: 3px solid #ffd700; }
+        .engine-card.nas100 { border-left: 3px solid #0096ff; }
+        .regime-badge { padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 600; }
+        .regime-trending { background: #166534; color: #86efac; }
+        .regime-ranging { background: #1e40af; color: #93c5fd; }
+        .regime-volatile { background: #991b1b; color: #fca5a5; }
+        .regime-quiet { background: #374151; color: #9ca3af; }
+        .session-peak { background: #166534; color: #86efac; }
+        .session-secondary { background: #854d0e; color: #fde047; }
+        .session-off { background: #374151; color: #6b7280; }
+        .progress-bar { height: 6px; background: #1f2937; border-radius: 3px; overflow: hidden; }
+        .progress-fill { height: 100%; transition: width 0.3s ease; }
+        .config-input { background: #1f2937; border: 1px solid #374151; border-radius: 4px; padding: 4px 8px; font-size: 0.75rem; width: 80px; color: #e5e7eb; }
+        .config-input:focus { outline: none; border-color: #3b82f6; }
+    </style>
+</head>
+<body class="text-gray-300 min-h-screen p-3">
+    <div class="hotkey-hint">
+        <span class="text-yellow-400">R</span>=Reconnect | 
+        <span class="text-yellow-400">Space</span>=Pause | 
+        <span class="text-yellow-400">K</span>=Kill
+    </div>
+    
+    <div class="max-w-[1600px] mx-auto">
+        <!-- Header -->
+        <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-3">
+                <h1 class="text-2xl font-bold text-white">⚡ ALPHA</h1>
+                <span class="text-xs bg-blue-600 px-2 py-0.5 rounded">v1.0.0</span>
+                <span id="mode-badge" class="text-xs bg-yellow-600 px-2 py-0.5 rounded">SHADOW</span>
+                <span class="text-xs bg-cyan-600 px-2 py-0.5 rounded">DUAL-ENGINE</span>
+            </div>
+            <div class="flex items-center gap-3">
+                <div class="flex items-center gap-2">
+                    <div id="ws-dot" class="status-dot down"></div>
+                    <span id="ws-text" class="text-xs">Disconnected</span>
+                </div>
+                <input id="ws-url" type="text" value="ws://localhost:8765" 
+                       class="bg-gray-800 text-xs px-2 py-1 rounded border border-gray-700 w-44">
+                <button onclick="reconnect()" class="bg-blue-600 text-xs px-3 py-1 rounded hover:bg-blue-500">Connect</button>
+                <button onclick="killSwitch()" id="kill-btn" class="bg-red-700 text-xs px-3 py-1 rounded hover:bg-red-600 font-bold">⚠️ KILL ALL</button>
+            </div>
+        </div>
+
+        <!-- Status Bar -->
+        <div class="card p-2 mb-3 bg-gradient-to-r from-cyan-900/20 to-purple-900/20 border-cyan-700/30">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-6">
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs text-gray-400">FIX:</span>
+                        <div id="fix-dot" class="status-dot down"></div>
+                        <span id="fix-text" class="text-xs">Disconnected</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs text-gray-400">TRADE:</span>
+                        <div id="trade-dot" class="status-dot down"></div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs text-gray-400">QUOTE:</span>
+                        <div id="quote-dot" class="status-dot down"></div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-6 text-xs">
+                    <span>UTC: <span id="utc-time" class="text-cyan-400 font-bold">--:--:--</span></span>
+                    <span>Uptime: <span id="uptime" class="text-cyan-400">0s</span></span>
+                    <span>Ticks: <span id="total-ticks" class="text-blue-400">0</span></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Session Stats Header -->
+        <div class="card p-2 mb-3 border-green-700/50">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-4">
+                    <span class="text-xs text-green-400 uppercase tracking-wider font-bold">📊 SESSION</span>
+                    <div class="flex items-center gap-4 text-sm">
+                        <span>PnL: <span id="session-pnl" class="font-bold text-xl text-green-400">$0.00</span></span>
+                        <span>W/L: <span id="session-wins" class="text-green-400">0</span>/<span id="session-losses" class="text-red-400">0</span></span>
+                        <span>WR: <span id="session-winrate" class="text-yellow-400">--%</span></span>
+                        <span>Trades: <span id="session-trades" class="text-cyan-400">0</span>/20</span>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4 text-xs">
+                    <span>Daily R: <span id="daily-r" class="font-bold text-green-400">0.0R</span></span>
+                    <span>Consec Loss: <span id="consec-loss" class="text-yellow-400">0</span>/5</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dual Engine Layout -->
+        <div class="grid grid-cols-2 gap-3 mb-3">
+            <!-- XAUUSD Engine -->
+            <div class="engine-card card xauusd p-3">
+                <div class="flex items-center justify-between mb-3">
+                    <div class="flex items-center gap-2">
+                        <span class="text-xl">🥇</span>
+                        <span class="text-lg font-bold text-yellow-400">XAUUSD</span>
+                        <span id="xau-state" class="text-xs px-2 py-0.5 rounded bg-gray-700 text-gray-400">INIT</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span id="xau-regime" class="regime-badge regime-quiet">QUIET</span>
+                        <span id="xau-session" class="text-xs px-2 py-0.5 rounded session-off">OFF</span>
+                    </div>
+                </div>
+                
+                <!-- Prices -->
+                <div class="grid grid-cols-3 gap-3 mb-3">
+                    <div class="text-center p-2 bg-gray-800/50 rounded">
+                        <div class="text-xs text-gray-500">BID</div>
+                        <div id="xau-bid" class="text-lg font-bold text-green-400">--</div>
+                    </div>
+                    <div class="text-center p-2 bg-gray-800/50 rounded">
+                        <div class="text-xs text-gray-500">ASK</div>
+                        <div id="xau-ask" class="text-lg font-bold text-red-400">--</div>
+                    </div>
+                    <div class="text-center p-2 bg-gray-800/50 rounded">
+                        <div class="text-xs text-gray-500">SPREAD</div>
+                        <div id="xau-spread" class="text-lg font-bold text-yellow-400">--</div>
+                    </div>
+                </div>
+                
+                <!-- Metrics -->
+                <div class="grid grid-cols-4 gap-2 mb-3 text-center text-xs">
+                    <div class="p-2 bg-gray-800/30 rounded">
+                        <div class="text-gray-500">Ticks</div>
+                        <div id="xau-ticks" class="text-sm font-bold text-cyan-400">0</div>
+                    </div>
+                    <div class="p-2 bg-gray-800/30 rounded">
+                        <div class="text-gray-500">Trades</div>
+                        <div id="xau-trades" class="text-sm font-bold text-blue-400">0</div>
+                    </div>
+                    <div class="p-2 bg-gray-800/30 rounded">
+                        <div class="text-gray-500">PnL</div>
+                        <div id="xau-pnl" class="text-sm font-bold">0.0 bps</div>
+                    </div>
+                    <div class="p-2 bg-gray-800/30 rounded">
+                        <div class="text-gray-500">Expectancy</div>
+                        <div id="xau-exp" class="text-sm font-bold">-- bps</div>
+                    </div>
+                </div>
+                
+                <!-- Microstructure -->
+                <div class="mb-3">
+                    <div class="section-title">MICROSTRUCTURE</div>
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs w-16 text-gray-500">Momentum</span>
+                            <div class="progress-bar flex-1">
+                                <div id="xau-momentum-bar" class="progress-fill bg-gradient-to-r from-red-500 via-gray-500 to-green-500" style="width: 50%"></div>
+                            </div>
+                            <span id="xau-momentum" class="text-xs w-12 text-right">0.0</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs w-16 text-gray-500">Volatility</span>
+                            <div class="progress-bar flex-1">
+                                <div id="xau-vol-bar" class="progress-fill bg-gradient-to-r from-blue-500 to-red-500" style="width: 30%"></div>
+                            </div>
+                            <span id="xau-vol" class="text-xs w-12 text-right">0.0</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Position -->
+                <div class="p-2 bg-gray-800/30 rounded">
+                    <div class="flex items-center justify-between mb-1">
+                        <span class="section-title mb-0">POSITION</span>
+                        <span id="xau-pos-side" class="text-xs font-bold px-2 py-0.5 rounded bg-gray-700">FLAT</span>
+                    </div>
+                    <div class="grid grid-cols-4 gap-2 text-xs">
+                        <div><span class="text-gray-500">Entry:</span> <span id="xau-pos-entry">--</span></div>
+                        <div><span class="text-gray-500">Size:</span> <span id="xau-pos-size">--</span></div>
+                        <div><span class="text-gray-500">PnL:</span> <span id="xau-pos-pnl">--</span></div>
+                        <div><span class="text-gray-500">Hold:</span> <span id="xau-pos-hold">--</span></div>
+                    </div>
+                </div>
+                
+                <!-- Session Schedule -->
+                <div class="mt-3 p-2 bg-yellow-900/10 rounded border border-yellow-700/30">
+                    <div class="section-title text-yellow-400">TRADING WINDOWS (UTC)</div>
+                    <div class="grid grid-cols-2 gap-1 text-xs">
+                        <div class="text-green-400">🔥 London: 07:00-09:00 (2.0x)</div>
+                        <div class="text-green-400">🔥 US Data: 13:30-15:00 (2.5x)</div>
+                        <div class="text-yellow-400">⚠️ Asia: 00:00-03:00 (0.7x)</div>
+                        <div class="text-yellow-400">⚠️ London PM: 10:00-12:00 (0.8x)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NAS100 Engine -->
+            <div class="engine-card card nas100 p-3">
+                <div class="flex items-center justify-between mb-3">
+                    <div class="flex items-center gap-2">
+                        <span class="text-xl">📈</span>
+                        <span class="text-lg font-bold text-blue-400">NAS100</span>
+                        <span id="nas-state" class="text-xs px-2 py-0.5 rounded bg-gray-700 text-gray-400">INIT</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span id="nas-regime" class="regime-badge regime-quiet">QUIET</span>
+                        <span id="nas-session" class="text-xs px-2 py-0.5 rounded session-off">OFF</span>
+                    </div>
+                </div>
+                
+                <!-- Prices -->
+                <div class="grid grid-cols-3 gap-3 mb-3">
+                    <div class="text-center p-2 bg-gray-800/50 rounded">
+                        <div class="text-xs text-gray-500">BID</div>
+                        <div id="nas-bid" class="text-lg font-bold text-green-400">--</div>
+                    </div>
+                    <div class="text-center p-2 bg-gray-800/50 rounded">
+                        <div class="text-xs text-gray-500">ASK</div>
+                        <div id="nas-ask" class="text-lg font-bold text-red-400">--</div>
+                    </div>
+                    <div class="text-center p-2 bg-gray-800/50 rounded">
+                        <div class="text-xs text-gray-500">SPREAD</div>
+                        <div id="nas-spread" class="text-lg font-bold text-yellow-400">--</div>
+                    </div>
+                </div>
+                
+                <!-- Metrics -->
+                <div class="grid grid-cols-4 gap-2 mb-3 text-center text-xs">
+                    <div class="p-2 bg-gray-800/30 rounded">
+                        <div class="text-gray-500">Ticks</div>
+                        <div id="nas-ticks" class="text-sm font-bold text-cyan-400">0</div>
+                    </div>
+                    <div class="p-2 bg-gray-800/30 rounded">
+                        <div class="text-gray-500">Trades</div>
+                        <div id="nas-trades" class="text-sm font-bold text-blue-400">0</div>
+                    </div>
+                    <div class="p-2 bg-gray-800/30 rounded">
+                        <div class="text-gray-500">PnL</div>
+                        <div id="nas-pnl" class="text-sm font-bold">0.0 bps</div>
+                    </div>
+                    <div class="p-2 bg-gray-800/30 rounded">
+                        <div class="text-gray-500">Expectancy</div>
+                        <div id="nas-exp" class="text-sm font-bold">-- bps</div>
+                    </div>
+                </div>
+                
+                <!-- Microstructure -->
+                <div class="mb-3">
+                    <div class="section-title">MICROSTRUCTURE</div>
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs w-16 text-gray-500">Momentum</span>
+                            <div class="progress-bar flex-1">
+                                <div id="nas-momentum-bar" class="progress-fill bg-gradient-to-r from-red-500 via-gray-500 to-green-500" style="width: 50%"></div>
+                            </div>
+                            <span id="nas-momentum" class="text-xs w-12 text-right">0.0</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs w-16 text-gray-500">Volatility</span>
+                            <div class="progress-bar flex-1">
+                                <div id="nas-vol-bar" class="progress-fill bg-gradient-to-r from-blue-500 to-red-500" style="width: 30%"></div>
+                            </div>
+                            <span id="nas-vol" class="text-xs w-12 text-right">0.0</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Position -->
+                <div class="p-2 bg-gray-800/30 rounded">
+                    <div class="flex items-center justify-between mb-1">
+                        <span class="section-title mb-0">POSITION</span>
+                        <span id="nas-pos-side" class="text-xs font-bold px-2 py-0.5 rounded bg-gray-700">FLAT</span>
+                    </div>
+                    <div class="grid grid-cols-4 gap-2 text-xs">
+                        <div><span class="text-gray-500">Entry:</span> <span id="nas-pos-entry">--</span></div>
+                        <div><span class="text-gray-500">Size:</span> <span id="nas-pos-size">--</span></div>
+                        <div><span class="text-gray-500">PnL:</span> <span id="nas-pos-pnl">--</span></div>
+                        <div><span class="text-gray-500">Hold:</span> <span id="nas-pos-hold">--</span></div>
+                    </div>
+                </div>
+                
+                <!-- Session Schedule -->
+                <div class="mt-3 p-2 bg-blue-900/10 rounded border border-blue-700/30">
+                    <div class="section-title text-blue-400">TRADING WINDOWS (UTC)</div>
+                    <div class="grid grid-cols-2 gap-1 text-xs">
+                        <div class="text-green-400">🔥 Cash Open: 13:30-15:30 (2.5x)</div>
+                        <div class="text-green-400">🔥 Power Hour: 19:00-20:30 (2.0x)</div>
+                        <div class="text-yellow-400">⚠️ Pre-Market: 12:00-13:30 (0.6x)</div>
+                        <div class="text-yellow-400">⚠️ Midday: 15:30-18:00 (0.4x)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Row: Trades + Diagnostics -->
+        <div class="grid grid-cols-3 gap-3">
+            <!-- Trade Blotter -->
+            <div class="col-span-2 card p-3">
+                <div class="flex items-center justify-between mb-2">
+                    <div class="flex items-center gap-2">
+                        <span class="section-title mb-0">📋 TRADE LOG</span>
+                        <span id="trade-count" class="text-xs text-cyan-400">0 trades</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="exportTrades()" class="text-xs bg-gray-700 px-2 py-1 rounded hover:bg-gray-600">📥 Export</button>
+                        <button onclick="clearTrades()" class="text-xs bg-red-800 px-2 py-1 rounded hover:bg-red-700">🗑️ Clear</button>
+                    </div>
+                </div>
+                <div class="grid grid-cols-8 gap-2 text-xs text-gray-500 border-b border-gray-700 pb-1 mb-1">
+                    <div>Time</div>
+                    <div>Instrument</div>
+                    <div>Side</div>
+                    <div>Size</div>
+                    <div>Entry</div>
+                    <div>Exit</div>
+                    <div>PnL</div>
+                    <div>Reason</div>
+                </div>
+                <div id="trade-blotter" class="scrollable">
+                    <div class="text-xs text-gray-500 text-center py-4">No trades yet</div>
+                </div>
+            </div>
+
+            <!-- Diagnostics + System -->
+            <div class="space-y-3">
+                <!-- Live Diagnostics -->
+                <div class="card p-3 border-orange-700/30">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="section-title text-orange-400 mb-0">🔴 DIAGNOSTICS</span>
+                        <button onclick="clearDiag()" class="text-xs bg-gray-700 px-2 py-0.5 rounded hover:bg-gray-600">Clear</button>
+                    </div>
+                    <div id="diag-console" class="text-xs font-mono bg-black/50 rounded p-2 h-32 overflow-y-auto">
+                        <div class="text-gray-500">Waiting for data...</div>
+                    </div>
+                </div>
+
+                <!-- System Status -->
+                <div class="card p-3">
+                    <div class="section-title">SYSTEM</div>
+                    <div class="grid grid-cols-2 gap-2 text-xs">
+                        <div class="flex justify-between"><span class="text-gray-500">Heartbeat:</span><span id="sys-hb">0</span></div>
+                        <div class="flex justify-between"><span class="text-gray-500">Loop:</span><span id="sys-loop">0ms</span></div>
+                        <div class="flex justify-between"><span class="text-gray-500">Latency:</span><span id="sys-lat" class="text-green-400">0μs</span></div>
+                        <div class="flex justify-between"><span class="text-gray-500">Memory:</span><span id="sys-mem">0MB</span></div>
+                    </div>
+                </div>
+
+                <!-- Risk Status -->
+                <div class="card p-3 border-red-700/30">
+                    <div class="section-title text-red-400">RISK LIMITS</div>
+                    <div class="space-y-2 text-xs">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-500">Daily Loss</span>
+                            <div class="flex items-center gap-2">
+                                <div class="w-24 progress-bar">
+                                    <div id="risk-dd-bar" class="progress-fill bg-green-500" style="width: 0%"></div>
+                                </div>
+                                <span id="risk-dd">0/2R</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-500">Trade Count</span>
+                            <div class="flex items-center gap-2">
+                                <div class="w-24 progress-bar">
+                                    <div id="risk-trades-bar" class="progress-fill bg-blue-500" style="width: 0%"></div>
+                                </div>
+                                <span id="risk-trades">0/20</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-500">Cooldown</span>
+                            <span id="risk-cooldown" class="text-green-400">READY</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ═══════════════════════════════════════════════════════════════════════════════
+        // ALPHA DASHBOARD - WebSocket Client
+        // ═══════════════════════════════════════════════════════════════════════════════
+        let ws = null;
+        let reconnectTimer = null;
+        let reconnectAttempts = 0;
+        let paused = false;
+        let trades = [];
+        let diagLogs = [];
+        const MAX_TRADES = 500;
+        const MAX_DIAG = 50;
+
+        // Session stats
+        let session = {
+            pnl: 0,
+            wins: 0,
+            losses: 0,
+            trades: 0
+        };
+
+        // ═══════════════════════════════════════════════════════════════════════════════
+        // WEBSOCKET CONNECTION
+        // ═══════════════════════════════════════════════════════════════════════════════
+        function connect() {
+            const url = document.getElementById('ws-url').value;
+            try {
+                if (ws) { ws.close(); ws = null; }
+                document.getElementById('ws-text').textContent = 'Connecting...';
+                ws = new WebSocket(url);
+
+                ws.onopen = () => {
+                    console.log('[WS] Connected to ' + url);
+                    document.getElementById('ws-dot').className = 'status-dot up';
+                    document.getElementById('ws-text').textContent = 'Connected';
+                    reconnectAttempts = 0;
+                    if (reconnectTimer) { clearTimeout(reconnectTimer); reconnectTimer = null; }
+                    addDiag('INFO', 'WebSocket connected');
+                };
+
+                ws.onclose = () => {
+                    document.getElementById('ws-dot').className = 'status-dot down';
+                    reconnectAttempts++;
+                    const delay = Math.min(1000 * Math.pow(1.5, reconnectAttempts), 10000);
+                    document.getElementById('ws-text').textContent = `Reconnecting (${reconnectAttempts})...`;
+                    reconnectTimer = setTimeout(connect, delay);
+                };
+
+                ws.onerror = (err) => {
+                    console.error('[WS] Error:', err);
+                    addDiag('ERROR', 'WebSocket error');
+                };
+
+                ws.onmessage = (e) => {
+                    if (paused) return;
+                    try {
+                        const data = JSON.parse(e.data);
+                        handleMessage(data);
+                    } catch (err) {
+                        console.error('[WS] Parse error:', err);
+                    }
+                };
+            } catch (e) {
+                console.error('[WS] Connection error:', e);
+                reconnectAttempts++;
+                const delay = Math.min(1000 * Math.pow(1.5, reconnectAttempts), 10000);
+                reconnectTimer = setTimeout(connect, delay);
+            }
+        }
+
+        function reconnect() {
+            if (reconnectTimer) clearTimeout(reconnectTimer);
+            reconnectAttempts = 0;
+            connect();
+        }
+
+        function disconnectWs() {
+            if (ws) { ws.close(); ws = null; }
+            if (reconnectTimer) { clearTimeout(reconnectTimer); reconnectTimer = null; }
+            document.getElementById('ws-dot').className = 'status-dot down';
+            document.getElementById('ws-text').textContent = 'Disconnected';
+        }
+
+        function killSwitch() {
+            if (confirm('⚠️ KILL ALL POSITIONS?\n\nThis will close all open positions immediately!')) {
+                if (ws && ws.readyState === WebSocket.OPEN) {
+                    ws.send(JSON.stringify({ cmd: 'kill' }));
+                    addDiag('WARN', 'KILL SWITCH ACTIVATED');
+                }
+            }
+        }
+
+        // ═══════════════════════════════════════════════════════════════════════════════
+        // MESSAGE HANDLER
+        // ═══════════════════════════════════════════════════════════════════════════════
+        function handleMessage(data) {
+            if (data.type === 'status') updateStatus(data);
+            else if (data.type === 'trade') addTrade(data);
+            else if (data.type === 'tick') updateTick(data);
+            else if (data.type === 'position') updatePosition(data);
+            else if (data.type === 'diag') addDiag(data.level, data.msg);
+        }
+
+        function updateStatus(data) {
+            // Connection status
+            if (data.fix_connected !== undefined) {
+                document.getElementById('fix-dot').className = 'status-dot ' + (data.fix_connected ? 'up' : 'down');
+                document.getElementById('fix-text').textContent = data.fix_connected ? 'Connected' : 'Disconnected';
+            }
+            if (data.trade_session !== undefined) {
+                document.getElementById('trade-dot').className = 'status-dot ' + (data.trade_session ? 'up' : 'down');
+            }
+            if (data.quote_session !== undefined) {
+                document.getElementById('quote-dot').className = 'status-dot ' + (data.quote_session ? 'up' : 'down');
+            }
+
+            // Mode
+            if (data.mode) {
+                const badge = document.getElementById('mode-badge');
+                badge.textContent = data.mode;
+                badge.className = 'text-xs px-2 py-0.5 rounded ' + (data.mode === 'LIVE' ? 'bg-red-600 live-badge' : 'bg-yellow-600');
+            }
+
+            // System
+            if (data.uptime !== undefined) document.getElementById('uptime').textContent = formatUptime(data.uptime);
+            if (data.total_ticks !== undefined) document.getElementById('total-ticks').textContent = data.total_ticks.toLocaleString();
+            if (data.heartbeat !== undefined) document.getElementById('sys-hb').textContent = data.heartbeat;
+            if (data.loop_ms !== undefined) document.getElementById('sys-loop').textContent = data.loop_ms + 'ms';
+            if (data.latency_us !== undefined) document.getElementById('sys-lat').textContent = data.latency_us + 'μs';
+
+            // Session stats
+            if (data.session_pnl !== undefined) {
+                session.pnl = data.session_pnl;
+                const el = document.getElementById('session-pnl');
+                el.textContent = '$' + data.session_pnl.toFixed(2);
+                el.className = 'font-bold text-xl ' + (data.session_pnl >= 0 ? 'text-green-400' : 'text-red-400');
+            }
+            if (data.wins !== undefined) {
+                session.wins = data.wins;
+                document.getElementById('session-wins').textContent = data.wins;
+            }
+            if (data.losses !== undefined) {
+                session.losses = data.losses;
+                document.getElementById('session-losses').textContent = data.losses;
+            }
+            if (data.daily_trades !== undefined) {
+                session.trades = data.daily_trades;
+                document.getElementById('session-trades').textContent = data.daily_trades;
+                document.getElementById('risk-trades').textContent = data.daily_trades + '/20';
+                document.getElementById('risk-trades-bar').style.width = (data.daily_trades / 20 * 100) + '%';
+            }
+            updateWinRate();
+
+            // Risk
+            if (data.daily_r !== undefined) {
+                const el = document.getElementById('daily-r');
+                el.textContent = data.daily_r.toFixed(1) + 'R';
+                el.className = 'font-bold ' + (data.daily_r >= 0 ? 'text-green-400' : 'text-red-400');
+                document.getElementById('risk-dd').textContent = Math.abs(data.daily_r).toFixed(1) + '/2R';
+                document.getElementById('risk-dd-bar').style.width = Math.min(100, Math.abs(data.daily_r) / 2 * 100) + '%';
+                document.getElementById('risk-dd-bar').className = 'progress-fill ' + (data.daily_r < -1.5 ? 'bg-red-500' : data.daily_r < -1 ? 'bg-yellow-500' : 'bg-green-500');
+            }
+            if (data.consec_losses !== undefined) {
+                document.getElementById('consec-loss').textContent = data.consec_losses;
+            }
+            if (data.cooldown_remaining !== undefined) {
+                const el = document.getElementById('risk-cooldown');
+                if (data.cooldown_remaining > 0) {
+                    el.textContent = data.cooldown_remaining + 's';
+                    el.className = 'text-yellow-400';
+                } else {
+                    el.textContent = 'READY';
+                    el.className = 'text-green-400';
+                }
+            }
+
+            // Engine updates
+            if (data.xauusd) updateEngine('xau', data.xauusd);
+            if (data.nas100) updateEngine('nas', data.nas100);
+        }
+
+        function updateEngine(prefix, eng) {
+            // State
+            if (eng.state) {
+                const el = document.getElementById(prefix + '-state');
+                el.textContent = eng.state;
+                const stateColors = {
+                    'INIT': 'bg-gray-700 text-gray-400',
+                    'WARMUP': 'bg-yellow-900 text-yellow-400',
+                    'RUNNING': 'bg-green-900 text-green-400',
+                    'LIVE': 'bg-green-900 text-green-400',
+                    'PAUSED': 'bg-red-900 text-red-400',
+                    'STOPPED': 'bg-gray-700 text-gray-400'
+                };
+                el.className = 'text-xs px-2 py-0.5 rounded ' + (stateColors[eng.state] || 'bg-gray-700 text-gray-400');
+            }
+
+            // Regime
+            if (eng.regime) {
+                const el = document.getElementById(prefix + '-regime');
+                el.textContent = eng.regime;
+                el.className = 'regime-badge regime-' + eng.regime.toLowerCase();
+            }
+
+            // Session
+            if (eng.session) {
+                const el = document.getElementById(prefix + '-session');
+                el.textContent = eng.session;
+                const sessionTypes = { 'PEAK': 'session-peak', 'SECONDARY': 'session-secondary', 'OFF': 'session-off' };
+                el.className = 'text-xs px-2 py-0.5 rounded ' + (sessionTypes[eng.session_type] || 'session-off');
+            }
+
+            // Prices
+            if (eng.bid !== undefined) document.getElementById(prefix + '-bid').textContent = eng.bid.toFixed(2);
+            if (eng.ask !== undefined) document.getElementById(prefix + '-ask').textContent = eng.ask.toFixed(2);
+            if (eng.spread !== undefined) document.getElementById(prefix + '-spread').textContent = eng.spread.toFixed(2);
+
+            // Metrics
+            if (eng.ticks !== undefined) document.getElementById(prefix + '-ticks').textContent = eng.ticks.toLocaleString();
+            if (eng.trades !== undefined) document.getElementById(prefix + '-trades').textContent = eng.trades;
+            if (eng.pnl !== undefined) {
+                const el = document.getElementById(prefix + '-pnl');
+                el.textContent = eng.pnl.toFixed(1) + ' bps';
+                el.className = 'text-sm font-bold ' + (eng.pnl >= 0 ? 'text-green-400' : 'text-red-400');
+            }
+            if (eng.expectancy !== undefined) {
+                const el = document.getElementById(prefix + '-exp');
+                el.textContent = eng.expectancy.toFixed(1) + ' bps';
+                el.className = 'text-sm font-bold ' + (eng.expectancy >= 0 ? 'text-green-400' : 'text-red-400');
+            }
+
+            // Microstructure
+            if (eng.momentum !== undefined) {
+                document.getElementById(prefix + '-momentum').textContent = eng.momentum.toFixed(2);
+                const pct = Math.min(100, Math.max(0, (eng.momentum + 5) / 10 * 100));
+                document.getElementById(prefix + '-momentum-bar').style.width = pct + '%';
+            }
+            if (eng.volatility !== undefined) {
+                document.getElementById(prefix + '-vol').textContent = eng.volatility.toFixed(2);
+                const pct = Math.min(100, eng.volatility / 5 * 100);
+                document.getElementById(prefix + '-vol-bar').style.width = pct + '%';
+            }
+
+            // Position
+            if (eng.position) {
+                const pos = eng.position;
+                const sideEl = document.getElementById(prefix + '-pos-side');
+                sideEl.textContent = pos.side || 'FLAT';
+                sideEl.className = 'text-xs font-bold px-2 py-0.5 rounded ' + 
+                    (pos.side === 'LONG' ? 'bg-green-900 text-green-400' : 
+                     pos.side === 'SHORT' ? 'bg-red-900 text-red-400' : 'bg-gray-700');
+                
+                document.getElementById(prefix + '-pos-entry').textContent = pos.entry ? pos.entry.toFixed(2) : '--';
+                document.getElementById(prefix + '-pos-size').textContent = pos.size ? pos.size.toFixed(2) : '--';
+                
+                const pnlEl = document.getElementById(prefix + '-pos-pnl');
+                if (pos.pnl_bps !== undefined) {
+                    pnlEl.textContent = (pos.pnl_bps >= 0 ? '+' : '') + pos.pnl_bps.toFixed(1) + ' bps';
+                    pnlEl.className = pos.pnl_bps >= 0 ? 'text-green-400' : 'text-red-400';
+                } else {
+                    pnlEl.textContent = '--';
+                    pnlEl.className = '';
+                }
+                
+                document.getElementById(prefix + '-pos-hold').textContent = pos.hold_ms ? (pos.hold_ms / 1000).toFixed(1) + 's' : '--';
+            }
+        }
+
+        function updateTick(data) {
+            const prefix = data.instrument === 'XAUUSD' ? 'xau' : 'nas';
+            if (data.bid) document.getElementById(prefix + '-bid').textContent = data.bid.toFixed(2);
+            if (data.ask) document.getElementById(prefix + '-ask').textContent = data.ask.toFixed(2);
+            if (data.spread) document.getElementById(prefix + '-spread').textContent = data.spread.toFixed(2);
+        }
+
+        function updatePosition(data) {
+            const prefix = data.instrument === 'XAUUSD' ? 'xau' : 'nas';
+            updateEngine(prefix, { position: data });
+        }
+
+        // ═══════════════════════════════════════════════════════════════════════════════
+        // TRADE LOG
+        // ═══════════════════════════════════════════════════════════════════════════════
+        function addTrade(trade) {
+            trades.unshift(trade);
+            if (trades.length > MAX_TRADES) trades.pop();
+
+            // Update session stats
+            if (trade.pnl !== undefined) {
+                session.pnl += trade.pnl;
+                if (trade.pnl >= 0) session.wins++;
+                else session.losses++;
+                session.trades++;
+            }
+
+            renderTrades();
+            document.getElementById('trade-count').textContent = trades.length + ' trades';
+            addDiag('TRADE', `${trade.side} ${trade.instrument} ${trade.size} @ ${trade.entry?.toFixed(2)} → ${trade.pnl?.toFixed(1)} bps`);
+        }
+
+        function renderTrades() {
+            const el = document.getElementById('trade-blotter');
+            if (trades.length === 0) {
+                el.innerHTML = '<div class="text-xs text-gray-500 text-center py-4">No trades yet</div>';
+                return;
+            }
+            el.innerHTML = trades.slice(0, 100).map(t => {
+                const pnlClass = t.pnl >= 0 ? 'text-green-400' : 'text-red-400';
+                const sideClass = t.side === 'LONG' ? 'text-green-400' : 'text-red-400';
+                return `<div class="trade-row grid grid-cols-8 gap-2">
+                    <div class="text-gray-500">${formatTime(t.time)}</div>
+                    <div class="${t.instrument === 'XAUUSD' ? 'text-yellow-400' : 'text-blue-400'}">${t.instrument}</div>
+                    <div class="${sideClass}">${t.side}</div>
+                    <div>${t.size?.toFixed(2) || '--'}</div>
+                    <div>${t.entry?.toFixed(2) || '--'}</div>
+                    <div>${t.exit?.toFixed(2) || '--'}</div>
+                    <div class="${pnlClass}">${t.pnl >= 0 ? '+' : ''}${t.pnl?.toFixed(1) || '--'} bps</div>
+                    <div class="text-gray-500">${t.reason || '--'}</div>
+                </div>`;
+            }).join('');
+        }
+
+        function clearTrades() {
+            if (confirm('Clear all trades from display?')) {
+                trades = [];
+                session = { pnl: 0, wins: 0, losses: 0, trades: 0 };
+                renderTrades();
+                updateWinRate();
+                document.getElementById('trade-count').textContent = '0 trades';
+                document.getElementById('session-pnl').textContent = '$0.00';
+                document.getElementById('session-wins').textContent = '0';
+                document.getElementById('session-losses').textContent = '0';
+            }
+        }
+
+        function exportTrades() {
+            if (trades.length === 0) { alert('No trades to export'); return; }
+            const csv = 'Time,Instrument,Side,Size,Entry,Exit,PnL_bps,Reason\n' + 
+                trades.map(t => `${t.time},${t.instrument},${t.side},${t.size},${t.entry},${t.exit},${t.pnl},${t.reason}`).join('\n');
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `alpha_trades_${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+        }
+
+        function updateWinRate() {
+            const total = session.wins + session.losses;
+            const wr = total > 0 ? (session.wins / total * 100).toFixed(0) : '--';
+            document.getElementById('session-winrate').textContent = wr + '%';
+        }
+
+        // ═══════════════════════════════════════════════════════════════════════════════
+        // DIAGNOSTICS
+        // ═══════════════════════════════════════════════════════════════════════════════
+        function addDiag(level, msg) {
+            const time = new Date().toLocaleTimeString('en-US', { hour12: false });
+            const colors = {
+                'INFO': 'text-cyan-400',
+                'WARN': 'text-yellow-400',
+                'ERROR': 'text-red-400',
+                'TRADE': 'text-green-400',
+                'BLOCK': 'text-orange-400'
+            };
+            diagLogs.unshift({ time, level, msg, color: colors[level] || 'text-gray-400' });
+            if (diagLogs.length > MAX_DIAG) diagLogs.pop();
+            renderDiag();
+        }
+
+        function renderDiag() {
+            const el = document.getElementById('diag-console');
+            if (diagLogs.length === 0) {
+                el.innerHTML = '<div class="text-gray-500">Waiting for data...</div>';
+                return;
+            }
+            el.innerHTML = diagLogs.map(d => 
+                `<div class="${d.color}"><span class="text-gray-600">${d.time}</span> [${d.level}] ${d.msg}</div>`
+            ).join('');
+        }
+
+        function clearDiag() {
+            diagLogs = [];
+            renderDiag();
+        }
+
+        // ═══════════════════════════════════════════════════════════════════════════════
+        // UTILITIES
+        // ═══════════════════════════════════════════════════════════════════════════════
+        function formatUptime(seconds) {
+            const h = Math.floor(seconds / 3600);
+            const m = Math.floor((seconds % 3600) / 60);
+            const s = seconds % 60;
+            if (h > 0) return `${h}h ${m}m`;
+            if (m > 0) return `${m}m ${s}s`;
+            return `${s}s`;
+        }
+
+        function formatTime(ts) {
+            if (!ts) return '--';
+            const d = new Date(ts);
+            return d.toLocaleTimeString('en-US', { hour12: false });
+        }
+
+        // Update UTC clock
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('utc-time').textContent = now.toISOString().substr(11, 8);
+        }
+
+        // Session detection (for visual indicator when not connected)
+        function updateSessionIndicators() {
+            const now = new Date();
+            const utcHour = now.getUTCHours();
+            const utcMinute = now.getUTCMinutes();
+            const mins = utcHour * 60 + utcMinute;
+
+            // XAUUSD sessions
+            let xauSession = 'OFF', xauType = 'session-off';
+            if (mins >= 7*60 && mins < 9*60) { xauSession = 'LONDON'; xauType = 'session-peak'; }
+            else if (mins >= 13*60+30 && mins < 15*60) { xauSession = 'US_DATA'; xauType = 'session-peak'; }
+            else if (mins >= 0 && mins < 3*60) { xauSession = 'ASIA'; xauType = 'session-secondary'; }
+            else if (mins >= 10*60 && mins < 12*60) { xauSession = 'LONDON_PM'; xauType = 'session-secondary'; }
+
+            // NAS100 sessions
+            let nasSession = 'OFF', nasType = 'session-off';
+            if (mins >= 13*60+30 && mins < 15*60+30) { nasSession = 'CASH_OPEN'; nasType = 'session-peak'; }
+            else if (mins >= 19*60 && mins < 20*60+30) { nasSession = 'POWER_HOUR'; nasType = 'session-peak'; }
+            else if (mins >= 12*60 && mins < 13*60+30) { nasSession = 'PRE_MKT'; nasType = 'session-secondary'; }
+            else if (mins >= 15*60+30 && mins < 18*60) { nasSession = 'MIDDAY'; nasType = 'session-secondary'; }
+
+            // Only update if not receiving live data
+            if (!ws || ws.readyState !== WebSocket.OPEN) {
+                const xauEl = document.getElementById('xau-session');
+                xauEl.textContent = xauSession;
+                xauEl.className = 'text-xs px-2 py-0.5 rounded ' + xauType;
+
+                const nasEl = document.getElementById('nas-session');
+                nasEl.textContent = nasSession;
+                nasEl.className = 'text-xs px-2 py-0.5 rounded ' + nasType;
+            }
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.target.tagName === 'INPUT') return;
+            switch (e.key.toLowerCase()) {
+                case 'r': reconnect(); break;
+                case ' ': e.preventDefault(); paused = !paused; document.getElementById('ws-text').textContent = paused ? 'PAUSED' : 'Connected'; break;
+                case 'k': killSwitch(); break;
+            }
+        });
+
+        // Initialize
+        setInterval(updateClock, 1000);
+        setInterval(updateSessionIndicators, 5000);
+        updateClock();
+        updateSessionIndicators();
+
+        // Auto-connect on load
+        setTimeout(connect, 500);
+    </script>
+</body>
+</html>
