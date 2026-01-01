@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chimera Income Engine Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Consolas', 'Monaco', monospace;
+            background: #0a0a0f;
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #333;
+        }
+        .header h1 {
+            color: #4ecdc4;
+            font-size: 24px;
+        }
+        .status-badge {
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .status-running { background: #2d5a27; color: #7fef7f; }
+        .status-halted { background: #5a2727; color: #ef7f7f; }
+        .status-warmup { background: #5a5a27; color: #efef7f; }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .panel {
+            background: #12121a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        .panel h2 {
+            color: #4ecdc4;
+            font-size: 14px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Panel A - ML Regime Score Chart */
+        .chart-container {
+            height: 300px;
+            position: relative;
+        }
+        
+        /* Panel B - Veto Counters */
+        .veto-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        .veto-item {
+            background: #1a1a24;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+        }
+        .veto-count {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .veto-label {
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+        }
+        .veto-ml { color: #ff6b6b; }
+        .veto-spread { color: #ffd93d; }
+        .veto-liquidity { color: #6bcb77; }
+        .veto-session { color: #4d96ff; }
+        
+        /* Panel C - Why No Trade */
+        .idle-reason {
+            background: #1a1a24;
+            padding: 20px;
+            border-radius: 6px;
+            text-align: center;
+            border-left: 4px solid #4ecdc4;
+        }
+        .idle-label {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 10px;
+        }
+        .idle-text {
+            font-size: 18px;
+            color: #fff;
+        }
+        .idle-score {
+            font-size: 14px;
+            color: #ff6b6b;
+            margin-top: 5px;
+        }
+        
+        /* Session Stats */
+        .stats-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .stat-card {
+            flex: 1;
+            background: #12121a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .stat-label {
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+        }
+        .stat-green { color: #7fef7f; }
+        .stat-red { color: #ef7f7f; }
+        .stat-yellow { color: #efef7f; }
+        .stat-blue { color: #7f7fef; }
+        
+        /* Trade Log */
+        .trade-log {
+            max-height: 200px;
+            overflow-y: auto;
+            font-size: 12px;
+        }
+        .trade-entry {
+            padding: 8px 12px;
+            border-bottom: 1px solid #222;
+            display: flex;
+            justify-content: space-between;
+        }
+        .trade-entry:hover { background: #1a1a24; }
+        .trade-win { border-left: 3px solid #7fef7f; }
+        .trade-loss { border-left: 3px solid #ef7f7f; }
+        .trade-scratch { border-left: 3px solid #888; }
+        
+        /* Veto Log */
+        .veto-log {
+            max-height: 150px;
+            overflow-y: auto;
+            font-size: 11px;
+            background: #0a0a0f;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .veto-entry {
+            padding: 5px 0;
+            border-bottom: 1px solid #1a1a24;
+            color: #ff6b6b;
+        }
+        
+        /* Health Indicators */
+        .health-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .health-item {
+            padding: 10px;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 11px;
+        }
+        .health-ok { background: #1a3a1a; color: #7fef7f; }
+        .health-warn { background: #3a3a1a; color: #efef7f; }
+        .health-bad { background: #3a1a1a; color: #ef7f7f; }
+        
+        /* Checklist */
+        .checklist {
+            font-size: 12px;
+        }
+        .check-item {
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .check-icon { font-size: 16px; }
+        .check-pass { color: #7fef7f; }
+        .check-fail { color: #ef7f7f; }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #555;
+            font-size: 11px;
+        }
+        
+        .warning-banner {
+            background: #3a2a1a;
+            border: 1px solid #5a4a2a;
+            color: #ffd93d;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>⚡ CHIMERA INCOME ENGINE</h1>
+        <div>
+            <span class="status-badge status-warmup" id="status-badge">SHADOW MODE</span>
+            <span style="margin-left: 15px; color: #888;">NAS100 ONLY</span>
+        </div>
+    </div>
+    
+    <div class="warning-banner" id="warning-banner" style="display: none;">
+        ⚠️ <span id="warning-text">HARD FAIL TRIGGERED</span>
+    </div>
+    
+    <!-- Stats Row -->
+    <div class="stats-row">
+        <div class="stat-card">
+            <div class="stat-value stat-blue" id="trades-fired">0</div>
+            <div class="stat-label">Trades Fired</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value stat-yellow" id="trades-vetoed">0</div>
+            <div class="stat-label">Trades Vetoed</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value" id="net-pnl">0.00</div>
+            <div class="stat-label">Net PnL (bps)</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value stat-red" id="max-dd">0.00</div>
+            <div class="stat-label">Max DD (bps)</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value stat-green" id="avg-mae">0.00</div>
+            <div class="stat-label">Avg MAE (bps)</div>
+        </div>
+    </div>
+    
+    <div class="grid">
+        <!-- Panel A: ML Regime Score Time Series -->
+        <div class="panel">
+            <h2>📊 Panel A — ML Regime Score (Time Series)</h2>
+            <div class="chart-container">
+                <canvas id="regime-chart"></canvas>
+            </div>
+            <div class="health-grid">
+                <div class="health-item" id="health-score">Score: --</div>
+                <div class="health-item" id="health-threshold">Threshold: 0.60</div>
+                <div class="health-item" id="health-regime">Regime: --</div>
+                <div class="health-item" id="health-session">Session: --</div>
+            </div>
+        </div>
+        
+        <!-- Panel B: Veto Counters -->
+        <div class="panel">
+            <h2>🚫 Panel B — Veto Counters (This Session)</h2>
+            <div class="veto-grid">
+                <div class="veto-item">
+                    <div class="veto-count veto-ml" id="ml-vetoes">0</div>
+                    <div class="veto-label">ML Vetoes</div>
+                </div>
+                <div class="veto-item">
+                    <div class="veto-count veto-spread" id="spread-vetoes">0</div>
+                    <div class="veto-label">Spread Vetoes</div>
+                </div>
+                <div class="veto-item">
+                    <div class="veto-count veto-liquidity" id="liquidity-vetoes">0</div>
+                    <div class="veto-label">Liquidity Vetoes</div>
+                </div>
+                <div class="veto-item">
+                    <div class="veto-count veto-session" id="session-vetoes">0</div>
+                    <div class="veto-label">Session Vetoes</div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 20px;">
+                <div style="font-size: 11px; color: #888; margin-bottom: 10px;">VETO HEALTH CHECK</div>
+                <div id="veto-health" class="health-item health-ok">
+                    ✓ ML is vetoing appropriately
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="grid">
+        <!-- Panel C: Why No Trade -->
+        <div class="panel">
+            <h2>💤 Panel C — Why No Trade?</h2>
+            <div class="idle-reason">
+                <div class="idle-label">INCOMEENGINE STATUS</div>
+                <div class="idle-text" id="idle-reason">IncomeEngine idle: WARMUP</div>
+                <div class="idle-score" id="idle-score">Regime score: 0.00</div>
+            </div>
+            
+            <div style="margin-top: 20px;">
+                <div style="font-size: 11px; color: #888; margin-bottom: 10px;">RECENT ML VETOES</div>
+                <div class="veto-log" id="veto-log">
+                    <div class="veto-entry">[waiting for data...]</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Trade Log -->
+        <div class="panel">
+            <h2>📜 Trade Log (MAE/MFE Tracked)</h2>
+            <div class="trade-log" id="trade-log">
+                <div class="trade-entry">
+                    <span style="color: #888;">No trades yet</span>
+                </div>
+            </div>
+            
+            <div style="margin-top: 20px;">
+                <div style="font-size: 11px; color: #888; margin-bottom: 10px;">EXIT REASON BREAKDOWN</div>
+                <div style="display: flex; gap: 15px; font-size: 12px;">
+                    <span>TP: <span id="exits-tp" style="color: #7fef7f;">0</span></span>
+                    <span>SL: <span id="exits-sl" style="color: #ef7f7f;">0</span></span>
+                    <span>TRAIL: <span id="exits-trail" style="color: #ffd93d;">0</span></span>
+                    <span>TIME: <span id="exits-time" style="color: #888;">0</span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Pre-London Checklist -->
+    <div class="panel" style="margin-bottom: 20px;">
+        <h2>✅ Pre-London Checklist</h2>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+            <div class="checklist">
+                <div style="color: #4ecdc4; margin-bottom: 10px; font-weight: bold;">Engine Structure</div>
+                <div class="check-item"><span class="check-icon check-pass">✓</span> IncomeEngine isolated</div>
+                <div class="check-item"><span class="check-icon check-pass">✓</span> NAS100 only</div>
+                <div class="check-item"><span class="check-icon check-pass">✓</span> XAUUSD hard-disabled</div>
+                <div class="check-item"><span class="check-icon check-pass">✓</span> No shared state with Alpha</div>
+            </div>
+            <div class="checklist">
+                <div style="color: #4ecdc4; margin-bottom: 10px; font-weight: bold;">Risk</div>
+                <div class="check-item"><span class="check-icon check-pass">✓</span> Daily loss ladder enforced</div>
+                <div class="check-item"><span class="check-icon check-pass">✓</span> Trade cap enforced (6/day)</div>
+                <div class="check-item"><span class="check-icon check-pass">✓</span> No pyramids</div>
+                <div class="check-item"><span class="check-icon check-pass">✓</span> No scaling</div>
+            </div>
+            <div class="checklist">
+                <div style="color: #4ecdc4; margin-bottom: 10px; font-weight: bold;">ML & Metrics</div>
+                <div class="check-item"><span class="check-icon check-pass">✓</span> Regime score visible</div>
+                <div class="check-item"><span class="check-icon check-pass">✓</span> Veto reasons logged</div>
+                <div class="check-item"><span class="check-icon check-pass">✓</span> Threshold fixed at 0.60</div>
+                <div class="check-item"><span class="check-icon check-pass">✓</span> MAE/MFE logged</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Hard Fail Conditions -->
+    <div class="panel">
+        <h2>🚨 Hard Fail Conditions (Auto-Stop)</h2>
+        <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px;">
+            <div class="health-item health-ok" id="fail-dd">DD ≤ -0.50%</div>
+            <div class="health-item health-ok" id="fail-trades">Trades ≤ 10</div>
+            <div class="health-item health-ok" id="fail-opens">No Open Trades</div>
+            <div class="health-item health-ok" id="fail-override">No ML Override</div>
+            <div class="health-item health-ok" id="fail-overlap">No Alpha Overlap</div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        CHIMERA v4.4.0 | Income Engine | Shadow Mode | NAS100 Only | ML Threshold: 0.60
+        <br>
+        <span style="color: #4ecdc4;">If it feels boring, you're doing it right.</span>
+    </div>
+    
+    <script>
+        // Initialize Chart
+        const ctx = document.getElementById('regime-chart').getContext('2d');
+        const regimeData = {
+            labels: [],
+            datasets: [{
+                label: 'P(regime_suitable)',
+                data: [],
+                borderColor: '#4ecdc4',
+                backgroundColor: 'rgba(78, 205, 196, 0.1)',
+                fill: true,
+                tension: 0.4,
+                pointRadius: 0
+            }]
+        };
+        
+        const regimeChart = new Chart(ctx, {
+            type: 'line',
+            data: regimeData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        min: 0,
+                        max: 1,
+                        grid: { color: '#222' },
+                        ticks: { color: '#888' }
+                    },
+                    x: {
+                        grid: { color: '#222' },
+                        ticks: { color: '#888', maxTicksLimit: 10 }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    annotation: {
+                        annotations: {
+                            threshold: {
+                                type: 'line',
+                                yMin: 0.60,
+                                yMax: 0.60,
+                                borderColor: '#ff6b6b',
+                                borderWidth: 2,
+                                borderDash: [5, 5],
+                                label: {
+                                    content: 'Threshold 0.60',
+                                    enabled: true,
+                                    position: 'end'
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Simulated data update (replace with WebSocket in production)
+        let tickCount = 0;
+        const vetoLog = [];
+        const tradeLog = [];
+        
+        function updateDashboard(data) {
+            // Update stats
+            document.getElementById('trades-fired').textContent = data.trades_fired || 0;
+            document.getElementById('trades-vetoed').textContent = data.trades_vetoed || 0;
+            
+            const pnl = data.net_pnl_bps || 0;
+            const pnlEl = document.getElementById('net-pnl');
+            pnlEl.textContent = pnl.toFixed(2);
+            pnlEl.className = 'stat-value ' + (pnl >= 0 ? 'stat-green' : 'stat-red');
+            
+            document.getElementById('max-dd').textContent = (data.max_dd_bps || 0).toFixed(2);
+            document.getElementById('avg-mae').textContent = (data.avg_mae_bps || 0).toFixed(2);
+            
+            // Veto counters
+            document.getElementById('ml-vetoes').textContent = data.ml_vetoes || 0;
+            document.getElementById('spread-vetoes').textContent = data.spread_vetoes || 0;
+            document.getElementById('liquidity-vetoes').textContent = data.liquidity_vetoes || 0;
+            document.getElementById('session-vetoes').textContent = data.session_vetoes || 0;
+            
+            // Exit reasons
+            document.getElementById('exits-tp').textContent = data.exits_tp || 0;
+            document.getElementById('exits-sl').textContent = data.exits_sl || 0;
+            document.getElementById('exits-trail').textContent = data.exits_trail || 0;
+            document.getElementById('exits-time').textContent = data.exits_time || 0;
+            
+            // Idle reason (Panel C)
+            document.getElementById('idle-reason').textContent = 
+                'IncomeEngine idle: ' + (data.idle_reason || 'WAITING');
+            document.getElementById('idle-score').textContent = 
+                'Regime score: ' + (data.regime_score || 0).toFixed(2);
+            
+            // Update regime chart
+            const now = new Date().toLocaleTimeString();
+            regimeData.labels.push(now);
+            regimeData.datasets[0].data.push(data.regime_score || 0);
+            
+            // Keep last 100 points
+            if (regimeData.labels.length > 100) {
+                regimeData.labels.shift();
+                regimeData.datasets[0].data.shift();
+            }
+            regimeChart.update('none');
+            
+            // Update health indicators
+            const score = data.regime_score || 0;
+            const healthScore = document.getElementById('health-score');
+            healthScore.textContent = 'Score: ' + score.toFixed(2);
+            healthScore.className = 'health-item ' + (score >= 0.60 ? 'health-ok' : 'health-bad');
+            
+            document.getElementById('health-regime').textContent = 
+                'Regime: ' + (score >= 0.60 ? 'SUITABLE' : 'UNSUITABLE');
+            document.getElementById('health-regime').className = 
+                'health-item ' + (score >= 0.60 ? 'health-ok' : 'health-bad');
+            
+            // Veto health check
+            const vetoHealth = document.getElementById('veto-health');
+            const mlVetoes = data.ml_vetoes || 0;
+            const totalTicks = data.ticks || 1;
+            
+            if (mlVetoes === 0 && totalTicks > 1000) {
+                vetoHealth.textContent = '⚠️ ML never vetoes - check thresholds';
+                vetoHealth.className = 'health-item health-warn';
+            } else if (mlVetoes > totalTicks * 0.95) {
+                vetoHealth.textContent = '⚠️ ML vetoes everything - thresholds too high';
+                vetoHealth.className = 'health-item health-warn';
+            } else {
+                vetoHealth.textContent = '✓ ML is vetoing appropriately';
+                vetoHealth.className = 'health-item health-ok';
+            }
+            
+            // Hard fail checks
+            updateFailCheck('fail-dd', (data.max_dd_bps || 0) >= -50, 'DD ≤ -0.50%');
+            updateFailCheck('fail-trades', (data.trades_fired || 0) <= 10, 'Trades ≤ 10');
+        }
+        
+        function updateFailCheck(id, pass, label) {
+            const el = document.getElementById(id);
+            el.textContent = (pass ? '✓ ' : '✗ ') + label;
+            el.className = 'health-item ' + (pass ? 'health-ok' : 'health-bad');
+        }
+        
+        function addVetoLog(veto) {
+            const log = document.getElementById('veto-log');
+            const entry = document.createElement('div');
+            entry.className = 'veto-entry';
+            entry.textContent = `[${new Date().toLocaleTimeString()}] ML-VETO score=${veto.score.toFixed(2)} ` +
+                `vol_pct=${(veto.vol_pct * 100).toFixed(0)} compression=${veto.compression.toFixed(2)}`;
+            log.insertBefore(entry, log.firstChild);
+            
+            // Keep last 20
+            while (log.children.length > 20) {
+                log.removeChild(log.lastChild);
+            }
+        }
+        
+        function addTradeLog(trade) {
+            const log = document.getElementById('trade-log');
+            const entry = document.createElement('div');
+            const pnlClass = trade.pnl > 1 ? 'trade-win' : trade.pnl < -1 ? 'trade-loss' : 'trade-scratch';
+            entry.className = 'trade-entry ' + pnlClass;
+            entry.innerHTML = `
+                <span>${trade.symbol} ${trade.direction}</span>
+                <span>PnL: ${trade.pnl.toFixed(2)}bps | MAE: ${trade.mae.toFixed(2)} | MFE: ${trade.mfe.toFixed(2)} | ${trade.exit}</span>
+            `;
+            log.insertBefore(entry, log.firstChild);
+        }
+        
+        // Simulate updates (replace with WebSocket)
+        setInterval(() => {
+            tickCount++;
+            const score = 0.45 + Math.random() * 0.25; // Simulate score between 0.45-0.70
+            
+            updateDashboard({
+                trades_fired: Math.floor(tickCount / 500),
+                trades_vetoed: Math.floor(tickCount / 50),
+                net_pnl_bps: (Math.random() - 0.5) * 10,
+                max_dd_bps: -Math.random() * 20,
+                avg_mae_bps: -1.5 - Math.random(),
+                ml_vetoes: Math.floor(tickCount / 60),
+                spread_vetoes: Math.floor(tickCount / 200),
+                liquidity_vetoes: Math.floor(tickCount / 500),
+                session_vetoes: Math.floor(tickCount / 1000),
+                exits_tp: Math.floor(tickCount / 800),
+                exits_sl: Math.floor(tickCount / 1200),
+                exits_trail: Math.floor(tickCount / 1500),
+                exits_time: Math.floor(tickCount / 2000),
+                idle_reason: score < 0.60 ? 'ML veto (score ' + score.toFixed(2) + ')' : 'WAITING_FOR_SIGNAL',
+                regime_score: score,
+                ticks: tickCount
+            });
+            
+            // Occasionally add veto log
+            if (tickCount % 30 === 0 && score < 0.60) {
+                addVetoLog({
+                    score: score,
+                    vol_pct: Math.random() * 0.8 + 0.2,
+                    compression: 0.7 + Math.random() * 0.3
+                });
+            }
+        }, 1000);
+        
+        // WebSocket connection (production)
+        /*
+        const ws = new WebSocket('ws://localhost:8765/income');
+        ws.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+            updateDashboard(data);
+            if (data.veto) addVetoLog(data.veto);
+            if (data.trade) addTradeLog(data.trade);
+        };
+        */
+    </script>
+</body>
+</html>

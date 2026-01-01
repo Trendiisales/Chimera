@@ -1,0 +1,22 @@
+# =============================================================================
+# Chimera Dashboard HTTP Server Systemd Service
+# =============================================================================
+# Installation:
+#   1. Copy to ~/.config/systemd/user/chimera-http.service
+#   2. Enable: systemctl --user enable chimera-http
+#   3. Start: systemctl --user start chimera-http
+# =============================================================================
+
+[Unit]
+Description=Chimera Dashboard HTTP Server
+After=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/Chimera
+ExecStart=/usr/bin/python3 -m http.server 8080 --bind 0.0.0.0
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

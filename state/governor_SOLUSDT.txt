@@ -1,0 +1,7 @@
+state=0
+relax_steps=1
+entry_confidence_min=0.560000
+expectancy_min_bps=0.750000
+confirmation_ticks=1
+maker_timeout_ms=130
+governor_heat=0.462963
