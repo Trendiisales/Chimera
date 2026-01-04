@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <title>Chimera v4.9.12 - Regime × Alpha × Broker</title>
+    <link rel="icon" type="image/png" href="chimera_logo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+        body { font-family: 'JetBrains Mono', monospace; background: #0a0a0c; }
+        .card { background: linear-gradient(135deg, #1a1a1f 0%, #12121a 100%); border: 1px solid #2a2a35; border-radius: 8px; }
+        .status-dot { width: 8px; height: 8px; border-radius: 50%; }
+        .status-dot.up { background: #22c55e; box-shadow: 0 0 6px #22c55e; }
+        .status-dot.down { background: #ef4444; box-shadow: 0 0 6px #ef4444; }
+        .cell-btn { transition: all 0.15s; }
+        .cell-btn:hover { transform: scale(1.02); }
+        .cell-btn.selected { box-shadow: 0 0 0 2px #22d3ee; }
+        .scrollable { max-height: 200px; overflow-y: auto; }
+        .scrollable::-webkit-scrollbar { width: 4px; }
+        .scrollable::-webkit-scrollbar-track { background: #1a1a1f; }
+        .scrollable::-webkit-scrollbar-thumb { background: #374151; border-radius: 2px; }
+    </style>
+</head>
+<body class="text-gray-300 min-h-screen p-3">
+    <div class="max-w-[1600px] mx-auto">
+        <!-- Header -->
+        <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2">
+                <img src="chimera_logo.png" alt="Chimera" class="h-7 w-7 rounded">
+                <h1 class="text-lg font-bold text-white">CHIMERA</h1>
+                <span id="version-badge" class="text-xs bg-cyan-600 px-2 py-0.5 rounded">v4.9.12</span>
+                <span id="physics-badge" class="text-xs bg-yellow-600 px-2 py-0.5 rounded">WAN</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <div class="flex items-center gap-1">
+                    <div id="ws-dot" class="status-dot down"></div>
+                    <span id="ws-text" class="text-xs">Disconnected</span>
+                </div>
+                <input id="ws-url" type="text" value="ws://45.85.3.38:7777" 
+                       class="bg-gray-800 text-xs px-2 py-1 rounded border border-gray-700 w-40">
+                <button onclick="reconnect()" class="bg-blue-600 text-xs px-2 py-1 rounded hover:bg-blue-500">Connect</button>
+            </div>
+        </div>
+        
+        <!-- ═══════════════════════════════════════════════════════════════════ -->
+        <!-- NAVIGATION TAB BAR - v4.9.12                                        -->
+        <!-- ═══════════════════════════════════════════════════════════════════ -->
+        <div class="flex items-center gap-1 mb-3 bg-gray-900/50 p-1 rounded-lg border border-gray-800">
+            <a href="chimera_dashboard.html" class="flex items-center gap-2 px-4 py-2 rounded-md bg-gray-800 hover:bg-gray-700 text-gray-300 text-sm font-medium transition-colors">
+                <span>⚡</span> OPERATIONS
+            </a>
+            <a href="regime_dashboard.html" class="flex items-center gap-2 px-4 py-2 rounded-md bg-cyan-600 text-white text-sm font-medium">
+                <span>📊</span> REGIME × ALPHA
+            </a>
+            <a href="income_dashboard.html" class="flex items-center gap-2 px-4 py-2 rounded-md bg-gray-800 hover:bg-gray-700 text-gray-300 text-sm font-medium transition-colors">
+                <span>💰</span> INCOME
+            </a>
+            <div class="flex-1"></div>
+            <div class="text-xs text-gray-500 px-2">Dashboard Views</div>
+        </div>
+        
+        <!-- Filter Bar -->
+        <div class="card p-2 mb-3 flex items-center gap-4">
+            <div>
+                <label class="text-xs text-gray-400">Broker</label>
+                <select id="broker-select" onchange="updateMatrix()" class="bg-gray-800 text-white rounded px-2 py-1 text-xs border border-gray-700 ml-1">
+                    <option value="Binance">Binance</option>
+                    <option value="BlackBull">BlackBull</option>
+                    <option value="Pepperstone">Pepperstone</option>
+                </select>
+            </div>
+            <div class="flex-1"></div>
+            <div class="text-xs text-gray-400">
+                <span id="total-trades">0</span> trades | 
+                Net R: <span id="total-net-r" class="text-green-400">+0.0</span> |
+                Active: <span id="active-alphas">0/0</span>
+            </div>
+        </div>
+        
+        <!-- Main Grid -->
+        <div class="grid grid-cols-3 gap-3 mb-3">
+            <!-- Matrix -->
+            <div class="col-span-2 card p-3">
+                <h3 class="text-sm font-semibold text-white mb-2">Regime × Alpha Matrix</h3>
+                <table class="w-full text-xs" id="matrix-table">
+                    <thead>
+                        <tr>
+                            <th class="text-left text-gray-400 p-1 w-24">Regime</th>
+                            <th class="text-center text-gray-400 p-1">MOMENTUM</th>
+                            <th class="text-center text-gray-400 p-1">FADE</th>
+                            <th class="text-center text-gray-400 p-1">BREAKOUT</th>
+                            <th class="text-center text-gray-400 p-1">PULLBACK</th>
+                        </tr>
+                    </thead>
+                    <tbody id="matrix-body">
+                        <!-- Filled by JS -->
+                    </tbody>
+                </table>
+                <div class="flex gap-3 mt-2 text-xs">
+                    <div class="flex items-center gap-1"><div class="w-2 h-2 rounded bg-emerald-600"></div><span class="text-gray-400">+2R</span></div>
+                    <div class="flex items-center gap-1"><div class="w-2 h-2 rounded bg-green-600/50"></div><span class="text-gray-400">+0.5R</span></div>
+                    <div class="flex items-center gap-1"><div class="w-2 h-2 rounded bg-yellow-600/40"></div><span class="text-gray-400">Marginal</span></div>
+                    <div class="flex items-center gap-1"><div class="w-2 h-2 rounded bg-orange-600/50"></div><span class="text-gray-400">-0.5R</span></div>
+                    <div class="flex items-center gap-1"><div class="w-2 h-2 rounded bg-red-700/60"></div><span class="text-gray-400">Negative</span></div>
+                    <div class="flex items-center gap-1"><div class="w-2 h-2 rounded bg-gray-800"></div><span class="text-gray-400">Halted</span></div>
+                </div>
+            </div>
+            
+            <!-- Cell Breakdown -->
+            <div class="card p-3" id="cell-breakdown">
+                <h3 class="text-sm font-semibold text-white mb-2" id="cell-title">Cell Breakdown</h3>
+                <div id="cell-content" class="text-gray-500 text-center py-6 text-xs">
+                    Select a cell to view details
+                </div>
+            </div>
+        </div>
+        
+        <!-- Charts Row -->
+        <div class="grid grid-cols-2 gap-3 mb-3">
+            <!-- Hourly Chart -->
+            <div class="card p-3">
+                <h3 class="text-sm font-semibold text-white mb-2">Hourly Expectancy (UTC)</h3>
+                <div class="flex items-end gap-0.5 h-24" id="hourly-chart">
+                    <!-- Filled by JS -->
+                </div>
+                <div class="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>0</span><span>6</span><span>12</span><span>18</span><span>23</span>
+                </div>
+            </div>
+            
+            <!-- No-Trade Reasons -->
+            <div class="card p-3">
+                <h3 class="text-sm font-semibold text-white mb-2">No-Trade Reasons (24h)</h3>
+                <div class="space-y-1.5" id="no-trade-reasons">
+                    <!-- Filled by JS -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Retirement Log -->
+        <div class="card p-3">
+            <h3 class="text-sm font-semibold text-white mb-2">Auto-Retirement Log</h3>
+            <div class="space-y-1 scrollable" id="retirement-log">
+                <div class="text-gray-500 text-xs text-center py-2">No retirement events</div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let ws = null;
+        let data = {};
+        let selectedCell = null;
+        const regimes = ['TREND', 'RANGE', 'VOLATILITY', 'DEAD'];
+        const alphas = ['MOMENTUM', 'FADE', 'BREAKOUT', 'PULLBACK'];
+        
+        function getCellColor(cell) {
+            if (!cell || cell.status === 'HALT') return 'bg-gray-800 text-gray-500';
+            if (cell.status === 'RETIRED') return 'bg-red-900/60 text-red-300';
+            if (cell.net_r >= 2.0) return 'bg-emerald-600/70 text-white';
+            if (cell.net_r >= 0.5) return 'bg-green-600/50 text-green-100';
+            if (cell.net_r >= 0) return 'bg-yellow-600/40 text-yellow-100';
+            if (cell.net_r >= -0.5) return 'bg-orange-600/50 text-orange-100';
+            return 'bg-red-700/60 text-red-100';
+        }
+        
+        function findCell(broker, regime, alpha) {
+            if (!data.regime_alpha_cells) return null;
+            return data.regime_alpha_cells.find(c => 
+                c.broker === broker && c.regime === regime && c.alpha === alpha);
+        }
+        
+        function updateMatrix() {
+            const broker = document.getElementById('broker-select').value;
+            const tbody = document.getElementById('matrix-body');
+            tbody.innerHTML = '';
+            
+            let totalTrades = 0;
+            let totalNetR = 0;
+            let activeCount = 0;
+            let totalAlphas = 0;
+            
+            regimes.forEach(regime => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `<td class="text-gray-300 font-medium p-1">${regime}</td>`;
+                
+                alphas.forEach(alpha => {
+                    const cell = findCell(broker, regime, alpha);
+                    const isSelected = selectedCell && selectedCell.regime === regime && selectedCell.alpha === alpha;
+                    
+                    if (regime !== 'DEAD') totalAlphas++;
+                    
+                    let content = '';
+                    if (regime === 'DEAD' || !cell) {
+                        content = '<span class="text-xs">HALT</span>';
+                    } else {
+                        totalTrades += cell.trades || 0;
+                        totalNetR += cell.net_r || 0;
+                        if (cell.status === 'ACTIVE') activeCount++;
+                        
+                        if (cell.status === 'RETIRED') {
+                            content = `<div class="text-xs opacity-70">RETIRED</div>
+                                      <div class="font-mono">${cell.net_r > 0 ? '+' : ''}${cell.net_r.toFixed(1)}R</div>`;
+                        } else {
+                            content = `<div class="font-mono font-semibold">${cell.net_r > 0 ? '+' : ''}${cell.net_r.toFixed(1)}R</div>
+                                      <div class="opacity-70">${cell.trades}t</div>`;
+                        }
+                    }
+                    
+                    const colorClass = regime === 'DEAD' ? 'bg-gray-800 text-gray-500' : getCellColor(cell);
+                    const selectedClass = isSelected ? 'selected' : '';
+                    
+                    tr.innerHTML += `
+                        <td class="p-0.5">
+                            <button onclick="selectCell('${regime}','${alpha}')" 
+                                    class="cell-btn w-full p-1.5 rounded text-xs ${colorClass} ${selectedClass}">
+                                ${content}
+                            </button>
+                        </td>`;
+                });
+                
+                tbody.appendChild(tr);
+            });
+            
+            document.getElementById('total-trades').textContent = totalTrades;
+            document.getElementById('total-net-r').textContent = (totalNetR >= 0 ? '+' : '') + totalNetR.toFixed(1);
+            document.getElementById('total-net-r').className = totalNetR >= 0 ? 'text-green-400' : 'text-red-400';
+            document.getElementById('active-alphas').textContent = `${activeCount}/${totalAlphas}`;
+        }
+        
+        function selectCell(regime, alpha) {
+            const broker = document.getElementById('broker-select').value;
+            selectedCell = { regime, alpha };
+            const cell = findCell(broker, regime, alpha);
+            
+            updateMatrix();
+            updateCellBreakdown(cell, regime, alpha, broker);
+            updateHourlyChart(cell);
+        }
+        
+        function updateCellBreakdown(cell, regime, alpha, broker) {
+            const titleEl = document.getElementById('cell-title');
+            const contentEl = document.getElementById('cell-content');
+            
+            titleEl.textContent = `${alpha} × ${regime}`;
+            
+            if (!cell || regime === 'DEAD') {
+                contentEl.innerHTML = '<div class="text-gray-500 text-center py-6 text-xs">HALTED - No trading in DEAD regime</div>';
+                return;
+            }
+            
+            const netEdge = (cell.gross_edge_bps || 0) - (cell.spread_paid_bps || 0) - (cell.latency_cost_bps || 0);
+            const netEdgeClass = netEdge >= 0 ? 'text-green-400' : 'text-red-400';
+            const statusClass = cell.status === 'ACTIVE' ? 'bg-green-900/50 text-green-300' :
+                               cell.status === 'MONITOR' ? 'bg-yellow-900/50 text-yellow-300' :
+                               'bg-red-900/50 text-red-300';
+            
+            contentEl.innerHTML = `
+                <div class="text-xs text-gray-400 mb-2">Broker: ${broker}</div>
+                <div class="grid grid-cols-2 gap-2 mb-3">
+                    <div class="bg-gray-800 rounded p-1.5">
+                        <div class="text-gray-400 text-xs">Net R</div>
+                        <div class="text-lg font-mono ${cell.net_r >= 0 ? 'text-green-400' : 'text-red-400'}">
+                            ${cell.net_r > 0 ? '+' : ''}${cell.net_r.toFixed(2)}
+                        </div>
+                    </div>
+                    <div class="bg-gray-800 rounded p-1.5">
+                        <div class="text-gray-400 text-xs">Win%</div>
+                        <div class="text-lg font-mono text-white">${((cell.win_rate || 0) * 100).toFixed(0)}%</div>
+                    </div>
+                </div>
+                <div class="space-y-1 mb-3 text-xs">
+                    <div class="flex justify-between"><span class="text-gray-400">Trades</span><span class="font-mono">${cell.trades}</span></div>
+                    <div class="flex justify-between"><span class="text-gray-400">Sharpe</span><span class="font-mono">${(cell.sharpe || 0).toFixed(2)}</span></div>
+                    <div class="flex justify-between"><span class="text-gray-400">Fill Rate</span><span class="font-mono">${((cell.fill_rate || 0) * 100).toFixed(0)}%</span></div>
+                    <div class="flex justify-between"><span class="text-gray-400">Reject</span><span class="font-mono ${(cell.reject_rate || 0) > 0.1 ? 'text-red-400' : ''}">${((cell.reject_rate || 0) * 100).toFixed(1)}%</span></div>
+                    <div class="flex justify-between"><span class="text-gray-400">Latency</span><span class="font-mono">${(cell.avg_latency_ms || 0).toFixed(1)}ms</span></div>
+                </div>
+                <div class="border-t border-gray-700 pt-2 space-y-0.5 text-xs">
+                    <div class="flex justify-between text-green-400"><span>Gross</span><span>+${(cell.gross_edge_bps || 0).toFixed(2)}bps</span></div>
+                    <div class="flex justify-between text-red-400"><span>Spread</span><span>-${(cell.spread_paid_bps || 0).toFixed(2)}bps</span></div>
+                    <div class="flex justify-between text-red-400"><span>Latency</span><span>-${(cell.latency_cost_bps || 0).toFixed(2)}bps</span></div>
+                    <div class="flex justify-between font-semibold pt-1 border-t border-gray-700">
+                        <span class="${netEdgeClass}">Net</span>
+                        <span class="${netEdgeClass}">${netEdge >= 0 ? '+' : ''}${netEdge.toFixed(2)}bps</span>
+                    </div>
+                </div>
+                <div class="mt-3 p-1.5 rounded text-center text-xs ${statusClass}">${cell.status}</div>
+            `;
+        }
+        
+        function updateHourlyChart(cell) {
+            const container = document.getElementById('hourly-chart');
+            
+            if (!cell || !cell.hourly_exp) {
+                // Default empty chart
+                let html = '';
+                for (let h = 0; h < 24; h++) {
+                    html += `<div class="flex-1 flex flex-col items-center">
+                        <div class="w-full rounded-t bg-gray-700/30" style="height: 5%"></div>
+                    </div>`;
+                }
+                container.innerHTML = html;
+                return;
+            }
+            
+            const maxExp = Math.max(...cell.hourly_exp.map(e => Math.abs(e)), 0.1);
+            let html = '';
+            
+            for (let h = 0; h < 24; h++) {
+                const exp = cell.hourly_exp[h] || 0;
+                const height = Math.max(5, (Math.abs(exp) / maxExp) * 100);
+                const colorClass = exp >= 0.5 ? 'bg-green-500' : exp >= 0 ? 'bg-green-700/60' : 'bg-red-600/60';
+                
+                html += `<div class="flex-1 flex flex-col items-center" title="${h}:00 UTC: ${exp.toFixed(3)}R">
+                    <div class="w-full rounded-t ${colorClass}" style="height: ${height}%"></div>
+                </div>`;
+            }
+            
+            container.innerHTML = html;
+        }
+        
+        function updateNoTradeReasons() {
+            const container = document.getElementById('no-trade-reasons');
+            
+            if (!data.no_trade_reasons || data.no_trade_reasons.length === 0) {
+                container.innerHTML = '<div class="text-gray-500 text-xs text-center py-2">No data</div>';
+                return;
+            }
+            
+            const maxCount = Math.max(...data.no_trade_reasons.map(r => r.count));
+            let html = '';
+            
+            data.no_trade_reasons.forEach(r => {
+                const barWidth = (r.count / maxCount) * 100;
+                const barClass = r.reason === 'WAITING_SIGNAL' || r.reason === 'WAITING' ? 'bg-gray-600' : 'bg-blue-600/60';
+                
+                html += `
+                    <div>
+                        <div class="flex justify-between text-xs mb-0.5">
+                            <span class="text-gray-300">${r.reason}</span>
+                            <span class="text-gray-400">${r.pct.toFixed(1)}%</span>
+                        </div>
+                        <div class="h-1.5 bg-gray-800 rounded overflow-hidden">
+                            <div class="${barClass} h-full rounded" style="width: ${barWidth}%"></div>
+                        </div>
+                    </div>`;
+            });
+            
+            container.innerHTML = html;
+        }
+        
+        function updateRetirementLog() {
+            const container = document.getElementById('retirement-log');
+            
+            if (!data.retirement_events || data.retirement_events.length === 0) {
+                container.innerHTML = '<div class="text-gray-500 text-xs text-center py-2">No retirement events</div>';
+                return;
+            }
+            
+            let html = '';
+            data.retirement_events.forEach(evt => {
+                const ts = evt.ts ? new Date(evt.ts).toLocaleTimeString() : '--:--:--';
+                html += `
+                    <div class="bg-red-900/20 border border-red-900/50 rounded p-1.5 text-xs">
+                        <div class="flex justify-between">
+                            <span class="text-red-400 font-medium">${evt.alpha} × ${evt.regime}</span>
+                            <span class="text-gray-500">${ts}</span>
+                        </div>
+                        <div class="text-gray-400 mt-0.5">${evt.reason}</div>
+                        <div class="text-gray-500">Broker: ${evt.broker}</div>
+                    </div>`;
+            });
+            
+            container.innerHTML = html;
+        }
+        
+        function updateDashboard(d) {
+            data = d;
+            
+            if (d.version) {
+                document.getElementById('version-badge').textContent = d.version;
+            }
+            
+            if (d.physics_state) {
+                const badge = document.getElementById('physics-badge');
+                badge.textContent = d.physics_state;
+                badge.className = 'text-xs px-2 py-0.5 rounded ' + (
+                    d.physics_state === 'COLO' ? 'bg-green-600' :
+                    d.physics_state === 'NEAR_COLO' ? 'bg-yellow-600' :
+                    'bg-red-600');
+            }
+            
+            updateMatrix();
+            updateNoTradeReasons();
+            updateRetirementLog();
+            
+            // Update selected cell if one is selected
+            if (selectedCell) {
+                const broker = document.getElementById('broker-select').value;
+                const cell = findCell(broker, selectedCell.regime, selectedCell.alpha);
+                updateCellBreakdown(cell, selectedCell.regime, selectedCell.alpha, broker);
+                updateHourlyChart(cell);
+            }
+        }
+        
+        function connect() {
+            const url = document.getElementById('ws-url').value;
+            try {
+                ws = new WebSocket(url);
+                ws.onopen = () => {
+                    document.getElementById('ws-dot').className = 'status-dot up';
+                    document.getElementById('ws-text').textContent = 'Connected';
+                    console.log('[WS] Connected to', url);
+                };
+                ws.onclose = () => {
+                    document.getElementById('ws-dot').className = 'status-dot down';
+                    document.getElementById('ws-text').textContent = 'Disconnected';
+                    console.log('[WS] Disconnected');
+                    setTimeout(connect, 3000);
+                };
+                ws.onerror = (e) => {
+                    console.error('[WS] Error:', e);
+                };
+                ws.onmessage = (e) => {
+                    try {
+                        const parsed = JSON.parse(e.data);
+                        updateDashboard(parsed);
+                    } catch(err) {
+                        console.error('[WS] Parse error:', err);
+                    }
+                };
+            } catch(e) {
+                console.error('[WS] Connect error:', e);
+                setTimeout(connect, 3000);
+            }
+        }
+        
+        function reconnect() {
+            if (ws) ws.close();
+            connect();
+        }
+        
+        // Initialize
+        updateMatrix();
+        updateHourlyChart(null);
+        connect();
+    </script>
+</body>
+</html>
