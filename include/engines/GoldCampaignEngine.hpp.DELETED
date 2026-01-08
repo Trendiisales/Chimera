@@ -1,0 +1,43 @@
+// =============================================================================
+// GoldCampaignEngine.hpp - DELETED (2025-01-06)
+// =============================================================================
+// THIS FILE WAS INTENTIONALLY REMOVED
+//
+// REASON:
+//   The old GoldCampaignEngine violated the Gold architecture audit:
+//   ❌ Had entry logic (executeEntry)
+//   ❌ Had position management (managePosition)
+//   ❌ Had risk calculations
+//   ❌ Could place trades directly
+//   ❌ No portfolio authority check
+//
+// REPLACEMENT:
+//   The new Gold system is a 3-part architecture:
+//   
+//   1. GoldCampaignEngine_v2_1.hpp (include/engines/)
+//      - Campaign detection ONLY
+//      - Produces HTF regime + campaign state
+//      - NEVER places trades
+//
+//   2. GoldEngine_v5_2.hpp (include/engines/)
+//      - Thin execution engine
+//      - REQUIRES portfolio permission
+//      - REQUIRES active campaign
+//      - Partial + runner management
+//
+//   3. GoldScaleGuard.hpp (include/portfolio/)
+//      - Discipline-based scaling
+//      - MICRO -> LEVEL_1 -> LEVEL_2
+//      - Freezes on discipline violation
+//
+//   4. GoldExecutionContract.hpp (include/engines/)
+//      - Truthful trade tagging
+//      - Required for scale guard accuracy
+//
+//   5. PortfolioModeController.hpp (include/portfolio/)
+//      - canTradeGold() is SINGLE AUTHORITY
+//      - Index priority hard-blocks Gold
+//      - Returns risk from scale guard
+//
+// DO NOT RECREATE THIS FILE
+// =============================================================================

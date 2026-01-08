@@ -1,0 +1,8 @@
+[
+{
+  "directory": "/home/trader/Chimera/build",
+  "command": "/usr/bin/c++  -I/home/trader/Chimera/include -I/home/trader/Chimera/include/engines -I/home/trader/Chimera/include/shared -I/home/trader/Chimera/cfd_engine/include -I/home/trader/Chimera/cfd_engine/include/fix -I/home/trader/Chimera/cfd_engine/include/openapi -O3 -DNDEBUG -std=gnu++20 -Wall -Wextra -O2 -o CMakeFiles/chimera.dir/src/main.cpp.o -c /home/trader/Chimera/src/main.cpp",
+  "file": "/home/trader/Chimera/src/main.cpp",
+  "output": "CMakeFiles/chimera.dir/src/main.cpp.o"
+}
+]
