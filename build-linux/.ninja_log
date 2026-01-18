@@ -1,0 +1,13 @@
+# ninja log v5
+2	526	1768700545466408995	core/CMakeFiles/chimera_core.dir/src/EventBus.cpp.o	d0c2270f6dad93f3
+540	674	1768700545618288205	core/libchimera_core.a	7ca786190855c0cf
+5	807	1768700545749100942	gui_hub/CMakeFiles/gui_hub.dir/main.cpp.o	9b6efd63c1283fe2
+810	996	1768700545937173679	bin/gui_hub	dce188fa3988a831
+4	1219	1768700546163011827	engines/gold/CMakeFiles/chimera_gold.dir/main.cpp.o	d6db1fc59e31c348
+4	1238	1768700546181974219	engines/crypto/CMakeFiles/chimera_crypto.dir/main.cpp.o	6efcb5c5f61ec948
+4	1268	1768700546212272079	engines/indices/CMakeFiles/chimera_indices.dir/main.cpp.o	16676edd5b763e43
+1224	1358	1768700546301179452	bin/chimera_gold	9fc8813e9bc37b9e
+1242	1367	1768700546310701584	bin/chimera_crypto	af36921d2e258083
+3	1370	1768700546314408422	supervisor/CMakeFiles/chimera_supervisor.dir/main.cpp.o	1afcd6f02ebbbf64
+1269	1393	1768700546336857282	bin/chimera_indices	b7cd62d4369d2325
+1371	1493	1768700546437191038	bin/chimera_supervisor	a01f742c9a8014b4
