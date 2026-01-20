@@ -1,0 +1,9 @@
+build/
+*.o
+*.a
+*.so
+*.log
+keys.json
+*.tar.gz
+chimera_COMMIT_*/
+RESTORE_CHIMERA_*.sh

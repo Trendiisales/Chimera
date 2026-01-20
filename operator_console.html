@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CHIMERA OPERATOR CONSOLE</title>
+<style>
+body { background:#0b0b0b; color:#00ffcc; font-family:monospace; }
+button { background:#222; color:#00ffcc; border:1px solid #00ffcc; padding:6px 12px; margin:2px; }
+.card { border:1px solid #00ffcc; margin:10px; padding:10px; }
+</style>
+</head>
+<body>
+
+<h1>CHIMERA — LIVE ENGINE CONTROL</h1>
+<button onclick="kill()">GLOBAL FLATTEN</button>
+
+<div id="engines"></div>
+
+<script>
+const api = "http://" + location.hostname + ":9001";
+
+function kill() {
+    fetch(api + "/api/kill", {method:"POST"});
+}
+
+function enable(name) {
+    fetch(api + "/api/enable?engine=" + name, {method:"POST"});
+}
+
+function disable(name) {
+    fetch(api + "/api/disable?engine=" + name, {method:"POST"});
+}
+
+async function refresh() {
+    const res = await fetch(api + "/api/state");
+    const data = await res.json();
+
+    const root = document.getElementById("engines");
+    root.innerHTML = "";
+
+    for (let k in data.engines) {
+        const e = data.engines[k];
+        const div = document.createElement("div");
+        div.className = "card";
+        div.innerHTML = `
+            <h3>${k}</h3>
+            Enabled: ${e.enabled}<br>
+            PnL: ${e.pnl}<br>
+            DD: ${e.drawdown}<br>
+            Trades: ${e.trades}<br>
+            Wins: ${e.wins} Losses: ${e.losses}<br>
+            SizeScale: ${e.size_scale}<br>
+            LastSignal: ${e.last_signal}<br>
+            <button onclick="enable('${k}')">ENABLE</button>
+            <button onclick="disable('${k}')">DISABLE</button>
+        `;
+        root.appendChild(div);
+    }
+}
+
+setInterval(refresh, 1000);
+refresh();
+</script>
+
+</body>
+</html>
