@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CHIMERA LIVE</title>
+<style>
+body {
+  background: #000;
+  color: #0f0;
+  font-family: monospace;
+}
+pre {
+  white-space: pre-wrap;
+  font-size: 14px;
+}
+</style>
+</head>
+<body>
+<h2>CHIMERA — LIVE OPERATOR FEED</h2>
+<pre id="feed">CONNECTING...</pre>
+
+<script>
+const feed = document.getElementById("feed");
+const es = new EventSource("/stream");
+
+es.onmessage = function(e) {
+  feed.textContent = e.data;
+};
+
+es.onerror = function() {
+  feed.textContent = "DISCONNECTED";
+};
+</script>
+</body>
+</html>
