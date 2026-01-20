@@ -5,15 +5,31 @@ TelemetryBus& TelemetryBus::instance() {
     return bus;
 }
 
-void TelemetryBus::publish(const std::string& type, const nlohmann::json& payload) {
-    std::lock_guard<std::mutex> lock(mtx);
-    ring.push_back({type, payload});
-    if (ring.size() > MAX_EVENTS) {
-        ring.erase(ring.begin());
+void TelemetryBus::updateEngine(const TelemetryEngineRow& row) {
+    std::lock_guard<std::mutex> g(mu_);
+    for (auto& e : engines_) {
+        if (e.symbol == row.symbol) {
+            e = row;
+            return;
+        }
+    }
+    engines_.push_back(row);
+}
+
+void TelemetryBus::recordTrade(const TelemetryTradeRow& row) {
+    std::lock_guard<std::mutex> g(mu_);
+    trades_.push_back(row);
+    if (trades_.size() > 200) {
+        trades_.erase(trades_.begin());
     }
 }
 
-std::vector<TelemetryEvent> TelemetryBus::snapshot() {
-    std::lock_guard<std::mutex> lock(mtx);
-    return ring;
+std::vector<TelemetryEngineRow> TelemetryBus::snapshotEngines() {
+    std::lock_guard<std::mutex> g(mu_);
+    return engines_;
+}
+
+std::vector<TelemetryTradeRow> TelemetryBus::snapshotTrades() {
+    std::lock_guard<std::mutex> g(mu_);
+    return trades_;
 }

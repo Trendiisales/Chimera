@@ -1,34 +1,106 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<title>CHIMERA LIVE</title>
+<meta charset="utf-8"/>
+<title>CHIMERA — LIVE OPERATOR CONSOLE</title>
 <style>
-body {
-  background: #000;
-  color: #0f0;
-  font-family: monospace;
-}
-pre {
-  white-space: pre-wrap;
-  font-size: 14px;
-}
+body { background:#0b0f14; color:#d0d0d0; font-family:monospace; margin:0; }
+#top { display:flex; padding:10px; border-bottom:1px solid #333; }
+.badge { padding:4px 10px; border-radius:4px; margin-left:10px; }
+.live { background:#0a3; color:#000; }
+.grid { display:grid; grid-template-columns:2fr 1fr; grid-gap:10px; padding:10px; }
+.panel { border:1px solid #333; padding:8px; }
+h3 { margin:0 0 6px 0; color:#6f9; }
+table { width:100%; border-collapse:collapse; }
+td,th { border-bottom:1px solid #222; padding:4px; }
+.symbol { display:grid; grid-template-columns:repeat(4,1fr); gap:6px; }
+.card { border:1px solid #222; padding:6px; }
 </style>
 </head>
 <body>
-<h2>CHIMERA — LIVE OPERATOR FEED</h2>
-<pre id="feed">CONNECTING...</pre>
+<div id="top">
+  <div>CHIMERA — LIVE OPERATOR</div>
+  <div id="status" class="badge">CONNECTING</div>
+</div>
+
+<div class="grid">
+  <div class="panel">
+    <h3>SYMBOLS</h3>
+    <div id="symbols"></div>
+  </div>
+
+  <div class="panel">
+    <h3>RISK / METRICS</h3>
+    <div id="metrics"></div>
+    <h3>ENGINES</h3>
+    <div id="engines"></div>
+  </div>
+
+  <div class="panel" style="grid-column:span 2">
+    <h3>TRADES</h3>
+    <table>
+      <thead><tr><th>Time</th><th>Sym</th><th>Side</th><th>Px</th><th>Sz</th><th>Edge</th><th>Lat</th><th>PnL</th></tr></thead>
+      <tbody id="trades"></tbody>
+    </table>
+  </div>
+</div>
 
 <script>
-const feed = document.getElementById("feed");
+const status = document.getElementById("status");
+const symbols = document.getElementById("symbols");
+const metrics = document.getElementById("metrics");
+const engines = document.getElementById("engines");
+const trades = document.getElementById("trades");
+
 const es = new EventSource("/stream");
+es.onmessage = (e) => {
+  const d = JSON.parse(e.data);
+  status.textContent = "LIVE";
+  status.className = "badge live";
 
-es.onmessage = function(e) {
-  feed.textContent = e.data;
-};
+  symbols.innerHTML = "";
+  Object.keys(d.symbols).forEach(k => {
+    const s = d.symbols[k];
+    const div = document.createElement("div");
+    div.className = "card symbol";
+    div.innerHTML = `
+      <b>${k}</b>
+      <div>Bid: ${s.bid}</div>
+      <div>Ask: ${s.ask}</div>
+      <div>Spr: ${s.spread_bps}</div>
+      <div>OFI: ${s.ofi}</div>
+      <div>Imp: ${s.impulse}</div>
+      <div>Lat: ${s.latency_ms}ms</div>
+      <div>Pos: ${s.position.side} ${s.position.size}</div>
+      <div>PnL: ${s.position.pnl}</div>
+      <div>Reg: ${s.regime}</div>
+      <div>Eng: ${s.engine}</div>
+      <div>Risk: ${s.risk}</div>
+    `;
+    symbols.appendChild(div);
+  });
 
-es.onerror = function() {
-  feed.textContent = "DISCONNECTED";
+  metrics.innerHTML = `
+    Risk: ${d.risk_state}<br/>
+    Latency: ${d.metrics.latency_ms} ms<br/>
+    Spread: ${d.metrics.spread_bps} bps<br/>
+    PnL (Session): ${d.metrics.pnl_session}<br/>
+    PnL (Today): ${d.metrics.pnl_today}
+  `;
+
+  engines.innerHTML = "";
+  d.engines.forEach(e => {
+    engines.innerHTML += `${e.name} | ${e.state} | edge=${e.edge} | win=${e.winrate}<br/>`;
+  });
+
+  trades.innerHTML = "";
+  d.trades.forEach(t => {
+    trades.innerHTML += `<tr>
+      <td>${t.t}</td><td>${t.sym}</td><td>${t.side}</td>
+      <td>${t.px}</td><td>${t.sz}</td><td>${t.edge}</td>
+      <td>${t.lat}</td><td>${t.pnl}</td>
+    </tr>`;
+  });
 };
 </script>
 </body>

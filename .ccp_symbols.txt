@@ -1,0 +1,282 @@
+./main.cpp.bak.1768902705:6:#include "allocator/CapitalAllocator.hpp"
+./main.cpp.bak.1768902705:7:#include "ledger/TradeLedger.hpp"
+./main.cpp.bak.1768902705:11:    startTelemetry();
+./main.cpp.bak.1768902705:14:    CapitalAllocator allocator;
+./main.cpp.bak.1768902705:15:    TradeLedger ledger("logs/trades.jsonl");
+./main.cpp.bak.1768902705:63:        TelemetryBus::instance().publish("RISK", {
+./telemetry/TelemetryServer.cpp:1:#include "telemetry/TelemetryBus.hpp"
+./telemetry/TelemetryServer.cpp:16:std::string buildTelemetryJSON() {
+./telemetry/TelemetryServer.cpp:20:    auto engines = TelemetryBus::instance().engines();
+./telemetry/TelemetryServer.cpp:21:    auto trades = TelemetryBus::instance().trades();
+./telemetry/TelemetryServer.cpp:61:void startTelemetryServer() {
+./telemetry/TelemetryServer.cpp:65:            std::cout << buildTelemetryJSON() << std::endl;
+./telemetry/TelemetryBus.cpp:1:#include "telemetry/TelemetryBus.hpp"
+./telemetry/TelemetryBus.cpp:3:TelemetryBus& TelemetryBus::instance() {
+./telemetry/TelemetryBus.cpp:4:    static TelemetryBus bus;
+./telemetry/TelemetryBus.cpp:8:void TelemetryBus::updateEngine(const TelemetryEngineRow& row) {
+./telemetry/TelemetryBus.cpp:13:void TelemetryBus::pushTrade(const TelemetryTradeRow& row) {
+./telemetry/TelemetryBus.cpp:20:std::vector<TelemetryEngineRow> TelemetryBus::engines() {
+./telemetry/TelemetryBus.cpp:22:    std::vector<TelemetryEngineRow> out;
+./telemetry/TelemetryBus.cpp:28:std::vector<TelemetryTradeRow> TelemetryBus::trades() {
+./telemetry/TelemetryBus.hpp:7:struct TelemetryEngineRow {
+./telemetry/TelemetryBus.hpp:18:struct TelemetryTradeRow {
+./telemetry/TelemetryBus.hpp:29:class TelemetryBus {
+./telemetry/TelemetryBus.hpp:31:    static TelemetryBus& instance();
+./telemetry/TelemetryBus.hpp:33:    void updateEngine(const TelemetryEngineRow& row);
+./telemetry/TelemetryBus.hpp:34:    void pushTrade(const TelemetryTradeRow& row);
+./telemetry/TelemetryBus.hpp:36:    std::vector<TelemetryEngineRow> engines();
+./telemetry/TelemetryBus.hpp:37:    std::vector<TelemetryTradeRow> trades();
+./telemetry/TelemetryBus.hpp:40:    TelemetryBus() = default;
+./telemetry/TelemetryBus.hpp:43:    std::unordered_map<std::string, TelemetryEngineRow> engines_;
+./telemetry/TelemetryBus.hpp:44:    std::vector<TelemetryTradeRow> trades_;
+./build/CMakeFiles/chimera.dir/link.txt:1:/usr/bin/c++ CMakeFiles/chimera.dir/core/SymbolLane_ANTIPARALYSIS.cpp.o CMakeFiles/chimera.dir/execution/ShadowExecutor.cpp.o CMakeFiles/chimera.dir/main.cpp.o -o chimera 
+./build/CMakeFiles/chimera.dir/DependInfo.cmake:12:  "/home/ubuntu/chimera/execution/ShadowExecutor.cpp" "CMakeFiles/chimera.dir/execution/ShadowExecutor.cpp.o" "gcc" "CMakeFiles/chimera.dir/execution/ShadowExecutor.cpp.o.d"
+./build/CMakeFiles/chimera.dir/cmake_clean.cmake:4:  "CMakeFiles/chimera.dir/execution/ShadowExecutor.cpp.o"
+./build/CMakeFiles/chimera.dir/cmake_clean.cmake:5:  "CMakeFiles/chimera.dir/execution/ShadowExecutor.cpp.o.d"
+./build/CMakeFiles/chimera.dir/core/SymbolLane_ANTIPARALYSIS.cpp.o.d:4: /home/ubuntu/chimera/telemetry/TelemetryBus.hpp \
+./build/CMakeFiles/chimera.dir/build.make:86:CMakeFiles/chimera.dir/execution/ShadowExecutor.cpp.o: CMakeFiles/chimera.dir/flags.make
+./build/CMakeFiles/chimera.dir/build.make:87:CMakeFiles/chimera.dir/execution/ShadowExecutor.cpp.o: /home/ubuntu/chimera/execution/ShadowExecutor.cpp
+./build/CMakeFiles/chimera.dir/build.make:88:CMakeFiles/chimera.dir/execution/ShadowExecutor.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
+./build/CMakeFiles/chimera.dir/build.make:89:	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/chimera.dir/execution/ShadowExecutor.cpp.o"
+./build/CMakeFiles/chimera.dir/build.make:90:	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/execution/ShadowExecutor.cpp.o -MF CMakeFiles/chimera.dir/execution/ShadowExecutor.cpp.o.d -o CMakeFiles/chimera.dir/execution/ShadowExecutor.cpp.o -c /home/ubuntu/chimera/execution/ShadowExecutor.cpp
+./build/CMakeFiles/chimera.dir/build.make:92:CMakeFiles/chimera.dir/execution/ShadowExecutor.cpp.i: cmake_force
+./build/CMakeFiles/chimera.dir/build.make:93:	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/execution/ShadowExecutor.cpp.i"
+./build/CMakeFiles/chimera.dir/build.make:94:	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ubuntu/chimera/execution/ShadowExecutor.cpp > CMakeFiles/chimera.dir/execution/ShadowExecutor.cpp.i
+./build/CMakeFiles/chimera.dir/build.make:96:CMakeFiles/chimera.dir/execution/ShadowExecutor.cpp.s: cmake_force
+./build/CMakeFiles/chimera.dir/build.make:97:	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/execution/ShadowExecutor.cpp.s"
+./build/CMakeFiles/chimera.dir/build.make:98:	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ubuntu/chimera/execution/ShadowExecutor.cpp -o CMakeFiles/chimera.dir/execution/ShadowExecutor.cpp.s
+./build/CMakeFiles/chimera.dir/build.make:117:"CMakeFiles/chimera.dir/execution/ShadowExecutor.cpp.o" \
+./build/CMakeFiles/chimera.dir/build.make:124:chimera: CMakeFiles/chimera.dir/execution/ShadowExecutor.cpp.o
+./build/CMakeFiles/chimera.dir/execution/ShadowExecutor.cpp.o.d:1:CMakeFiles/chimera.dir/execution/ShadowExecutor.cpp.o: \
+./build/CMakeFiles/chimera.dir/execution/ShadowExecutor.cpp.o.d:2: /home/ubuntu/chimera/execution/ShadowExecutor.cpp \
+./build/CMakeFiles/chimera.dir/execution/ShadowExecutor.cpp.o.d:4: /home/ubuntu/chimera/execution/ShadowExecutor.hpp \
+./build/CMakeFiles/chimera.dir/execution/ShadowExecutor.cpp.o.d:201: /home/ubuntu/chimera/ledger/TradeLedger.hpp /usr/include/c++/13/mutex \
+./build/Makefile:156:execution/ShadowExecutor.o: execution/ShadowExecutor.cpp.o
+./build/Makefile:157:.PHONY : execution/ShadowExecutor.o
+./build/Makefile:160:execution/ShadowExecutor.cpp.o:
+./build/Makefile:161:	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/execution/ShadowExecutor.cpp.o
+./build/Makefile:162:.PHONY : execution/ShadowExecutor.cpp.o
+./build/Makefile:164:execution/ShadowExecutor.i: execution/ShadowExecutor.cpp.i
+./build/Makefile:165:.PHONY : execution/ShadowExecutor.i
+./build/Makefile:168:execution/ShadowExecutor.cpp.i:
+./build/Makefile:169:	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/execution/ShadowExecutor.cpp.i
+./build/Makefile:170:.PHONY : execution/ShadowExecutor.cpp.i
+./build/Makefile:172:execution/ShadowExecutor.s: execution/ShadowExecutor.cpp.s
+./build/Makefile:173:.PHONY : execution/ShadowExecutor.s
+./build/Makefile:176:execution/ShadowExecutor.cpp.s:
+./build/Makefile:177:	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/execution/ShadowExecutor.cpp.s
+./build/Makefile:178:.PHONY : execution/ShadowExecutor.cpp.s
+./build/Makefile:216:	@echo "... execution/ShadowExecutor.o"
+./build/Makefile:217:	@echo "... execution/ShadowExecutor.i"
+./build/Makefile:218:	@echo "... execution/ShadowExecutor.s"
+./main.cpp.bak.1768902592:6:#include "allocator/CapitalAllocator.hpp"
+./main.cpp.bak.1768902592:7:#include "ledger/TradeLedger.hpp"
+./main.cpp.bak.1768902592:11:\n    startTelemetry();
+./main.cpp.bak.1768902592:14:    CapitalAllocator allocator;
+./main.cpp.bak.1768902592:15:    TradeLedger ledger("logs/trades.jsonl");
+./main.cpp.bak.1768902592:63:        TelemetryBus::instance().publish("RISK", {
+./TELEMETRY_FULL_STACK.sh:24:cat > telemetry/TelemetryBus.hpp << 'TEOF'
+./TELEMETRY_FULL_STACK.sh:32:struct TelemetryEvent {
+./TELEMETRY_FULL_STACK.sh:38:class TelemetryBus {
+./TELEMETRY_FULL_STACK.sh:40:    static TelemetryBus& instance() {
+./TELEMETRY_FULL_STACK.sh:41:        static TelemetryBus bus;
+./TELEMETRY_FULL_STACK.sh:48:        TelemetryEvent e;
+./TELEMETRY_FULL_STACK.sh:58:    std::vector<TelemetryEvent> snapshot() {
+./TELEMETRY_FULL_STACK.sh:64:    TelemetryBus() = default;
+./TELEMETRY_FULL_STACK.sh:73:    std::vector<TelemetryEvent> events_;
+./TELEMETRY_FULL_STACK.sh:83:void startTelemetry();
+./TELEMETRY_FULL_STACK.sh:90:#include "TelemetryBus.hpp"
+./TELEMETRY_FULL_STACK.sh:101:    auto events = TelemetryBus::instance().snapshot();
+./TELEMETRY_FULL_STACK.sh:136:void startTelemetry() {
+./TELEMETRY_FULL_STACK.sh:160:  sed -i '1i #include "telemetry/telemetry_boot.hpp"\n#include "telemetry/TelemetryBus.hpp"' main.cpp
+./TELEMETRY_FULL_STACK.sh:163:if ! grep -q "startTelemetry();" main.cpp; then
+./TELEMETRY_FULL_STACK.sh:167:      print "    startTelemetry();"
+./router/CapitalRouter.cpp:1:#include "../telemetry/TelemetryBus.hpp"
+./router/CapitalRouter.cpp.bak.1768902592:1:#include "../telemetry/TelemetryBus.hpp"
+./FIX_OPERATOR_AND_TELEMETRY_STACK.sh:11:cat > telemetry/TelemetryBus.hpp << 'TELEOF'
+./FIX_OPERATOR_AND_TELEMETRY_STACK.sh:19:struct TelemetryEvent {
+./FIX_OPERATOR_AND_TELEMETRY_STACK.sh:25:class TelemetryBus {
+./FIX_OPERATOR_AND_TELEMETRY_STACK.sh:27:    std::vector<TelemetryEvent> ring;
+./FIX_OPERATOR_AND_TELEMETRY_STACK.sh:30:    TelemetryBus() {}
+./FIX_OPERATOR_AND_TELEMETRY_STACK.sh:33:    static TelemetryBus& instance() {
+./FIX_OPERATOR_AND_TELEMETRY_STACK.sh:34:        static TelemetryBus bus;
+./FIX_OPERATOR_AND_TELEMETRY_STACK.sh:42:        TelemetryEvent e;
+./FIX_OPERATOR_AND_TELEMETRY_STACK.sh:60:    std::vector<TelemetryEvent> snapshot() {
+./FIX_OPERATOR_AND_TELEMETRY_STACK.sh:74:#include "TelemetryBus.hpp"
+./FIX_OPERATOR_AND_TELEMETRY_STACK.sh:93:    auto events = TelemetryBus::instance().snapshot();
+./FIX_OPERATOR_AND_TELEMETRY_STACK.sh:119:void startTelemetry(int port = 9090) {
+./FIX_OPERATOR_AND_TELEMETRY_STACK.sh:217:echo "Telemetry: http://15.168.16.103:9090/snapshot"
+./FIX_TELEMETRY_PUBLISH_MISMATCH.sh:6:echo "[CHIMERA] Fixing TelemetryBus API mismatch"
+./FIX_TELEMETRY_PUBLISH_MISMATCH.sh:18:    sed -i 's/TelemetryBus::instance().publish/TelemetryBus::instance().push/g' "$f"
+./main.cpp.bak:8:#include "allocator/CapitalAllocator.hpp"
+./main.cpp.bak:9:#include "ledger/TradeLedger.hpp"
+./main.cpp.bak:13:    startTelemetry(9090);
+./main.cpp.bak:16:    CapitalAllocator allocator;
+./main.cpp.bak:17:    TradeLedger ledger("logs/trades.jsonl");
+./main.cpp.bak:64:        TelemetryBus::instance().push("RISK", {
+./ledger/TradeLedger.hpp:23:class TradeLedger {
+./ledger/TradeLedger.hpp:25:    TradeLedger(const std::string& path) : path_(path) {}
+./.ccp_tree.txt:202:./allocator/CapitalAllocator.hpp
+./.ccp_tree.txt:223:./build/CMakeFiles/chimera.dir/execution/ShadowExecutor.cpp.o
+./.ccp_tree.txt:224:./build/CMakeFiles/chimera.dir/execution/ShadowExecutor.cpp.o.d
+./.ccp_tree.txt:248:./core/Telemetry.hpp
+./.ccp_tree.txt:264:./execution/ShadowExecutor.cpp
+./.ccp_tree.txt:265:./execution/ShadowExecutor.hpp
+./.ccp_tree.txt:284:./ledger/TradeLedger.hpp
+./.ccp_tree.txt:316:./telemetry/TelemetryBus.cpp
+./.ccp_tree.txt:317:./telemetry/TelemetryBus.hpp
+./.ccp_tree.txt:318:./telemetry/TelemetryServer.cpp
+./FIX_TELEMETRY_TYPES_AND_BUILD.sh:5:TEL="$ROOT/telemetry/TelemetryBus.hpp"
+./FIX_TELEMETRY_TYPES_AND_BUILD.sh:7:echo "[CHIMERA] Fixing Telemetry type compatibility (double -> string bridge)"
+./FIX_TELEMETRY_TYPES_AND_BUILD.sh:10:  echo "[ERROR] TelemetryBus.hpp not found at $TEL"
+./FIX_TELEMETRY_TYPES_AND_BUILD.sh:18:sed -i '/class TelemetryBus {/a \
+./FIX_TELEMETRY_TYPES_AND_BUILD.sh:27:echo "[CHIMERA] Telemetry API bridged"
+./FIX_TELEMETRY_CALL_AND_RUN.sh:4:echo "[CHIMERA] Fixing startTelemetry() call"
+./FIX_TELEMETRY_CALL_AND_RUN.sh:9:if ! grep -q "startTelemetry(" "$MAIN"; then
+./FIX_TELEMETRY_CALL_AND_RUN.sh:10:  echo "[ERROR] startTelemetry not found in main.cpp"
+./FIX_TELEMETRY_CALL_AND_RUN.sh:15:sed -i 's/startTelemetry();/startTelemetry(9090);/g' "$MAIN"
+./fix_telemetry_and_build.sh:15:sed -i 's/\\n[[:space:]]*startTelemetry();/    startTelemetry();/g' main.cpp
+./fix_telemetry_and_build.sh:46:if ! grep -q "startTelemetry();" main.cpp; then
+./fix_telemetry_and_build.sh:47:  echo "[PATCH] Injecting startTelemetry()"
+./fix_telemetry_and_build.sh:52:      print "    startTelemetry();"
+./main.cpp.bak.1768902771:6:#include "allocator/CapitalAllocator.hpp"
+./main.cpp.bak.1768902771:7:#include "ledger/TradeLedger.hpp"
+./main.cpp.bak.1768902771:11:    startTelemetry();
+./main.cpp.bak.1768902771:14:    CapitalAllocator allocator;
+./main.cpp.bak.1768902771:15:    TradeLedger ledger("logs/trades.jsonl");
+./main.cpp.bak.1768902771:63:        TelemetryBus::instance().publish("RISK", {
+./core/Telemetry.hpp:7:struct TelemetrySymbol {
+./core/Telemetry.hpp:20:struct TelemetryTrade {
+./core/Telemetry.hpp:33:struct TelemetryFrame {
+./core/Telemetry.hpp:37:    std::vector<TelemetrySymbol> symbols;
+./core/Telemetry.hpp:38:    std::vector<TelemetryTrade> trades;
+./core/Telemetry.hpp:45:class TelemetryBus {
+./core/Telemetry.hpp:47:    static TelemetryBus& instance() {
+./core/Telemetry.hpp:48:        static TelemetryBus t;
+./core/Telemetry.hpp:52:    void updateSymbol(const TelemetrySymbol& s) {
+./core/Telemetry.hpp:63:    void pushTrade(const TelemetryTrade& t) {
+./core/Telemetry.hpp:70:    TelemetryFrame snapshot() {
+./core/Telemetry.hpp:85:    TelemetryFrame frame_;
+./core/SymbolLane_ANTIPARALYSIS.cpp:1:#include "telemetry/TelemetryBus.hpp"
+./core/SymbolLane_ANTIPARALYSIS.cpp:9:        TelemetryEngineRow row;
+./FIX_TELEMETRY_API_AND_BUILD.sh:5:TEL="$ROOT/telemetry/TelemetryBus.hpp"
+./FIX_TELEMETRY_API_AND_BUILD.sh:7:echo "[CHIMERA] Locking Telemetry API (publish -> push wrapper)"
+./FIX_TELEMETRY_API_AND_BUILD.sh:10:  echo "[ERROR] TelemetryBus.hpp not found at $TEL"
+./FIX_TELEMETRY_API_AND_BUILD.sh:18:sed -i '/class TelemetryBus {/a \
+./FIX_TELEMETRY_API_AND_BUILD.sh:23:echo "[CHIMERA] Telemetry API locked"
+./allocator/CapitalRotationAI.hpp:4:#include "../telemetry/TelemetryBus.hpp"
+./allocator/CapitalRotationAI.hpp:36:            TelemetryBus::instance().push("DIVERGE", {
+./allocator/CapitalAllocator.hpp:20:class CapitalAllocator {
+./allocator/CapitalAllocator.hpp:22:    CapitalAllocator() {
+./FIX_TELEMETRY_TYPES.sh:9:cat > telemetry/TelemetryBus.hpp << 'TEOF'
+./FIX_TELEMETRY_TYPES.sh:17:struct TelemetryEvent {
+./FIX_TELEMETRY_TYPES.sh:23:class TelemetryBus {
+./FIX_TELEMETRY_TYPES.sh:25:    static TelemetryBus& instance() {
+./FIX_TELEMETRY_TYPES.sh:26:        static TelemetryBus bus;
+./FIX_TELEMETRY_TYPES.sh:33:        TelemetryEvent e;
+./FIX_TELEMETRY_TYPES.sh:43:    std::vector<TelemetryEvent> snapshot() {
+./FIX_TELEMETRY_TYPES.sh:49:    TelemetryBus() = default;
+./FIX_TELEMETRY_TYPES.sh:58:    std::vector<TelemetryEvent> events_;
+./learning/MonteCarloRisk.hpp:4:#include "../telemetry/TelemetryBus.hpp"
+./learning/MonteCarloRisk.hpp:23:        TelemetryBus::instance().push("MC", {
+./learning/AutoKillLearner.hpp:5:#include "../telemetry/TelemetryBus.hpp"
+./learning/AutoKillLearner.hpp:21:        TelemetryBus::instance().push("EDGE", {
+./telemetry_install.sh:4:echo "[CHIMERA] Installing Full Telemetry + Operator Console"
+./telemetry_install.sh:15:cat > telemetry/TelemetryBus.hpp << 'EOT'
+./telemetry_install.sh:47:class TelemetryBus {
+./telemetry_install.sh:49:    static TelemetryBus& instance() {
+./telemetry_install.sh:50:        static TelemetryBus bus;
+./telemetry_install.sh:93:cat > telemetry/TelemetryServer.hpp << 'EOT'
+./telemetry_install.sh:98:class TelemetryServer {
+./telemetry_install.sh:100:    TelemetryServer(int port);
+./telemetry_install.sh:111:cat > telemetry/TelemetryServer.cpp << 'EOT'
+./telemetry_install.sh:112:#include "TelemetryServer.hpp"
+./telemetry_install.sh:113:#include "TelemetryBus.hpp"
+./telemetry_install.sh:120:TelemetryServer::TelemetryServer(int port)
+./telemetry_install.sh:123:void TelemetryServer::start() {
+./telemetry_install.sh:125:    worker_ = std::thread(&TelemetryServer::run, this);
+./telemetry_install.sh:128:void TelemetryServer::stop() {
+./telemetry_install.sh:142:void TelemetryServer::run() {
+./telemetry_install.sh:150:        auto engines = TelemetryBus::instance().engines();
+./telemetry_install.sh:151:        auto trades = TelemetryBus::instance().trades();
+./telemetry_install.sh:284:#include "TelemetryServer.hpp"
+./telemetry_install.sh:286:static TelemetryServer* g_server = nullptr;
+./telemetry_install.sh:288:inline void startTelemetry() {
+./telemetry_install.sh:289:    g_server = new TelemetryServer(8080);
+./telemetry_install.sh:294:echo "[CHIMERA] Telemetry + GUI installed"
+./main.cpp.bak.1768902535:5:#include "allocator/CapitalAllocator.hpp"
+./main.cpp.bak.1768902535:6:#include "ledger/TradeLedger.hpp"
+./main.cpp.bak.1768902535:12:    CapitalAllocator allocator;
+./main.cpp.bak.1768902535:13:    TradeLedger ledger("logs/trades.jsonl");
+./main.cpp.bak.1768902535:61:        TelemetryBus::instance().publish("RISK", {
+./FIX_TELEMETRY_PORT_INTERFACE.sh:6:echo "[CHIMERA] Locating startTelemetry implementation..."
+./FIX_TELEMETRY_PORT_INTERFACE.sh:8:IMPL=$(grep -R "void startTelemetry" -n "$ROOT" | grep -v build | head -n1 | cut -d: -f1)
+./FIX_TELEMETRY_PORT_INTERFACE.sh:11:  echo "[ERROR] Could not find startTelemetry implementation"
+./FIX_TELEMETRY_PORT_INTERFACE.sh:25:sed -i 's/void startTelemetry();/void startTelemetry(int port);/g' "$HDR"
+./FIX_TELEMETRY_PORT_INTERFACE.sh:28:sed -i 's/void startTelemetry()/void startTelemetry(int port)/g' "$IMPL"
+./FLIGHT_DECK_UPGRADE.sh:12:#include "TelemetryBus.hpp"
+./FLIGHT_DECK_UPGRADE.sh:29:    auto events = TelemetryBus::instance().snapshot();
+./FLIGHT_DECK_UPGRADE.sh:51:void startTelemetry() {
+./execution/ShadowExecutor.cpp:1:#include "ShadowExecutor.hpp"
+./execution/ShadowExecutor.cpp:8:uint64_t ShadowExecutor::nowMs() const {
+./execution/ShadowExecutor.cpp:24:ShadowExecutor::ShadowExecutor(TradeLedger* ledger)
+./execution/ShadowExecutor.cpp:33:void ShadowExecutor::setFeeBps(double bps) { fee_bps_ = bps; }
+./execution/ShadowExecutor.cpp:34:void ShadowExecutor::setSlippageBps(double bps) { slippage_bps_ = bps; }
+./execution/ShadowExecutor.cpp:35:void ShadowExecutor::setHoldSeconds(int sec) { hold_sec_ = sec; }
+./execution/ShadowExecutor.cpp:36:void ShadowExecutor::setStopLossBps(double bps) { sl_bps_ = bps; }
+./execution/ShadowExecutor.cpp:37:void ShadowExecutor::setTakeProfitBps(double bps) { tp_bps_ = bps; }
+./execution/ShadowExecutor.cpp:39:double ShadowExecutor::applyCosts(double px, const std::string& side) const {
+./execution/ShadowExecutor.cpp:46:double ShadowExecutor::calcPnl(const ShadowPosition& p, double px) const {
+./execution/ShadowExecutor.cpp:51:void ShadowExecutor::onIntent(
+./execution/ShadowExecutor.cpp:108:void ShadowExecutor::onTick(
+./execution/ShadowExecutor.cpp:163:void ShadowExecutor::closePosition(const std::string& sym, double exit_px, const std::string& reason) {
+./execution/ShadowExecutor.cpp:208:std::vector<ShadowTrade> ShadowExecutor::lastTrades(size_t n) const {
+./execution/ShadowExecutor.cpp:216:double ShadowExecutor::sessionPnl() const {
+./execution/ShadowExecutor.hpp:6:#include "ledger/TradeLedger.hpp"
+./execution/ShadowExecutor.hpp:36:class ShadowExecutor {
+./execution/ShadowExecutor.hpp:38:    ShadowExecutor(TradeLedger* ledger);
+./execution/ShadowExecutor.hpp:85:    TradeLedger* ledger_;
+./main.cpp.bak.1768902653:6:#include "allocator/CapitalAllocator.hpp"
+./main.cpp.bak.1768902653:7:#include "ledger/TradeLedger.hpp"
+./main.cpp.bak.1768902653:11:\n    startTelemetry();
+./main.cpp.bak.1768902653:14:    CapitalAllocator allocator;
+./main.cpp.bak.1768902653:15:    TradeLedger ledger("logs/trades.jsonl");
+./main.cpp.bak.1768902653:63:        TelemetryBus::instance().publish("RISK", {
+./wire_telemetry_into_chimera.sh:4:echo "[CHIMERA] Wiring Telemetry (safe mode, no sed quoting)"
+./wire_telemetry_into_chimera.sh:26:if ! grep -q "startTelemetry()" main.cpp; then
+./wire_telemetry_into_chimera.sh:31:      print "    startTelemetry();"
+./wire_telemetry_into_chimera.sh:43:if ! grep -q "TelemetryBus" router/CapitalRouter.cpp; then
+./wire_telemetry_into_chimera.sh:47:    NR==1 { print "#include \"../telemetry/TelemetryBus.hpp\"" }
+./wire_telemetry_into_chimera.sh:57:        print "        TelemetryBus::instance().recordTrade({"
+./wire_telemetry_into_chimera.sh:83:if [ -f "$FILE" ] && ! grep -q "TelemetryBus" "$FILE"; then
+./wire_telemetry_into_chimera.sh:87:    NR==1 { print "#include \"../telemetry/TelemetryBus.hpp\"" }
+./wire_telemetry_into_chimera.sh:103:        print "        TelemetryBus::instance().updateEngine({"
+./.ccp_includes.txt:4:./main.cpp.bak.1768902705:6:#include "allocator/CapitalAllocator.hpp"
+./.ccp_includes.txt:5:./main.cpp.bak.1768902705:7:#include "ledger/TradeLedger.hpp"
+./.ccp_includes.txt:15:./telemetry/TelemetryServer.cpp:1:#include "telemetry/TelemetryBus.hpp"
+./.ccp_includes.txt:16:./telemetry/TelemetryBus.cpp:1:#include "telemetry/TelemetryBus.hpp"
+./.ccp_includes.txt:20:./main.cpp.bak.1768902592:6:#include "allocator/CapitalAllocator.hpp"
+./.ccp_includes.txt:21:./main.cpp.bak.1768902592:7:#include "ledger/TradeLedger.hpp"
+./.ccp_includes.txt:40:./TELEMETRY_FULL_STACK.sh:90:#include "TelemetryBus.hpp"
+./.ccp_includes.txt:43:./TELEMETRY_FULL_STACK.sh:160:  sed -i '1i #include "telemetry/telemetry_boot.hpp"\n#include "telemetry/TelemetryBus.hpp"' main.cpp
+./.ccp_includes.txt:75:./router/CapitalRouter.cpp:1:#include "../telemetry/TelemetryBus.hpp"
+./.ccp_includes.txt:82:./router/CapitalRouter.cpp.bak.1768902592:1:#include "../telemetry/TelemetryBus.hpp"
+./.ccp_includes.txt:103:./FIX_OPERATOR_AND_TELEMETRY_STACK.sh:74:#include "TelemetryBus.hpp"
+./.ccp_includes.txt:144:./main.cpp.bak:8:#include "allocator/CapitalAllocator.hpp"
+./.ccp_includes.txt:145:./main.cpp.bak:9:#include "ledger/TradeLedger.hpp"
+./.ccp_includes.txt:191:./main.cpp.bak.1768902771:6:#include "allocator/CapitalAllocator.hpp"
+./.ccp_includes.txt:192:./main.cpp.bak.1768902771:7:#include "ledger/TradeLedger.hpp"
+./.ccp_includes.txt:207:./core/SymbolLane_ANTIPARALYSIS.cpp:1:#include "telemetry/TelemetryBus.hpp"
+./.ccp_includes.txt:226:./allocator/CapitalRotationAI.hpp:4:#include "../telemetry/TelemetryBus.hpp"
+./.ccp_includes.txt:240:./learning/MonteCarloRisk.hpp:4:#include "../telemetry/TelemetryBus.hpp"
+./.ccp_includes.txt:241:./learning/AutoKillLearner.hpp:5:#include "../telemetry/TelemetryBus.hpp"
+./.ccp_includes.txt:246:./telemetry_install.sh:112:#include "TelemetryServer.hpp"
+./.ccp_includes.txt:247:./telemetry_install.sh:113:#include "TelemetryBus.hpp"
+./.ccp_includes.txt:248:./telemetry_install.sh:284:#include "TelemetryServer.hpp"
+./.ccp_includes.txt:250:./main.cpp.bak.1768902535:5:#include "allocator/CapitalAllocator.hpp"
+./.ccp_includes.txt:251:./main.cpp.bak.1768902535:6:#include "ledger/TradeLedger.hpp"
+./.ccp_includes.txt:293:./FLIGHT_DECK_UPGRADE.sh:12:#include "TelemetryBus.hpp"
+./.ccp_includes.txt:295:./execution/ShadowExecutor.cpp:1:#include "ShadowExecutor.hpp"
+./.ccp_includes.txt:296:./execution/ShadowExecutor.hpp:6:#include "ledger/TradeLedger.hpp"
+./.ccp_includes.txt:298:./main.cpp.bak.1768902653:6:#include "allocator/CapitalAllocator.hpp"
+./.ccp_includes.txt:299:./main.cpp.bak.1768902653:7:#include "ledger/TradeLedger.hpp"

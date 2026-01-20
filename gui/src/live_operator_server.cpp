@@ -14,6 +14,35 @@ static std::string load_file(const std::string& path) {
     return ss.str();
 }
 
+// Always return valid JSON
+static std::string json_wrap(const std::string& raw) {
+    if (raw.empty()) {
+        return "{\"ts\":\"BOOT\",\"flow\":{},\"latency_ms\":0,\"spread_bps\":0,\"pnl\":{\"session\":0,\"today\":0},\"risk\":\"CONNECTING\",\"engines\":[],\"trades\":[]}";
+    }
+    // If it's already JSON, pass through
+    if (!raw.empty() && raw.front() == '{') return raw;
+
+    // Otherwise wrap plain text into JSON
+    std::ostringstream ss;
+    ss << "{"
+       << "\"ts\":\"TEXT\","
+       << "\"flow\":{},"
+       << "\"latency_ms\":0,"
+       << "\"spread_bps\":0,"
+       << "\"pnl\":{\"session\":0,\"today\":0},"
+       << "\"risk\":\"TEXT\","
+       << "\"engines\":[],"
+       << "\"trades\":[],"
+       << "\"message\":\"";
+
+    for (char c : raw) {
+        if (c == '"' || c == '\\') ss << '\\';
+        ss << c;
+    }
+    ss << "\"}";
+    return ss.str();
+}
+
 LiveOperatorServer::LiveOperatorServer(int port)
     : port_(port) {}
 
@@ -21,13 +50,11 @@ void LiveOperatorServer::start() {
     server_thread_ = std::thread([this]() {
         httplib::Server svr;
 
-        // Root page
         svr.Get("/", [](const httplib::Request&, httplib::Response& res) {
             std::string html = load_file("gui/web/index.html");
             res.set_content(html, "text/html");
         });
 
-        // SSE stream — provider runs its own loop (portable behavior)
         svr.Get("/stream", [](const httplib::Request&, httplib::Response& res) {
             res.set_header("Content-Type", "text/event-stream");
             res.set_header("Cache-Control", "no-cache");
@@ -39,16 +66,18 @@ void LiveOperatorServer::start() {
                     std::string last;
 
                     while (true) {
-                        std::string now = GuiSnapshotBus::instance().get();
-                        if (now != last) {
-                            std::string msg = "data: " + now + "\n\n";
+                        std::string raw = GuiSnapshotBus::instance().get();
+                        std::string json = json_wrap(raw);
+
+                        if (json != last) {
+                            std::string msg = "data: " + json + "\n\n";
                             sink.write(msg.data(), msg.size());
-                            last = now;
+                            last = json;
                         }
+
                         std::this_thread::sleep_for(std::chrono::milliseconds(200));
                     }
-
-                    return false; // unreachable, but required by signature
+                    return false;
                 }
             );
         });

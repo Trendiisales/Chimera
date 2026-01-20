@@ -4,22 +4,29 @@ project(chimera CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+############################################
+# GLOBAL INCLUDE PATHS
+############################################
 include_directories(
     ${CMAKE_SOURCE_DIR}
     ${CMAKE_SOURCE_DIR}/core
     ${CMAKE_SOURCE_DIR}/execution
-    ${CMAKE_SOURCE_DIR}/telemetry
     ${CMAKE_SOURCE_DIR}/ledger
 )
 
+############################################
+# SOURCES
+############################################
 file(GLOB_RECURSE CHIMERA_SOURCES
     core/*.cpp
     execution/*.cpp
-    telemetry/*.cpp
     main.cpp
 )
 
 add_executable(chimera ${CHIMERA_SOURCES})
 
+############################################
+# THREADS
+############################################
 find_package(Threads REQUIRED)
 target_link_libraries(chimera PRIVATE Threads::Threads)
