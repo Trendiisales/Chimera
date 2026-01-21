@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+[ -f .chimera_root ] || { echo "FATAL: Not in Chimera root"; exit 1; }
 set -e
 
 echo "[CHIMERA] Binding WS → tier3::TickData (REAL CONTRACT)"

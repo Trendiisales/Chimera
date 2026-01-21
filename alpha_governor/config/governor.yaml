@@ -1,0 +1,38 @@
+# Minimum expected edge (bps) per signal to stay enabled
+min_edge_bps: 0.5
+
+# Execution cost estimate (bps)
+cost_bps: 0.8
+
+# Rolling window size (trades)
+window: 200
+
+# Confidence threshold (0-1)
+min_confidence: 0.65
+
+# Regime stability window (trades)
+regime_window: 100
+
+# Capital reweighting bounds
+min_weight: 0.05
+max_weight: 0.7
+
+# Hysteresis settings (prevent thrashing)
+disable_consecutive_windows: 3  # Must fail N windows before disabling
+enable_consecutive_windows: 5   # Must pass N windows before re-enabling
+cooldown_trades: 100           # Minimum trades between state changes
+
+# Operating mode: OBSERVE | ADVISE | ACT
+# OBSERVE: Monitor only, no commands issued
+# ADVISE: Generate commands but log only (dry-run)
+# ACT: Execute commands (live mode)
+mode: "OBSERVE"
+
+# Chimera command sink
+command_file: "alpha_governor/logs/commands.out"
+
+# Research feed
+research_csv: "research.csv"
+
+# WebSocket broadcast port
+ws_port: 8099

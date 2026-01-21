@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+[ -f .chimera_root ] || { echo "FATAL: Not in Chimera root"; exit 1; }
 set -e
 
 echo "[CHIMERA] Installing REAL wire-latency (WS ping/pong + REST probe)"

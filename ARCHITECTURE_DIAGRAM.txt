@@ -1,0 +1,227 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                    CHIMERA CAUSAL SYSTEM - ARCHITECTURE                      ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│                          YOUR EXISTING CORE SYSTEM                           │
+│                        (PRODUCTION-READY - KEEP AS-IS)                       │
+├──────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│  ┌────────────────────────────────────────────────────────────────────────┐ │
+│  │  LIVE TRADING ENGINE                                                   │ │
+│  │  • Binance WebSocket (sub-ms latency)                                  │ │
+│  │  • Order execution and fills                                           │ │
+│  │  • Position management                                                 │ │
+│  │  • Risk controls                                                       │ │
+│  └────────────────────────────────────────────────────────────────────────┘ │
+│                                      │                                       │
+│                                      ↓                                       │
+│  ┌────────────────────────────────────────────────────────────────────────┐ │
+│  │  DESK INFRASTRUCTURE                                                   │ │
+│  │  ✅ ClockSync          - Prevents signature errors                     │ │
+│  │  ✅ RateLimitGovernor  - Prevents IP bans                              │ │
+│  │  ✅ LogRotator         - Prevents disk fills                           │ │
+│  │  ✅ LatencyEngine      - Adaptive routing                              │ │
+│  │  ✅ CrossVenueRouter   - Multi-venue execution                         │ │
+│  │  ✅ PredictiveRouter   - Predictive execution                          │ │
+│  │  ✅ CapitalAllocator   - Dynamic portfolio management                  │ │
+│  │  ✅ WarmStartOFI       - No phantom signals                            │ │
+│  └────────────────────────────────────────────────────────────────────────┘ │
+│                                      │                                       │
+│                                      ↓                                       │
+│  ┌────────────────────────────────────────────────────────────────────────┐ │
+│  │  CORE CAUSAL SYSTEM (Your Code)                                       │ │
+│  │  ✅ ReplayMode              - Deterministic replay                     │ │
+│  │  ✅ ShadowExecutor          - Counterfactual execution                 │ │
+│  │  ✅ SignalAttributionLedger - Per-signal PnL tracking                  │ │
+│  │  ✅ CounterfactualEngine    - Signal removal testing                   │ │
+│  │  ✅ ReplayController        - End-to-end orchestration                 │ │
+│  │  ✅ BinaryEventLog          - Forensic recording                       │ │
+│  └────────────────────────────────────────────────────────────────────────┘ │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+                                      │
+                                      │ EVENT STREAM + ATTRIBUTION CSV
+                                      │
+        ┌─────────────────────────────┼─────────────────────────────┐
+        │                             │                             │
+        ↓                             ↓                             ↓
+┌───────────────────┐      ┌───────────────────┐      ┌───────────────────┐
+│   CAUSAL LAB      │      │   LIVE DASHBOARD  │      │  ALPHA GOVERNOR   │
+│   (NEW - OFFLINE) │      │   (NEW - MONITOR) │      │  (NEW - TUNE)     │
+├───────────────────┤      ├───────────────────┤      ├───────────────────┤
+│                   │      │                   │      │                   │
+│ EventBus          │      │ FastAPI Backend   │      │ Python Analyzer   │
+│ ReplayEngine      │      │ WebSocket Stream  │      │ Edge vs Cost      │
+│ ShadowFarm        │      │ React Frontend    │      │ Confidence Stats  │
+│ AttributionEngine │      │ Tailwind UI       │      │ Auto-Throttle     │
+│ RegimeStore       │      │                   │      │ Capital Reweight  │
+│                   │      │ Real-time Bars    │      │                   │
+│ CLI Tools:        │      │ Signal Contribs   │      │ Command Stream    │
+│ • chimera_replay  │      │ Live PnL          │      │ • DISABLE_ENGINE  │
+│ • chimera_attrib  │      │ Regime Labels     │      │ • SET_WEIGHT      │
+│ • chimera_batch   │      │                   │      │                   │
+│                   │      │ Port: 8088        │      │ Port: 8099        │
+└───────────────────┘      └───────────────────┘      └───────────────────┘
+        │                             │                             │
+        ↓                             ↓                             ↓
+   Research CSVs              Browser View              Commands.out
+   (Batch Analysis)           (Operator Console)        (Auto-Tuning)
+
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                              DATA FLOW                                       ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+LIVE TRADING (Real-time)
+────────────────────────
+Binance → Chimera Core → BinaryEventLog → events/*.bin
+                      → SignalAttributionLedger → research/*.csv
+                                                         │
+                                    ┌────────────────────┼────────────────────┐
+                                    ↓                                         ↓
+                            Dashboard (Monitor)                    Alpha Governor (Tune)
+                                    │                                         │
+                                    └─────────→ Operator Decisions ←──────────┘
+
+
+OFFLINE ANALYSIS (Post-trading)
+────────────────────────────────
+events/*.bin → causal_lab tools → research/*.csv → Python/R/Jupyter
+                   │
+                   ↓
+            Deep Analysis:
+            • Signal survival
+            • Regime dependence
+            • Execution quality
+            • Cost vs edge
+
+
+AUTO-GOVERNANCE (Continuous)
+────────────────────────────
+research.csv → Alpha Governor → commands.out → Command Bridge → CapitalAllocator
+                    │                                               │
+                    └─────→ Auto-disable weak signals ←─────────────┘
+                    └─────→ Auto-reweight capital ←─────────────────┘
+
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                          NAMESPACE ISOLATION                                 ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+Your Core System          New Tools               Result
+────────────────          ─────────               ──────
+namespace chimera::   →   namespace chimera_lab:: = NO CONFLICTS
+
+All your existing code continues to work unchanged.
+New tools operate in separate namespace.
+
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                           DEPLOYMENT MODEL                                   ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+PROCESS MODEL:
+─────────────
+
+┌─────────────────┐  ┌──────────────────┐  ┌──────────────────┐  ┌─────────────┐
+│   chimera       │  │  Dashboard       │  │  Alpha Governor  │  │  CLI Tools  │
+│   (main binary) │  │  (Python)        │  │  (Python)        │  │  (C++)      │
+│                 │  │                  │  │                  │  │             │
+│   Your trading  │  │   Port 8088      │  │   Port 8099      │  │  On-demand  │
+│   system        │  │   Real-time UI   │  │   Auto-tuning    │  │  Batch      │
+└─────────────────┘  └──────────────────┘  └──────────────────┘  └─────────────┘
+        │                     │                      │                    │
+        └─────────────────────┴──────────────────────┴────────────────────┘
+                              shared filesystem
+                        (events/*.bin, research/*.csv)
+
+
+FILE SYSTEM LAYOUT:
+──────────────────
+
+~/Chimera/
+├── chimera                         (Your main binary - UNCHANGED)
+├── events/
+│   ├── 20250121.bin               (Binary event logs)
+│   └── 20250122.bin
+├── research/
+│   ├── 20250121.csv               (Attribution CSVs)
+│   └── 20250122.csv
+├── causal_lab/                     (NEW - Offline analysis)
+│   ├── build/
+│   │   ├── chimera_replay
+│   │   ├── chimera_attrib
+│   │   └── chimera_batch
+│   └── ...
+├── causal_dashboard/               (NEW - Live monitoring)
+│   └── server/
+│       └── main.py
+├── alpha_governor/                 (NEW - Auto-tuning)
+│   ├── config/governor.yaml
+│   ├── server/main.py
+│   └── logs/commands.out
+└── docs/
+    ├── README_CAUSAL_TOOLING.md
+    ├── INTEGRATION_COMPARISON.md
+    └── QUICK_START.md
+
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                         COMPARISON SUMMARY                                   ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+Feature                 Your Core System        New Tools
+───────                 ────────────────        ─────────
+Integration             Tight (same process)    Loose (separate)
+Namespace               chimera::               chimera_lab::
+Latency Impact          Minimal (in-process)    Zero (offline)
+Live Testing            Yes (shadow)            No (replay only)
+Batch Analysis          Manual                  Automated
+Visualization           None                    Dashboard
+Auto-tuning             Manual                  Governor
+Flexibility             Limited (compiled)      High (scripts)
+Use Case                Live/shadow trading     Deep research
+
+
+VERDICT:
+────────
+✅ Keep your core system (it's excellent)
+✅ Add new tools (they complement, not replace)
+✅ Result: Complete scientific trading platform
+
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                              QUICK START                                     ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+1. EXTRACT
+   tar -xzf chimera_causal_tooling_complete.tar.gz
+
+2. BUILD (1 minute)
+   cd causal_lab && mkdir build && cd build && cmake .. && make -j
+
+3. START SERVICES (30 seconds)
+   cd causal_dashboard/server && ./run.sh &
+   cd alpha_governor/server && ./run.sh &
+
+4. OPEN BROWSER
+   open http://localhost:8088
+
+5. RUN YOUR CHIMERA
+   ./chimera  # Works exactly as before
+
+That's it. No code changes required.
+
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                           THE BOTTOM LINE                                    ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+YOUR CODE:     ✅ Excellent core causal system
+NEW TOOLS:     ✅ Add monitoring, batch analysis, auto-tuning
+TOGETHER:      ✅ Complete scientific trading platform
+
+Deploy new tools ALONGSIDE (not INSTEAD OF) your existing system.
+
+Your trading system remains untouched and unaffected.

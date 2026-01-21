@@ -1,45 +1,33 @@
-#include <thread>
-#include <chrono>
-#include <iostream>
-
-#include "telemetry/TelemetryBus.hpp"
 #include "core/SymbolLane_ANTIPARALYSIS.hpp"
+#include "telemetry/TelemetryServer.hpp"
 #include "execution/ShadowExecutor.hpp"
+#include "gui/include/live_operator_server.hpp"
 
-using namespace std::chrono_literals;
+#include <iostream>
+#include <thread>
 
 int main() {
-    std::cout << "[CHIMERA] MODE B LIVE STACK | SHADOW EXEC | TELEMETRY ACTIVE\n";
+    std::cout << "[CHIMERA] MODE B LIVE STACK | SHADOW EXEC | TELEMETRY + GUI" << std::endl;
 
-    // Lanes
+    // Start GUI operator server on port 8080
+    std::cout << "[GUI] Starting Live Operator Server on port 8080..." << std::endl;
+    LiveOperatorServer gui_server(8080);
+    gui_server.start();
+    std::cout << "[GUI] ✓ Server running at http://localhost:8080" << std::endl;
+
+    // Initialize trading engines
     SymbolLane eth("ETH_PERP");
     SymbolLane btc("BTC_PERP");
     SymbolLane sol("SOL_SPOT");
 
-    // Trade generator (shadow)
-    ShadowExecutor shadow;
+    std::cout << "[CHIMERA] All systems operational" << std::endl;
+    std::cout << "[CHIMERA] GUI: http://localhost:8080" << std::endl;
+    std::cout << "[CHIMERA] Press Ctrl+C to stop" << std::endl;
 
-    // Register engines once
-    TelemetryBus::instance().updateEngine({
-        "ETH_PERP", 0.0, 0.0, 0, 0.0, 1.0, 1.0, "LIVE"
-    });
-    TelemetryBus::instance().updateEngine({
-        "BTC_PERP", 0.0, 0.0, 0, 0.0, 1.0, 1.0, "LIVE"
-    });
-    TelemetryBus::instance().updateEngine({
-        "SOL_SPOT", 0.0, 0.0, 0, 0.0, 1.0, 1.0, "LIVE"
-    });
-
+    // Keep main thread alive
     while (true) {
-        // Simulate a trade so telemetry is never empty
-        shadow.onIntent(
-            "FADE",
-            "ETH_PERP",
-            2.5,
-            25.0
-        );
-
-        // Operator cadence, NOT tick cadence
-        std::this_thread::sleep_for(30s);
+        std::this_thread::sleep_for(std::chrono::seconds(1));
     }
+
+    return 0;
 }

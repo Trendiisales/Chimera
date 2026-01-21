@@ -1,2 +1,9 @@
 #pragma once
-void runTelemetryServer();
+#include <ostream>
+
+class TelemetryServer {
+public:
+    static void handleRequest(std::ostream& body);
+};
+
+void runTelemetryServer(int port);

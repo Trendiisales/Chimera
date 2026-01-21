@@ -1,0 +1,14 @@
+SYMBOLS:
+  ETH_PERP
+  BTC_PERP
+  SOL_SPOT
+
+ENGINES:
+  FADE
+  CASCADE
+  FUNDING
+  CROSS_SYMBOL
+
+POLICY:
+  - No symbol may be added without updating this file
+  - No engine may emit telemetry unless registered here

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+[ -f .chimera_root ] || { echo "FATAL: Not in Chimera root"; exit 1; }
 set -euo pipefail
 
 REPO_ROOT=$(git rev-parse --show-toplevel)

@@ -1,0 +1,23 @@
+TelemetryEngineRow:
+  symbol
+  net_bps
+  dd_bps
+  trades
+  fees
+  alloc
+  leverage
+  state
+
+TelemetryTradeRow:
+  engine
+  symbol
+  side
+  bps
+  latency_ms
+  leverage
+
+TelemetryBus API:
+  updateEngine(TelemetryEngineRow)
+  recordTrade(TelemetryTradeRow)
+  snapshotEngines()
+  snapshotTrades()

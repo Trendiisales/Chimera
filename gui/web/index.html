@@ -52,6 +52,12 @@ const metrics = document.getElementById("metrics");
 const engines = document.getElementById("engines");
 const trades = document.getElementById("trades");
 
+const govRegime = document.getElementById("gov_regime");
+const govLadder = document.getElementById("gov_ladder");
+const govLock = document.getElementById("gov_lock");
+const govKill = document.getElementById("gov_kill");
+
+
 const es = new EventSource("/stream");
 es.onmessage = (e) => {
   const d = JSON.parse(e.data);
@@ -94,6 +100,14 @@ es.onmessage = (e) => {
   });
 
   trades.innerHTML = "";
+  
+  if (d.governance) {
+    govRegime.textContent = "Regime: " + d.governance.regime_quality.toFixed(2);
+    govLadder.textContent = "Ladder: Tier " + d.governance.ladder_tier;
+    govLock.textContent = "ETH Lock: " + (d.governance.eth_locked ? "ON" : "OFF");
+    govKill.textContent = "KillSwitch: " + (d.governance.kill_enabled ? "ENABLED" : "DISABLED");
+  }
+
   d.trades.forEach(t => {
     trades.innerHTML += `<tr>
       <td>${t.t}</td><td>${t.sym}</td><td>${t.side}</td>

@@ -3,8 +3,6 @@
 
 class ShadowExecutor {
 public:
-    ShadowExecutor() = default;
-
     void onIntent(
         const std::string& engine,
         const std::string& symbol,

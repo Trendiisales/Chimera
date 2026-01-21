@@ -1,0 +1,58 @@
+const ws = new WebSocket(`ws://${location.host}/ws`);
+
+function renderTable(id, headers, rows) {
+    const table = document.getElementById(id);
+    table.innerHTML = "";
+
+    const thead = document.createElement("tr");
+    headers.forEach(h => {
+        const th = document.createElement("th");
+        th.innerText = h;
+        thead.appendChild(th);
+    });
+    table.appendChild(thead);
+
+    rows.forEach(r => {
+        const tr = document.createElement("tr");
+        headers.forEach(h => {
+            const td = document.createElement("td");
+            td.innerText = r[h] ?? "";
+            tr.appendChild(td);
+        });
+        table.appendChild(tr);
+    });
+}
+
+ws.onmessage = evt => {
+    const data = JSON.parse(evt.data);
+
+    const marketRows = Object.entries(data.market).map(
+        ([k, v]) => ({
+            symbol: k,
+            price: v.price,
+            spread: v.spread,
+            ofi: v.ofi,
+            impulse: v.impulse
+        })
+    );
+
+    renderTable("market",
+        ["symbol", "price", "spread", "ofi", "impulse"],
+        marketRows
+    );
+
+    renderTable("positions",
+        ["symbol", "net_qty", "avg_price", "unrealized", "realized"],
+        Object.values(data.positions)
+    );
+
+    renderTable("trades",
+        ["engine", "symbol", "side", "qty", "price", "ts"],
+        data.trades
+    );
+
+    renderTable("decisions",
+        ["engine", "symbol", "approved", "reason", "edge", "spread", "ts"],
+        data.decisions
+    );
+};

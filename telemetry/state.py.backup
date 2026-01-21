@@ -1,0 +1,51 @@
+from dataclasses import dataclass, field
+from typing import Dict, List
+import time
+
+@dataclass
+class Position:
+    symbol: str
+    net_qty: float = 0.0
+    avg_price: float = 0.0
+    unrealized: float = 0.0
+    realized: float = 0.0
+
+@dataclass
+class Trade:
+    engine: str
+    symbol: str
+    side: str
+    qty: float
+    price: float
+    ts: float
+
+@dataclass
+class Decision:
+    engine: str
+    symbol: str
+    approved: bool
+    reason: str
+    edge: float
+    spread: float
+    ts: float
+
+@dataclass
+class TelemetryState:
+    positions: Dict[str, Position] = field(default_factory=dict)
+    trades: List[Trade] = field(default_factory=list)
+    decisions: List[Decision] = field(default_factory=list)
+    market: Dict[str, dict] = field(default_factory=dict)
+    regime: Dict[str, str] = field(default_factory=dict)
+    last_update: float = field(default_factory=lambda: time.time())
+
+    def snapshot(self):
+        return {
+            "positions": {
+                k: vars(v) for k, v in self.positions.items()
+            },
+            "trades": [vars(t) for t in self.trades[-50:]],
+            "decisions": [vars(d) for d in self.decisions[-50:]],
+            "market": self.market,
+            "regime": self.regime,
+            "ts": self.last_update
+        }

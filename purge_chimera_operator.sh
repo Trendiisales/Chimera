@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+[ -f .chimera_root ] || { echo "FATAL: Not in Chimera root"; exit 1; }
 set -e
 
 echo "[CHIMERA] Purging all chimera_operator references from CMakeLists.txt"

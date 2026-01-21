@@ -51,7 +51,7 @@ void LiveOperatorServer::start() {
         httplib::Server svr;
 
         svr.Get("/", [](const httplib::Request&, httplib::Response& res) {
-            std::string html = load_file("gui/web/index.html");
+            std::string html = load_file("../gui/web/index.html");
             res.set_content(html, "text/html");
         });
 
