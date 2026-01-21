@@ -2,120 +2,369 @@
 <html>
 <head>
 <meta charset="utf-8"/>
-<title>CHIMERA — LIVE OPERATOR CONSOLE</title>
+<title>CHIMERA — Live Operator Console</title>
 <style>
-body { background:#0b0f14; color:#d0d0d0; font-family:monospace; margin:0; }
-#top { display:flex; padding:10px; border-bottom:1px solid #333; }
-.badge { padding:4px 10px; border-radius:4px; margin-left:10px; }
-.live { background:#0a3; color:#000; }
-.grid { display:grid; grid-template-columns:2fr 1fr; grid-gap:10px; padding:10px; }
-.panel { border:1px solid #333; padding:8px; }
-h3 { margin:0 0 6px 0; color:#6f9; }
-table { width:100%; border-collapse:collapse; }
-td,th { border-bottom:1px solid #222; padding:4px; }
-.symbol { display:grid; grid-template-columns:repeat(4,1fr); gap:6px; }
-.card { border:1px solid #222; padding:6px; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body { 
+    background: #0a0e14; 
+    color: #8fa1b3; 
+    font-family: 'SF Mono', 'Consolas', 'Monaco', monospace;
+    font-size: 13px;
+}
+
+#header { 
+    background: #14181f;
+    border-bottom: 1px solid #1f2933;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title { 
+    font-size: 16px;
+    font-weight: 600;
+    color: #c5cdd8;
+    letter-spacing: 0.5px;
+}
+
+.status-badge { 
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.status-badge.live { 
+    background: rgba(76, 175, 80, 0.15);
+    color: #4caf50;
+    border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+#main { 
+    padding: 24px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+}
+
+.panel { 
+    background: #14181f;
+    border: 1px solid #1f2933;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.panel-header { 
+    font-size: 12px;
+    font-weight: 600;
+    color: #5294e2;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #1f2933;
+}
+
+.engine-grid { 
+    display: grid;
+    gap: 12px;
+}
+
+.engine-card { 
+    background: #0f1419;
+    border: 1px solid #1a1f29;
+    border-radius: 6px;
+    padding: 14px;
+    transition: border-color 0.2s;
+}
+
+.engine-card:hover { 
+    border-color: #2d3748;
+}
+
+.engine-symbol { 
+    font-size: 14px;
+    font-weight: 600;
+    color: #c5cdd8;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.engine-state { 
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background: rgba(82, 148, 226, 0.1);
+    color: #5294e2;
+    border: 1px solid rgba(82, 148, 226, 0.2);
+}
+
+.engine-metrics { 
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.metric { 
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.metric-label { 
+    font-size: 10px;
+    color: #6b7a8f;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.metric-value { 
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.metric-value.positive { color: #4caf50; }
+.metric-value.negative { color: #ef5350; }
+.metric-value.neutral { color: #8fa1b3; }
+
+table { 
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th { 
+    text-align: left;
+    padding: 10px 8px;
+    font-size: 10px;
+    color: #6b7a8f;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid #1f2933;
+}
+
+td { 
+    padding: 10px 8px;
+    font-size: 12px;
+    border-bottom: 1px solid #1a1f29;
+}
+
+.side-buy { color: #4caf50; }
+.side-sell { color: #ef5350; }
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.info-box {
+    background: #0f1419;
+    border: 1px solid #1a1f29;
+    border-radius: 6px;
+    padding: 14px;
+}
+
+.info-label {
+    font-size: 10px;
+    color: #6b7a8f;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+}
+
+.info-value {
+    font-size: 18px;
+    font-weight: 600;
+    color: #c5cdd8;
+}
+
+#no-data {
+    color: #6b7a8f;
+    text-align: center;
+    padding: 40px;
+    font-size: 12px;
+}
 </style>
 </head>
 <body>
-<div id="top">
-  <div>CHIMERA — LIVE OPERATOR</div>
-  <div id="status" class="badge">CONNECTING</div>
+
+<div id="header">
+    <div class="title">CHIMERA — LIVE OPERATOR CONSOLE</div>
+    <div id="status" class="status-badge live">● LIVE</div>
 </div>
 
-<div class="grid">
-  <div class="panel">
-    <h3>SYMBOLS</h3>
-    <div id="symbols"></div>
-  </div>
-
-  <div class="panel">
-    <h3>RISK / METRICS</h3>
-    <div id="metrics"></div>
-    <h3>ENGINES</h3>
-    <div id="engines"></div>
-  </div>
-
-  <div class="panel" style="grid-column:span 2">
-    <h3>TRADES</h3>
-    <table>
-      <thead><tr><th>Time</th><th>Sym</th><th>Side</th><th>Px</th><th>Sz</th><th>Edge</th><th>Lat</th><th>PnL</th></tr></thead>
-      <tbody id="trades"></tbody>
-    </table>
-  </div>
+<div id="main">
+    <div class="panel">
+        <div class="panel-header">Active Engines</div>
+        <div id="engines" class="engine-grid"></div>
+        <div id="no-data" style="display:none">Waiting for data...</div>
+    </div>
+    
+    <div class="panel">
+        <div class="panel-header">System Metrics</div>
+        <div class="info-grid" id="metrics"></div>
+    </div>
+    
+    <div class="panel" style="grid-column: 1 / -1">
+        <div class="panel-header">Recent Trades</div>
+        <table id="trades">
+            <thead>
+                <tr>
+                    <th>Engine</th>
+                    <th>Symbol</th>
+                    <th>Side</th>
+                    <th>PnL (bps)</th>
+                    <th>Latency</th>
+                    <th>Leverage</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
 </div>
 
 <script>
-const status = document.getElementById("status");
-const symbols = document.getElementById("symbols");
-const metrics = document.getElementById("metrics");
-const engines = document.getElementById("engines");
-const trades = document.getElementById("trades");
+const evtSource = new EventSource('/stream');
+let lastUpdate = Date.now();
 
-const govRegime = document.getElementById("gov_regime");
-const govLadder = document.getElementById("gov_ladder");
-const govLock = document.getElementById("gov_lock");
-const govKill = document.getElementById("gov_kill");
-
-
-const es = new EventSource("/stream");
-es.onmessage = (e) => {
-  const d = JSON.parse(e.data);
-  status.textContent = "LIVE";
-  status.className = "badge live";
-
-  symbols.innerHTML = "";
-  Object.keys(d.symbols).forEach(k => {
-    const s = d.symbols[k];
-    const div = document.createElement("div");
-    div.className = "card symbol";
-    div.innerHTML = `
-      <b>${k}</b>
-      <div>Bid: ${s.bid}</div>
-      <div>Ask: ${s.ask}</div>
-      <div>Spr: ${s.spread_bps}</div>
-      <div>OFI: ${s.ofi}</div>
-      <div>Imp: ${s.impulse}</div>
-      <div>Lat: ${s.latency_ms}ms</div>
-      <div>Pos: ${s.position.side} ${s.position.size}</div>
-      <div>PnL: ${s.position.pnl}</div>
-      <div>Reg: ${s.regime}</div>
-      <div>Eng: ${s.engine}</div>
-      <div>Risk: ${s.risk}</div>
-    `;
-    symbols.appendChild(div);
-  });
-
-  metrics.innerHTML = `
-    Risk: ${d.risk_state}<br/>
-    Latency: ${d.metrics.latency_ms} ms<br/>
-    Spread: ${d.metrics.spread_bps} bps<br/>
-    PnL (Session): ${d.metrics.pnl_session}<br/>
-    PnL (Today): ${d.metrics.pnl_today}
-  `;
-
-  engines.innerHTML = "";
-  d.engines.forEach(e => {
-    engines.innerHTML += `${e.name} | ${e.state} | edge=${e.edge} | win=${e.winrate}<br/>`;
-  });
-
-  trades.innerHTML = "";
-  
-  if (d.governance) {
-    govRegime.textContent = "Regime: " + d.governance.regime_quality.toFixed(2);
-    govLadder.textContent = "Ladder: Tier " + d.governance.ladder_tier;
-    govLock.textContent = "ETH Lock: " + (d.governance.eth_locked ? "ON" : "OFF");
-    govKill.textContent = "KillSwitch: " + (d.governance.kill_enabled ? "ENABLED" : "DISABLED");
-  }
-
-  d.trades.forEach(t => {
-    trades.innerHTML += `<tr>
-      <td>${t.t}</td><td>${t.sym}</td><td>${t.side}</td>
-      <td>${t.px}</td><td>${t.sz}</td><td>${t.edge}</td>
-      <td>${t.lat}</td><td>${t.pnl}</td>
-    </tr>`;
-  });
+evtSource.onmessage = (e) => {
+    lastUpdate = Date.now();
+    try {
+        const data = JSON.parse(e.data);
+        updateEngines(data.engines || []);
+        updateMetrics(data);
+        updateTrades(data.trades || []);
+    } catch(err) {
+        console.error('Parse error:', err);
+    }
 };
+
+function updateEngines(engines) {
+    const container = document.getElementById('engines');
+    const noData = document.getElementById('no-data');
+    
+    if (engines.length === 0) {
+        noData.style.display = 'block';
+        container.innerHTML = '';
+        return;
+    }
+    
+    noData.style.display = 'none';
+    
+    container.innerHTML = engines.map(e => `
+        <div class="engine-card">
+            <div class="engine-symbol">
+                <span>${e.symbol}</span>
+                <span class="engine-state">${e.state}</span>
+            </div>
+            <div class="engine-metrics">
+                <div class="metric">
+                    <div class="metric-label">Net PnL</div>
+                    <div class="metric-value ${e.net_bps > 0 ? 'positive' : e.net_bps < 0 ? 'negative' : 'neutral'}">
+                        ${e.net_bps > 0 ? '+' : ''}${e.net_bps.toFixed(2)} bps
+                    </div>
+                </div>
+                <div class="metric">
+                    <div class="metric-label">Drawdown</div>
+                    <div class="metric-value negative">${e.dd_bps.toFixed(2)} bps</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-label">Trades</div>
+                    <div class="metric-value neutral">${e.trades}</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-label">Fees</div>
+                    <div class="metric-value neutral">${e.fees.toFixed(4)}</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-label">Allocation</div>
+                    <div class="metric-value neutral">${(e.alloc * 100).toFixed(0)}%</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-label">Leverage</div>
+                    <div class="metric-value neutral">${e.leverage.toFixed(1)}x</div>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
+
+function updateMetrics(data) {
+    const gov = data.governance || {};
+    const engines = data.engines || [];
+    const trades = data.trades || [];
+    
+    const totalPnl = engines.reduce((sum, e) => sum + e.net_bps, 0);
+    const avgLatency = trades.length > 0 
+        ? trades.slice(0, 10).reduce((sum, t) => sum + t.latency_ms, 0) / Math.min(10, trades.length)
+        : 0;
+    
+    document.getElementById('metrics').innerHTML = `
+        <div class="info-box">
+            <div class="info-label">Total PnL</div>
+            <div class="info-value" style="color: ${totalPnl > 0 ? '#4caf50' : totalPnl < 0 ? '#ef5350' : '#8fa1b3'}">
+                ${totalPnl > 0 ? '+' : ''}${totalPnl.toFixed(2)} bps
+            </div>
+        </div>
+        <div class="info-box">
+            <div class="info-label">Avg Latency</div>
+            <div class="info-value">${avgLatency.toFixed(1)} ms</div>
+        </div>
+        <div class="info-box">
+            <div class="info-label">Active Engines</div>
+            <div class="info-value">${engines.length}</div>
+        </div>
+        <div class="info-box">
+            <div class="info-label">Total Trades</div>
+            <div class="info-value">${engines.reduce((sum, e) => sum + e.trades, 0)}</div>
+        </div>
+        <div class="info-box">
+            <div class="info-label">Regime Quality</div>
+            <div class="info-value">${gov.regime_quality || 0}</div>
+        </div>
+        <div class="info-box">
+            <div class="info-label">Kill Switch</div>
+            <div class="info-value" style="color: ${gov.kill_enabled ? '#4caf50' : '#ef5350'}">
+                ${gov.kill_enabled ? 'ENABLED' : 'DISABLED'}
+            </div>
+        </div>
+    `;
+}
+
+function updateTrades(trades) {
+    const tbody = document.querySelector('#trades tbody');
+    tbody.innerHTML = trades.slice(0, 20).map(t => `
+        <tr>
+            <td>${t.engine}</td>
+            <td>${t.symbol}</td>
+            <td class="${t.side === 'BUY' ? 'side-buy' : 'side-sell'}">${t.side}</td>
+            <td class="${t.bps > 0 ? 'metric-value positive' : 'metric-value negative'}">
+                ${t.bps > 0 ? '+' : ''}${t.bps.toFixed(2)}
+            </td>
+            <td>${t.latency_ms} ms</td>
+            <td>${t.leverage.toFixed(1)}x</td>
+        </tr>
+    `).join('');
+}
+
+// Connection status
+setInterval(() => {
+    const timeSinceUpdate = Date.now() - lastUpdate;
+    const status = document.getElementById('status');
+    if (timeSinceUpdate > 5000) {
+        status.textContent = '● DISCONNECTED';
+        status.className = 'status-badge';
+        status.style.background = 'rgba(239, 83, 80, 0.15)';
+        status.style.color = '#ef5350';
+    }
+}, 1000);
 </script>
+
 </body>
 </html>

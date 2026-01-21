@@ -26,7 +26,7 @@ struct TradeRow {
 using TelemetryEngineRow = EngineRow;
 using TelemetryTradeRow  = TradeRow;
 
-#include "governance/GovernanceController.hpp"
+#include "../core/include/governance/GovernanceController.hpp"
 using chimera::GovernanceSnapshot;
 
 class TelemetryBus {
