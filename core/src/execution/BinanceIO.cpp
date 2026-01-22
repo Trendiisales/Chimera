@@ -1,4 +1,5 @@
 #include "chimera/execution/BinanceIO.hpp"
+#include "chimera/execution/Hash.hpp"  // ← ADDED FOR HASH COMPUTATION
 
 #include <chrono>
 #include <thread>
@@ -290,14 +291,19 @@ void BinanceIO::wsThread() {
                         double bid_qty = std::stod(data["B"].as_string().c_str());
                         double ask_qty = std::stod(data["A"].as_string().c_str());
 
+                        // ============================================================
+                        // CRITICAL PATCH: Compute symbol_hash at ingestion
+                        // ============================================================
                         MarketTick t;
                         t.symbol = symbol;
+                        t.symbol_hash = fnv1a_32(symbol);  // ← ADDED: O(1) routing
                         t.bid = bid;
                         t.ask = ask;
                         t.last = (bid + ask) / 2.0;  // Mid price
                         t.bid_size = bid_qty;
                         t.ask_size = ask_qty;
                         t.ts_ns = nowMs() * 1000000ULL;
+                        // ============================================================
 
                         if (on_tick) {
                             on_tick(t);

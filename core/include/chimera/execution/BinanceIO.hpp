@@ -1,6 +1,7 @@
 #pragma once
 
 #include "chimera/execution/ExchangeIO.hpp"
+#include "chimera/execution/Hash.hpp"  // FNV-1a hash utility
 #include <atomic>
 #include <thread>
 #include <mutex>
@@ -55,5 +56,17 @@ private:
     std::mutex rate_mutex;
     uint64_t last_rest_ts = 0;
 };
+
+// IMPLEMENTATION NOTE:
+// In BinanceIO.cpp, wherever you construct MarketTick (probably in wsThread),
+// compute symbol_hash ONCE at ingestion:
+//
+// MarketTick tick;
+// tick.symbol = symbol_string;
+// tick.symbol_hash = fnv1a_32(symbol_string);  // REQUIRED
+// tick.bid = ...;
+// tick.ask = ...;
+// ...
+// on_tick(tick);
 
 }

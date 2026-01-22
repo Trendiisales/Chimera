@@ -15,6 +15,10 @@ struct MarketTick {
     double bid_size = 0.0;
     double ask_size = 0.0;
     uint64_t ts_ns = 0;
+    
+    // CRITICAL: Hash computed at ingestion for O(1) routing
+    // A tick without symbol_hash is a malformed tick
+    uint32_t symbol_hash = 0;
 };
 
 struct OrderRequest {
