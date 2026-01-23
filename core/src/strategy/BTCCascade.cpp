@@ -15,6 +15,7 @@ void BTCCascade::onTick(
     double spread,
     uint64_t
 ) {
+    (void)bid;
     if (symbol != "BTCUSDT") return;
     if (spread > max_spread) return;
 

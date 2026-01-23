@@ -8,6 +8,7 @@ bool RiskGovernor::allowOrder(
     double,
     const PositionBook& book
 ) {
+    (void)symbol;
     if (killed) return false;
 
     double exposure = book.totalExposure();

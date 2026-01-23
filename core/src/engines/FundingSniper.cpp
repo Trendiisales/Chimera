@@ -1,8 +1,12 @@
-#include "engines/FundingSniper.hpp"
+#include "chimera/engines/FundingSniper.hpp"
+#include <cmath>
 
 namespace chimera {
 
-FundingSniper::FundingSniper() : rate_(0), next_funding_us_(0) {}
+FundingSniper::FundingSniper()
+    : rate_(0.0)
+    , next_funding_us_(0) {
+}
 
 void FundingSniper::update(double funding_rate, uint64_t next_funding_ts_us) {
     rate_ = funding_rate;
@@ -10,18 +14,22 @@ void FundingSniper::update(double funding_rate, uint64_t next_funding_ts_us) {
 }
 
 bool FundingSniper::shouldFire(uint64_t now_us) const {
-    if (next_funding_us_ == 0) return false;
-    uint64_t time_to_funding = (next_funding_us_ > now_us) ? (next_funding_us_ - now_us) : 0;
-    uint64_t window_us = 60 * 1000000;
-    return (time_to_funding < window_us) && (rate_ != 0);
+    const uint64_t FIVE_MIN_US = 5 * 60 * 1000000ULL;
+    
+    if (next_funding_us_ > now_us) {
+        uint64_t time_to_funding = next_funding_us_ - now_us;
+        return time_to_funding < FIVE_MIN_US && std::abs(rate_) > 0.0001;
+    }
+    
+    return false;
 }
 
 bool FundingSniper::isBuy() const {
-    return rate_ > 0;
+    return rate_ < 0.0;
 }
 
 double FundingSniper::sizeBias() const {
-    return (rate_ != 0) ? 1.5 : 1.0;
+    return std::min(2.0, std::abs(rate_) * 10000.0);
 }
 
 } // namespace chimera

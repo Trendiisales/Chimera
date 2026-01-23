@@ -1,3 +1,4 @@
+#include "chimera/infra/Clock.hpp"
 #include "chimera/infra/ClockSync.hpp"
 
 #include <curl/curl.h>
@@ -55,7 +56,7 @@ void ClockSync::refresh() {
             std::chrono::duration_cast<
                 std::chrono::milliseconds
             >(
-                std::chrono::system_clock::now()
+                chimera::infra::now()
                     .time_since_epoch()
             ).count();
 
@@ -74,7 +75,7 @@ int64_t ClockSync::nowMs() const {
         std::chrono::duration_cast<
             std::chrono::milliseconds
         >(
-            std::chrono::system_clock::now()
+            chimera::infra::now()
                 .time_since_epoch()
         ).count();
 

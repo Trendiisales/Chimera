@@ -1,3 +1,4 @@
+#include "chimera/infra/Clock.hpp"
 #include "chimera/execution/BinanceIO.hpp"
 #include "chimera/execution/Hash.hpp"  // ← ADDED FOR HASH COMPUTATION
 
@@ -64,7 +65,7 @@ uint64_t BinanceIO::nowMs() const {
     return std::chrono::duration_cast<
         std::chrono::milliseconds
     >(
-        std::chrono::system_clock::now().time_since_epoch()
+        chimera::infra::now().time_since_epoch()
     ).count();
 }
 
@@ -247,7 +248,7 @@ void BinanceIO::wsThread() {
 
             // Resolve and connect
             auto const results = resolver.resolve(host, port);
-            auto ep = net::connect(get_lowest_layer(ws), results);
+            net::connect(get_lowest_layer(ws), results);
 
             // SNI and SSL handshake
             if (!SSL_set_tlsext_host_name(ws.next_layer().native_handle(), host.c_str())) {
@@ -269,10 +270,22 @@ void BinanceIO::wsThread() {
             ws.handshake(host, path);
             std::cout << "[BINANCE WS] Connected!" << std::endl;
 
+            // Set timeout so read() can be interrupted
+            ws.set_option(websocket::stream_base::timeout::suggested(beast::role_type::client));
+
             // Read loop
             beast::flat_buffer buffer;
             while (running) {
-                ws.read(buffer);
+                beast::error_code ec;
+                ws.read(buffer, ec);
+                
+                if (ec == websocket::error::closed || !running) {
+                    break;
+                }
+                
+                if (ec) {
+                    throw beast::system_error{ec};
+                }
                 
                 std::string msg = beast::buffers_to_string(buffer.data());
                 buffer.consume(buffer.size());
@@ -314,12 +327,19 @@ void BinanceIO::wsThread() {
                 }
             }
 
-            ws.close(websocket::close_code::normal);
+            // Close connection gracefully
+            beast::error_code ec;
+            ws.close(websocket::close_code::normal, ec);
 
         } catch (const std::exception& e) {
             std::cerr << "[BINANCE WS] Error: " << e.what() << std::endl;
+            if (!running) break;
+            
             std::cerr << "[BINANCE WS] Reconnecting in 5 seconds..." << std::endl;
-            std::this_thread::sleep_for(std::chrono::seconds(5));
+            // Interruptible sleep - check running flag every 100ms
+            for (int i = 0; i < 50 && running; ++i) {
+                std::this_thread::sleep_for(std::chrono::milliseconds(100));
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-#include "governance/SessionGovernor.hpp"
+#include "chimera/governance/SessionGovernor.hpp"
 
 namespace chimera {
 

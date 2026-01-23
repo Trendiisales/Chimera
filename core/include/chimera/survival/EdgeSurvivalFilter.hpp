@@ -21,6 +21,7 @@ struct FeeModel {
 };
 
 class EdgeSurvivalFilter {
+    double minFloorBps() const { return min_survival_bps; }
 public:
     explicit EdgeSurvivalFilter(MarketBus& market);
 

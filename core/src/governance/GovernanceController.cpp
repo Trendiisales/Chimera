@@ -1,13 +1,13 @@
-#include "governance/GovernanceController.hpp"
-#include "governance/SessionGovernor.hpp"
-#include "governance/RegimeClassifier.hpp"
-#include "governance/CapitalLadder.hpp"
-#include "governance/SessionGovernor.hpp"
-#include "governance/RegimeClassifier.hpp"
-#include "governance/CapitalLadder.hpp"
-#include "governance/SessionGovernor.hpp"
-#include "governance/RegimeClassifier.hpp"
-#include "governance/CapitalLadder.hpp"
+#include "chimera/governance/GovernanceController.hpp"
+#include "chimera/governance/SessionGovernor.hpp"
+#include "chimera/governance/RegimeClassifier.hpp"
+#include "chimera/governance/CapitalLadder.hpp"
+#include "chimera/governance/SessionGovernor.hpp"
+#include "chimera/governance/RegimeClassifier.hpp"
+#include "chimera/governance/CapitalLadder.hpp"
+#include "chimera/governance/SessionGovernor.hpp"
+#include "chimera/governance/RegimeClassifier.hpp"
+#include "chimera/governance/CapitalLadder.hpp"
 
 namespace chimera {
 

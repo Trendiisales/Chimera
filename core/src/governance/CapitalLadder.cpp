@@ -1,4 +1,4 @@
-#include "governance/CapitalLadder.hpp"
+#include "chimera/governance/CapitalLadder.hpp"
 
 namespace chimera {
 

@@ -1,4 +1,7 @@
 #include "chimera/safety/StatePersistence.hpp"
+// Suppress unused parameter warnings
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-parameter"
 #include <fstream>
 #include <boost/json.hpp>
 

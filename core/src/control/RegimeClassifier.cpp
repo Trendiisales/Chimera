@@ -4,28 +4,37 @@ namespace chimera {
 
 RegimeClassifier::RegimeClassifier()
     : regime_(Regime::BALANCED),
-      quality_score_(0.5) {}
+      quality_score_(1.0) {
+}
 
-void RegimeClassifier::update(
-    double spread_bps,
-    double ofi_accel,
-    bool impulse_open,
-    int tick_rate
-) {
-    // BALANCED: Normal market conditions
-    // CHAOTIC: High volatility, wide spreads
-    // DEAD: Low liquidity, slow ticks
-    
-    if (spread_bps > 10.0 || ofi_accel > 2.0) {
-        regime_ = Regime::CHAOTIC;
-        quality_score_ = 0.3;  // Lower quality
-    } else if (tick_rate < 5 && spread_bps > 5.0) {
+void RegimeClassifier::update(double spread_bps,
+                              double ofi_accel,
+                              bool impulse_open,
+                              int tick_rate) {
+    // Penalize poor liquidity or unstable flow
+    double score = 1.0;
+
+    if (spread_bps > 15.0) score -= 0.3;
+    if (tick_rate < 5)     score -= 0.3;
+    if (impulse_open)     score -= 0.2;
+
+    // Use OFI acceleration as flow stability signal
+    if (ofi_accel < 0.0)  score -= 0.2;
+
+    if (score <= 0.2) {
         regime_ = Regime::DEAD;
-        quality_score_ = 0.1;  // Very low quality
-    } else {
-        regime_ = Regime::BALANCED;
-        quality_score_ = 0.8;  // Good quality
+        quality_score_ = 0.0;
+        return;
     }
+
+    if (score <= 0.6) {
+        regime_ = Regime::CHAOTIC;
+        quality_score_ = score;
+        return;
+    }
+
+    regime_ = Regime::BALANCED;
+    quality_score_ = score;
 }
 
 RegimeClassifier::Regime RegimeClassifier::current() const {
@@ -36,4 +45,4 @@ double RegimeClassifier::quality() const {
     return quality_score_;
 }
 
-}
+} // namespace chimera

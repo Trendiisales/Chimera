@@ -15,6 +15,7 @@ void ETHFade::onTick(
     double spread,
     uint64_t
 ) {
+    (void)bid;
     if (symbol != "ETHUSDT") return;
     if (spread > max_spread) return;
 

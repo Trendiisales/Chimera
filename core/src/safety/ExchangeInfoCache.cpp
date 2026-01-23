@@ -1,4 +1,7 @@
 #include "chimera/safety/ExchangeInfoCache.hpp"
+// Suppress unused parameter warnings
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-parameter"
 
 #include <curl/curl.h>
 #include <boost/json.hpp>
