@@ -1,0 +1,3 @@
+/home/ubuntu/Chimera/build/CMakeFiles/chimera_real.dir
+/home/ubuntu/Chimera/build/CMakeFiles/edit_cache.dir
+/home/ubuntu/Chimera/build/CMakeFiles/rebuild_cache.dir
