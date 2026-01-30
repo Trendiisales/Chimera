@@ -1,3 +1,13 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "[CHIMERA] PROMOTING src/ TO PRODUCTION"
+echo "[CHIMERA] core/ AND main.cpp WILL BE IGNORED"
+
+########################################
+# WRITE NEW CMakeLists.txt
+########################################
+cat > CMakeLists.txt << 'CMAKE'
 cmake_minimum_required(VERSION 3.16)
 project(chimera LANGUAGES CXX)
 
@@ -88,3 +98,21 @@ add_executable(chimera
 )
 
 message(STATUS "Building CHIMERA from src/ (core/ is ignored)")
+CMAKE
+
+########################################
+# CLEAN + BUILD
+########################################
+echo "[CHIMERA] CLEANING BUILD"
+rm -rf build
+mkdir build
+cd build
+
+echo "[CHIMERA] CONFIGURING"
+cmake ..
+
+echo "[CHIMERA] BUILDING"
+cmake --build . -j$(nproc)
+
+echo "[CHIMERA] DONE"
+echo "Binary: build/chimera"
