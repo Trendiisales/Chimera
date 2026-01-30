@@ -1,0 +1,44 @@
+CHIMERA v4.12.0 - EDGE THRESHOLD FIX (MICRO-FADE MODE)
+
+ROOT CAUSE
+Edge thresholds were set to 10bps minimum, but live market shows 0.4bps impulse.
+Result: ZERO decisions fired despite execution being fully wired.
+
+THRESHOLDS FIXED
+
+ETH (FadeETH.hpp):
+  min_expected_bps: 10.0 → 0.20 bps
+  economic_floor_bps: 8.0 → 0.15 bps
+
+SOL (FadeSOL.hpp):
+  min_expected_bps: 10.0 → 0.30 bps  
+  economic_floor_bps: 8.0 → 0.25 bps
+
+LOGGING ADDED
+[EDGE_GATE] lines now show:
+- OFI z-score
+- Impulse bps
+- Vol bps
+- Expected edge bps
+- Minimum required
+
+EXPECTED BEHAVIOR
+Within 30 seconds:
+[EDGE_GATE] ETH ofi_z=1.70 impulse=0.39bps vol=0.04bps expected=0.45bps min_req=0.20bps
+[DECISION] symbol=ETHUSDT edge=0.45 qty=0.123 regime=STABLE strategy=FADE
+[ROUTER] ACCEPTED symbol=ETHUSDT edge=0.45 qty=0.123 mode=SHADOW
+[ROUTER] ROUTED #1 ETHUSDT BUY qty=0.123 edge=0.45bps
+[SHADOW_EXEC] onDecision called symbol=ETHUSDT side=BUY expected=0.45bps
+[SHADOW_EXEC] OPEN ETHUSDT BUY qty=0.123 @ 3007.76
+
+TRADE FREQUENCY EXPECTATIONS
+With these settings:
+- ETH: 10-50 decisions/minute (micro-fade mode)
+- SOL: 5-30 decisions/minute
+- Most will be sub-1bps scalps
+
+IF STILL NO TRADES
+Check [EDGE_GATE] logs:
+1. If expected < min_req: edge not strong enough (normal)
+2. If no [EDGE_GATE] logs: signal generation broken upstream
+3. If [EDGE_GATE] but no [DECISION]: economics gate blocking

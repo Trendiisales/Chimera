@@ -1,0 +1,84 @@
+FORCED-FILL TEST BUILD INSTRUCTIONS
+===================================
+
+DEPLOY:
+------
+scp -i ~/.ssh/ChimeraKey.pem ~/Downloads/Chimera_v4.13.0.tar.gz ubuntu@56.155.82.45:~/
+ssh -i ~/.ssh/ChimeraKey.pem ubuntu@56.155.82.45
+
+EXTRACT:
+-------
+mv ~/Chimera ~/Chimera_archive_$(date +%Y%m%d_%H%M%S)
+tar xzf Chimera_v4.13.0.tar.gz && mv Chimera_v4.13.0 Chimera
+
+BUILD:
+-----
+cd Chimera/build
+rm -rf *
+cmake .. -DCMAKE_BUILD_TYPE=Release
+make -j2
+
+This will build TWO executables:
+1. chimera (main system)
+2. test_execution (forced-fill test)
+
+CHECK BUILD:
+-----------
+ls -lh test_execution chimera
+
+You should see:
+-rwxr-xr-x 1 ubuntu ubuntu 2.1M Jan 28 01:10 chimera
+-rwxr-xr-x 1 ubuntu ubuntu  45K Jan 28 01:10 test_execution
+
+RUN TEST:
+--------
+./test_execution
+
+EXPECTED OUTPUT:
+---------------
+=== EXECUTION SIMULATOR TEST ===
+[EXEC] Simulator wired
+Submitting test order...
+[ORDER] ETHUSDT BUY 0.25 @ 3021.5
+[SIM] FORCED FILL ETHUSDT BUY 0.25 @ 3021.5
+[FILL] ETHUSDT BUY 0.25 @ 3021.5 fee=0.1bps
+=== TEST COMPLETE ===
+
+IF BUILD FAILS:
+--------------
+Check for:
+- Missing includes (should have target_include_directories in CMakeLists.txt)
+- Compilation errors (paste full output)
+
+IF test_execution DOESN'T EXIST:
+--------------------------------
+cmake didn't build it. Check:
+1. Is test_execution.cpp in Chimera/ directory?
+2. Run: grep "test_execution" ../CMakeLists.txt
+3. Should see: add_executable(test_execution ...)
+
+IF TEST RUNS BUT NO OUTPUT:
+---------------------------
+Binary built but something wrong with code. Check:
+- Constructor called?
+- Callback set?
+- submit() called?
+
+WHAT THIS PROVES:
+----------------
+✅ ExecutionSimulator compiles
+✅ Callback mechanism works
+✅ Fill events propagate
+✅ Execution pipeline functional
+
+NEXT STEP:
+---------
+If test shows all [EXEC], [SIM], [FILL] logs:
+→ Wire SimpleExecutionBridge into actual strategies
+→ You WILL see fills when strategies fire
+→ Then add complexity (state machine, partials, etc)
+
+If test doesn't work:
+→ Paste full build output
+→ Paste runtime errors
+→ Fix test before touching main system

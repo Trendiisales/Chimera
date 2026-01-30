@@ -1,0 +1,63 @@
+CHIMERA v4.13.0 - EXECUTION LAYER FULLY INTEGRATED
+==================================================
+
+WHAT WAS DONE:
+-------------
+✅ 9 execution layer files added (OrderTypes, FeeModel, Inventory, PnLLedger, OrderBookModel, QueueModel, VenueRouter, ExecutionOptimizer, ExecutionEngine)
+✅ DecisionRouter.hpp - added ExecutionEngine* parameter
+✅ DecisionRouter.cpp - calls exec_engine_->submit() for all routed decisions
+✅ main.cpp - ExecutionEngine instantiated, wired to DecisionRouter
+✅ main.cpp - updateMarket() called on every depth tick
+✅ main.cpp - step() called in main event loop
+✅ CMakeLists.txt - all new source files added
+
+FILES MODIFIED:
+--------------
+1. include/execution/DecisionRouter.hpp
+   - Added ExecutionEngine* exec_engine_ member
+   - Constructor now takes ExecutionEngine* parameter
+
+2. src/execution/DecisionRouter.cpp
+   - Constructor updated to accept ExecutionEngine*
+   - route() calls exec_engine_->submit(symbol, side, qty, edge_bps, spread_bps)
+   - Still calls shadow_exec for compatibility
+
+3. src/main.cpp
+   - Added #include "execution/ExecutionEngine.hpp"
+   - Line 369-370: instantiated exec_engine_eth and exec_engine_sol
+   - Line 376-377: passed to DecisionRouter constructors
+   - Line 589-590: ETH updateMarket() and updateVenueLatency() on depth ticks
+   - Line 692-693: SOL updateMarket() and updateVenueLatency() on depth ticks
+   - Line 743-744: step() called in main loop
+
+4. CMakeLists.txt
+   - Added all 7 execution layer .cpp files to build
+
+INTEGRATION FLOW:
+-----------------
+Strategy → DecisionRouter.route()
+         → exec_engine_->submit(symbol, side, qty, edge_bps, spread_bps)
+         → ExecutionOptimizer decides MAKER vs TAKER
+         → Order queued in ExecutionEngine
+         → step() processes fills with realistic simulation
+         → Logs to chimera_fills.jsonl
+
+DEPLOYMENT:
+-----------
+scp -i ~/.ssh/ChimeraKey.pem ~/Downloads/Chimera_v4.13.0.tar.gz ubuntu@56.155.82.45:~/
+ssh -i ~/.ssh/ChimeraKey.pem ubuntu@56.155.82.45
+mv ~/Chimera ~/Chimera_archive_$(date +%Y%m%d_%H%M%S)
+tar xzf Chimera_v4.13.0.tar.gz
+mv Chimera_v4.13.0 Chimera
+cd Chimera/build && rm -rf * && cmake .. -DCMAKE_BUILD_TYPE=Release && make -j2
+cd .. && ./build/chimera
+
+EXPECTED OUTPUT:
+---------------
+[EXEC] MAKER ETHUSDT qty=0.0005 venue=BINANCE
+[FILL] ETHUSDT qty=0.00032 px=3021.1 pnl=-0.18
+
+logs/chimera_fills.jsonl:
+{"type":"fill","order":12,"symbol":"ETHUSDT","qty":0.00032,"price":3021.1,"fee":0.00967,"ts":1738022400.123}
+
+STATUS: FULLY INTEGRATED - READY TO DEPLOY

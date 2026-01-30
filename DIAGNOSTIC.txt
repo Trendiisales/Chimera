@@ -1,0 +1,125 @@
+CHIMERA v4.12.0 - DIAGNOSTIC GUIDE
+
+WHAT TO LOOK FOR IN LOGS
+
+1. EDGE GATE (Should fire every few seconds)
+[EDGE_GATE] ETH ofi_z=X impulse=Xbps vol=Xbps expected=Xbps min_req=0.20bps
+
+2. DECISION EMISSION (If expected > min_req)
+[DECISION] symbol=ETHUSDT edge=X qty=X regime=STABLE strategy=FADE
+
+3. ROUTER ACCEPTANCE
+[ROUTER] ACCEPTED symbol=ETHUSDT edge=X qty=X mode=SHADOW
+[ROUTER] ROUTED #N ETHUSDT BUY qty=X edge=Xbps
+
+4. SHADOW EXEC RECEIPT
+[SHADOW_EXEC] onDecision called symbol=ETHUSDT side=BUY expected=Xbps
+
+5. POSITION OPEN
+[SHADOW_EXEC] 🔶 OPEN ETHUSDT BUY qty=X @ 3007.76 TP=X SL=X
+
+6. POSITION CLOSE (after TP/SL/timeout hit)
+[SHADOW_EXEC] 🏁 CLOSE ETHUSDT BUY PnL=Xbps (TP|SL|TIMEOUT)
+
+TROUBLESHOOTING
+
+IF NO [EDGE_GATE] LOGS:
+- OFI/Impulse engines not firing
+- Check upstream market data
+
+IF [EDGE_GATE] BUT NO [DECISION]:
+- expected_bps < min_required (0.20 for ETH, 0.30 for SOL)
+- This is NORMAL if market is quiet
+- Wait for stronger signal
+
+IF [DECISION] BUT NO [ROUTER]:
+- Router not wired (check main.cpp)
+- Should never happen
+
+IF [ROUTER] BUT NO [SHADOW_EXEC]:
+- shadow_exec_ pointer null
+- Check constructor in main.cpp
+
+IF [SHADOW_EXEC] BUT NO OPEN:
+- Position already open (blocked)
+- Regime/Kill blocking
+- Check "BLOCKED" message in logs
+
+IF OPEN BUT NO CLOSE:
+- onMarket not being called
+- TP/SL never hit
+- Check if bid/ask are updating
+- Add: grep "onMarket" logs to verify
+
+EXPECTED FREQUENCY (MICRO-FADE MODE)
+
+[EDGE_GATE]: Every 100-500ms (when market active)
+[DECISION]: Every 5-30 seconds (depends on edge strength)
+[OPEN]: Every 10-60 seconds (after cooldown)
+[CLOSE]: 5-30 seconds after open (TP/SL hit)
+
+CRITICAL SETTINGS (ALREADY SET)
+
+ETH:
+- min_expected_bps = 0.20
+- economic_floor_bps = 0.15
+- TP = dynamic (12-30bps based on vol)
+- SL = 0.65x TP
+- Timeout = 30 seconds
+
+SOL:
+- min_expected_bps = 0.30
+- economic_floor_bps = 0.25
+- TP = dynamic
+- SL = 0.65x TP
+- Timeout = 30 seconds
+
+NORMAL BEHAVIOR
+
+In low-volatility periods:
+- [EDGE_GATE] shows expected=0.1-0.4bps
+- No decisions fire (expected < min_req)
+- This is CORRECT - system waiting for edge
+
+In active periods:
+- [EDGE_GATE] shows expected=0.5-2.0bps
+- Decisions fire
+- Positions open
+- TP hit within seconds
+- Trades accumulate
+
+ABNORMAL BEHAVIOR
+
+[SHADOW_EXEC] BLOCKED position already open (repeated)
+→ Position never closing
+→ Check onMarket wiring
+→ Check TP/SL prices
+
+No [CLOSE] after 30+ seconds
+→ Timeout not triggering
+→ Check timestamp logic
+
+[EDGE_GATE] but expected always < 0.1bps
+→ OFI/Impulse too weak
+→ Market conditions not suitable
+→ Wait or lower thresholds further (not recommended)
+
+VERIFICATION COMMANDS
+
+# Count decisions
+grep -c "[DECISION]" logs/chimera.log
+
+# Count opens
+grep -c "OPEN" logs/chimera.log
+
+# Count closes
+grep -c "CLOSE" logs/chimera.log
+
+# Show last 10 trades
+grep "CLOSE" logs/chimera.log | tail -10
+
+# Check if onMarket is being called (should see continuous updates)
+grep "onMarket" logs/chimera.log | wc -l
+
+# Show edge gate decisions
+grep "EDGE_GATE" logs/chimera.log | tail -20

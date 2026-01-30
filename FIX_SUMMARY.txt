@@ -1,0 +1,28 @@
+CHIMERA v4.12.0 FINAL - EXECUTION FIX
+
+CRITICAL BUG FIXED
+Router was calling shadow_exec->onDecision() TWICE:
+1. Strategy calls it directly (line 425 FadeETH)
+2. Router calls it again (line 78 DecisionRouter)
+
+Second call hit pos_.open check and silently failed.
+
+SOLUTION
+Removed duplicate onDecision() call from router.
+Router now only validates and logs.
+Execution happens from strategy's direct call.
+
+FILES CHANGED
+1. src/execution/DecisionRouter.cpp - removed duplicate execution call
+2. src/FadeETH.cpp - added [DECISION] logging
+3. src/FadeSOL.cpp - added [DECISION] logging
+
+EXPECTED BEHAVIOR
+[DECISION] symbol=ETHUSDT edge=X qty=Y regime=STABLE strategy=FADE
+[ROUTER] ACCEPTED symbol=ETHUSDT edge=X qty=Y mode=SHADOW
+[ROUTER] ROUTED #1 ETHUSDT BUY qty=Y edge=Xbps
+[SHADOW_EXEC] OPEN ETHUSDT BUY qty=Y @ 3007.76
+[SHADOW_EXEC] CLOSE ETHUSDT BUY PnL=2.45bps (TP)
+
+DEPLOY
+See DEPLOY_COMMANDS.txt

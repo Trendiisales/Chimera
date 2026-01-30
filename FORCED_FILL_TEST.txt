@@ -1,0 +1,168 @@
+CHIMERA v4.13.0 - FORCED-FILL EXECUTION TEST
+============================================
+
+WHAT THIS PROVES:
+----------------
+Before adding queue models, slippage, latency - prove the execution pipeline works.
+This ExecutionSimulator FORCES IMMEDIATE FILLS for every order.
+
+If you don't see [FILL] logs, the problem is UPSTREAM, not execution.
+
+FILES ADDED:
+-----------
+include/execution/ExecutionSimulator.hpp - Simple forced-fill simulator
+include/execution/SimpleExecutionBridge.hpp - Wires callback
+src/execution/ExecutionSimulator.cpp - FORCES fills immediately
+src/execution/SimpleExecutionBridge.cpp - Logs fills
+test_execution.cpp - Standalone test program
+
+COMPILE TEST:
+------------
+cd Chimera/build && rm -rf * && cmake .. -DCMAKE_BUILD_TYPE=Release && make -j2
+
+This builds TWO executables:
+1. chimera (main system)
+2. test_execution (simple test)
+
+RUN FORCED-FILL TEST:
+--------------------
+cd Chimera/build
+./test_execution
+
+EXPECTED OUTPUT:
+---------------
+=== EXECUTION SIMULATOR TEST ===
+[EXEC] Simulator wired
+Submitting test order...
+[ORDER] ETHUSDT BUY 0.25 @ 3021.5
+[SIM] FORCED FILL ETHUSDT BUY 0.25 @ 3021.5
+[FILL] ETHUSDT BUY 0.25 @ 3021.5 fee=0.1bps
+=== TEST COMPLETE ===
+
+IF YOU SEE THIS:
+---------------
+✅ Execution pipeline works
+✅ Callbacks work
+✅ Fill events propagate
+✅ Ready to integrate with strategies
+
+IF YOU DON'T SEE [EXEC] Simulator wired:
+----------------------------------------
+❌ Constructor never called
+❌ Object not instantiated
+❌ Link error
+
+IF YOU DON'T SEE [SIM] FORCED FILL:
+-----------------------------------
+❌ submit() not called
+❌ Callback not set
+❌ Wrong object instance
+
+IF YOU DON'T SEE [FILL]:
+------------------------
+❌ Callback not wired
+❌ onFill() not called
+❌ Lambda capture broken
+
+INTEGRATION STEPS:
+-----------------
+Once test works:
+
+1. Find where strategies emit decisions
+2. Convert decision to SimOrderIntent:
+   
+   SimOrderIntent order;
+   order.symbol = decision.symbol;
+   order.is_buy = decision.side == BUY;
+   order.price = decision.price;
+   order.qty = decision.qty;
+   order.post_only = false;
+
+3. Call bridge.submit(order)
+
+4. You WILL see [SIM] FORCED FILL immediately
+
+FULL SYSTEM STRUCTURE:
+---------------------
+Current state:
+
+Strategy → ??? → [nothing]
+
+With forced-fill test:
+
+test_execution
+  → SimpleExecutionBridge
+    → ExecutionSimulator
+      → [SIM] FORCED FILL
+      → callback → onFill()
+        → [FILL] log
+
+Next step (after test works):
+
+Strategy → DecisionRouter
+           → SimpleExecutionBridge
+             → ExecutionSimulator
+               → [FILL]
+
+Final step (after fills work):
+
+Strategy → DecisionRouter
+           → ExecutionBridge (with state machine)
+             → ShadowExchange (with queue/latency)
+               → [FILL] with partials
+                 → PositionManager
+                   → PnL
+
+DEPLOY & TEST:
+-------------
+scp -i ~/.ssh/ChimeraKey.pem ~/Downloads/Chimera_v4.13.0.tar.gz ubuntu@56.155.82.45:~/
+ssh -i ~/.ssh/ChimeraKey.pem ubuntu@56.155.82.45
+
+mv ~/Chimera ~/Chimera_archive_$(date +%Y%m%d_%H%M%S)
+tar xzf Chimera_v4.13.0.tar.gz && mv Chimera_v4.13.0 Chimera
+cd Chimera/build && rm -rf * && cmake .. -DCMAKE_BUILD_TYPE=Release && make -j2
+
+# Run the test
+./test_execution
+
+# If test passes, run full system
+cd .. && ./build/chimera
+
+CRITICAL DEBUGGING:
+------------------
+If test_execution works but chimera doesn't show fills:
+
+1. Strategy is NOT calling any execution path
+2. DecisionRouter exists but is never instantiated
+3. Two different router instances (common bug)
+4. Strategy condition never true (edge never > threshold)
+5. Kill switch blocking (check logs for "BLOCKED")
+
+WHY THIS MATTERS:
+----------------
+Until you see [FILL] logs, NOTHING else matters:
+- Not queue position
+- Not maker/taker
+- Not slippage
+- Not PnL
+- Not risk management
+- Not the GUI
+
+This test proves: "Can my system execute a trade?"
+
+If NO → fix this first
+If YES → integrate with strategies
+Then → add complexity (queue, latency, etc)
+
+STATUS:
+------
+✅ ExecutionSimulator compiles
+✅ SimpleExecutionBridge compiles
+✅ test_execution compiles
+⬜ Run test_execution (YOU DO THIS)
+⬜ See [FILL] logs (PROOF)
+⬜ Wire into strategies (NEXT STEP)
+
+This is the simplest possible execution proof.
+No partials, no queue, no latency - just FORCED FILLS.
+If this doesn't work, nothing will.

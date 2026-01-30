@@ -1,0 +1,85 @@
+CHIMERA v4.13.0 FINAL - ACTUAL EXECUTION SYSTEM
+===============================================
+
+WHAT WAS FIXED:
+--------------
+✅ Deleted 7 useless files (QueueModel, VenueRouter, ExecutionOptimizer, etc) that NEVER GOT CALLED
+✅ ExecutionEngine is now a virtual base class with submitOrder() and onFill()
+✅ LiveExecutionEngine implements the interface and simulates fills
+✅ DecisionRouter NOW ACTUALLY CALLS exec_engine->submitOrder() in LIVE mode
+✅ Default mode is SHADOW (safe), can be set to LIVE when ready
+
+KEY ARCHITECTURE:
+----------------
+Signal → Strategy → DecisionRouter
+                        ↓
+                    SHADOW MODE: shadow_exec->onDecision()
+                    LIVE MODE:   exec_engine->submitOrder()
+                                     ↓
+                                 LiveExecutionEngine
+                                     ↓
+                                 [EXEC] SEND logs
+                                 [FILL] logs
+
+HOW IT WORKS:
+------------
+SHADOW MODE (default):
+- router.setMode(ExecutionMode::SHADOW)
+- All decisions go to shadow_exec only
+- No actual orders placed
+- Safe for learning/testing
+
+LIVE MODE:
+- router.setMode(ExecutionMode::LIVE)
+- Decisions go to exec_engine->submitOrder()
+- LiveExecutionEngine places simulated orders
+- Logs [EXEC] and [FILL] messages
+- Ready for real venue integration
+
+ORDER LOGIC:
+-----------
+Tight spread (<5bps) → LIMIT order (maker, join queue)
+Wide spread (≥5bps)  → IOC order (taker, cross immediately)
+
+FILES CHANGED:
+-------------
+DELETED:
+- include/execution/{QueueModel,VenueRouter,ExecutionOptimizer,FeeModel,Inventory,PnLLedger,OrderBookModel}.hpp
+- src/execution/{QueueModel,VenueRouter,ExecutionOptimizer,Inventory,PnLLedger,OrderBookModel,ExecutionEngine}.cpp
+
+CREATED:
+- include/execution/ExecutionEngine.hpp (virtual base class)
+- src/execution/LiveExecutionEngine.cpp (implementation)
+
+MODIFIED:
+- src/execution/DecisionRouter.cpp (NOW CALLS exec_engine->submitOrder())
+- src/main.cpp (uses CreateLiveExecutionEngine())
+- CMakeLists.txt (removed old files, added LiveExecutionEngine.cpp)
+
+DEPLOY:
+------
+scp -i ~/.ssh/ChimeraKey.pem ~/Downloads/Chimera_v4.13.0.tar.gz ubuntu@56.155.82.45:~/
+ssh -i ~/.ssh/ChimeraKey.pem ubuntu@56.155.82.45
+mv ~/Chimera ~/Chimera_archive_$(date +%Y%m%d_%H%M%S)
+tar xzf Chimera_v4.13.0.tar.gz && mv Chimera_v4.13.0 Chimera
+cd Chimera/build && rm -rf * && cmake .. -DCMAKE_BUILD_TYPE=Release && make -j2
+cd .. && ./build/chimera
+
+EXPECTED OUTPUT (SHADOW MODE - default):
+---------------------------------------
+[ROUTER] ROUTED #1 ETHUSDT BUY qty=0.0005 edge=0.42bps mode=SHADOW
+[SHADOW_EXEC] OPEN ETHUSDT ...
+
+EXPECTED OUTPUT (LIVE MODE - after setMode(LIVE)):
+-------------------------------------------------
+[ROUTER] ROUTED #1 ETHUSDT BUY qty=0.0005 edge=0.42bps mode=LIVE
+[EXEC] SEND BUY ETHUSDT qty=0.0005 px=3021.1 edge=0.42 type=LMT
+[FILL] ETHUSDT qty=0.0005 px=3021.1 fee=1.20844
+
+TO ENABLE LIVE MODE:
+-------------------
+In main.cpp after router creation:
+router_eth.setMode(chimera::ExecutionMode::LIVE);
+router_sol.setMode(chimera::ExecutionMode::LIVE);
+
+STATUS: READY TO DEPLOY (SHADOW MODE SAFE)

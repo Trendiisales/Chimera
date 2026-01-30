@@ -1,0 +1,11 @@
+scp -i ~/.ssh/ChimeraKey.pem ~/Downloads/Chimera_v4.12.0.tar.gz ubuntu@56.155.82.45:~/
+ssh -i ~/.ssh/ChimeraKey.pem ubuntu@56.155.82.45
+sudo systemctl stop chimera
+rm -rf Chimera
+tar xzf Chimera_v4.12.0.tar.gz
+mv Chimera_v4.12.0 Chimera
+cd Chimera/build
+rm -rf *
+cmake .. -DCMAKE_BUILD_TYPE=Release
+make -j2
+sudo systemctl start chimera

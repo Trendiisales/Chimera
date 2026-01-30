@@ -1,0 +1,22 @@
+CHIMERA v4.12.0 - EXECUTION WIRE FIX
+
+BUG FIXED
+Router was not calling shadow_exec->onDecision()
+Result: router logged but never executed
+
+CHANGES
+1. src/FadeETH.cpp - removed direct shadow_exec call (line 425)
+2. src/FadeSOL.cpp - removed direct shadow_exec call (line 413)  
+3. src/execution/DecisionRouter.cpp - added shadow_exec->onDecision() call
+4. src/phase10/ShadowExecutionEngine.cpp - added debug logging to onDecision
+
+FLOW NOW
+Strategy -> Router -> ShadowExec -> Position Open/Close -> Trade Stats
+
+EXPECTED LOGS
+[DECISION] symbol=ETHUSDT edge=1.23 qty=0.123 regime=STABLE strategy=FADE
+[ROUTER] ACCEPTED symbol=ETHUSDT edge=1.23 qty=0.123 mode=SHADOW
+[ROUTER] ROUTED #1 ETHUSDT BUY qty=0.123 edge=1.23bps
+[SHADOW_EXEC] onDecision called symbol=ETHUSDT side=BUY expected=1.23bps
+[SHADOW_EXEC] OPEN ETHUSDT BUY qty=0.123 @ 3007.76
+[SHADOW_EXEC] CLOSE ETHUSDT BUY PnL=2.45bps (TP)

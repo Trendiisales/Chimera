@@ -1,0 +1,8 @@
+tar xzf Chimera_v4.12.0.tar.gz
+rm -rf Chimera
+mv Chimera_v4.12.0 Chimera
+cd Chimera/build
+rm -rf *
+cmake .. -DCMAKE_BUILD_TYPE=Release
+make -j2
+./chimera

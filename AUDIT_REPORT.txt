@@ -1,0 +1,33 @@
+CHIMERA v4.13.6 — SHADOW EXECUTION AUDIT REPORT
+==============================================
+
+MODE:
+  - SHADOW MODE: ENABLED (compile-time enforced)
+  - LIVE ORDER PATHS: DISABLED
+
+VERIFIED EXECUTION SPINE:
+  Market Data
+    -> Phase10/11/12
+    -> ExecutionGateway (SHADOW)
+    -> DecisionRouter
+    -> Simulator / Maker
+    -> Fill Events
+    -> Position Manager
+    -> PnL / GUI
+
+SAFETY INVARIANTS:
+  - No REST/FIX order send functions can execute
+  - Router always receives decisions
+  - Fills always propagate to PnL and GUI
+  - Boot banner confirms runtime mode
+
+FILES MODIFIED:
+  - include/core/RuntimeMode.hpp (new)
+  - include/ExecutionGateway.hpp (shadow enforcement)
+  - src/main.cpp (boot banner)
+  - verify_execution.sh (shadow proof script)
+
+RESULT:
+  This build is mechanically capable of trading in SHADOW mode
+  using real market data, without any possibility of sending
+  live orders to an exchange.

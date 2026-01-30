@@ -1,0 +1,145 @@
+================================================================================
+CHIMERA v4.13.0 - EXECUTION LAYER QUICK REFERENCE
+================================================================================
+
+INCLUDE
+-------
+#include "execution/ExecutionEngine.hpp"
+#include "execution/OrderTypes.hpp"
+
+INSTANCE
+--------
+chimera::ExecutionEngine exec_engine;
+
+API CALLS
+---------
+
+1. UPDATE MARKET (every tick)
+   exec_engine.updateMarket(bid, ask, latency_ms);
+   exec_engine.updateVenueLatency("BINANCE", latency_ms);
+
+2. SUBMIT ORDER (when signal fires)
+   exec_engine.submit(
+       symbol,      // "ETHUSDT"
+       side,        // chimera::Side::BUY or chimera::Side::SELL
+       qty,         // 0.0005
+       edge_bps,    // 0.42 (expected edge in basis points)
+       spread_bps   // 4.2 (current spread in basis points)
+   );
+
+3. PROCESS FILLS (every event loop)
+   exec_engine.step(current_timestamp);
+
+4. CHECK PNL (optional)
+   double pnl = exec_engine.totalPnL();
+
+MIGRATION FROM SHADOW_EXEC
+---------------------------
+
+OLD:
+    shadow_exec->onDecision(symbol, side, qty);
+
+NEW:
+    double spread_bps = ((ask - bid) / bid) * 10000.0;
+    exec_engine.submit(symbol, side, qty, edge_bps, spread_bps);
+
+KEY DIFFERENCES
+---------------
+
+Shadow Exec:
+- Instant fills
+- No fees
+- No learning
+- No cost awareness
+
+Execution Engine:
+- Partial fills
+- Maker/taker fees (0.01% / 0.04%)
+- Queue learning
+- Venue routing
+- Cost-aware decisions
+- Real PnL tracking
+
+OUTPUT LOGS
+-----------
+
+[EXEC] MAKER ETHUSDT qty=0.0005 venue=BINANCE
+[FILL] ETHUSDT qty=0.00032 px=3021.1 pnl=-0.18
+
+JSONL (logs/chimera_fills.jsonl):
+{"type":"fill","order":12,"symbol":"ETHUSDT","qty":0.00032,"price":3021.1,"fee":0.00967,"ts":1738022400.123}
+
+SIDE ENUM
+---------
+chimera::Side::BUY
+chimera::Side::SELL
+
+DECISION LOGIC
+--------------
+System automatically chooses:
+- MAKER: if fill_prob * edge > maker_cost
+- TAKER: if edge > taker_cost + spread
+
+Where:
+  maker_cost = 0.01% + (spread / 2)
+  taker_cost = 0.04% + spread
+
+LEARNING BEHAVIOR
+-----------------
+Over time:
+- Queue fill probabilities converge
+- Low fill rate → shift to taker
+- High edge → willing to pay spread
+- Best venue selected by latency
+
+PROFITABILITY GATE
+------------------
+Only trades when:
+  edge_bps > (fee_bps + spread_cost + slippage + margin)
+
+This prevents bleeding edge on:
+- Tight spreads with high fees
+- Low fill probability
+- High latency
+
+COMPLETE EXAMPLE
+----------------
+
+// In main.cpp
+#include "execution/ExecutionEngine.hpp"
+chimera::ExecutionEngine g_exec;
+
+// Feed market data
+void onTick(double bid, double ask, double lat) {
+    g_exec.updateMarket(bid, ask, lat);
+    g_exec.updateVenueLatency("BINANCE", lat);
+}
+
+// Submit from strategy
+void onSignal(double edge, chimera::Side side) {
+    double spread = ((ask_ - bid_) / bid_) * 10000.0;
+    g_exec.submit("ETHUSDT", side, 0.0005, edge, spread);
+}
+
+// Process fills in main loop
+void loop() {
+    g_exec.step(now_ts);
+    double pnl = g_exec.totalPnL();
+}
+
+FILES TO READ
+-------------
+1. PATCH_NOTES_v4.13.0.md - Complete overview
+2. EXECUTION_LAYER_INTEGRATION.md - Detailed architecture
+3. INTEGRATION_EXAMPLE.cpp - Full code examples
+4. DEPLOYMENT_SUMMARY.txt - Deploy procedure
+
+COMPILE
+-------
+cd build && rm -rf * && cmake .. && make -j2
+
+VERIFY
+------
+./verify_execution.sh
+
+================================================================================
