@@ -1,0 +1,33 @@
+# Build artifacts
+build/
+*.o
+*.so
+*.a
+chimera
+test_*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+logs/
+
+# Env files
+.env
+
+# System
+.DS_Store
+*~
+
+# Temporary
+tmp/
+temp/
+*.tmp
+
+# VPS specific
+snapshot.bin
+/var/log/chimera/

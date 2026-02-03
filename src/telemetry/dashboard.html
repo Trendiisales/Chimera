@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CHIMERA Telemetry</title>
+<style>
+body {
+  background: #0b1020;
+  color: #d8e3ff;
+  font-family: system-ui, monospace;
+  margin: 0;
+  padding: 0;
+}
+header {
+  padding: 20px;
+  background: linear-gradient(90deg, #6a5cff, #8c5cff);
+  font-weight: bold;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding: 16px;
+}
+.card {
+  background: #131a33;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #24305c;
+}
+h2 {
+  margin-top: 0;
+  font-size: 14px;
+  color: #9db3ff;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 6px;
+  border-bottom: 1px solid #24305c;
+  font-size: 12px;
+}
+.ok {
+  color: #00ff9c;
+}
+.bad {
+  color: #ff4c4c;
+}
+</style>
+</head>
+<body>
+
+<header>
+⚡ CHIMERA TELEMETRY — <span id="armState">UNKNOWN</span>
+</header>
+
+<div class="grid">
+  <div class="card">
+    <h2>PORTFOLIO</h2>
+    <div>PnL: <span id="pnlValue">$0.00</span></div>
+    <div>Realized: <span id="pnlRealized">$0.00</span></div>
+    <div>Unrealized: <span id="pnlUnrealized">$0.00</span></div>
+    <div>Fees: <span id="pnlFees">$0.00</span></div>
+    <div>Total Fills: <span id="totalFills">0</span></div>
+  </div>
+
+  <div class="card">
+    <h2>LATENCY</h2>
+    <div>Current: <span id="latencyCurrent">0ms</span></div>
+    <div>Min: <span id="latencyMin">0ms</span></div>
+    <div>Max: <span id="latencyMax">0ms</span></div>
+    <div>P99: <span id="latencyP99">0ms</span></div>
+  </div>
+
+  <div class="card">
+    <h2>BLOCKS</h2>
+    <div>Risk: <span id="riskBlocks">0</span></div>
+    <div>Position: <span id="positionBlocks">0</span></div>
+    <div>Throttle: <span id="throttleBlocks">0</span></div>
+    <div>Toxicity: <span id="toxicityBlocks">0</span></div>
+  </div>
+</div>
+
+<div class="card" style="margin:16px;">
+<h2>POSITIONS</h2>
+<table>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Position</th>
+<th>Bid</th>
+<th>Ask</th>
+<th>Spread</th>
+<th>Utilization</th>
+</tr>
+</thead>
+<tbody id="positionsBody"></tbody>
+</table>
+</div>
+
+<div class="card" style="margin:16px;">
+<h2>STRATEGIES</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>PnL</th>
+<th>Fills</th>
+<th>Win%</th>
+<th>Avg Edge (bps)</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody id="strategiesBody"></tbody>
+</table>
+</div>
+
+<script>
+function num(v, d = 0) {
+  const n = Number(v);
+  return isFinite(n) ? n : d;
+}
+
+function fmt(v, digits = 2) {
+  return num(v).toFixed(digits);
+}
+
+async function fetchData() {
+  try {
+    const res = await fetch("/api/dashboard");
+    const data = await res.json();
+
+    document.getElementById("armState").textContent =
+      data.armed ? "ARMED" : "DISARMED";
+
+    document.getElementById("pnlValue").textContent =
+      "$" + fmt(data.pnl);
+
+    document.getElementById("pnlRealized").textContent =
+      "$" + fmt(data.pnl_realized);
+
+    document.getElementById("pnlUnrealized").textContent =
+      "$" + fmt(data.pnl_unrealized);
+
+    document.getElementById("pnlFees").textContent =
+      "$" + fmt(data.fees_paid);
+
+    document.getElementById("totalFills").textContent =
+      num(data.fills, 0);
+
+    document.getElementById("latencyCurrent").textContent =
+      fmt(num(data.latency_current_us) / 1000, 1) + "ms";
+    document.getElementById("latencyMin").textContent =
+      fmt(num(data.latency_min_us) / 1000, 1) + "ms";
+    document.getElementById("latencyMax").textContent =
+      fmt(num(data.latency_avg_us) / 1000, 1) + "ms";
+    document.getElementById("latencyP99").textContent =
+      fmt(num(data.latency_p99_us) / 1000, 1) + "ms";
+
+    document.getElementById("riskBlocks").textContent = num(data.risk_blocks);
+    document.getElementById("positionBlocks").textContent = num(data.position_blocks);
+    document.getElementById("throttleBlocks").textContent = num(data.throttle_blocks);
+    document.getElementById("toxicityBlocks").textContent = num(data.toxicity_blocks);
+
+    const posBody = document.getElementById("positionsBody");
+    posBody.innerHTML = "";
+    
+    const positions = data.positions || {};
+    for (const [symbol, p] of Object.entries(positions)) {
+      const tr = document.createElement("tr");
+      const bid = num(p.bid);
+      const ask = num(p.ask);
+      const spread = num(p.spread);
+      tr.innerHTML = `
+        <td>${symbol}</td>
+        <td>${fmt(p.qty, 4)}</td>
+        <td>${fmt(bid, 2)}</td>
+        <td>${fmt(ask, 2)}</td>
+        <td>${fmt(spread, 2)} bps</td>
+        <td>${fmt(p.utilization, 0)}%</td>
+      `;
+      posBody.appendChild(tr);
+    }
+
+    const stratBody = document.getElementById("strategiesBody");
+    stratBody.innerHTML = "";
+    const strategies = data.strategies || {};
+    const stratArray = Object.entries(strategies);
+    
+    if (stratArray.length === 0) {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td colspan="6">No strategy data yet</td>`;
+      stratBody.appendChild(tr);
+    } else {
+      stratArray.forEach(([name, s]) => {
+        const tr = document.createElement("tr");
+        const isActive = s.status !== "KILLED";
+        tr.innerHTML = `
+          <td>${name}</td>
+          <td>$${fmt(s.pnl)}</td>
+          <td>${num(s.fills)}</td>
+          <td>${fmt(s.win_pct, 0)}%</td>
+          <td>${fmt(s.avg_edge)}</td>
+          <td class="${isActive ? "ok" : "bad"}">
+            ${s.status || "UNKNOWN"}
+          </td>
+        `;
+        stratBody.appendChild(tr);
+      });
+    }
+
+  } catch (err) {
+    console.error("Dashboard fetch error:", err);
+  }
+}
+
+setInterval(fetchData, 1000);
+fetchData();
+</script>
+
+</body>
+</html>
