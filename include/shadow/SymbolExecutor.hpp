@@ -2,6 +2,10 @@
 #include "core/TradeLedger.hpp"
 #include "execution/ExecutionGovernor.hpp"
 #include "execution/ExecutionRouter.hpp"
+#include "risk/LatencyAwareTP.h"
+#include "risk/ImpulseSizer.h"
+#include "risk/ImpulseProfitGovernor.h"
+#include "routing/SymbolOpportunityRouter.hpp"
 #include <vector>
 #include <functional>
 #include <unordered_map>
@@ -30,6 +34,8 @@ struct Leg {
     double size;
     double entry;
     double stop;
+    double take_profit;
+    double entry_impulse;
     uint64_t entry_ts;
 };
 
@@ -37,6 +43,7 @@ struct SymbolConfig {
     std::string symbol;
     double base_size;
     double initial_stop;
+    double initial_tp;
     int max_legs;
 };
 
@@ -84,6 +91,7 @@ private:
     Metal metal_type_;
     
     ExecutionRouter& router_;
+    ImpulseProfitGovernor profit_governor_;
     
     GUITradeCallback gui_callback_;
     ExitCallback exit_callback_;

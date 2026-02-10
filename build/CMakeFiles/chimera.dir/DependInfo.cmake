@@ -10,6 +10,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/trader/Chimera/src/core/TradeLedger.cpp" "CMakeFiles/chimera.dir/src/core/TradeLedger.cpp.o" "gcc" "CMakeFiles/chimera.dir/src/core/TradeLedger.cpp.o.d"
   "/home/trader/Chimera/src/execution/ExecutionGovernor.cpp" "CMakeFiles/chimera.dir/src/execution/ExecutionGovernor.cpp.o" "gcc" "CMakeFiles/chimera.dir/src/execution/ExecutionGovernor.cpp.o.d"
+  "/home/trader/Chimera/src/execution/ExecutionGovernor_drift.cpp" "CMakeFiles/chimera.dir/src/execution/ExecutionGovernor_drift.cpp.o" "gcc" "CMakeFiles/chimera.dir/src/execution/ExecutionGovernor_drift.cpp.o.d"
   "/home/trader/Chimera/src/execution/ExecutionRouter.cpp" "CMakeFiles/chimera.dir/src/execution/ExecutionRouter.cpp.o" "gcc" "CMakeFiles/chimera.dir/src/execution/ExecutionRouter.cpp.o.d"
   "/home/trader/Chimera/src/execution/LatencyExecutionGovernor.cpp" "CMakeFiles/chimera.dir/src/execution/LatencyExecutionGovernor.cpp.o" "gcc" "CMakeFiles/chimera.dir/src/execution/LatencyExecutionGovernor.cpp.o.d"
   "/home/trader/Chimera/src/execution/VelocityCalculator.cpp" "CMakeFiles/chimera.dir/src/execution/VelocityCalculator.cpp.o" "gcc" "CMakeFiles/chimera.dir/src/execution/VelocityCalculator.cpp.o.d"
@@ -18,6 +19,10 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/trader/Chimera/src/latency/LatencyMonitor.cpp" "CMakeFiles/chimera.dir/src/latency/LatencyMonitor.cpp.o" "gcc" "CMakeFiles/chimera.dir/src/latency/LatencyMonitor.cpp.o.d"
   "/home/trader/Chimera/src/latency/LatencyRouter.cpp" "CMakeFiles/chimera.dir/src/latency/LatencyRouter.cpp.o" "gcc" "CMakeFiles/chimera.dir/src/latency/LatencyRouter.cpp.o.d"
   "/home/trader/Chimera/src/main.cpp" "CMakeFiles/chimera.dir/src/main.cpp.o" "gcc" "CMakeFiles/chimera.dir/src/main.cpp.o.d"
+  "/home/trader/Chimera/src/risk/ImpulseDecayExit.cpp" "CMakeFiles/chimera.dir/src/risk/ImpulseDecayExit.cpp.o" "gcc" "CMakeFiles/chimera.dir/src/risk/ImpulseDecayExit.cpp.o.d"
+  "/home/trader/Chimera/src/risk/ImpulseSizer.cpp" "CMakeFiles/chimera.dir/src/risk/ImpulseSizer.cpp.o" "gcc" "CMakeFiles/chimera.dir/src/risk/ImpulseSizer.cpp.o.d"
+  "/home/trader/Chimera/src/risk/LatencyAwareTP.cpp" "CMakeFiles/chimera.dir/src/risk/LatencyAwareTP.cpp.o" "gcc" "CMakeFiles/chimera.dir/src/risk/LatencyAwareTP.cpp.o.d"
+  "/home/trader/Chimera/src/routing/SymbolOpportunityRouter.cpp" "CMakeFiles/chimera.dir/src/routing/SymbolOpportunityRouter.cpp.o" "gcc" "CMakeFiles/chimera.dir/src/routing/SymbolOpportunityRouter.cpp.o.d"
   "/home/trader/Chimera/src/shadow/CrashHandler.cpp" "CMakeFiles/chimera.dir/src/shadow/CrashHandler.cpp.o" "gcc" "CMakeFiles/chimera.dir/src/shadow/CrashHandler.cpp.o.d"
   "/home/trader/Chimera/src/shadow/EquityCurve.cpp" "CMakeFiles/chimera.dir/src/shadow/EquityCurve.cpp.o" "gcc" "CMakeFiles/chimera.dir/src/shadow/EquityCurve.cpp.o.d"
   "/home/trader/Chimera/src/shadow/JournalWriter.cpp" "CMakeFiles/chimera.dir/src/shadow/JournalWriter.cpp.o" "gcc" "CMakeFiles/chimera.dir/src/shadow/JournalWriter.cpp.o.d"

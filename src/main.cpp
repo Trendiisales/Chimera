@@ -232,6 +232,7 @@ int main(int argc, char* argv[]) {
     xau.max_legs = 3;
     xau.base_size = 1.0;
     xau.initial_stop = 0.45;
+    xau.initial_tp = 1.20;  // Base TP in points (will be multiplied by latency regime)
     executor.addSymbol(xau, mode);
 
     SymbolConfig xag;
@@ -239,6 +240,7 @@ int main(int argc, char* argv[]) {
     xag.max_legs = 2;
     xag.base_size = 1.0;
     xag.initial_stop = 0.55;
+    xag.initial_tp = 0.08;  // Base TP in points (will be multiplied by latency regime)
     executor.addSymbol(xag, mode);
 
     std::cout << "[INIT] Configured: XAUUSD, XAGUSD\n";

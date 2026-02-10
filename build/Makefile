@@ -190,6 +190,30 @@ src/execution/ExecutionGovernor.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/execution/ExecutionGovernor.cpp.s
 .PHONY : src/execution/ExecutionGovernor.cpp.s
 
+src/execution/ExecutionGovernor_drift.o: src/execution/ExecutionGovernor_drift.cpp.o
+.PHONY : src/execution/ExecutionGovernor_drift.o
+
+# target to build an object file
+src/execution/ExecutionGovernor_drift.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/execution/ExecutionGovernor_drift.cpp.o
+.PHONY : src/execution/ExecutionGovernor_drift.cpp.o
+
+src/execution/ExecutionGovernor_drift.i: src/execution/ExecutionGovernor_drift.cpp.i
+.PHONY : src/execution/ExecutionGovernor_drift.i
+
+# target to preprocess a source file
+src/execution/ExecutionGovernor_drift.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/execution/ExecutionGovernor_drift.cpp.i
+.PHONY : src/execution/ExecutionGovernor_drift.cpp.i
+
+src/execution/ExecutionGovernor_drift.s: src/execution/ExecutionGovernor_drift.cpp.s
+.PHONY : src/execution/ExecutionGovernor_drift.s
+
+# target to generate assembly for a file
+src/execution/ExecutionGovernor_drift.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/execution/ExecutionGovernor_drift.cpp.s
+.PHONY : src/execution/ExecutionGovernor_drift.cpp.s
+
 src/execution/ExecutionRouter.o: src/execution/ExecutionRouter.cpp.o
 .PHONY : src/execution/ExecutionRouter.o
 
@@ -550,6 +574,102 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/risk/ImpulseDecayExit.o: src/risk/ImpulseDecayExit.cpp.o
+.PHONY : src/risk/ImpulseDecayExit.o
+
+# target to build an object file
+src/risk/ImpulseDecayExit.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/risk/ImpulseDecayExit.cpp.o
+.PHONY : src/risk/ImpulseDecayExit.cpp.o
+
+src/risk/ImpulseDecayExit.i: src/risk/ImpulseDecayExit.cpp.i
+.PHONY : src/risk/ImpulseDecayExit.i
+
+# target to preprocess a source file
+src/risk/ImpulseDecayExit.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/risk/ImpulseDecayExit.cpp.i
+.PHONY : src/risk/ImpulseDecayExit.cpp.i
+
+src/risk/ImpulseDecayExit.s: src/risk/ImpulseDecayExit.cpp.s
+.PHONY : src/risk/ImpulseDecayExit.s
+
+# target to generate assembly for a file
+src/risk/ImpulseDecayExit.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/risk/ImpulseDecayExit.cpp.s
+.PHONY : src/risk/ImpulseDecayExit.cpp.s
+
+src/risk/ImpulseSizer.o: src/risk/ImpulseSizer.cpp.o
+.PHONY : src/risk/ImpulseSizer.o
+
+# target to build an object file
+src/risk/ImpulseSizer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/risk/ImpulseSizer.cpp.o
+.PHONY : src/risk/ImpulseSizer.cpp.o
+
+src/risk/ImpulseSizer.i: src/risk/ImpulseSizer.cpp.i
+.PHONY : src/risk/ImpulseSizer.i
+
+# target to preprocess a source file
+src/risk/ImpulseSizer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/risk/ImpulseSizer.cpp.i
+.PHONY : src/risk/ImpulseSizer.cpp.i
+
+src/risk/ImpulseSizer.s: src/risk/ImpulseSizer.cpp.s
+.PHONY : src/risk/ImpulseSizer.s
+
+# target to generate assembly for a file
+src/risk/ImpulseSizer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/risk/ImpulseSizer.cpp.s
+.PHONY : src/risk/ImpulseSizer.cpp.s
+
+src/risk/LatencyAwareTP.o: src/risk/LatencyAwareTP.cpp.o
+.PHONY : src/risk/LatencyAwareTP.o
+
+# target to build an object file
+src/risk/LatencyAwareTP.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/risk/LatencyAwareTP.cpp.o
+.PHONY : src/risk/LatencyAwareTP.cpp.o
+
+src/risk/LatencyAwareTP.i: src/risk/LatencyAwareTP.cpp.i
+.PHONY : src/risk/LatencyAwareTP.i
+
+# target to preprocess a source file
+src/risk/LatencyAwareTP.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/risk/LatencyAwareTP.cpp.i
+.PHONY : src/risk/LatencyAwareTP.cpp.i
+
+src/risk/LatencyAwareTP.s: src/risk/LatencyAwareTP.cpp.s
+.PHONY : src/risk/LatencyAwareTP.s
+
+# target to generate assembly for a file
+src/risk/LatencyAwareTP.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/risk/LatencyAwareTP.cpp.s
+.PHONY : src/risk/LatencyAwareTP.cpp.s
+
+src/routing/SymbolOpportunityRouter.o: src/routing/SymbolOpportunityRouter.cpp.o
+.PHONY : src/routing/SymbolOpportunityRouter.o
+
+# target to build an object file
+src/routing/SymbolOpportunityRouter.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/routing/SymbolOpportunityRouter.cpp.o
+.PHONY : src/routing/SymbolOpportunityRouter.cpp.o
+
+src/routing/SymbolOpportunityRouter.i: src/routing/SymbolOpportunityRouter.cpp.i
+.PHONY : src/routing/SymbolOpportunityRouter.i
+
+# target to preprocess a source file
+src/routing/SymbolOpportunityRouter.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/routing/SymbolOpportunityRouter.cpp.i
+.PHONY : src/routing/SymbolOpportunityRouter.cpp.i
+
+src/routing/SymbolOpportunityRouter.s: src/routing/SymbolOpportunityRouter.cpp.s
+.PHONY : src/routing/SymbolOpportunityRouter.s
+
+# target to generate assembly for a file
+src/routing/SymbolOpportunityRouter.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/routing/SymbolOpportunityRouter.cpp.s
+.PHONY : src/routing/SymbolOpportunityRouter.cpp.s
+
 src/shadow/CrashHandler.o: src/shadow/CrashHandler.cpp.o
 .PHONY : src/shadow/CrashHandler.o
 
@@ -710,6 +830,9 @@ help:
 	@echo "... src/execution/ExecutionGovernor.o"
 	@echo "... src/execution/ExecutionGovernor.i"
 	@echo "... src/execution/ExecutionGovernor.s"
+	@echo "... src/execution/ExecutionGovernor_drift.o"
+	@echo "... src/execution/ExecutionGovernor_drift.i"
+	@echo "... src/execution/ExecutionGovernor_drift.s"
 	@echo "... src/execution/ExecutionRouter.o"
 	@echo "... src/execution/ExecutionRouter.i"
 	@echo "... src/execution/ExecutionRouter.s"
@@ -755,6 +878,18 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/risk/ImpulseDecayExit.o"
+	@echo "... src/risk/ImpulseDecayExit.i"
+	@echo "... src/risk/ImpulseDecayExit.s"
+	@echo "... src/risk/ImpulseSizer.o"
+	@echo "... src/risk/ImpulseSizer.i"
+	@echo "... src/risk/ImpulseSizer.s"
+	@echo "... src/risk/LatencyAwareTP.o"
+	@echo "... src/risk/LatencyAwareTP.i"
+	@echo "... src/risk/LatencyAwareTP.s"
+	@echo "... src/routing/SymbolOpportunityRouter.o"
+	@echo "... src/routing/SymbolOpportunityRouter.i"
+	@echo "... src/routing/SymbolOpportunityRouter.s"
 	@echo "... src/shadow/CrashHandler.o"
 	@echo "... src/shadow/CrashHandler.i"
 	@echo "... src/shadow/CrashHandler.s"

@@ -19,9 +19,14 @@ add_executable(chimera
     src/shadow/EquityCurve.cpp
     src/core/TradeLedger.cpp
     src/execution/ExecutionGovernor.cpp
+    src/execution/ExecutionGovernor_drift.cpp
     src/execution/VelocityCalculator.cpp
     src/execution/LatencyExecutionGovernor.cpp
     src/execution/ExecutionRouter.cpp
+    src/risk/LatencyAwareTP.cpp
+    src/risk/ImpulseSizer.cpp
+    src/risk/ImpulseDecayExit.cpp
+    src/routing/SymbolOpportunityRouter.cpp
     src/latency/LatencyMonitor.cpp
     src/latency/LatencyClassifier.cpp
     src/latency/ExecutionPolicy.cpp

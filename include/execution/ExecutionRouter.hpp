@@ -27,6 +27,7 @@ public:
 
     void dump_status() const;
     const LatencyExecutionGovernor& latency() const;
+    double get_velocity(const std::string& symbol) const;
 
 private:
     bool submit_xau(uint64_t signal_ts_ms, uint64_t now_ms, std::string& reject_reason);

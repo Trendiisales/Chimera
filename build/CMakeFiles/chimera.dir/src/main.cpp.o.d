@@ -188,13 +188,20 @@ CMakeFiles/chimera.dir/src/main.cpp.o: /home/trader/Chimera/src/main.cpp \
  /usr/include/c++/13/deque /usr/include/c++/13/bits/stl_deque.h \
  /usr/include/c++/13/bits/deque.tcc \
  /home/trader/Chimera/include/execution/VelocityCalculator.hpp \
- /usr/include/c++/13/functional /usr/include/c++/13/bits/std_function.h \
- /usr/include/c++/13/typeinfo /usr/include/c++/13/array \
- /usr/include/c++/13/compare /usr/include/c++/13/bits/stl_algo.h \
+ /home/trader/Chimera/include/risk/LatencyAwareTP.h \
+ /home/trader/Chimera/include/risk/ImpulseSizer.h \
+ /home/trader/Chimera/include/risk/ImpulseProfitGovernor.h \
+ /usr/include/c++/13/algorithm /usr/include/c++/13/bits/stl_algo.h \
  /usr/include/c++/13/bits/algorithmfwd.h \
  /usr/include/c++/13/bits/stl_heap.h \
  /usr/include/c++/13/bits/uniform_int_dist.h \
- /usr/include/c++/13/bits/stl_tempbuf.h /usr/include/c++/13/memory \
+ /usr/include/c++/13/bits/stl_tempbuf.h \
+ /usr/include/c++/13/pstl/glue_algorithm_defs.h \
+ /usr/include/c++/13/pstl/execution_defs.h \
+ /home/trader/Chimera/include/routing/SymbolOpportunityRouter.hpp \
+ /usr/include/c++/13/functional /usr/include/c++/13/bits/std_function.h \
+ /usr/include/c++/13/typeinfo /usr/include/c++/13/array \
+ /usr/include/c++/13/compare /usr/include/c++/13/memory \
  /usr/include/c++/13/bits/stl_raw_storage_iter.h \
  /usr/include/c++/13/bits/align.h /usr/include/c++/13/bits/shared_ptr.h \
  /usr/include/c++/13/bits/shared_ptr_base.h \
@@ -209,7 +216,6 @@ CMakeFiles/chimera.dir/src/main.cpp.o: /home/trader/Chimera/src/main.cpp \
  /usr/include/c++/13/bits/shared_ptr_atomic.h \
  /usr/include/c++/13/backward/auto_ptr.h \
  /usr/include/c++/13/pstl/glue_memory_defs.h \
- /usr/include/c++/13/pstl/execution_defs.h \
  /home/trader/Chimera/include/gui/TradeHistory.hpp \
  /home/trader/Chimera/include/gui/ExecutionSnapshot.hpp \
  /usr/include/c++/13/map /usr/include/c++/13/bits/stl_tree.h \
@@ -275,8 +281,6 @@ CMakeFiles/chimera.dir/src/main.cpp.o: /home/trader/Chimera/src/main.cpp \
  /home/trader/Chimera/include/shadow/EquityCurve.hpp \
  /home/trader/Chimera/include/gui/GUIBroadcaster.hpp \
  /home/trader/Chimera/cfd_engine/include/fix/CTraderFIXClient.hpp \
- /usr/include/c++/13/algorithm \
- /usr/include/c++/13/pstl/glue_algorithm_defs.h \
  /home/trader/Chimera/cfd_engine/include/fix/FIXConfig.hpp \
  /home/trader/Chimera/cfd_engine/include/fix/../../../include/shared/ConfigLoader.hpp \
  /usr/include/c++/13/fstream /usr/include/c++/13/bits/codecvt.h \
