@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CHIMERA</title>
+<style>
+body { background:#0b0e11; color:#e5e7eb; font-family:monospace; margin:0; padding:10px; }
+.grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:20px; }
+.card { background:#111827; padding:12px; border:1px solid #1f2937; border-radius:4px; }
+.card h2 { margin:0 0 8px 0; font-size:14px; color:#9ca3af; }
+.value { font-size:22px; font-weight:bold; }
+.good { color:#22c55e; }
+.bad { color:#ef4444; }
+.warn { color:#f59e0b; }
+table { width:100%; border-collapse:collapse; margin-top:10px; }
+td,th { border:1px solid #1f2937; padding:6px; text-align:right; font-size:13px; }
+th { background:#111827; color:#9ca3af; }
+h1 { color:#e5e7eb; font-size:24px; margin:10px 0; }
+</style>
+</head>
+<body>
+
+<h1>CHIMERA — XAU/XAG Execution Monitor</h1>
+
+<div class="grid">
+<div class="card"><h2>XAU Bid</h2><div class="value" id="xau_bid">—</div></div>
+<div class="card"><h2>XAU Ask</h2><div class="value" id="xau_ask">—</div></div>
+<div class="card"><h2>XAG Bid</h2><div class="value" id="xag_bid">—</div></div>
+<div class="card"><h2>XAG Ask</h2><div class="value" id="xag_ask">—</div></div>
+</div>
+
+<div class="grid">
+<div class="card"><h2>PnL</h2><div class="value" id="pnl">—</div></div>
+<div class="card"><h2>Trades</h2><div class="value" id="trades">—</div></div>
+<div class="card"><h2>Rejects</h2><div class="value" id="rejects">—</div></div>
+<div class="card"><h2>FIX RTT (ms)</h2><div class="value" id="rtt">—</div></div>
+</div>
+
+<div class="card">
+<h2>Trade Blotter</h2>
+<table id="blotter">
+<tr><th>ID</th><th>Symbol</th><th>Qty</th><th>Entry</th><th>Exit</th><th>Fees</th><th>PnL</th></tr>
+</table>
+</div>
+
+<div style="margin-top:20px; color:#6b7280; font-size:12px;">
+WebSocket: <span id="status">CONNECTING...</span> | Uptime: <span id="uptime">0</span>s | Shadow: <span id="shadow">—</span>
+</div>
+
+<script>
+const el = id => document.getElementById(id);
+let ws;
+
+function connect() {
+    ws = new WebSocket(`ws://${location.hostname}:7777`);
+    
+    ws.onopen = () => {
+        el("status").textContent = "CONNECTED";
+        el("status").className = "good";
+    };
+    
+    ws.onclose = () => {
+        el("status").textContent = "DISCONNECTED";
+        el("status").className = "bad";
+        setTimeout(connect, 2000);
+    };
+    
+    ws.onerror = () => ws.close();
+    
+    ws.onmessage = e => {
+        const s = JSON.parse(e.data);
+        
+        el("xau_bid").textContent = s.xau.bid.toFixed(2);
+        el("xau_ask").textContent = s.xau.ask.toFixed(2);
+        el("xag_bid").textContent = s.xag.bid.toFixed(2);
+        el("xag_ask").textContent = s.xag.ask.toFixed(2);
+        
+        el("pnl").textContent = "$" + s.exec.pnl.toFixed(2);
+        el("pnl").className = "value " + (s.exec.pnl >= 0 ? "good" : "bad");
+        
+        el("trades").textContent = s.exec.trades;
+        el("rejects").textContent = s.exec.rejects;
+        el("rtt").textContent = s.latency.fix_rtt_ms.toFixed(2);
+        
+        el("uptime").textContent = s.meta.uptime;
+        el("shadow").textContent = s.meta.shadow ? "YES" : "NO";
+        el("shadow").className = s.meta.shadow ? "warn" : "good";
+        
+        // Update blotter
+        const t = el("blotter");
+        t.innerHTML = "<tr><th>ID</th><th>Symbol</th><th>Qty</th><th>Entry</th><th>Exit</th><th>Fees</th><th>PnL</th></tr>";
+        (s.blotter || []).forEach(r => {
+            const tr = document.createElement("tr");
+            tr.innerHTML = 
+                `<td>${r.id}</td>
+                 <td>${r.sym}</td>
+                 <td>${r.qty}</td>
+                 <td>${r.entry.toFixed(2)}</td>
+                 <td>${r.exit.toFixed(2)}</td>
+                 <td>${r.fees.toFixed(2)}</td>
+                 <td class="${r.pnl >= 0 ? 'good' : 'bad'}">${r.pnl.toFixed(2)}</td>`;
+            t.appendChild(tr);
+        });
+    };
+}
+
+connect();
+</script>
+
+</body>
+</html>
