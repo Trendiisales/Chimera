@@ -10,6 +10,13 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/trader/Chimera/src/core/TradeLedger.cpp" "CMakeFiles/chimera.dir/src/core/TradeLedger.cpp.o" "gcc" "CMakeFiles/chimera.dir/src/core/TradeLedger.cpp.o.d"
   "/home/trader/Chimera/src/execution/ExecutionGovernor.cpp" "CMakeFiles/chimera.dir/src/execution/ExecutionGovernor.cpp.o" "gcc" "CMakeFiles/chimera.dir/src/execution/ExecutionGovernor.cpp.o.d"
+  "/home/trader/Chimera/src/execution/ExecutionRouter.cpp" "CMakeFiles/chimera.dir/src/execution/ExecutionRouter.cpp.o" "gcc" "CMakeFiles/chimera.dir/src/execution/ExecutionRouter.cpp.o.d"
+  "/home/trader/Chimera/src/execution/LatencyExecutionGovernor.cpp" "CMakeFiles/chimera.dir/src/execution/LatencyExecutionGovernor.cpp.o" "gcc" "CMakeFiles/chimera.dir/src/execution/LatencyExecutionGovernor.cpp.o.d"
+  "/home/trader/Chimera/src/execution/VelocityCalculator.cpp" "CMakeFiles/chimera.dir/src/execution/VelocityCalculator.cpp.o" "gcc" "CMakeFiles/chimera.dir/src/execution/VelocityCalculator.cpp.o.d"
+  "/home/trader/Chimera/src/latency/ExecutionPolicy.cpp" "CMakeFiles/chimera.dir/src/latency/ExecutionPolicy.cpp.o" "gcc" "CMakeFiles/chimera.dir/src/latency/ExecutionPolicy.cpp.o.d"
+  "/home/trader/Chimera/src/latency/LatencyClassifier.cpp" "CMakeFiles/chimera.dir/src/latency/LatencyClassifier.cpp.o" "gcc" "CMakeFiles/chimera.dir/src/latency/LatencyClassifier.cpp.o.d"
+  "/home/trader/Chimera/src/latency/LatencyMonitor.cpp" "CMakeFiles/chimera.dir/src/latency/LatencyMonitor.cpp.o" "gcc" "CMakeFiles/chimera.dir/src/latency/LatencyMonitor.cpp.o.d"
+  "/home/trader/Chimera/src/latency/LatencyRouter.cpp" "CMakeFiles/chimera.dir/src/latency/LatencyRouter.cpp.o" "gcc" "CMakeFiles/chimera.dir/src/latency/LatencyRouter.cpp.o.d"
   "/home/trader/Chimera/src/main.cpp" "CMakeFiles/chimera.dir/src/main.cpp.o" "gcc" "CMakeFiles/chimera.dir/src/main.cpp.o.d"
   "/home/trader/Chimera/src/shadow/CrashHandler.cpp" "CMakeFiles/chimera.dir/src/shadow/CrashHandler.cpp.o" "gcc" "CMakeFiles/chimera.dir/src/shadow/CrashHandler.cpp.o.d"
   "/home/trader/Chimera/src/shadow/EquityCurve.cpp" "CMakeFiles/chimera.dir/src/shadow/EquityCurve.cpp.o" "gcc" "CMakeFiles/chimera.dir/src/shadow/EquityCurve.cpp.o.d"

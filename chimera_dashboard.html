@@ -1,25 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<title>CHIMERA</title>
+<meta charset="UTF-8">
+<title>CHIMERA — XAU/XAG Execution Monitor</title>
 <style>
-body { background:#0b0e11; color:#e5e7eb; font-family:monospace; margin:0; padding:10px; }
-.grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:20px; }
-.card { background:#111827; padding:12px; border:1px solid #1f2937; border-radius:4px; }
-.card h2 { margin:0 0 8px 0; font-size:14px; color:#9ca3af; }
-.value { font-size:22px; font-weight:bold; }
-.good { color:#22c55e; }
-.bad { color:#ef4444; }
-.warn { color:#f59e0b; }
-table { width:100%; border-collapse:collapse; margin-top:10px; }
-td,th { border:1px solid #1f2937; padding:6px; text-align:right; font-size:13px; }
-th { background:#111827; color:#9ca3af; }
-h1 { color:#e5e7eb; font-size:24px; margin:10px 0; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font: 14px 'SF Mono', 'Consolas', monospace; background: #0a0e27; color: #e0e6ed; }
+.container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+h1 { font-size: 24px; margin-bottom: 20px; color: #00d4ff; text-transform: uppercase; letter-spacing: 2px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 30px; }
+.card { background: #141b2d; border: 1px solid #1e293b; border-radius: 8px; padding: 15px; }
+.card h2 { font-size: 11px; text-transform: uppercase; color: #64748b; margin-bottom: 10px; letter-spacing: 1px; }
+.value { font-size: 28px; font-weight: 700; color: #00d4ff; }
+.good { color: #10b981; }
+.bad { color: #ef4444; }
+.neutral { color: #64748b; }
+table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+th, td { padding: 12px; text-align: left; border-bottom: 1px solid #1e293b; }
+th { color: #64748b; font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; }
+td { font-size: 13px; }
+.status { padding: 20px; background: #141b2d; border: 1px solid #1e293b; border-radius: 8px; margin-bottom: 20px; font-size: 13px; }
+.regime-FAST { color: #10b981; font-weight: 700; }
+.regime-NORMAL { color: #f59e0b; font-weight: 700; }
+.regime-DEGRADED { color: #ef4444; font-weight: 700; }
+.regime-HALT { color: #dc2626; font-weight: 700; text-decoration: blink; }
 </style>
 </head>
 <body>
-
+<div class="container">
 <h1>CHIMERA — XAU/XAG Execution Monitor</h1>
 
 <div class="grid">
@@ -27,85 +35,85 @@ h1 { color:#e5e7eb; font-size:24px; margin:10px 0; }
 <div class="card"><h2>XAU Ask</h2><div class="value" id="xau_ask">—</div></div>
 <div class="card"><h2>XAG Bid</h2><div class="value" id="xag_bid">—</div></div>
 <div class="card"><h2>XAG Ask</h2><div class="value" id="xag_ask">—</div></div>
-</div>
-
-<div class="grid">
-<div class="card"><h2>PnL</h2><div class="value" id="pnl">—</div></div>
-<div class="card"><h2>Trades</h2><div class="value" id="trades">—</div></div>
-<div class="card"><h2>Rejects</h2><div class="value" id="rejects">—</div></div>
+<div class="card"><h2>PnL</h2><div class="value" id="pnl">$0.00</div></div>
+<div class="card"><h2>Trades</h2><div class="value" id="trades">0</div></div>
+<div class="card"><h2>Rejects</h2><div class="value" id="rejects">0</div></div>
 <div class="card"><h2>FIX RTT (ms)</h2><div class="value" id="rtt">—</div></div>
+<div class="card"><h2>Latency Regime</h2><div class="value" id="regime">—</div></div>
 </div>
 
-<div class="card">
-<h2>Trade Blotter</h2>
+<h2 style="color: #64748b; margin-bottom: 10px;">Trade Blotter</h2>
 <table id="blotter">
-<tr><th>ID</th><th>Symbol</th><th>Qty</th><th>Entry</th><th>Exit</th><th>Fees</th><th>PnL</th></tr>
+<tr><th>ID</th><th>Symbol</th><th>Side</th><th>Qty</th><th>Entry</th><th>Exit</th><th>Fees</th><th>PnL</th></tr>
 </table>
-</div>
 
-<div style="margin-top:20px; color:#6b7280; font-size:12px;">
-WebSocket: <span id="status">CONNECTING...</span> | Uptime: <span id="uptime">0</span>s | Shadow: <span id="shadow">—</span>
+<div class="status">
+WebSocket: <span id="status">CONNECTING...</span> | Uptime: <span id="uptime">00h:00m:00s</span> | Shadow: <span id="shadow">—</span>
+</div>
 </div>
 
 <script>
 const el = id => document.getElementById(id);
-let ws;
+const ws = new WebSocket("ws://185.167.119.59:7777");
 
-function connect() {
-    ws = new WebSocket(`ws://${location.hostname}:7777`);
+ws.onopen = () => el("status").textContent = "CONNECTED";
+ws.onclose = () => el("status").textContent = "DISCONNECTED";
+ws.onerror = () => el("status").textContent = "ERROR";
+
+ws.onmessage = (evt) => {
+    const s = JSON.parse(evt.data);
     
-    ws.onopen = () => {
-        el("status").textContent = "CONNECTED";
-        el("status").className = "good";
-    };
-    
-    ws.onclose = () => {
-        el("status").textContent = "DISCONNECTED";
-        el("status").className = "bad";
-        setTimeout(connect, 2000);
-    };
-    
-    ws.onerror = () => ws.close();
-    
-    ws.onmessage = e => {
-        const s = JSON.parse(e.data);
-        
+    if (s.xau) {
         el("xau_bid").textContent = s.xau.bid.toFixed(2);
         el("xau_ask").textContent = s.xau.ask.toFixed(2);
+    }
+    
+    if (s.xag) {
         el("xag_bid").textContent = s.xag.bid.toFixed(2);
         el("xag_ask").textContent = s.xag.ask.toFixed(2);
-        
-        el("pnl").textContent = "$" + s.exec.pnl.toFixed(2);
-        el("pnl").className = "value " + (s.exec.pnl >= 0 ? "good" : "bad");
-        
+    }
+    
+    if (s.exec) {
+        const pnl = s.exec.pnl;
+        el("pnl").textContent = "$" + pnl.toFixed(2);
+        el("pnl").className = pnl >= 0 ? "value good" : "value bad";
         el("trades").textContent = s.exec.trades;
         el("rejects").textContent = s.exec.rejects;
+    }
+    
+    if (s.latency) {
         el("rtt").textContent = s.latency.fix_rtt_ms.toFixed(2);
         
+        const regime = s.latency.regime || "UNKNOWN";
+        const regimeEl = el("regime");
+        regimeEl.textContent = regime;
+        regimeEl.className = "value regime-" + regime;
+    }
+    
+    if (s.meta) {
         el("uptime").textContent = s.meta.uptime;
         el("shadow").textContent = s.meta.shadow ? "YES" : "NO";
-        el("shadow").className = s.meta.shadow ? "warn" : "good";
-        
-        // Update blotter
-        const t = el("blotter");
-        t.innerHTML = "<tr><th>ID</th><th>Symbol</th><th>Qty</th><th>Entry</th><th>Exit</th><th>Fees</th><th>PnL</th></tr>";
-        (s.blotter || []).forEach(r => {
-            const tr = document.createElement("tr");
-            tr.innerHTML = 
-                `<td>${r.id}</td>
-                 <td>${r.sym}</td>
-                 <td>${r.qty}</td>
-                 <td>${r.entry.toFixed(2)}</td>
-                 <td>${r.exit.toFixed(2)}</td>
-                 <td>${r.fees.toFixed(2)}</td>
-                 <td class="${r.pnl >= 0 ? 'good' : 'bad'}">${r.pnl.toFixed(2)}</td>`;
-            t.appendChild(tr);
-        });
-    };
-}
-
-connect();
+    }
+    
+    // Update blotter
+    const t = el("blotter");
+    t.innerHTML = "<tr><th>ID</th><th>Symbol</th><th>Side</th><th>Qty</th><th>Entry</th><th>Exit</th><th>Fees</th><th>PnL</th></tr>";
+    (s.blotter || []).forEach(r => {
+        const tr = document.createElement("tr");
+        const sideText = r.side === 'B' ? 'BUY' : 'SELL';
+        const sideClass = r.side === 'B' ? 'good' : 'neutral';
+        tr.innerHTML =
+            `<td>${r.id}</td>
+             <td><strong>${r.sym}</strong></td>
+             <td class="${sideClass}">${sideText}</td>
+             <td>${r.qty.toFixed(2)}</td>
+             <td>${r.entry.toFixed(2)}</td>
+             <td>${r.exit.toFixed(2)}</td>
+             <td>${r.fees.toFixed(2)}</td>
+             <td class="${r.pnl >= 0 ? 'good' : 'bad'}">$${r.pnl.toFixed(2)}</td>`;
+        t.appendChild(tr);
+    });
+};
 </script>
-
 </body>
 </html>

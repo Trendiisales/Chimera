@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <map>
+#include <vector>
 #include <cstdint>
 
 namespace gui {
@@ -41,16 +42,25 @@ struct SymbolSnapshot {
     int trades = 0;
     int rejects = 0;
     int legs = 0;
-
     std::string session;
     std::string regime;
     std::string state;
-
     std::map<std::string, GateState> gates;
     CostModel cost;
     EdgeModel edge;
     ImpulseModel impulse;
     PnLModel pnl;
+};
+
+struct TradeRecord {
+    uint64_t id;
+    std::string sym;
+    char side; // 'B' or 'S'
+    double qty;
+    double entry;
+    double exit;
+    double fees;
+    double pnl;
 };
 
 struct GovernorSnapshot {
@@ -68,6 +78,7 @@ struct ConnectionSnapshot {
 struct ExecutionSnapshot {
     uint64_t ts = 0;
     std::map<std::string, SymbolSnapshot> symbols;
+    std::vector<TradeRecord> blotter;
     GovernorSnapshot governor;
     ConnectionSnapshot connections;
 };

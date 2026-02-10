@@ -1,0 +1,86 @@
+[
+{
+  "directory": "/home/trader/Chimera/build",
+  "command": "/usr/bin/c++  -I/home/trader/Chimera/include -I/home/trader/Chimera/cfd_engine/include  -Wall -O3 -std=gnu++20 -o CMakeFiles/chimera.dir/src/main.cpp.o -c /home/trader/Chimera/src/main.cpp",
+  "file": "/home/trader/Chimera/src/main.cpp",
+  "output": "CMakeFiles/chimera.dir/src/main.cpp.o"
+},
+{
+  "directory": "/home/trader/Chimera/build",
+  "command": "/usr/bin/c++  -I/home/trader/Chimera/include -I/home/trader/Chimera/cfd_engine/include  -Wall -O3 -std=gnu++20 -o CMakeFiles/chimera.dir/src/shadow/SymbolExecutor.cpp.o -c /home/trader/Chimera/src/shadow/SymbolExecutor.cpp",
+  "file": "/home/trader/Chimera/src/shadow/SymbolExecutor.cpp",
+  "output": "CMakeFiles/chimera.dir/src/shadow/SymbolExecutor.cpp.o"
+},
+{
+  "directory": "/home/trader/Chimera/build",
+  "command": "/usr/bin/c++  -I/home/trader/Chimera/include -I/home/trader/Chimera/cfd_engine/include  -Wall -O3 -std=gnu++20 -o CMakeFiles/chimera.dir/src/shadow/MultiSymbolExecutor.cpp.o -c /home/trader/Chimera/src/shadow/MultiSymbolExecutor.cpp",
+  "file": "/home/trader/Chimera/src/shadow/MultiSymbolExecutor.cpp",
+  "output": "CMakeFiles/chimera.dir/src/shadow/MultiSymbolExecutor.cpp.o"
+},
+{
+  "directory": "/home/trader/Chimera/build",
+  "command": "/usr/bin/c++  -I/home/trader/Chimera/include -I/home/trader/Chimera/cfd_engine/include  -Wall -O3 -std=gnu++20 -o CMakeFiles/chimera.dir/src/shadow/CrashHandler.cpp.o -c /home/trader/Chimera/src/shadow/CrashHandler.cpp",
+  "file": "/home/trader/Chimera/src/shadow/CrashHandler.cpp",
+  "output": "CMakeFiles/chimera.dir/src/shadow/CrashHandler.cpp.o"
+},
+{
+  "directory": "/home/trader/Chimera/build",
+  "command": "/usr/bin/c++  -I/home/trader/Chimera/include -I/home/trader/Chimera/cfd_engine/include  -Wall -O3 -std=gnu++20 -o CMakeFiles/chimera.dir/src/shadow/WatchdogThread.cpp.o -c /home/trader/Chimera/src/shadow/WatchdogThread.cpp",
+  "file": "/home/trader/Chimera/src/shadow/WatchdogThread.cpp",
+  "output": "CMakeFiles/chimera.dir/src/shadow/WatchdogThread.cpp.o"
+},
+{
+  "directory": "/home/trader/Chimera/build",
+  "command": "/usr/bin/c++  -I/home/trader/Chimera/include -I/home/trader/Chimera/cfd_engine/include  -Wall -O3 -std=gnu++20 -o CMakeFiles/chimera.dir/src/shadow/JournalWriter.cpp.o -c /home/trader/Chimera/src/shadow/JournalWriter.cpp",
+  "file": "/home/trader/Chimera/src/shadow/JournalWriter.cpp",
+  "output": "CMakeFiles/chimera.dir/src/shadow/JournalWriter.cpp.o"
+},
+{
+  "directory": "/home/trader/Chimera/build",
+  "command": "/usr/bin/c++  -I/home/trader/Chimera/include -I/home/trader/Chimera/cfd_engine/include  -Wall -O3 -std=gnu++20 -o CMakeFiles/chimera.dir/src/shadow/EquityCurve.cpp.o -c /home/trader/Chimera/src/shadow/EquityCurve.cpp",
+  "file": "/home/trader/Chimera/src/shadow/EquityCurve.cpp",
+  "output": "CMakeFiles/chimera.dir/src/shadow/EquityCurve.cpp.o"
+},
+{
+  "directory": "/home/trader/Chimera/build",
+  "command": "/usr/bin/c++  -I/home/trader/Chimera/include -I/home/trader/Chimera/cfd_engine/include  -Wall -O3 -std=gnu++20 -o CMakeFiles/chimera.dir/src/core/TradeLedger.cpp.o -c /home/trader/Chimera/src/core/TradeLedger.cpp",
+  "file": "/home/trader/Chimera/src/core/TradeLedger.cpp",
+  "output": "CMakeFiles/chimera.dir/src/core/TradeLedger.cpp.o"
+},
+{
+  "directory": "/home/trader/Chimera/build",
+  "command": "/usr/bin/c++  -I/home/trader/Chimera/include -I/home/trader/Chimera/cfd_engine/include  -Wall -O3 -std=gnu++20 -o CMakeFiles/chimera.dir/src/execution/ExecutionGovernor.cpp.o -c /home/trader/Chimera/src/execution/ExecutionGovernor.cpp",
+  "file": "/home/trader/Chimera/src/execution/ExecutionGovernor.cpp",
+  "output": "CMakeFiles/chimera.dir/src/execution/ExecutionGovernor.cpp.o"
+},
+{
+  "directory": "/home/trader/Chimera/build",
+  "command": "/usr/bin/c++  -I/home/trader/Chimera/include -I/home/trader/Chimera/cfd_engine/include  -Wall -O3 -std=gnu++20 -o CMakeFiles/chimera.dir/src/latency/LatencyMonitor.cpp.o -c /home/trader/Chimera/src/latency/LatencyMonitor.cpp",
+  "file": "/home/trader/Chimera/src/latency/LatencyMonitor.cpp",
+  "output": "CMakeFiles/chimera.dir/src/latency/LatencyMonitor.cpp.o"
+},
+{
+  "directory": "/home/trader/Chimera/build",
+  "command": "/usr/bin/c++  -I/home/trader/Chimera/include -I/home/trader/Chimera/cfd_engine/include  -Wall -O3 -std=gnu++20 -o CMakeFiles/chimera.dir/src/latency/LatencyClassifier.cpp.o -c /home/trader/Chimera/src/latency/LatencyClassifier.cpp",
+  "file": "/home/trader/Chimera/src/latency/LatencyClassifier.cpp",
+  "output": "CMakeFiles/chimera.dir/src/latency/LatencyClassifier.cpp.o"
+},
+{
+  "directory": "/home/trader/Chimera/build",
+  "command": "/usr/bin/c++  -I/home/trader/Chimera/include -I/home/trader/Chimera/cfd_engine/include  -Wall -O3 -std=gnu++20 -o CMakeFiles/chimera.dir/src/latency/ExecutionPolicy.cpp.o -c /home/trader/Chimera/src/latency/ExecutionPolicy.cpp",
+  "file": "/home/trader/Chimera/src/latency/ExecutionPolicy.cpp",
+  "output": "CMakeFiles/chimera.dir/src/latency/ExecutionPolicy.cpp.o"
+},
+{
+  "directory": "/home/trader/Chimera/build",
+  "command": "/usr/bin/c++  -I/home/trader/Chimera/include -I/home/trader/Chimera/cfd_engine/include  -Wall -O3 -std=gnu++20 -o CMakeFiles/gui.dir/src/gui/WsServer.cpp.o -c /home/trader/Chimera/src/gui/WsServer.cpp",
+  "file": "/home/trader/Chimera/src/gui/WsServer.cpp",
+  "output": "CMakeFiles/gui.dir/src/gui/WsServer.cpp.o"
+},
+{
+  "directory": "/home/trader/Chimera/build",
+  "command": "/usr/bin/c++  -I/home/trader/Chimera/include -I/home/trader/Chimera/cfd_engine/include  -Wall -O3 -std=gnu++20 -o CMakeFiles/gui.dir/src/gui/GUIBroadcaster.cpp.o -c /home/trader/Chimera/src/gui/GUIBroadcaster.cpp",
+  "file": "/home/trader/Chimera/src/gui/GUIBroadcaster.cpp",
+  "output": "CMakeFiles/gui.dir/src/gui/GUIBroadcaster.cpp.o"
+}
+]

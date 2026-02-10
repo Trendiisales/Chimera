@@ -1,6 +1,7 @@
 #include "gui/GUIBroadcaster.hpp"
 #include "gui/WsServer.hpp"
 #include "gui/ExecutionSnapshot.hpp"
+#include "gui/TradeHistory.hpp"
 #include "shadow/MultiSymbolExecutor.hpp"
 #include <thread>
 #include <chrono>
@@ -8,9 +9,17 @@
 extern WsServer* g_wsServer;
 extern shadow::MultiSymbolExecutor* g_executor;
 
+static uint64_t g_start_time_ms = 0;
+
 namespace Chimera {
 
-GUIBroadcaster::GUIBroadcaster() : ws_(nullptr) {}
+GUIBroadcaster::GUIBroadcaster() : ws_(nullptr) {
+    if (g_start_time_ms == 0) {
+        g_start_time_ms = std::chrono::duration_cast<std::chrono::milliseconds>(
+            std::chrono::steady_clock::now().time_since_epoch()
+        ).count();
+    }
+}
 
 GUIBroadcaster::~GUIBroadcaster() {
     stop();
@@ -18,7 +27,7 @@ GUIBroadcaster::~GUIBroadcaster() {
 
 void GUIBroadcaster::start() {
     ws_ = g_wsServer;
-    
+
     std::thread([this]() {
         while (true) {
             if (!g_executor) {
@@ -27,7 +36,22 @@ void GUIBroadcaster::start() {
             }
 
             gui::ExecutionSnapshot snap;
-            snap.ts = std::chrono::system_clock::now().time_since_epoch().count() / 1000000000;
+            
+            // Calculate uptime
+            uint64_t now_ms = std::chrono::duration_cast<std::chrono::milliseconds>(
+                std::chrono::steady_clock::now().time_since_epoch()
+            ).count();
+            uint64_t uptime_ms = now_ms - g_start_time_ms;
+            snap.ts = uptime_ms / 1000;
+            
+            // Get latency regime from ExecutionRouter
+            auto regime_snap = g_executor->router().latency().snapshot();
+            const char* regime_str = 
+                regime_snap.regime == LatencyRegime::FAST ? "FAST" :
+                regime_snap.regime == LatencyRegime::NORMAL ? "NORMAL" :
+                regime_snap.regime == LatencyRegime::DEGRADED ? "DEGRADED" : "HALT";
+            
+            double fix_rtt_ms = regime_snap.p50_ms;
 
             // XAU data
             auto* xau_exec = g_executor->getExecutor("XAUUSD");
@@ -36,19 +60,19 @@ void GUIBroadcaster::start() {
                 xau.bid = xau_exec->getLastBid();
                 xau.ask = xau_exec->getLastAsk();
                 xau.spread = xau_exec->getSpread();
-                xau.latency_ms = xau_exec->getLatencyMs();
+                xau.latency_ms = fix_rtt_ms;
                 xau.trades = xau_exec->getTradesThisHour();
                 xau.rejects = xau_exec->getTotalRejections();
                 xau.legs = xau_exec->getActiveLegs();
                 xau.session = "NY";
-                xau.regime = "TREND";
-                
+                xau.regime = regime_str;
+
                 int legs = xau_exec->getActiveLegs();
                 xau.state = (legs > 0) ? "IN_POSITION" : "OPEN";
-                
+
                 xau.gates["session"] = gui::Gate(true, "active", "");
                 xau.gates["spread"] = gui::Gate(xau.spread < 0.50, "OK", xau.spread >= 0.50 ? "spread too wide" : "");
-                xau.gates["latency"] = gui::Gate(xau.latency_ms < 50.0, "OK", xau.latency_ms >= 50.0 ? "latency high" : "");
+                xau.gates["latency"] = gui::Gate(fix_rtt_ms < 8.0, regime_str, fix_rtt_ms >= 8.0 ? "latency high" : "");
                 xau.gates["edge"] = gui::Gate(true, "checking", "");
                 xau.gates["cooldown"] = gui::Gate(true, "ready", "");
 
@@ -72,19 +96,19 @@ void GUIBroadcaster::start() {
                 xag.bid = xag_exec->getLastBid();
                 xag.ask = xag_exec->getLastAsk();
                 xag.spread = xag_exec->getSpread();
-                xag.latency_ms = xag_exec->getLatencyMs();
+                xag.latency_ms = fix_rtt_ms;
                 xag.trades = xag_exec->getTradesThisHour();
                 xag.rejects = xag_exec->getTotalRejections();
                 xag.legs = xag_exec->getActiveLegs();
                 xag.session = "NY";
-                xag.regime = "MEAN";
-                
+                xag.regime = regime_str;
+
                 int legs = xag_exec->getActiveLegs();
                 xag.state = (legs > 0) ? "IN_POSITION" : "OPEN";
 
                 xag.gates["session"] = gui::Gate(true, "active", "");
                 xag.gates["spread"] = gui::Gate(xag.spread < 0.05, "OK", xag.spread >= 0.05 ? "spread too wide" : "");
-                xag.gates["latency"] = gui::Gate(xag.latency_ms < 50.0, "OK", xag.latency_ms >= 50.0 ? "latency high" : "");
+                xag.gates["latency"] = gui::Gate(fix_rtt_ms < 8.0, regime_str, fix_rtt_ms >= 8.0 ? "latency high" : "");
                 xag.gates["edge"] = gui::Gate(true, "checking", "");
                 xag.gates["cooldown"] = gui::Gate(true, "ready", "");
 
@@ -101,6 +125,9 @@ void GUIBroadcaster::start() {
                 xag.pnl.cash = 0.0;
             }
 
+            // Populate blotter from TradeHistory
+            snap.blotter = gui::TradeHistory::instance().getTrades();
+
             snap.governor.daily_dd = "OK";
             snap.governor.hourly_loss = "OK";
             snap.governor.reject_rate = "LOW";
@@ -110,7 +137,7 @@ void GUIBroadcaster::start() {
             snap.connections.ctrader = true;
 
             std::string json = gui::EmitJSON(snap);
-            
+
             if (ws_) {
                 ws_->broadcast(json);
             }

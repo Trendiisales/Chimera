@@ -190,6 +190,78 @@ src/execution/ExecutionGovernor.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/execution/ExecutionGovernor.cpp.s
 .PHONY : src/execution/ExecutionGovernor.cpp.s
 
+src/execution/ExecutionRouter.o: src/execution/ExecutionRouter.cpp.o
+.PHONY : src/execution/ExecutionRouter.o
+
+# target to build an object file
+src/execution/ExecutionRouter.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/execution/ExecutionRouter.cpp.o
+.PHONY : src/execution/ExecutionRouter.cpp.o
+
+src/execution/ExecutionRouter.i: src/execution/ExecutionRouter.cpp.i
+.PHONY : src/execution/ExecutionRouter.i
+
+# target to preprocess a source file
+src/execution/ExecutionRouter.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/execution/ExecutionRouter.cpp.i
+.PHONY : src/execution/ExecutionRouter.cpp.i
+
+src/execution/ExecutionRouter.s: src/execution/ExecutionRouter.cpp.s
+.PHONY : src/execution/ExecutionRouter.s
+
+# target to generate assembly for a file
+src/execution/ExecutionRouter.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/execution/ExecutionRouter.cpp.s
+.PHONY : src/execution/ExecutionRouter.cpp.s
+
+src/execution/LatencyExecutionGovernor.o: src/execution/LatencyExecutionGovernor.cpp.o
+.PHONY : src/execution/LatencyExecutionGovernor.o
+
+# target to build an object file
+src/execution/LatencyExecutionGovernor.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/execution/LatencyExecutionGovernor.cpp.o
+.PHONY : src/execution/LatencyExecutionGovernor.cpp.o
+
+src/execution/LatencyExecutionGovernor.i: src/execution/LatencyExecutionGovernor.cpp.i
+.PHONY : src/execution/LatencyExecutionGovernor.i
+
+# target to preprocess a source file
+src/execution/LatencyExecutionGovernor.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/execution/LatencyExecutionGovernor.cpp.i
+.PHONY : src/execution/LatencyExecutionGovernor.cpp.i
+
+src/execution/LatencyExecutionGovernor.s: src/execution/LatencyExecutionGovernor.cpp.s
+.PHONY : src/execution/LatencyExecutionGovernor.s
+
+# target to generate assembly for a file
+src/execution/LatencyExecutionGovernor.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/execution/LatencyExecutionGovernor.cpp.s
+.PHONY : src/execution/LatencyExecutionGovernor.cpp.s
+
+src/execution/VelocityCalculator.o: src/execution/VelocityCalculator.cpp.o
+.PHONY : src/execution/VelocityCalculator.o
+
+# target to build an object file
+src/execution/VelocityCalculator.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/execution/VelocityCalculator.cpp.o
+.PHONY : src/execution/VelocityCalculator.cpp.o
+
+src/execution/VelocityCalculator.i: src/execution/VelocityCalculator.cpp.i
+.PHONY : src/execution/VelocityCalculator.i
+
+# target to preprocess a source file
+src/execution/VelocityCalculator.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/execution/VelocityCalculator.cpp.i
+.PHONY : src/execution/VelocityCalculator.cpp.i
+
+src/execution/VelocityCalculator.s: src/execution/VelocityCalculator.cpp.s
+.PHONY : src/execution/VelocityCalculator.s
+
+# target to generate assembly for a file
+src/execution/VelocityCalculator.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/execution/VelocityCalculator.cpp.s
+.PHONY : src/execution/VelocityCalculator.cpp.s
+
 src/gui/ExecutionSnapshotJSON.o: src/gui/ExecutionSnapshotJSON.cpp.o
 .PHONY : src/gui/ExecutionSnapshotJSON.o
 
@@ -357,6 +429,102 @@ src/gui/WsServer.s: src/gui/WsServer.cpp.s
 src/gui/WsServer.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/gui.dir/build.make CMakeFiles/gui.dir/src/gui/WsServer.cpp.s
 .PHONY : src/gui/WsServer.cpp.s
+
+src/latency/ExecutionPolicy.o: src/latency/ExecutionPolicy.cpp.o
+.PHONY : src/latency/ExecutionPolicy.o
+
+# target to build an object file
+src/latency/ExecutionPolicy.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/latency/ExecutionPolicy.cpp.o
+.PHONY : src/latency/ExecutionPolicy.cpp.o
+
+src/latency/ExecutionPolicy.i: src/latency/ExecutionPolicy.cpp.i
+.PHONY : src/latency/ExecutionPolicy.i
+
+# target to preprocess a source file
+src/latency/ExecutionPolicy.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/latency/ExecutionPolicy.cpp.i
+.PHONY : src/latency/ExecutionPolicy.cpp.i
+
+src/latency/ExecutionPolicy.s: src/latency/ExecutionPolicy.cpp.s
+.PHONY : src/latency/ExecutionPolicy.s
+
+# target to generate assembly for a file
+src/latency/ExecutionPolicy.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/latency/ExecutionPolicy.cpp.s
+.PHONY : src/latency/ExecutionPolicy.cpp.s
+
+src/latency/LatencyClassifier.o: src/latency/LatencyClassifier.cpp.o
+.PHONY : src/latency/LatencyClassifier.o
+
+# target to build an object file
+src/latency/LatencyClassifier.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/latency/LatencyClassifier.cpp.o
+.PHONY : src/latency/LatencyClassifier.cpp.o
+
+src/latency/LatencyClassifier.i: src/latency/LatencyClassifier.cpp.i
+.PHONY : src/latency/LatencyClassifier.i
+
+# target to preprocess a source file
+src/latency/LatencyClassifier.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/latency/LatencyClassifier.cpp.i
+.PHONY : src/latency/LatencyClassifier.cpp.i
+
+src/latency/LatencyClassifier.s: src/latency/LatencyClassifier.cpp.s
+.PHONY : src/latency/LatencyClassifier.s
+
+# target to generate assembly for a file
+src/latency/LatencyClassifier.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/latency/LatencyClassifier.cpp.s
+.PHONY : src/latency/LatencyClassifier.cpp.s
+
+src/latency/LatencyMonitor.o: src/latency/LatencyMonitor.cpp.o
+.PHONY : src/latency/LatencyMonitor.o
+
+# target to build an object file
+src/latency/LatencyMonitor.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/latency/LatencyMonitor.cpp.o
+.PHONY : src/latency/LatencyMonitor.cpp.o
+
+src/latency/LatencyMonitor.i: src/latency/LatencyMonitor.cpp.i
+.PHONY : src/latency/LatencyMonitor.i
+
+# target to preprocess a source file
+src/latency/LatencyMonitor.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/latency/LatencyMonitor.cpp.i
+.PHONY : src/latency/LatencyMonitor.cpp.i
+
+src/latency/LatencyMonitor.s: src/latency/LatencyMonitor.cpp.s
+.PHONY : src/latency/LatencyMonitor.s
+
+# target to generate assembly for a file
+src/latency/LatencyMonitor.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/latency/LatencyMonitor.cpp.s
+.PHONY : src/latency/LatencyMonitor.cpp.s
+
+src/latency/LatencyRouter.o: src/latency/LatencyRouter.cpp.o
+.PHONY : src/latency/LatencyRouter.o
+
+# target to build an object file
+src/latency/LatencyRouter.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/latency/LatencyRouter.cpp.o
+.PHONY : src/latency/LatencyRouter.cpp.o
+
+src/latency/LatencyRouter.i: src/latency/LatencyRouter.cpp.i
+.PHONY : src/latency/LatencyRouter.i
+
+# target to preprocess a source file
+src/latency/LatencyRouter.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/latency/LatencyRouter.cpp.i
+.PHONY : src/latency/LatencyRouter.cpp.i
+
+src/latency/LatencyRouter.s: src/latency/LatencyRouter.cpp.s
+.PHONY : src/latency/LatencyRouter.s
+
+# target to generate assembly for a file
+src/latency/LatencyRouter.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/latency/LatencyRouter.cpp.s
+.PHONY : src/latency/LatencyRouter.cpp.s
 
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
@@ -542,6 +710,15 @@ help:
 	@echo "... src/execution/ExecutionGovernor.o"
 	@echo "... src/execution/ExecutionGovernor.i"
 	@echo "... src/execution/ExecutionGovernor.s"
+	@echo "... src/execution/ExecutionRouter.o"
+	@echo "... src/execution/ExecutionRouter.i"
+	@echo "... src/execution/ExecutionRouter.s"
+	@echo "... src/execution/LatencyExecutionGovernor.o"
+	@echo "... src/execution/LatencyExecutionGovernor.i"
+	@echo "... src/execution/LatencyExecutionGovernor.s"
+	@echo "... src/execution/VelocityCalculator.o"
+	@echo "... src/execution/VelocityCalculator.i"
+	@echo "... src/execution/VelocityCalculator.s"
 	@echo "... src/gui/ExecutionSnapshotJSON.o"
 	@echo "... src/gui/ExecutionSnapshotJSON.i"
 	@echo "... src/gui/ExecutionSnapshotJSON.s"
@@ -563,6 +740,18 @@ help:
 	@echo "... src/gui/WsServer.o"
 	@echo "... src/gui/WsServer.i"
 	@echo "... src/gui/WsServer.s"
+	@echo "... src/latency/ExecutionPolicy.o"
+	@echo "... src/latency/ExecutionPolicy.i"
+	@echo "... src/latency/ExecutionPolicy.s"
+	@echo "... src/latency/LatencyClassifier.o"
+	@echo "... src/latency/LatencyClassifier.i"
+	@echo "... src/latency/LatencyClassifier.s"
+	@echo "... src/latency/LatencyMonitor.o"
+	@echo "... src/latency/LatencyMonitor.i"
+	@echo "... src/latency/LatencyMonitor.s"
+	@echo "... src/latency/LatencyRouter.o"
+	@echo "... src/latency/LatencyRouter.i"
+	@echo "... src/latency/LatencyRouter.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

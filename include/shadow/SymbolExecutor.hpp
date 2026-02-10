@@ -1,66 +1,69 @@
 #pragma once
-
-#include "ShadowTypes.hpp"
-#include "ShadowConfig.hpp"
-#include "RangeFailureExit.hpp"
-#include "PartialExitRunner.hpp"
 #include "core/TradeLedger.hpp"
 #include "execution/ExecutionGovernor.hpp"
-#include "risk/SessionGuard.hpp"
-#include "symbols/MetalProfiles.hpp"
+#include "execution/ExecutionRouter.hpp"
 #include <vector>
-#include <unordered_map>
 #include <functional>
-#include <iostream>
-#include <cstring>
+#include <unordered_map>
+#include <cstdint>
 
 namespace shadow {
 
-using GUITradeCallback = std::function<void(const char* symbol, const char* side, double size, double price, double pnl)>;
+enum class ExecMode { LIVE, SHADOW };
+enum class Side { BUY, SELL };
+enum class Metal { XAU, XAG };
 
-struct RejectionReason {
-    enum class Type {
-        NONE, REGIME_BLOCKED, CONFIDENCE_LOW, ATR_ZERO,
-        COST_GATE_FAILED, SESSION_BLOCKED, COOLDOWN_ACTIVE, MAX_LEGS_REACHED
-    };
-    Type type = Type::NONE;
-    double value = 0.0;
-    double threshold = 0.0;
-    uint64_t timestamp_ms = 0;
-    
-    const char* toString() const {
-        switch (type) {
-            case Type::NONE: return "NONE";
-            case Type::REGIME_BLOCKED: return "REGIME_BLOCKED";
-            case Type::CONFIDENCE_LOW: return "CONFIDENCE_LOW";
-            case Type::ATR_ZERO: return "ATR_ZERO";
-            case Type::COST_GATE_FAILED: return "COST_GATE_FAILED";
-            case Type::SESSION_BLOCKED: return "SESSION_BLOCKED";
-            case Type::COOLDOWN_ACTIVE: return "COOLDOWN_ACTIVE";
-            case Type::MAX_LEGS_REACHED: return "MAX_LEGS_REACHED";
-            default: return "UNKNOWN";
-        }
-    }
+struct Signal {
+    Side side;
+    double price;
+    double confidence;
+};
+
+struct Tick {
+    double bid;
+    double ask;
+    uint64_t ts_ms;
+};
+
+struct Leg {
+    Side side;
+    double size;
+    double entry;
+    double stop;
+    uint64_t entry_ts;
+};
+
+struct SymbolConfig {
+    std::string symbol;
+    double base_size;
+    double initial_stop;
+    int max_legs;
+};
+
+struct SessionGuard {
+    uint64_t session_close_utc;
+    uint64_t flatten_buffer_sec;
+    uint64_t liquidity_fade_sec;
 };
 
 struct RejectionStats {
-    RejectionReason last_rejection;
     uint64_t total_rejections = 0;
-    void record(RejectionReason::Type type, double value, double threshold, uint64_t ts) {
-        last_rejection.type = type;
-        last_rejection.value = value;
-        last_rejection.threshold = threshold;
-        last_rejection.timestamp_ms = ts;
-        total_rejections++;
-    }
+    uint64_t dd_rejects = 0;
+    uint64_t edge_rejects = 0;
+    uint64_t latency_rejects = 0;
 };
+
+using GUITradeCallback = std::function<void(const char*, uint64_t, char, double, double, double, double, uint64_t)>;
+using ExitCallback = std::function<void(const char*, uint64_t, double, double, const char*)>;
 
 class SymbolExecutor {
 public:
-    SymbolExecutor(const SymbolConfig& cfg, ExecMode mode);
+    SymbolExecutor(const SymbolConfig& cfg, ExecMode mode, ExecutionRouter& router);
+    
     void onTick(const Tick& t);
     void onSignal(const Signal& s, uint64_t ts_ms);
     void setGUICallback(GUITradeCallback cb);
+    void setExitCallback(ExitCallback cb);
     double getRealizedPnL() const;
     double getLastBid() const { return last_bid_; }
     double getLastAsk() const { return last_ask_; }
@@ -71,7 +74,7 @@ public:
     int getTradesThisHour() const { return trades_this_hour_; }
     int getTotalRejections() const { return rejection_stats_.total_rejections; }
     void status() const;
-    
+
 private:
     SymbolConfig cfg_;
     ExecMode mode_;
@@ -79,7 +82,11 @@ private:
     ExecutionGovernor governor_;
     SessionGuard session_guard_;
     Metal metal_type_;
+    
+    ExecutionRouter& router_;
+    
     GUITradeCallback gui_callback_;
+    ExitCallback exit_callback_;
     std::vector<Leg> legs_;
     std::unordered_map<size_t, uint64_t> leg_to_trade_;
     double realized_pnl_;

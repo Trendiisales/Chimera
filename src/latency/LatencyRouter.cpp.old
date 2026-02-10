@@ -1,0 +1,218 @@
+#include "latency/LatencyRouter.hpp"
+#include <vector>
+#include <algorithm>
+#include <cstdio>
+#include <cstdint>
+#include <ctime>
+
+namespace {
+
+class LatencyMonitor {
+public:
+    explicit LatencyMonitor(size_t window = 512)
+        : window_(window), ewma_(0.0), has_ewma_(false) {}
+
+    void record(double ms) {
+        if (ms <= 0.0 || ms > 1000.0) return;
+
+        if (!has_ewma_) {
+            ewma_ = ms;
+            has_ewma_ = true;
+        } else {
+            ewma_ = ewma_ * 0.90 + ms * 0.10;
+        }
+
+        samples_.push_back(ms);
+        if (samples_.size() > window_)
+            samples_.erase(samples_.begin());
+    }
+
+    bool ready() const {
+        return samples_.size() >= 25;
+    }
+
+    double current() const {
+        return samples_.empty() ? -1.0 : samples_.back();
+    }
+
+    double ewma() const {
+        return has_ewma_ ? ewma_ : -1.0;
+    }
+
+    double percentile(double p) const {
+        if (samples_.empty()) return -1.0;
+        std::vector<double> tmp = samples_;
+        std::sort(tmp.begin(), tmp.end());
+        size_t idx = static_cast<size_t>(p * (tmp.size() - 1));
+        return tmp[idx];
+    }
+
+    double p50() const { return percentile(0.50); }
+    double p90() const { return percentile(0.90); }
+    double p95() const { return percentile(0.95); }
+    double p99() const { return percentile(0.99); }
+
+private:
+    size_t window_;
+    std::vector<double> samples_;
+    double ewma_;
+    bool has_ewma_;
+};
+
+enum class LatencyState {
+    WARMUP,
+    FAST,
+    NORMAL,
+    DEGRADED,
+    HALT
+};
+
+class LatencyClassifier {
+public:
+    LatencyClassifier() : state_(LatencyState::WARMUP), stable_(0) {}
+
+    LatencyState update(const LatencyMonitor& m) {
+        if (!m.ready())
+            return state_ = LatencyState::WARMUP;
+
+        double cur = m.current();
+        double p95 = m.p95();
+        double p99 = m.p99();
+
+        LatencyState next;
+
+        if (p99 > 25.0 || cur > 25.0) {
+            next = LatencyState::HALT;
+        }
+        else if (p95 > 12.0) {
+            next = LatencyState::DEGRADED;
+        }
+        else if (p95 <= 6.0 && m.ewma() <= 6.0) {
+            next = LatencyState::FAST;
+        }
+        else {
+            next = LatencyState::NORMAL;
+        }
+
+        if (next == state_) {
+            stable_++;
+        } else {
+            stable_ = 0;
+        }
+
+        if (stable_ >= 5) {
+            state_ = next;
+            stable_ = 0;
+        }
+
+        return state_;
+    }
+
+    LatencyState state() const { return state_; }
+
+private:
+    LatencyState state_;
+    int stable_;
+};
+
+static uint64_t last_tick_ms = 0;
+
+static uint64_t monotonic_ms() {
+    struct timespec ts;
+    clock_gettime(CLOCK_MONOTONIC, &ts);
+    return uint64_t(ts.tv_sec) * 1000ULL + ts.tv_nsec / 1000000ULL;
+}
+
+static void watchdog_tick() {
+    uint64_t now = monotonic_ms();
+
+    if (last_tick_ms == 0) {
+        last_tick_ms = now;
+        return;
+    }
+
+    uint64_t elapsed = now - last_tick_ms;
+
+    if (elapsed > 2000 && elapsed < 60000) {
+        std::fprintf(stderr,
+            "[WATCHDOG] STALL detected: %llu ms\n",
+            (unsigned long long)elapsed);
+    }
+
+    last_tick_ms = now;
+}
+
+static LatencyMonitor g_latency;
+static LatencyClassifier g_classifier;
+
+const char* stateStr(LatencyState s) {
+    switch (s) {
+        case LatencyState::WARMUP:   return "WARMUP";
+        case LatencyState::FAST:     return "FAST";
+        case LatencyState::NORMAL:   return "NORMAL";
+        case LatencyState::DEGRADED: return "DEGRADED";
+        case LatencyState::HALT:     return "HALT";
+    }
+    return "?";
+}
+
+} // anonymous namespace
+
+namespace LatencyRouter {
+
+void recordRtt(double rtt_ms) {
+    g_latency.record(rtt_ms);
+    g_classifier.update(g_latency);
+}
+
+bool allowEntry(const std::string& symbol) {
+    watchdog_tick();
+
+    LatencyState s = g_classifier.state();
+
+    double cur = g_latency.current();
+    double p95 = g_latency.p95();
+    double p99 = g_latency.p99();
+
+    if (symbol == "XAUUSD") {
+        if (s != LatencyState::FAST) {
+            std::printf(
+                "[XAUUSD] REJECT: LATENCY state=%s cur=%.2fms p95=%.2fms p99=%.2fms\n",
+                stateStr(s), cur, p95, p99
+            );
+            return false;
+        }
+    }
+
+    if (symbol == "XAGUSD") {
+        if (s == LatencyState::HALT) {
+            std::printf(
+                "[XAGUSD] REJECT: HALT cur=%.2fms p99=%.2fms\n",
+                cur, p99
+            );
+            return false;
+        }
+    }
+
+    return true;
+}
+
+void dumpStatus() {
+    if (!g_latency.ready()) {
+        std::printf("[LATENCY] WARMUP\n");
+        return;
+    }
+
+    std::printf(
+        "[LATENCY] state=%s cur=%.2f p50=%.2f p90=%.2f p95=%.2f p99=%.2f ewma=%.2f\n",
+        stateStr(g_classifier.state()),
+        g_latency.current(),
+        g_latency.p50(),
+        g_latency.p90(),
+        g_latency.p95(),
+        g_latency.p99(),
+        g_latency.ewma()
+    );
+}
+
+} // namespace LatencyRouter

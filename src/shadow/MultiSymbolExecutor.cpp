@@ -1,10 +1,16 @@
 #include "shadow/MultiSymbolExecutor.hpp"
+#include "execution/Time.hpp"
 #include <chrono>
 
 namespace shadow {
 
+MultiSymbolExecutor::MultiSymbolExecutor()
+    : router_()
+{
+}
+
 void MultiSymbolExecutor::addSymbol(const SymbolConfig& cfg, ExecMode mode) {
-    executors_[cfg.symbol] = std::make_unique<SymbolExecutor>(cfg, mode);
+    executors_[cfg.symbol] = std::make_unique<SymbolExecutor>(cfg, mode, router_);
 }
 
 void MultiSymbolExecutor::onTick(const std::string& symbol, const Tick& t) {
@@ -17,9 +23,7 @@ void MultiSymbolExecutor::onTick(const std::string& symbol, const Tick& t) {
 void MultiSymbolExecutor::onSignal(const std::string& symbol, const Signal& s) {
     auto it = executors_.find(symbol);
     if (it != executors_.end()) {
-        uint64_t ts_ms = std::chrono::duration_cast<std::chrono::milliseconds>(
-            std::chrono::system_clock::now().time_since_epoch()
-        ).count();
+        uint64_t ts_ms = monotonic_ms();  // FIXED: Use monotonic time
         it->second->onSignal(s, ts_ms);
     }
 }
@@ -48,6 +52,7 @@ void MultiSymbolExecutor::statusAll() const {
     for (const auto& pair : executors_) {
         pair.second->status();
     }
+    router_.dump_status();
 }
 
 SymbolExecutor* MultiSymbolExecutor::getExecutor(const std::string& symbol) {

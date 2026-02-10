@@ -1,25 +1,15 @@
 #pragma once
-
 #include "SymbolExecutor.hpp"
+#include "execution/ExecutionRouter.hpp"
 #include <unordered_map>
 #include <memory>
 #include <string>
 
 namespace shadow {
 
-/**
- * Multi-symbol execution manager
- * 
- * Manages independent execution engines for multiple symbols.
- * Each symbol maintains its own:
- * - State machine
- * - Position tracking
- * - PnL accounting
- * - Risk limits
- */
 class MultiSymbolExecutor {
 public:
-    MultiSymbolExecutor() = default;
+    MultiSymbolExecutor();
     
     // Symbol registration
     void addSymbol(const SymbolConfig& cfg, ExecMode mode);
@@ -41,8 +31,12 @@ public:
     // Symbol-specific access
     SymbolExecutor* getExecutor(const std::string& symbol);
     const SymbolExecutor* getExecutor(const std::string& symbol) const;
+    
+    // ExecutionRouter access
+    ExecutionRouter& router() { return router_; }
 
 private:
+    ExecutionRouter router_;
     std::unordered_map<std::string, std::unique_ptr<SymbolExecutor>> executors_;
 };
 

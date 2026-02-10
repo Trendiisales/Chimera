@@ -1,0 +1,235 @@
+#include "shadow/SymbolExecutor.hpp"
+#include "risk/EdgeGate.hpp"
+#include "risk/DrawdownGate.hpp"
+#include <cmath>
+
+namespace shadow {
+
+SymbolExecutor::SymbolExecutor(const SymbolConfig& cfg, ExecMode mode, LatencyGovernor& latency_governor)
+    : cfg_(cfg)
+    , mode_(mode)
+    , ledger_()
+    , latency_governor_(latency_governor)
+    , latency_gate_(latency_governor)
+    , session_guard_({.session_close_utc = 86400, .flatten_buffer_sec = 0, .liquidity_fade_sec = 0})
+    , metal_type_(cfg.symbol == "XAUUSD" ? Metal::XAU : Metal::XAG)
+    , realized_pnl_(0.0)
+    , last_entry_ts_(0)
+    , trades_this_hour_(0)
+    , hour_start_ts_(0)
+    , last_bid_(0.0)
+    , last_ask_(0.0)
+    , last_latency_ms_(10.0)
+    , account_equity_(100000.0)
+{
+}
+
+void SymbolExecutor::onTick(const Tick& t) {
+    last_bid_ = t.bid;
+    last_ask_ = t.ask;
+    
+    uint64_t current_hour = t.ts_ms / 3600000;
+    if (current_hour != hour_start_ts_ / 3600000) {
+        trades_this_hour_ = 0;
+        hour_start_ts_ = t.ts_ms;
+    }
+    
+    // CHECK EXIT CONDITIONS (LATENCY-AWARE)
+    if (!legs_.empty()) {
+        double mid = (t.bid + t.ask) / 2.0;
+        bool should_exit = false;
+        const char* exit_reason = "";
+        
+        for (const auto& leg : legs_) {
+            double pnl_points = (leg.side == Side::BUY) ? 
+                (mid - leg.entry) : (leg.entry - mid);
+            double pnl_bps = (pnl_points / leg.entry) * 10000.0;
+            
+            // TIME EXITS: Only if latency gate allows
+            // (gate will check regime and block if NORMAL/DEGRADED)
+            uint64_t hold_time_ms = t.ts_ms - leg.entry_ts;
+            if (hold_time_ms > 10000) {
+                if (latency_gate_.allow_time_exit(cfg_.symbol)) {
+                    should_exit = true;
+                    exit_reason = "TIME";
+                    break;
+                }
+            }
+            
+            // TP/SL: ALWAYS ALLOWED (sacred exits)
+            if (pnl_bps > 5.0) {
+                should_exit = true;
+                exit_reason = "TP";
+                break;
+            }
+            
+            if (pnl_bps < -3.0) {
+                should_exit = true;
+                exit_reason = "SL";
+                break;
+            }
+        }
+        
+        if (should_exit) {
+            exitAll(exit_reason, mid, t.ts_ms);
+        }
+    }
+}
+
+void SymbolExecutor::onSignal(const Signal& s, uint64_t ts_ms) {
+    if (!canEnter(s, ts_ms)) {
+        return;
+    }
+    
+    enterBase(s.side, s.price, ts_ms);
+}
+
+bool SymbolExecutor::canEnter(const Signal& s, uint64_t ts_ms) {
+    // LATENCY GATE (FIRST CHECK - if latency is bad, don't waste time on other checks)
+    if (!latency_gate_.allow_entry(cfg_.symbol)) {
+        rejection_stats_.record(RejectionReason::Type::REGIME_BLOCKED, last_latency_ms_, 0, ts_ms);
+        return false;
+    }
+    
+    // SESSION GUARD DISABLED FOR 24/7 METALS TRADING
+    // uint32_t now_utc = static_cast<uint32_t>(ts_ms / 1000);
+    // if (!session_guard_.allow_new_trade(now_utc)) {
+    //     rejection_stats_.record(RejectionReason::Type::SESSION_BLOCKED, 0, 0, ts_ms);
+    //     std::cout << "[" << cfg_.symbol << "] REJECT: SESSION_BLOCKED (now=" << now_utc << ")\n";
+    //     return false;
+    // }
+    
+    const auto& regime = (metal_type_ == Metal::XAU) ? XAU_REGIME : XAG_REGIME;
+    
+    if (trades_this_hour_ >= regime.max_trades_per_hour) {
+        rejection_stats_.record(RejectionReason::Type::REGIME_BLOCKED, trades_this_hour_, regime.max_trades_per_hour, ts_ms);
+        std::cout << "[" << cfg_.symbol << "] REJECT: REGIME_BLOCKED (trades=" << trades_this_hour_ << " max=" << regime.max_trades_per_hour << ")\n";
+        return false;
+    }
+    
+    if (legs_.size() >= static_cast<size_t>(cfg_.max_legs)) {
+        rejection_stats_.record(RejectionReason::Type::MAX_LEGS_REACHED, legs_.size(), cfg_.max_legs, ts_ms);
+        std::cout << "[" << cfg_.symbol << "] REJECT: MAX_LEGS (legs=" << legs_.size() << " max=" << cfg_.max_legs << ")\n";
+        return false;
+    }
+    
+    if (ts_ms < last_entry_ts_ + regime.min_cooldown_ms) {
+        rejection_stats_.record(RejectionReason::Type::COOLDOWN_ACTIVE, 0, 0, ts_ms);
+        uint64_t remaining = (last_entry_ts_ + regime.min_cooldown_ms - ts_ms);
+        std::cout << "[" << cfg_.symbol << "] REJECT: COOLDOWN_ACTIVE (remaining=" << remaining << "ms)\n";
+        return false;
+    }
+    
+    double proposed_size = cfg_.base_size * regime.size_multiplier;
+    double expected_move = 10.0;
+    double confidence = s.confidence;
+    
+    if (!EdgeGate::allowEntry(cfg_.symbol, expected_move, last_bid_, last_ask_, 
+                                proposed_size, last_latency_ms_, confidence)) {
+        rejection_stats_.record(RejectionReason::Type::COST_GATE_FAILED, expected_move, 0, ts_ms);
+        std::cout << "[" << cfg_.symbol << "] REJECT: EDGE_GATE (bid=" << last_bid_ << " ask=" << last_ask_ << " spread=" << (last_ask_-last_bid_) << ")\n";
+        return false;
+    }
+    
+    double current_dd = std::abs(std::min(0.0, realized_pnl_));
+    
+    if (!DrawdownGate::allowTrade(cfg_.symbol, account_equity_, current_dd, 
+                                    cfg_.initial_stop, proposed_size)) {
+        rejection_stats_.record(RejectionReason::Type::REGIME_BLOCKED, 0, 0, ts_ms);
+        std::cout << "[" << cfg_.symbol << "] REJECT: DD_GATE (dd=" << current_dd << " equity=" << account_equity_ << ")\n";
+        return false;
+    }
+    
+    std::cout << "[" << cfg_.symbol << "] ✓ ENTRY ALLOWED\n";
+    return true;
+}
+
+void SymbolExecutor::enterBase(Side side, double price, uint64_t ts) {
+    const auto& regime = (metal_type_ == Metal::XAU) ? XAU_REGIME : XAG_REGIME;
+    double size = cfg_.base_size * regime.size_multiplier;
+    
+    TradeSide tside = (side == Side::BUY) ? TradeSide::BUY : TradeSide::SELL;
+    
+    uint64_t trade_id = governor_.commit_entry(
+        cfg_.symbol, tside, size, price, last_bid_, last_ask_, last_latency_ms_, ts
+    );
+    
+    Leg leg;
+    leg.side = side;
+    leg.size = size;
+    leg.entry = price;
+    leg.entry_ts = ts;
+    leg.stop = (side == Side::BUY) ? price - cfg_.initial_stop : price + cfg_.initial_stop;
+    
+    legs_.push_back(leg);
+    leg_to_trade_[legs_.size()-1] = trade_id;
+    last_entry_ts_ = ts;
+    trades_this_hour_++;
+    
+    std::cout << "[" << cfg_.symbol << "] ENTRY trade_id=" << trade_id 
+              << " price=" << price << " size=" << size 
+              << " (" << trades_this_hour_ << "/" << regime.max_trades_per_hour << " this hour)\n";
+    
+    if (gui_callback_) {
+        const char* side_str = (side == Side::BUY) ? "BUY" : "SELL";
+        gui_callback_(cfg_.symbol.c_str(), side_str, size, price, 0.0);
+    }
+}
+
+void SymbolExecutor::exitAll(const char* reason, double price, uint64_t ts) {
+    for (size_t i = 0; i < legs_.size(); i++) {
+        auto& leg = legs_[i];
+        uint64_t trade_id = leg_to_trade_[i];
+        
+        governor_.commit_exit(trade_id, price, ts);
+        
+        double pnl = ledger_.total_net_pnl() - realized_pnl_;
+        realized_pnl_ = ledger_.total_net_pnl();
+        
+        std::cout << "[" << cfg_.symbol << "] EXIT " << reason 
+                  << " trade_id=" << trade_id 
+                  << " pnl=$" << pnl << "\n";
+        
+        // GUI callback (for display/broadcast)
+        if (gui_callback_) {
+            const char* side_str = (leg.side == Side::BUY) ? "SELL" : "BUY";
+            gui_callback_(cfg_.symbol.c_str(), side_str, leg.size, price, pnl);
+        }
+        
+        // EXIT CALLBACK (for strategy lifecycle - signal generator, blotter, etc)
+        if (exit_callback_) {
+            exit_callback_(cfg_.symbol.c_str(), trade_id, price, pnl, reason);
+        }
+    }
+    
+    legs_.clear();
+    leg_to_trade_.clear();
+}
+
+void SymbolExecutor::setGUICallback(GUITradeCallback cb) {
+    gui_callback_ = cb;
+}
+
+void SymbolExecutor::setExitCallback(ExitCallback cb) {
+    exit_callback_ = cb;
+}
+
+double SymbolExecutor::getRealizedPnL() const {
+    return ledger_.total_net_pnl();
+}
+
+int SymbolExecutor::getActiveLegs() const {
+    return legs_.size();
+}
+
+void SymbolExecutor::status() const {
+    const auto& regime = (metal_type_ == Metal::XAU) ? XAU_REGIME : XAG_REGIME;
+    std::cout << "[" << cfg_.symbol << "] "
+              << "legs=" << legs_.size() << " "
+              << "pnl=$" << ledger_.total_net_pnl() << " "
+              << "trades=" << ledger_.all_trades().size() << " "
+              << "rejects=" << rejection_stats_.total_rejections << " "
+              << "hour=" << trades_this_hour_ << "/" << regime.max_trades_per_hour << "\n";
+}
+
+} // namespace shadow

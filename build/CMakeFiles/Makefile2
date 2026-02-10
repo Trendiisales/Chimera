@@ -83,12 +83,12 @@ clean: CMakeFiles/gui.dir/clean
 CMakeFiles/chimera.dir/all: CMakeFiles/gui.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10 "Built target chimera"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17 "Built target chimera"
 .PHONY : CMakeFiles/chimera.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/chimera.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/trader/Chimera/build/CMakeFiles 18
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/trader/Chimera/build/CMakeFiles 25
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/chimera.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/trader/Chimera/build/CMakeFiles 0
 .PHONY : CMakeFiles/chimera.dir/rule
@@ -109,7 +109,7 @@ CMakeFiles/chimera.dir/clean:
 CMakeFiles/gui.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/gui.dir/build.make CMakeFiles/gui.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/gui.dir/build.make CMakeFiles/gui.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=11,12,13,14,15,16,17,18 "Built target gui"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=18,19,20,21,22,23,24,25 "Built target gui"
 .PHONY : CMakeFiles/gui.dir/all
 
 # Build rule for subdir invocation for target.

@@ -1,5 +1,7 @@
 #include "gui/WsServer.hpp"
 #include "shadow/MultiSymbolExecutor.hpp"
+#include "execution/ExecutionRouter.hpp"
+#include "gui/TradeHistory.hpp"
 
 WsServer* g_wsServer = nullptr;
 shadow::MultiSymbolExecutor* g_executor = nullptr;
@@ -22,12 +24,22 @@ shadow::MultiSymbolExecutor* g_executor = nullptr;
 static std::atomic<bool> g_running{true};
 
 // ============================================================================
-// SIMPLE SIGNAL GENERATOR - METALS ONLY (NO EXTERNAL DEPENDENCIES)
+// METALS SIGNAL GENERATOR - XAU TUNED FOR QUALITY
 // ============================================================================
 class MetalsSignalGenerator {
 public:
     explicit MetalsSignalGenerator(shadow::MultiSymbolExecutor& executor)
         : executor_(executor) {}
+
+    // Called by exit callback to track last exit for displacement filter
+    void onExit(const std::string& symbol, double exit_price, double pnl) {
+        auto& state = states_[symbol];
+        state.last_exit_price = exit_price;
+        state.last_exit_pnl = pnl;
+        state.last_exit_ts_ns = std::chrono::duration_cast<std::chrono::nanoseconds>(
+            std::chrono::system_clock::now().time_since_epoch()
+        ).count();
+    }
 
     void onTick(const std::string& symbol, double bid, double ask, uint64_t ts_ns) {
         if (symbol != "XAUUSD" && symbol != "XAGUSD") return;
@@ -62,32 +74,86 @@ public:
         // Need warmup
         if (state.tick_count < 20) return;
         
-        // Simple trend + momentum signal
+        // Trend detection
         bool uptrend = state.ema_fast > state.ema_slow;
         bool downtrend = state.ema_fast < state.ema_slow;
         
         double threshold = spread * 0.25;  // 25% of spread
         
-        // Generate signals WITH COOLDOWN AND PRICE CHANGE FILTER
-        // Gold: 1 second cooldown, must move $0.10
-        // Silver: 1 second cooldown, must move $0.05
-        double min_price_change = (symbol == "XAUUSD") ? 0.10 : 0.05;
-        uint64_t cooldown_ns = 1'000'000'000ULL;  // 1 second
-        
-        // Price must have changed enough
-        if (state.last_signal_price > 0 && 
-            std::abs(mid - state.last_signal_price) < min_price_change) {
-            return;  // Price hasn't moved enough
+        // ═══════════════════════════════════════════════════════════
+        // XAU FIX 1: MINIMUM DISPLACEMENT FROM LAST EXIT ($0.60)
+        // Prevents chop re-entry immediately after exit
+        // ═══════════════════════════════════════════════════════════
+        if (symbol == "XAUUSD" && state.last_exit_price > 0) {
+            double displacement = std::abs(mid - state.last_exit_price);
+            if (displacement < 0.60) {
+                return;  // Too close to last exit - avoid whipsaw
+            }
         }
         
-        if (uptrend && state.momentum > 0 && std::abs(state.momentum) > threshold) {
-            if (ts_ns - state.last_signal_ns > cooldown_ns) {
+        // ═══════════════════════════════════════════════════════════
+        // XAU FIX 2: EXTENDED COOLDOWN AFTER LOSING EXIT (3s vs 1s)
+        // Gold whipsaws after losses - stay out longer
+        // ═══════════════════════════════════════════════════════════
+        uint64_t cooldown_ns = 1'000'000'000ULL;  // 1 second base (Silver)
+        
+        if (symbol == "XAUUSD") {
+            if (state.last_exit_pnl < 0) {
+                cooldown_ns = 3'000'000'000ULL;  // 3 seconds after XAU loss
+            }
+        }
+        
+        if (ts_ns - state.last_signal_ns < cooldown_ns) {
+            return;  // In cooldown
+        }
+        
+        // Price must have changed enough from last signal
+        double min_price_change = (symbol == "XAUUSD") ? 0.10 : 0.05;
+        if (state.last_signal_price > 0 && 
+            std::abs(mid - state.last_signal_price) < min_price_change) {
+            return;
+        }
+        
+        // ═══════════════════════════════════════════════════════════
+        // XAU FIX 3: 2-TICK CONFIRMATION RULE
+        // Require two consecutive directional ticks before XAU signal
+        // Filters single-tick noise without adding lag
+        // ═══════════════════════════════════════════════════════════
+        if (symbol == "XAUUSD") {
+            // Determine current directional signal
+            bool current_up = uptrend && state.momentum > 0 && std::abs(state.momentum) > threshold;
+            bool current_down = downtrend && state.momentum < 0 && std::abs(state.momentum) > threshold;
+            
+            if (current_up) {
+                if (state.last_direction == 1) {
+                    // Two consecutive up ticks - CONFIRMED BUY
+                    emitBuySignal(symbol, mid);
+                    state.last_signal_ns = ts_ns;
+                    state.last_signal_price = mid;
+                    state.last_direction = 0;  // Reset after emit
+                } else {
+                    state.last_direction = 1;  // First up tick, wait for second
+                }
+            } else if (current_down) {
+                if (state.last_direction == -1) {
+                    // Two consecutive down ticks - CONFIRMED SELL
+                    emitSellSignal(symbol, mid);
+                    state.last_signal_ns = ts_ns;
+                    state.last_signal_price = mid;
+                    state.last_direction = 0;  // Reset after emit
+                } else {
+                    state.last_direction = -1;  // First down tick, wait for second
+                }
+            } else {
+                state.last_direction = 0;  // No signal this tick, reset
+            }
+        } else {
+            // SILVER: Single-tick signals (no 2-tick confirmation needed)
+            if (uptrend && state.momentum > 0 && std::abs(state.momentum) > threshold) {
                 emitBuySignal(symbol, mid);
                 state.last_signal_ns = ts_ns;
                 state.last_signal_price = mid;
-            }
-        } else if (downtrend && state.momentum < 0 && std::abs(state.momentum) > threshold) {
-            if (ts_ns - state.last_signal_ns > cooldown_ns) {
+            } else if (downtrend && state.momentum < 0 && std::abs(state.momentum) > threshold) {
                 emitSellSignal(symbol, mid);
                 state.last_signal_ns = ts_ns;
                 state.last_signal_price = mid;
@@ -104,6 +170,10 @@ private:
         uint64_t tick_count = 0;
         uint64_t last_signal_ns = 0;
         double last_signal_price = 0.0;
+        double last_exit_price = 0.0;    // For FIX 1: displacement filter
+        double last_exit_pnl = 0.0;       // For FIX 2: cooldown after loss
+        uint64_t last_exit_ts_ns = 0;
+        int last_direction = 0;           // For FIX 3: -1=down, 0=none, 1=up
     };
     
     std::unordered_map<std::string, State> states_;
@@ -114,7 +184,6 @@ private:
         sig.side = shadow::Side::BUY;
         sig.price = price;
         sig.confidence = 0.75;
-        sig.raw_momentum = 1.0;
         
         std::cout << "[SIGNAL] " << symbol << " BUY @ " << price << "\n";
         executor_.onSignal(symbol, sig);
@@ -125,7 +194,6 @@ private:
         sig.side = shadow::Side::SELL;
         sig.price = price;
         sig.confidence = 0.75;
-        sig.raw_momentum = -1.0;
         
         std::cout << "[SIGNAL] " << symbol << " SELL @ " << price << "\n";
         executor_.onSignal(symbol, sig);
@@ -182,23 +250,69 @@ int main(int argc, char* argv[]) {
     auto xau_exec = executor.getExecutor("XAUUSD");
     auto xag_exec = executor.getExecutor("XAGUSD");
 
+    // SIGNAL GENERATOR - XAU tuned for quality
+    MetalsSignalGenerator signalGen(executor);
+    std::cout << "[INIT] Signal generator initialized\n";
+
+    // Wire EXIT callbacks (called only on position close)
     if (xau_exec) {
-        xau_exec->setGUICallback([&gui](const char* sym, const char* side,
-                                         double sz, double px, double pnl) {
-            gui.broadcastTrade(sym, side, sz, px, pnl);
+        xau_exec->setExitCallback([&signalGen](const char* sym, uint64_t trade_id,
+                                                 double exit_price, double pnl, const char* reason) {
+            signalGen.onExit(sym, exit_price, pnl);
         });
     }
 
     if (xag_exec) {
-        xag_exec->setGUICallback([&gui](const char* sym, const char* side,
-                                         double sz, double px, double pnl) {
-            gui.broadcastTrade(sym, side, sz, px, pnl);
+        xag_exec->setExitCallback([&signalGen](const char* sym, uint64_t trade_id,
+                                                 double exit_price, double pnl, const char* reason) {
+            signalGen.onExit(sym, exit_price, pnl);
+        });
+
+
+    // Wire GUI callbacks for trade blotter
+    if (xau_exec) {
+        xau_exec->setGUICallback([&gui](const char* sym, uint64_t trade_id, char side,
+                                         double entry, double exit_price, double size,
+                                         double pnl, uint64_t ts_ms) {
+            const char* side_str = (side == 'B') ? "BUY" : "SELL";
+            gui.broadcastTrade(sym, side_str, size, entry, pnl);
+            
+            // Add to trade history for blotter
+            gui::TradeRecord trade;
+            trade.id = trade_id;
+            trade.sym = sym;
+            trade.side = side;
+            trade.qty = size;
+            trade.entry = entry;
+            trade.exit = exit_price;
+            trade.fees = 0.0; // TODO: calculate actual fees
+            trade.pnl = pnl;
+            gui::TradeHistory::instance().addTrade(trade);
+        });
+    }
+    if (xag_exec) {
+        xag_exec->setGUICallback([&gui](const char* sym, uint64_t trade_id, char side,
+                                         double entry, double exit_price, double size,
+                                         double pnl, uint64_t ts_ms) {
+            const char* side_str = (side == 'B') ? "BUY" : "SELL";
+            gui.broadcastTrade(sym, side_str, size, entry, pnl);
+            
+            // Add to trade history for blotter
+            gui::TradeRecord trade;
+            trade.id = trade_id;
+            trade.sym = sym;
+            trade.side = side;
+            trade.qty = size;
+            trade.entry = entry;
+            trade.exit = exit_price;
+            trade.fees = 0.0; // TODO: calculate actual fees
+            trade.pnl = pnl;
+            gui::TradeHistory::instance().addTrade(trade);
         });
     }
 
-    // SIGNAL GENERATOR - Simple built-in logic
-    MetalsSignalGenerator signalGen(executor);
-    std::cout << "[INIT] Signal generator initialized\n";
+
+    }
 
     std::cout << "[INIT] Loading FIX config...\n";
     Chimera::FIXConfig fixConfig;
@@ -231,6 +345,18 @@ int main(int argc, char* argv[]) {
         signalGen.onTick(tick.symbol, tick.bid, tick.ask, ts_ns);
     });
 
+    
+    // RTT Recording: Feed FIX latency to LatencyMonitor
+    
+    // RTT Recording - feeds LatencyRouter
+    fix.setOnLatency([&executor](const std::string& symbol, double rtt_ms, double slippage_bps) {
+        uint64_t now_ms = std::chrono::duration_cast<std::chrono::milliseconds>(
+            std::chrono::system_clock::now().time_since_epoch()
+        ).count();
+        executor.router().on_fix_rtt(rtt_ms, now_ms);
+        (void)symbol; (void)slippage_bps;
+    });
+    
     fix.setOnExec([](const Chimera::CTraderExecReport& exec) {
         std::cout << "[EXEC] Order " << exec.clOrdID << " executed\n";
     });
@@ -280,6 +406,16 @@ int main(int argc, char* argv[]) {
 
         shadow::WatchdogThread::heartbeat();
 
+        
+        // Poll FIX RTT and feed to LatencyRouter
+        double rtt = fix.fixRttLastMs();
+        if (rtt > 0) {
+            uint64_t now_ms = std::chrono::duration_cast<std::chrono::milliseconds>(
+                std::chrono::system_clock::now().time_since_epoch()
+            ).count();
+            executor.router().on_fix_rtt(rtt, now_ms);
+            executor.router().on_loop_heartbeat(now_ms);
+        }
         auto now = std::chrono::steady_clock::now();
         if (std::chrono::duration_cast<std::chrono::seconds>(now - last_status).count() >= 10) {
             executor.statusAll();
