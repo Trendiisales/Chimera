@@ -14,7 +14,7 @@
 namespace shadow {
 
 enum class ExecMode { LIVE, SHADOW };
-enum class Side { BUY, SELL };
+enum class Side { BUY, SELL, FLAT };
 enum class Metal { XAU, XAG };
 
 struct Signal {
@@ -109,6 +109,7 @@ private:
     
     bool canEnter(const Signal& s, uint64_t ts_ms);
     void enterBase(Side side, double price, uint64_t ts);
+    void enterFromEngine(Side side, double price, double size, const char* engine, uint64_t ts);
     void exitAll(const char* reason, double price, uint64_t ts);
 };
 
