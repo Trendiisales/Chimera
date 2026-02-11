@@ -38,8 +38,8 @@ private:
 
 private:
     // === XAU CONFIG ===
-    static constexpr double XAU_MIN_IMPULSE_FAST = 0.18;
-    static constexpr double XAU_MIN_IMPULSE_OPEN = 0.14;
+    static constexpr double XAU_MIN_IMPULSE_FAST = 0.14;
+    static constexpr double XAU_MIN_IMPULSE_OPEN = 0.10;
     static constexpr double XAU_MAX_P95_FAST     = 5.0;
 
     // === XAG CONFIG ===

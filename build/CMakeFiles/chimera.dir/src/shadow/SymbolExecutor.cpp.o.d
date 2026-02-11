@@ -183,8 +183,7 @@ CMakeFiles/chimera.dir/src/shadow/SymbolExecutor.cpp.o: \
  /usr/include/c++/13/functional /usr/include/c++/13/bits/std_function.h \
  /usr/include/c++/13/typeinfo /usr/include/c++/13/array \
  /usr/include/c++/13/compare \
- /home/trader/Chimera/include/risk/EdgeGate.hpp \
- /home/trader/Chimera/include/risk/DrawdownGate.hpp \
+ /home/trader/Chimera/include/risk/SessionGuard.hpp \
  /usr/include/c++/13/iostream /usr/include/c++/13/ostream \
  /usr/include/c++/13/ios /usr/include/c++/13/exception \
  /usr/include/c++/13/bits/exception_ptr.h \
@@ -221,6 +220,4 @@ CMakeFiles/chimera.dir/src/shadow/SymbolExecutor.cpp.o: \
  /usr/include/c++/13/bits/locale_facets.tcc \
  /usr/include/c++/13/bits/basic_ios.tcc \
  /usr/include/c++/13/bits/ostream.tcc /usr/include/c++/13/istream \
- /usr/include/c++/13/bits/istream.tcc /usr/include/c++/13/chrono \
- /usr/include/c++/13/bits/chrono.h /usr/include/c++/13/ratio \
- /usr/include/c++/13/ctime /usr/include/c++/13/bits/parse_numbers.h
+ /usr/include/c++/13/bits/istream.tcc

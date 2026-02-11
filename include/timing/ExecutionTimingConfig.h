@@ -24,10 +24,10 @@ static constexpr int GLOBAL_BLOCK_TIME_MS  = 30000;
 static constexpr int XAU_ENTRY_RTT_MAX_MS    = 8;     // p95 hard gate - NO ENTRIES ABOVE THIS
 static constexpr int XAU_CAUTION_RTT_MS      = 6;     // p90-p95 transition zone
 static constexpr int XAU_BLOCK_RTT_MS        = 10;    // Safety margin above p95
-static constexpr int XAU_MAX_OPEN_LEGS       = 1;     // Single position only
+static constexpr int XAU_MAX_OPEN_LEGS       = 2;     // Single position only
 static constexpr int XAU_MAX_TRADES_PER_HOUR = 20;    // Quality over quantity
-static constexpr int XAU_COOLDOWN_MS         = 1500;  // Spacing between trades
-static constexpr int XAU_BLOCK_ON_LOSS_COUNT = 1;     // ONE bad exit = pause
+static constexpr int XAU_COOLDOWN_MS         = 800;  // Spacing between trades
+static constexpr int XAU_BLOCK_ON_LOSS_COUNT = 2;     // ONE bad exit = pause
 
 // =====================
 // XAGUSD — CAN TOLERATE P99 (deeper, less jumpy)

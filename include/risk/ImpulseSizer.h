@@ -38,8 +38,8 @@ private:
     static constexpr double MAX_MULT = 1.20;
 
     // === XAU thresholds ===
-    static constexpr double XAU_MED_IMPULSE = 0.18;
-    static constexpr double XAU_STRONG_IMPULSE = 0.30;
+    static constexpr double XAU_MED_IMPULSE    = 0.15;
+    static constexpr double XAU_STRONG_IMPULSE = 0.26;
 
     // === XAG thresholds ===
     static constexpr double XAG_MED_IMPULSE = 0.10;

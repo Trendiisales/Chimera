@@ -128,6 +128,8 @@ public:
                 if (state.last_direction == 1) {
                     // Two consecutive up ticks - CONFIRMED BUY
                     emitBuySignal(symbol, mid);
+                    state.last_signal_ns = ts_ns;
+                    state.last_signal_price = mid;
                     state.last_direction = 0;  // Reset after emit
                 } else {
                     state.last_direction = 1;  // First up tick, wait for second
@@ -136,6 +138,8 @@ public:
                 if (state.last_direction == -1) {
                     // Two consecutive down ticks - CONFIRMED SELL
                     emitSellSignal(symbol, mid);
+                    state.last_signal_ns = ts_ns;
+                    state.last_signal_price = mid;
                     state.last_direction = 0;  // Reset after emit
                 } else {
                     state.last_direction = -1;  // First down tick, wait for second
@@ -147,8 +151,12 @@ public:
             // SILVER: Single-tick signals (no 2-tick confirmation needed)
             if (uptrend && state.momentum > 0 && std::abs(state.momentum) > threshold) {
                 emitBuySignal(symbol, mid);
+                state.last_signal_ns = ts_ns;
+                state.last_signal_price = mid;
             } else if (downtrend && state.momentum < 0 && std::abs(state.momentum) > threshold) {
                 emitSellSignal(symbol, mid);
+                state.last_signal_ns = ts_ns;
+                state.last_signal_price = mid;
             }
         }
     }

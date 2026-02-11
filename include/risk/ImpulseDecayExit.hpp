@@ -47,8 +47,8 @@ private:
     static constexpr uint64_t MIN_AGE_MS = 120;
 
     // === XAU ===
-    static constexpr double XAU_DECAY_WARN = 0.55;
-    static constexpr double XAU_DECAY_EXIT = 0.35;
+    static constexpr double XAU_DECAY_WARN = 0.48;
+    static constexpr double XAU_DECAY_EXIT = 0.30;
     static constexpr double XAU_MIN_PNL_EXIT = -0.20;
 
     // === XAG ===

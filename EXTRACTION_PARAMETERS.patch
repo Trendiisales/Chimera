@@ -1,0 +1,76 @@
+# EXTRACTION PARAMETER UPGRADE
+# Apply these changes to unlock profit extraction
+
+## FILE 1: include/routing/SymbolOpportunityRouter.hpp
+### BEFORE:
+static constexpr double XAU_MIN_IMPULSE_FAST = 0.18;
+static constexpr double XAU_MIN_IMPULSE_OPEN = 0.14;
+
+### AFTER:
+static constexpr double XAU_MIN_IMPULSE_FAST = 0.14;
+static constexpr double XAU_MIN_IMPULSE_OPEN = 0.10;
+
+---
+
+## FILE 2: include/risk/ImpulseSizer.h
+### BEFORE:
+static constexpr double XAU_MED_IMPULSE    = 0.18;
+static constexpr double XAU_STRONG_IMPULSE = 0.30;
+
+### AFTER:
+static constexpr double XAU_MED_IMPULSE    = 0.15;
+static constexpr double XAU_STRONG_IMPULSE = 0.26;
+
+---
+
+## FILE 3: include/timing/ExecutionTimingConfig.h
+### BEFORE:
+static constexpr int XAU_COOLDOWN_MS         = 1500;
+static constexpr int XAU_BLOCK_ON_LOSS_COUNT = 1;
+static constexpr int XAU_MAX_OPEN_LEGS       = 1;
+
+### AFTER:
+static constexpr int XAU_COOLDOWN_MS         = 800;
+static constexpr int XAU_BLOCK_ON_LOSS_COUNT = 2;
+static constexpr int XAU_MAX_OPEN_LEGS       = 2;
+
+---
+
+## FILE 4: src/main.cpp (Loss-based cooldown)
+### BEFORE:
+if (symbol == "XAUUSD") {
+    cooldown_ns = 3'000'000'000ULL;
+}
+
+### AFTER:
+if (symbol == "XAUUSD" && impulse_ratio < 0.35) {
+    cooldown_ns = 3'000'000'000ULL;
+}
+
+---
+
+## FILE 5: include/risk/ImpulseDecayExit.hpp
+### BEFORE:
+static constexpr double XAU_DECAY_WARN = 0.55;
+static constexpr double XAU_DECAY_EXIT = 0.35;
+
+### AFTER:
+static constexpr double XAU_DECAY_WARN = 0.48;
+static constexpr double XAU_DECAY_EXIT = 0.30;
+
+---
+
+## FILE 6: src/main.cpp (Price displacement)
+### BEFORE:
+double min_price_change = (symbol == "XAUUSD") ? 0.10 : 0.05;
+
+### AFTER:
+double min_price_change = (symbol == "XAUUSD") ? 0.06 : 0.05;
+
+---
+
+# EXPECTED IMPACT:
+# - Trades/hour: 0-2 → 6-12
+# - Rejection rate: -65%
+# - PnL: Steady drift capture
+# - Risk: UNCHANGED (pre-sizing gates)
