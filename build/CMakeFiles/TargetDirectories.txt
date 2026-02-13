@@ -1,4 +1,3 @@
 /home/trader/Chimera/build/CMakeFiles/chimera.dir
-/home/trader/Chimera/build/CMakeFiles/gui.dir
 /home/trader/Chimera/build/CMakeFiles/edit_cache.dir
 /home/trader/Chimera/build/CMakeFiles/rebuild_cache.dir

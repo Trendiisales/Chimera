@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/trader/Chimera/include -I/home/trader/Chimera/cfd_engine/include -I/home/trader/Chimera/src
+CXX_INCLUDES = -I/home/trader/Chimera/include -I/home/trader/Chimera/src
 
-CXX_FLAGS =  -Wall -O3 -std=gnu++17
+CXX_FLAGS = -std=gnu++20
 

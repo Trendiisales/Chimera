@@ -129,18 +129,29 @@ chimera/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/build
 .PHONY : chimera/fast
 
-#=============================================================================
-# Target rules for targets named gui
+src/core/Globals.o: src/core/Globals.cpp.o
+.PHONY : src/core/Globals.o
 
-# Build rule for target.
-gui: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gui
-.PHONY : gui
+# target to build an object file
+src/core/Globals.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/core/Globals.cpp.o
+.PHONY : src/core/Globals.cpp.o
 
-# fast build rule for target.
-gui/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/gui.dir/build.make CMakeFiles/gui.dir/build
-.PHONY : gui/fast
+src/core/Globals.i: src/core/Globals.cpp.i
+.PHONY : src/core/Globals.i
+
+# target to preprocess a source file
+src/core/Globals.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/core/Globals.cpp.i
+.PHONY : src/core/Globals.cpp.i
+
+src/core/Globals.s: src/core/Globals.cpp.s
+.PHONY : src/core/Globals.s
+
+# target to generate assembly for a file
+src/core/Globals.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/core/Globals.cpp.s
+.PHONY : src/core/Globals.cpp.s
 
 src/core/TradeLedger.o: src/core/TradeLedger.cpp.o
 .PHONY : src/core/TradeLedger.o
@@ -165,6 +176,30 @@ src/core/TradeLedger.s: src/core/TradeLedger.cpp.s
 src/core/TradeLedger.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/core/TradeLedger.cpp.s
 .PHONY : src/core/TradeLedger.cpp.s
+
+src/execution/CostModel.o: src/execution/CostModel.cpp.o
+.PHONY : src/execution/CostModel.o
+
+# target to build an object file
+src/execution/CostModel.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/execution/CostModel.cpp.o
+.PHONY : src/execution/CostModel.cpp.o
+
+src/execution/CostModel.i: src/execution/CostModel.cpp.i
+.PHONY : src/execution/CostModel.i
+
+# target to preprocess a source file
+src/execution/CostModel.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/execution/CostModel.cpp.i
+.PHONY : src/execution/CostModel.cpp.i
+
+src/execution/CostModel.s: src/execution/CostModel.cpp.s
+.PHONY : src/execution/CostModel.s
+
+# target to generate assembly for a file
+src/execution/CostModel.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/execution/CostModel.cpp.s
+.PHONY : src/execution/CostModel.cpp.s
 
 src/execution/ExecutionGovernor.o: src/execution/ExecutionGovernor.cpp.o
 .PHONY : src/execution/ExecutionGovernor.o
@@ -214,29 +249,53 @@ src/execution/ExecutionGovernor_drift.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/execution/ExecutionGovernor_drift.cpp.s
 .PHONY : src/execution/ExecutionGovernor_drift.cpp.s
 
-src/execution/ExecutionRouter.o: src/execution/ExecutionRouter.cpp.o
-.PHONY : src/execution/ExecutionRouter.o
+src/execution/ExecutionRouter_dual_tier.o: src/execution/ExecutionRouter_dual_tier.cpp.o
+.PHONY : src/execution/ExecutionRouter_dual_tier.o
 
 # target to build an object file
-src/execution/ExecutionRouter.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/execution/ExecutionRouter.cpp.o
-.PHONY : src/execution/ExecutionRouter.cpp.o
+src/execution/ExecutionRouter_dual_tier.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/execution/ExecutionRouter_dual_tier.cpp.o
+.PHONY : src/execution/ExecutionRouter_dual_tier.cpp.o
 
-src/execution/ExecutionRouter.i: src/execution/ExecutionRouter.cpp.i
-.PHONY : src/execution/ExecutionRouter.i
+src/execution/ExecutionRouter_dual_tier.i: src/execution/ExecutionRouter_dual_tier.cpp.i
+.PHONY : src/execution/ExecutionRouter_dual_tier.i
 
 # target to preprocess a source file
-src/execution/ExecutionRouter.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/execution/ExecutionRouter.cpp.i
-.PHONY : src/execution/ExecutionRouter.cpp.i
+src/execution/ExecutionRouter_dual_tier.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/execution/ExecutionRouter_dual_tier.cpp.i
+.PHONY : src/execution/ExecutionRouter_dual_tier.cpp.i
 
-src/execution/ExecutionRouter.s: src/execution/ExecutionRouter.cpp.s
-.PHONY : src/execution/ExecutionRouter.s
+src/execution/ExecutionRouter_dual_tier.s: src/execution/ExecutionRouter_dual_tier.cpp.s
+.PHONY : src/execution/ExecutionRouter_dual_tier.s
 
 # target to generate assembly for a file
-src/execution/ExecutionRouter.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/execution/ExecutionRouter.cpp.s
-.PHONY : src/execution/ExecutionRouter.cpp.s
+src/execution/ExecutionRouter_dual_tier.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/execution/ExecutionRouter_dual_tier.cpp.s
+.PHONY : src/execution/ExecutionRouter_dual_tier.cpp.s
+
+src/execution/LatencyExecutionGate.o: src/execution/LatencyExecutionGate.cpp.o
+.PHONY : src/execution/LatencyExecutionGate.o
+
+# target to build an object file
+src/execution/LatencyExecutionGate.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/execution/LatencyExecutionGate.cpp.o
+.PHONY : src/execution/LatencyExecutionGate.cpp.o
+
+src/execution/LatencyExecutionGate.i: src/execution/LatencyExecutionGate.cpp.i
+.PHONY : src/execution/LatencyExecutionGate.i
+
+# target to preprocess a source file
+src/execution/LatencyExecutionGate.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/execution/LatencyExecutionGate.cpp.i
+.PHONY : src/execution/LatencyExecutionGate.cpp.i
+
+src/execution/LatencyExecutionGate.s: src/execution/LatencyExecutionGate.cpp.s
+.PHONY : src/execution/LatencyExecutionGate.s
+
+# target to generate assembly for a file
+src/execution/LatencyExecutionGate.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/execution/LatencyExecutionGate.cpp.s
+.PHONY : src/execution/LatencyExecutionGate.cpp.s
 
 src/execution/LatencyExecutionGovernor.o: src/execution/LatencyExecutionGovernor.cpp.o
 .PHONY : src/execution/LatencyExecutionGovernor.o
@@ -291,7 +350,7 @@ src/gui/ExecutionSnapshotJSON.o: src/gui/ExecutionSnapshotJSON.cpp.o
 
 # target to build an object file
 src/gui/ExecutionSnapshotJSON.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/gui.dir/build.make CMakeFiles/gui.dir/src/gui/ExecutionSnapshotJSON.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/gui/ExecutionSnapshotJSON.cpp.o
 .PHONY : src/gui/ExecutionSnapshotJSON.cpp.o
 
 src/gui/ExecutionSnapshotJSON.i: src/gui/ExecutionSnapshotJSON.cpp.i
@@ -299,7 +358,7 @@ src/gui/ExecutionSnapshotJSON.i: src/gui/ExecutionSnapshotJSON.cpp.i
 
 # target to preprocess a source file
 src/gui/ExecutionSnapshotJSON.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/gui.dir/build.make CMakeFiles/gui.dir/src/gui/ExecutionSnapshotJSON.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/gui/ExecutionSnapshotJSON.cpp.i
 .PHONY : src/gui/ExecutionSnapshotJSON.cpp.i
 
 src/gui/ExecutionSnapshotJSON.s: src/gui/ExecutionSnapshotJSON.cpp.s
@@ -307,7 +366,7 @@ src/gui/ExecutionSnapshotJSON.s: src/gui/ExecutionSnapshotJSON.cpp.s
 
 # target to generate assembly for a file
 src/gui/ExecutionSnapshotJSON.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/gui.dir/build.make CMakeFiles/gui.dir/src/gui/ExecutionSnapshotJSON.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/gui/ExecutionSnapshotJSON.cpp.s
 .PHONY : src/gui/ExecutionSnapshotJSON.cpp.s
 
 src/gui/GUIBroadcaster.o: src/gui/GUIBroadcaster.cpp.o
@@ -315,7 +374,7 @@ src/gui/GUIBroadcaster.o: src/gui/GUIBroadcaster.cpp.o
 
 # target to build an object file
 src/gui/GUIBroadcaster.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/gui.dir/build.make CMakeFiles/gui.dir/src/gui/GUIBroadcaster.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/gui/GUIBroadcaster.cpp.o
 .PHONY : src/gui/GUIBroadcaster.cpp.o
 
 src/gui/GUIBroadcaster.i: src/gui/GUIBroadcaster.cpp.i
@@ -323,7 +382,7 @@ src/gui/GUIBroadcaster.i: src/gui/GUIBroadcaster.cpp.i
 
 # target to preprocess a source file
 src/gui/GUIBroadcaster.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/gui.dir/build.make CMakeFiles/gui.dir/src/gui/GUIBroadcaster.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/gui/GUIBroadcaster.cpp.i
 .PHONY : src/gui/GUIBroadcaster.cpp.i
 
 src/gui/GUIBroadcaster.s: src/gui/GUIBroadcaster.cpp.s
@@ -331,7 +390,7 @@ src/gui/GUIBroadcaster.s: src/gui/GUIBroadcaster.cpp.s
 
 # target to generate assembly for a file
 src/gui/GUIBroadcaster.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/gui.dir/build.make CMakeFiles/gui.dir/src/gui/GUIBroadcaster.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/gui/GUIBroadcaster.cpp.s
 .PHONY : src/gui/GUIBroadcaster.cpp.s
 
 src/gui/GuiState.o: src/gui/GuiState.cpp.o
@@ -339,7 +398,7 @@ src/gui/GuiState.o: src/gui/GuiState.cpp.o
 
 # target to build an object file
 src/gui/GuiState.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/gui.dir/build.make CMakeFiles/gui.dir/src/gui/GuiState.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/gui/GuiState.cpp.o
 .PHONY : src/gui/GuiState.cpp.o
 
 src/gui/GuiState.i: src/gui/GuiState.cpp.i
@@ -347,7 +406,7 @@ src/gui/GuiState.i: src/gui/GuiState.cpp.i
 
 # target to preprocess a source file
 src/gui/GuiState.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/gui.dir/build.make CMakeFiles/gui.dir/src/gui/GuiState.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/gui/GuiState.cpp.i
 .PHONY : src/gui/GuiState.cpp.i
 
 src/gui/GuiState.s: src/gui/GuiState.cpp.s
@@ -355,7 +414,7 @@ src/gui/GuiState.s: src/gui/GuiState.cpp.s
 
 # target to generate assembly for a file
 src/gui/GuiState.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/gui.dir/build.make CMakeFiles/gui.dir/src/gui/GuiState.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/gui/GuiState.cpp.s
 .PHONY : src/gui/GuiState.cpp.s
 
 src/gui/LatencyStats.o: src/gui/LatencyStats.cpp.o
@@ -363,7 +422,7 @@ src/gui/LatencyStats.o: src/gui/LatencyStats.cpp.o
 
 # target to build an object file
 src/gui/LatencyStats.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/gui.dir/build.make CMakeFiles/gui.dir/src/gui/LatencyStats.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/gui/LatencyStats.cpp.o
 .PHONY : src/gui/LatencyStats.cpp.o
 
 src/gui/LatencyStats.i: src/gui/LatencyStats.cpp.i
@@ -371,7 +430,7 @@ src/gui/LatencyStats.i: src/gui/LatencyStats.cpp.i
 
 # target to preprocess a source file
 src/gui/LatencyStats.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/gui.dir/build.make CMakeFiles/gui.dir/src/gui/LatencyStats.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/gui/LatencyStats.cpp.i
 .PHONY : src/gui/LatencyStats.cpp.i
 
 src/gui/LatencyStats.s: src/gui/LatencyStats.cpp.s
@@ -379,7 +438,7 @@ src/gui/LatencyStats.s: src/gui/LatencyStats.cpp.s
 
 # target to generate assembly for a file
 src/gui/LatencyStats.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/gui.dir/build.make CMakeFiles/gui.dir/src/gui/LatencyStats.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/gui/LatencyStats.cpp.s
 .PHONY : src/gui/LatencyStats.cpp.s
 
 src/gui/PnLModel.o: src/gui/PnLModel.cpp.o
@@ -387,7 +446,7 @@ src/gui/PnLModel.o: src/gui/PnLModel.cpp.o
 
 # target to build an object file
 src/gui/PnLModel.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/gui.dir/build.make CMakeFiles/gui.dir/src/gui/PnLModel.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/gui/PnLModel.cpp.o
 .PHONY : src/gui/PnLModel.cpp.o
 
 src/gui/PnLModel.i: src/gui/PnLModel.cpp.i
@@ -395,7 +454,7 @@ src/gui/PnLModel.i: src/gui/PnLModel.cpp.i
 
 # target to preprocess a source file
 src/gui/PnLModel.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/gui.dir/build.make CMakeFiles/gui.dir/src/gui/PnLModel.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/gui/PnLModel.cpp.i
 .PHONY : src/gui/PnLModel.cpp.i
 
 src/gui/PnLModel.s: src/gui/PnLModel.cpp.s
@@ -403,15 +462,39 @@ src/gui/PnLModel.s: src/gui/PnLModel.cpp.s
 
 # target to generate assembly for a file
 src/gui/PnLModel.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/gui.dir/build.make CMakeFiles/gui.dir/src/gui/PnLModel.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/gui/PnLModel.cpp.s
 .PHONY : src/gui/PnLModel.cpp.s
+
+src/gui/TelemetryServer.o: src/gui/TelemetryServer.cpp.o
+.PHONY : src/gui/TelemetryServer.o
+
+# target to build an object file
+src/gui/TelemetryServer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/gui/TelemetryServer.cpp.o
+.PHONY : src/gui/TelemetryServer.cpp.o
+
+src/gui/TelemetryServer.i: src/gui/TelemetryServer.cpp.i
+.PHONY : src/gui/TelemetryServer.i
+
+# target to preprocess a source file
+src/gui/TelemetryServer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/gui/TelemetryServer.cpp.i
+.PHONY : src/gui/TelemetryServer.cpp.i
+
+src/gui/TelemetryServer.s: src/gui/TelemetryServer.cpp.s
+.PHONY : src/gui/TelemetryServer.s
+
+# target to generate assembly for a file
+src/gui/TelemetryServer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/gui/TelemetryServer.cpp.s
+.PHONY : src/gui/TelemetryServer.cpp.s
 
 src/gui/TradeBlotter.o: src/gui/TradeBlotter.cpp.o
 .PHONY : src/gui/TradeBlotter.o
 
 # target to build an object file
 src/gui/TradeBlotter.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/gui.dir/build.make CMakeFiles/gui.dir/src/gui/TradeBlotter.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/gui/TradeBlotter.cpp.o
 .PHONY : src/gui/TradeBlotter.cpp.o
 
 src/gui/TradeBlotter.i: src/gui/TradeBlotter.cpp.i
@@ -419,7 +502,7 @@ src/gui/TradeBlotter.i: src/gui/TradeBlotter.cpp.i
 
 # target to preprocess a source file
 src/gui/TradeBlotter.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/gui.dir/build.make CMakeFiles/gui.dir/src/gui/TradeBlotter.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/gui/TradeBlotter.cpp.i
 .PHONY : src/gui/TradeBlotter.cpp.i
 
 src/gui/TradeBlotter.s: src/gui/TradeBlotter.cpp.s
@@ -427,7 +510,7 @@ src/gui/TradeBlotter.s: src/gui/TradeBlotter.cpp.s
 
 # target to generate assembly for a file
 src/gui/TradeBlotter.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/gui.dir/build.make CMakeFiles/gui.dir/src/gui/TradeBlotter.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/gui/TradeBlotter.cpp.s
 .PHONY : src/gui/TradeBlotter.cpp.s
 
 src/gui/WsServer.o: src/gui/WsServer.cpp.o
@@ -435,7 +518,7 @@ src/gui/WsServer.o: src/gui/WsServer.cpp.o
 
 # target to build an object file
 src/gui/WsServer.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/gui.dir/build.make CMakeFiles/gui.dir/src/gui/WsServer.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/gui/WsServer.cpp.o
 .PHONY : src/gui/WsServer.cpp.o
 
 src/gui/WsServer.i: src/gui/WsServer.cpp.i
@@ -443,7 +526,7 @@ src/gui/WsServer.i: src/gui/WsServer.cpp.i
 
 # target to preprocess a source file
 src/gui/WsServer.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/gui.dir/build.make CMakeFiles/gui.dir/src/gui/WsServer.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/gui/WsServer.cpp.i
 .PHONY : src/gui/WsServer.cpp.i
 
 src/gui/WsServer.s: src/gui/WsServer.cpp.s
@@ -451,8 +534,32 @@ src/gui/WsServer.s: src/gui/WsServer.cpp.s
 
 # target to generate assembly for a file
 src/gui/WsServer.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/gui.dir/build.make CMakeFiles/gui.dir/src/gui/WsServer.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/gui/WsServer.cpp.s
 .PHONY : src/gui/WsServer.cpp.s
+
+src/gui/WsServerGlobals.o: src/gui/WsServerGlobals.cpp.o
+.PHONY : src/gui/WsServerGlobals.o
+
+# target to build an object file
+src/gui/WsServerGlobals.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/gui/WsServerGlobals.cpp.o
+.PHONY : src/gui/WsServerGlobals.cpp.o
+
+src/gui/WsServerGlobals.i: src/gui/WsServerGlobals.cpp.i
+.PHONY : src/gui/WsServerGlobals.i
+
+# target to preprocess a source file
+src/gui/WsServerGlobals.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/gui/WsServerGlobals.cpp.i
+.PHONY : src/gui/WsServerGlobals.cpp.i
+
+src/gui/WsServerGlobals.s: src/gui/WsServerGlobals.cpp.s
+.PHONY : src/gui/WsServerGlobals.s
+
+# target to generate assembly for a file
+src/gui/WsServerGlobals.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/gui/WsServerGlobals.cpp.s
+.PHONY : src/gui/WsServerGlobals.cpp.s
 
 src/latency/ExecutionPolicy.o: src/latency/ExecutionPolicy.cpp.o
 .PHONY : src/latency/ExecutionPolicy.o
@@ -501,6 +608,30 @@ src/latency/LatencyClassifier.s: src/latency/LatencyClassifier.cpp.s
 src/latency/LatencyClassifier.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/latency/LatencyClassifier.cpp.s
 .PHONY : src/latency/LatencyClassifier.cpp.s
+
+src/latency/LatencyGovernor.o: src/latency/LatencyGovernor.cpp.o
+.PHONY : src/latency/LatencyGovernor.o
+
+# target to build an object file
+src/latency/LatencyGovernor.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/latency/LatencyGovernor.cpp.o
+.PHONY : src/latency/LatencyGovernor.cpp.o
+
+src/latency/LatencyGovernor.i: src/latency/LatencyGovernor.cpp.i
+.PHONY : src/latency/LatencyGovernor.i
+
+# target to preprocess a source file
+src/latency/LatencyGovernor.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/latency/LatencyGovernor.cpp.i
+.PHONY : src/latency/LatencyGovernor.cpp.i
+
+src/latency/LatencyGovernor.s: src/latency/LatencyGovernor.cpp.s
+.PHONY : src/latency/LatencyGovernor.s
+
+# target to generate assembly for a file
+src/latency/LatencyGovernor.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/latency/LatencyGovernor.cpp.s
+.PHONY : src/latency/LatencyGovernor.cpp.s
 
 src/latency/LatencyMonitor.o: src/latency/LatencyMonitor.cpp.o
 .PHONY : src/latency/LatencyMonitor.o
@@ -645,6 +776,54 @@ src/risk/LatencyAwareTP.s: src/risk/LatencyAwareTP.cpp.s
 src/risk/LatencyAwareTP.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/risk/LatencyAwareTP.cpp.s
 .PHONY : src/risk/LatencyAwareTP.cpp.s
+
+src/risk/TradePermissionGate.o: src/risk/TradePermissionGate.cpp.o
+.PHONY : src/risk/TradePermissionGate.o
+
+# target to build an object file
+src/risk/TradePermissionGate.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/risk/TradePermissionGate.cpp.o
+.PHONY : src/risk/TradePermissionGate.cpp.o
+
+src/risk/TradePermissionGate.i: src/risk/TradePermissionGate.cpp.i
+.PHONY : src/risk/TradePermissionGate.i
+
+# target to preprocess a source file
+src/risk/TradePermissionGate.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/risk/TradePermissionGate.cpp.i
+.PHONY : src/risk/TradePermissionGate.cpp.i
+
+src/risk/TradePermissionGate.s: src/risk/TradePermissionGate.cpp.s
+.PHONY : src/risk/TradePermissionGate.s
+
+# target to generate assembly for a file
+src/risk/TradePermissionGate.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/risk/TradePermissionGate.cpp.s
+.PHONY : src/risk/TradePermissionGate.cpp.s
+
+src/risk/XAUEntryGovernor.o: src/risk/XAUEntryGovernor.cpp.o
+.PHONY : src/risk/XAUEntryGovernor.o
+
+# target to build an object file
+src/risk/XAUEntryGovernor.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/risk/XAUEntryGovernor.cpp.o
+.PHONY : src/risk/XAUEntryGovernor.cpp.o
+
+src/risk/XAUEntryGovernor.i: src/risk/XAUEntryGovernor.cpp.i
+.PHONY : src/risk/XAUEntryGovernor.i
+
+# target to preprocess a source file
+src/risk/XAUEntryGovernor.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/risk/XAUEntryGovernor.cpp.i
+.PHONY : src/risk/XAUEntryGovernor.cpp.i
+
+src/risk/XAUEntryGovernor.s: src/risk/XAUEntryGovernor.cpp.s
+.PHONY : src/risk/XAUEntryGovernor.s
+
+# target to generate assembly for a file
+src/risk/XAUEntryGovernor.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/risk/XAUEntryGovernor.cpp.s
+.PHONY : src/risk/XAUEntryGovernor.cpp.s
 
 src/routing/SymbolOpportunityRouter.o: src/routing/SymbolOpportunityRouter.cpp.o
 .PHONY : src/routing/SymbolOpportunityRouter.o
@@ -814,6 +993,30 @@ src/shadow/WatchdogThread.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/shadow/WatchdogThread.cpp.s
 .PHONY : src/shadow/WatchdogThread.cpp.s
 
+src/timing/ExecutionGovernor.o: src/timing/ExecutionGovernor.cpp.o
+.PHONY : src/timing/ExecutionGovernor.o
+
+# target to build an object file
+src/timing/ExecutionGovernor.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/timing/ExecutionGovernor.cpp.o
+.PHONY : src/timing/ExecutionGovernor.cpp.o
+
+src/timing/ExecutionGovernor.i: src/timing/ExecutionGovernor.cpp.i
+.PHONY : src/timing/ExecutionGovernor.i
+
+# target to preprocess a source file
+src/timing/ExecutionGovernor.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/timing/ExecutionGovernor.cpp.i
+.PHONY : src/timing/ExecutionGovernor.cpp.i
+
+src/timing/ExecutionGovernor.s: src/timing/ExecutionGovernor.cpp.s
+.PHONY : src/timing/ExecutionGovernor.s
+
+# target to generate assembly for a file
+src/timing/ExecutionGovernor.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chimera.dir/build.make CMakeFiles/chimera.dir/src/timing/ExecutionGovernor.cpp.s
+.PHONY : src/timing/ExecutionGovernor.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -823,19 +1026,27 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... chimera"
-	@echo "... gui"
+	@echo "... src/core/Globals.o"
+	@echo "... src/core/Globals.i"
+	@echo "... src/core/Globals.s"
 	@echo "... src/core/TradeLedger.o"
 	@echo "... src/core/TradeLedger.i"
 	@echo "... src/core/TradeLedger.s"
+	@echo "... src/execution/CostModel.o"
+	@echo "... src/execution/CostModel.i"
+	@echo "... src/execution/CostModel.s"
 	@echo "... src/execution/ExecutionGovernor.o"
 	@echo "... src/execution/ExecutionGovernor.i"
 	@echo "... src/execution/ExecutionGovernor.s"
 	@echo "... src/execution/ExecutionGovernor_drift.o"
 	@echo "... src/execution/ExecutionGovernor_drift.i"
 	@echo "... src/execution/ExecutionGovernor_drift.s"
-	@echo "... src/execution/ExecutionRouter.o"
-	@echo "... src/execution/ExecutionRouter.i"
-	@echo "... src/execution/ExecutionRouter.s"
+	@echo "... src/execution/ExecutionRouter_dual_tier.o"
+	@echo "... src/execution/ExecutionRouter_dual_tier.i"
+	@echo "... src/execution/ExecutionRouter_dual_tier.s"
+	@echo "... src/execution/LatencyExecutionGate.o"
+	@echo "... src/execution/LatencyExecutionGate.i"
+	@echo "... src/execution/LatencyExecutionGate.s"
 	@echo "... src/execution/LatencyExecutionGovernor.o"
 	@echo "... src/execution/LatencyExecutionGovernor.i"
 	@echo "... src/execution/LatencyExecutionGovernor.s"
@@ -857,18 +1068,27 @@ help:
 	@echo "... src/gui/PnLModel.o"
 	@echo "... src/gui/PnLModel.i"
 	@echo "... src/gui/PnLModel.s"
+	@echo "... src/gui/TelemetryServer.o"
+	@echo "... src/gui/TelemetryServer.i"
+	@echo "... src/gui/TelemetryServer.s"
 	@echo "... src/gui/TradeBlotter.o"
 	@echo "... src/gui/TradeBlotter.i"
 	@echo "... src/gui/TradeBlotter.s"
 	@echo "... src/gui/WsServer.o"
 	@echo "... src/gui/WsServer.i"
 	@echo "... src/gui/WsServer.s"
+	@echo "... src/gui/WsServerGlobals.o"
+	@echo "... src/gui/WsServerGlobals.i"
+	@echo "... src/gui/WsServerGlobals.s"
 	@echo "... src/latency/ExecutionPolicy.o"
 	@echo "... src/latency/ExecutionPolicy.i"
 	@echo "... src/latency/ExecutionPolicy.s"
 	@echo "... src/latency/LatencyClassifier.o"
 	@echo "... src/latency/LatencyClassifier.i"
 	@echo "... src/latency/LatencyClassifier.s"
+	@echo "... src/latency/LatencyGovernor.o"
+	@echo "... src/latency/LatencyGovernor.i"
+	@echo "... src/latency/LatencyGovernor.s"
 	@echo "... src/latency/LatencyMonitor.o"
 	@echo "... src/latency/LatencyMonitor.i"
 	@echo "... src/latency/LatencyMonitor.s"
@@ -887,6 +1107,12 @@ help:
 	@echo "... src/risk/LatencyAwareTP.o"
 	@echo "... src/risk/LatencyAwareTP.i"
 	@echo "... src/risk/LatencyAwareTP.s"
+	@echo "... src/risk/TradePermissionGate.o"
+	@echo "... src/risk/TradePermissionGate.i"
+	@echo "... src/risk/TradePermissionGate.s"
+	@echo "... src/risk/XAUEntryGovernor.o"
+	@echo "... src/risk/XAUEntryGovernor.i"
+	@echo "... src/risk/XAUEntryGovernor.s"
 	@echo "... src/routing/SymbolOpportunityRouter.o"
 	@echo "... src/routing/SymbolOpportunityRouter.i"
 	@echo "... src/routing/SymbolOpportunityRouter.s"
@@ -908,6 +1134,9 @@ help:
 	@echo "... src/shadow/WatchdogThread.o"
 	@echo "... src/shadow/WatchdogThread.i"
 	@echo "... src/shadow/WatchdogThread.s"
+	@echo "... src/timing/ExecutionGovernor.o"
+	@echo "... src/timing/ExecutionGovernor.i"
+	@echo "... src/timing/ExecutionGovernor.s"
 .PHONY : help
 
 

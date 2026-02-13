@@ -1,2 +1,0 @@
-/usr/bin/ar qc libgui.a CMakeFiles/gui.dir/src/gui/GuiState.cpp.o CMakeFiles/gui.dir/src/gui/TradeBlotter.cpp.o CMakeFiles/gui.dir/src/gui/LatencyStats.cpp.o CMakeFiles/gui.dir/src/gui/PnLModel.cpp.o CMakeFiles/gui.dir/src/gui/WsServer.cpp.o CMakeFiles/gui.dir/src/gui/GUIBroadcaster.cpp.o CMakeFiles/gui.dir/src/gui/ExecutionSnapshotJSON.cpp.o
-/usr/bin/ranlib libgui.a

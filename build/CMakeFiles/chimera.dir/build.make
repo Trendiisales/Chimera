@@ -69,108 +69,24 @@ include CMakeFiles/chimera.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/chimera.dir/flags.make
 
-CMakeFiles/chimera.dir/src/main.cpp.o: CMakeFiles/chimera.dir/flags.make
-CMakeFiles/chimera.dir/src/main.cpp.o: /home/trader/Chimera/src/main.cpp
-CMakeFiles/chimera.dir/src/main.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/chimera.dir/src/main.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/main.cpp.o -MF CMakeFiles/chimera.dir/src/main.cpp.o.d -o CMakeFiles/chimera.dir/src/main.cpp.o -c /home/trader/Chimera/src/main.cpp
+CMakeFiles/chimera.dir/src/core/Globals.cpp.o: CMakeFiles/chimera.dir/flags.make
+CMakeFiles/chimera.dir/src/core/Globals.cpp.o: /home/trader/Chimera/src/core/Globals.cpp
+CMakeFiles/chimera.dir/src/core/Globals.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/chimera.dir/src/core/Globals.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/core/Globals.cpp.o -MF CMakeFiles/chimera.dir/src/core/Globals.cpp.o.d -o CMakeFiles/chimera.dir/src/core/Globals.cpp.o -c /home/trader/Chimera/src/core/Globals.cpp
 
-CMakeFiles/chimera.dir/src/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/trader/Chimera/src/main.cpp > CMakeFiles/chimera.dir/src/main.cpp.i
+CMakeFiles/chimera.dir/src/core/Globals.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/core/Globals.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/trader/Chimera/src/core/Globals.cpp > CMakeFiles/chimera.dir/src/core/Globals.cpp.i
 
-CMakeFiles/chimera.dir/src/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/main.cpp -o CMakeFiles/chimera.dir/src/main.cpp.s
-
-CMakeFiles/chimera.dir/src/shadow/SymbolExecutor.cpp.o: CMakeFiles/chimera.dir/flags.make
-CMakeFiles/chimera.dir/src/shadow/SymbolExecutor.cpp.o: /home/trader/Chimera/src/shadow/SymbolExecutor.cpp
-CMakeFiles/chimera.dir/src/shadow/SymbolExecutor.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/chimera.dir/src/shadow/SymbolExecutor.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/shadow/SymbolExecutor.cpp.o -MF CMakeFiles/chimera.dir/src/shadow/SymbolExecutor.cpp.o.d -o CMakeFiles/chimera.dir/src/shadow/SymbolExecutor.cpp.o -c /home/trader/Chimera/src/shadow/SymbolExecutor.cpp
-
-CMakeFiles/chimera.dir/src/shadow/SymbolExecutor.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/shadow/SymbolExecutor.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/trader/Chimera/src/shadow/SymbolExecutor.cpp > CMakeFiles/chimera.dir/src/shadow/SymbolExecutor.cpp.i
-
-CMakeFiles/chimera.dir/src/shadow/SymbolExecutor.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/shadow/SymbolExecutor.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/shadow/SymbolExecutor.cpp -o CMakeFiles/chimera.dir/src/shadow/SymbolExecutor.cpp.s
-
-CMakeFiles/chimera.dir/src/shadow/MultiSymbolExecutor.cpp.o: CMakeFiles/chimera.dir/flags.make
-CMakeFiles/chimera.dir/src/shadow/MultiSymbolExecutor.cpp.o: /home/trader/Chimera/src/shadow/MultiSymbolExecutor.cpp
-CMakeFiles/chimera.dir/src/shadow/MultiSymbolExecutor.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/chimera.dir/src/shadow/MultiSymbolExecutor.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/shadow/MultiSymbolExecutor.cpp.o -MF CMakeFiles/chimera.dir/src/shadow/MultiSymbolExecutor.cpp.o.d -o CMakeFiles/chimera.dir/src/shadow/MultiSymbolExecutor.cpp.o -c /home/trader/Chimera/src/shadow/MultiSymbolExecutor.cpp
-
-CMakeFiles/chimera.dir/src/shadow/MultiSymbolExecutor.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/shadow/MultiSymbolExecutor.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/trader/Chimera/src/shadow/MultiSymbolExecutor.cpp > CMakeFiles/chimera.dir/src/shadow/MultiSymbolExecutor.cpp.i
-
-CMakeFiles/chimera.dir/src/shadow/MultiSymbolExecutor.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/shadow/MultiSymbolExecutor.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/shadow/MultiSymbolExecutor.cpp -o CMakeFiles/chimera.dir/src/shadow/MultiSymbolExecutor.cpp.s
-
-CMakeFiles/chimera.dir/src/shadow/CrashHandler.cpp.o: CMakeFiles/chimera.dir/flags.make
-CMakeFiles/chimera.dir/src/shadow/CrashHandler.cpp.o: /home/trader/Chimera/src/shadow/CrashHandler.cpp
-CMakeFiles/chimera.dir/src/shadow/CrashHandler.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/chimera.dir/src/shadow/CrashHandler.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/shadow/CrashHandler.cpp.o -MF CMakeFiles/chimera.dir/src/shadow/CrashHandler.cpp.o.d -o CMakeFiles/chimera.dir/src/shadow/CrashHandler.cpp.o -c /home/trader/Chimera/src/shadow/CrashHandler.cpp
-
-CMakeFiles/chimera.dir/src/shadow/CrashHandler.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/shadow/CrashHandler.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/trader/Chimera/src/shadow/CrashHandler.cpp > CMakeFiles/chimera.dir/src/shadow/CrashHandler.cpp.i
-
-CMakeFiles/chimera.dir/src/shadow/CrashHandler.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/shadow/CrashHandler.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/shadow/CrashHandler.cpp -o CMakeFiles/chimera.dir/src/shadow/CrashHandler.cpp.s
-
-CMakeFiles/chimera.dir/src/shadow/WatchdogThread.cpp.o: CMakeFiles/chimera.dir/flags.make
-CMakeFiles/chimera.dir/src/shadow/WatchdogThread.cpp.o: /home/trader/Chimera/src/shadow/WatchdogThread.cpp
-CMakeFiles/chimera.dir/src/shadow/WatchdogThread.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/chimera.dir/src/shadow/WatchdogThread.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/shadow/WatchdogThread.cpp.o -MF CMakeFiles/chimera.dir/src/shadow/WatchdogThread.cpp.o.d -o CMakeFiles/chimera.dir/src/shadow/WatchdogThread.cpp.o -c /home/trader/Chimera/src/shadow/WatchdogThread.cpp
-
-CMakeFiles/chimera.dir/src/shadow/WatchdogThread.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/shadow/WatchdogThread.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/trader/Chimera/src/shadow/WatchdogThread.cpp > CMakeFiles/chimera.dir/src/shadow/WatchdogThread.cpp.i
-
-CMakeFiles/chimera.dir/src/shadow/WatchdogThread.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/shadow/WatchdogThread.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/shadow/WatchdogThread.cpp -o CMakeFiles/chimera.dir/src/shadow/WatchdogThread.cpp.s
-
-CMakeFiles/chimera.dir/src/shadow/JournalWriter.cpp.o: CMakeFiles/chimera.dir/flags.make
-CMakeFiles/chimera.dir/src/shadow/JournalWriter.cpp.o: /home/trader/Chimera/src/shadow/JournalWriter.cpp
-CMakeFiles/chimera.dir/src/shadow/JournalWriter.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/chimera.dir/src/shadow/JournalWriter.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/shadow/JournalWriter.cpp.o -MF CMakeFiles/chimera.dir/src/shadow/JournalWriter.cpp.o.d -o CMakeFiles/chimera.dir/src/shadow/JournalWriter.cpp.o -c /home/trader/Chimera/src/shadow/JournalWriter.cpp
-
-CMakeFiles/chimera.dir/src/shadow/JournalWriter.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/shadow/JournalWriter.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/trader/Chimera/src/shadow/JournalWriter.cpp > CMakeFiles/chimera.dir/src/shadow/JournalWriter.cpp.i
-
-CMakeFiles/chimera.dir/src/shadow/JournalWriter.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/shadow/JournalWriter.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/shadow/JournalWriter.cpp -o CMakeFiles/chimera.dir/src/shadow/JournalWriter.cpp.s
-
-CMakeFiles/chimera.dir/src/shadow/EquityCurve.cpp.o: CMakeFiles/chimera.dir/flags.make
-CMakeFiles/chimera.dir/src/shadow/EquityCurve.cpp.o: /home/trader/Chimera/src/shadow/EquityCurve.cpp
-CMakeFiles/chimera.dir/src/shadow/EquityCurve.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/chimera.dir/src/shadow/EquityCurve.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/shadow/EquityCurve.cpp.o -MF CMakeFiles/chimera.dir/src/shadow/EquityCurve.cpp.o.d -o CMakeFiles/chimera.dir/src/shadow/EquityCurve.cpp.o -c /home/trader/Chimera/src/shadow/EquityCurve.cpp
-
-CMakeFiles/chimera.dir/src/shadow/EquityCurve.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/shadow/EquityCurve.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/trader/Chimera/src/shadow/EquityCurve.cpp > CMakeFiles/chimera.dir/src/shadow/EquityCurve.cpp.i
-
-CMakeFiles/chimera.dir/src/shadow/EquityCurve.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/shadow/EquityCurve.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/shadow/EquityCurve.cpp -o CMakeFiles/chimera.dir/src/shadow/EquityCurve.cpp.s
+CMakeFiles/chimera.dir/src/core/Globals.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/core/Globals.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/core/Globals.cpp -o CMakeFiles/chimera.dir/src/core/Globals.cpp.s
 
 CMakeFiles/chimera.dir/src/core/TradeLedger.cpp.o: CMakeFiles/chimera.dir/flags.make
 CMakeFiles/chimera.dir/src/core/TradeLedger.cpp.o: /home/trader/Chimera/src/core/TradeLedger.cpp
 CMakeFiles/chimera.dir/src/core/TradeLedger.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/chimera.dir/src/core/TradeLedger.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/chimera.dir/src/core/TradeLedger.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/core/TradeLedger.cpp.o -MF CMakeFiles/chimera.dir/src/core/TradeLedger.cpp.o.d -o CMakeFiles/chimera.dir/src/core/TradeLedger.cpp.o -c /home/trader/Chimera/src/core/TradeLedger.cpp
 
 CMakeFiles/chimera.dir/src/core/TradeLedger.cpp.i: cmake_force
@@ -181,10 +97,24 @@ CMakeFiles/chimera.dir/src/core/TradeLedger.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/core/TradeLedger.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/core/TradeLedger.cpp -o CMakeFiles/chimera.dir/src/core/TradeLedger.cpp.s
 
+CMakeFiles/chimera.dir/src/execution/CostModel.cpp.o: CMakeFiles/chimera.dir/flags.make
+CMakeFiles/chimera.dir/src/execution/CostModel.cpp.o: /home/trader/Chimera/src/execution/CostModel.cpp
+CMakeFiles/chimera.dir/src/execution/CostModel.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/chimera.dir/src/execution/CostModel.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/execution/CostModel.cpp.o -MF CMakeFiles/chimera.dir/src/execution/CostModel.cpp.o.d -o CMakeFiles/chimera.dir/src/execution/CostModel.cpp.o -c /home/trader/Chimera/src/execution/CostModel.cpp
+
+CMakeFiles/chimera.dir/src/execution/CostModel.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/execution/CostModel.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/trader/Chimera/src/execution/CostModel.cpp > CMakeFiles/chimera.dir/src/execution/CostModel.cpp.i
+
+CMakeFiles/chimera.dir/src/execution/CostModel.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/execution/CostModel.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/execution/CostModel.cpp -o CMakeFiles/chimera.dir/src/execution/CostModel.cpp.s
+
 CMakeFiles/chimera.dir/src/execution/ExecutionGovernor.cpp.o: CMakeFiles/chimera.dir/flags.make
 CMakeFiles/chimera.dir/src/execution/ExecutionGovernor.cpp.o: /home/trader/Chimera/src/execution/ExecutionGovernor.cpp
 CMakeFiles/chimera.dir/src/execution/ExecutionGovernor.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/chimera.dir/src/execution/ExecutionGovernor.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/chimera.dir/src/execution/ExecutionGovernor.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/execution/ExecutionGovernor.cpp.o -MF CMakeFiles/chimera.dir/src/execution/ExecutionGovernor.cpp.o.d -o CMakeFiles/chimera.dir/src/execution/ExecutionGovernor.cpp.o -c /home/trader/Chimera/src/execution/ExecutionGovernor.cpp
 
 CMakeFiles/chimera.dir/src/execution/ExecutionGovernor.cpp.i: cmake_force
@@ -198,7 +128,7 @@ CMakeFiles/chimera.dir/src/execution/ExecutionGovernor.cpp.s: cmake_force
 CMakeFiles/chimera.dir/src/execution/ExecutionGovernor_drift.cpp.o: CMakeFiles/chimera.dir/flags.make
 CMakeFiles/chimera.dir/src/execution/ExecutionGovernor_drift.cpp.o: /home/trader/Chimera/src/execution/ExecutionGovernor_drift.cpp
 CMakeFiles/chimera.dir/src/execution/ExecutionGovernor_drift.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/chimera.dir/src/execution/ExecutionGovernor_drift.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/chimera.dir/src/execution/ExecutionGovernor_drift.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/execution/ExecutionGovernor_drift.cpp.o -MF CMakeFiles/chimera.dir/src/execution/ExecutionGovernor_drift.cpp.o.d -o CMakeFiles/chimera.dir/src/execution/ExecutionGovernor_drift.cpp.o -c /home/trader/Chimera/src/execution/ExecutionGovernor_drift.cpp
 
 CMakeFiles/chimera.dir/src/execution/ExecutionGovernor_drift.cpp.i: cmake_force
@@ -209,24 +139,38 @@ CMakeFiles/chimera.dir/src/execution/ExecutionGovernor_drift.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/execution/ExecutionGovernor_drift.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/execution/ExecutionGovernor_drift.cpp -o CMakeFiles/chimera.dir/src/execution/ExecutionGovernor_drift.cpp.s
 
-CMakeFiles/chimera.dir/src/execution/VelocityCalculator.cpp.o: CMakeFiles/chimera.dir/flags.make
-CMakeFiles/chimera.dir/src/execution/VelocityCalculator.cpp.o: /home/trader/Chimera/src/execution/VelocityCalculator.cpp
-CMakeFiles/chimera.dir/src/execution/VelocityCalculator.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/chimera.dir/src/execution/VelocityCalculator.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/execution/VelocityCalculator.cpp.o -MF CMakeFiles/chimera.dir/src/execution/VelocityCalculator.cpp.o.d -o CMakeFiles/chimera.dir/src/execution/VelocityCalculator.cpp.o -c /home/trader/Chimera/src/execution/VelocityCalculator.cpp
+CMakeFiles/chimera.dir/src/execution/ExecutionRouter_dual_tier.cpp.o: CMakeFiles/chimera.dir/flags.make
+CMakeFiles/chimera.dir/src/execution/ExecutionRouter_dual_tier.cpp.o: /home/trader/Chimera/src/execution/ExecutionRouter_dual_tier.cpp
+CMakeFiles/chimera.dir/src/execution/ExecutionRouter_dual_tier.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/chimera.dir/src/execution/ExecutionRouter_dual_tier.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/execution/ExecutionRouter_dual_tier.cpp.o -MF CMakeFiles/chimera.dir/src/execution/ExecutionRouter_dual_tier.cpp.o.d -o CMakeFiles/chimera.dir/src/execution/ExecutionRouter_dual_tier.cpp.o -c /home/trader/Chimera/src/execution/ExecutionRouter_dual_tier.cpp
 
-CMakeFiles/chimera.dir/src/execution/VelocityCalculator.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/execution/VelocityCalculator.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/trader/Chimera/src/execution/VelocityCalculator.cpp > CMakeFiles/chimera.dir/src/execution/VelocityCalculator.cpp.i
+CMakeFiles/chimera.dir/src/execution/ExecutionRouter_dual_tier.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/execution/ExecutionRouter_dual_tier.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/trader/Chimera/src/execution/ExecutionRouter_dual_tier.cpp > CMakeFiles/chimera.dir/src/execution/ExecutionRouter_dual_tier.cpp.i
 
-CMakeFiles/chimera.dir/src/execution/VelocityCalculator.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/execution/VelocityCalculator.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/execution/VelocityCalculator.cpp -o CMakeFiles/chimera.dir/src/execution/VelocityCalculator.cpp.s
+CMakeFiles/chimera.dir/src/execution/ExecutionRouter_dual_tier.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/execution/ExecutionRouter_dual_tier.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/execution/ExecutionRouter_dual_tier.cpp -o CMakeFiles/chimera.dir/src/execution/ExecutionRouter_dual_tier.cpp.s
+
+CMakeFiles/chimera.dir/src/execution/LatencyExecutionGate.cpp.o: CMakeFiles/chimera.dir/flags.make
+CMakeFiles/chimera.dir/src/execution/LatencyExecutionGate.cpp.o: /home/trader/Chimera/src/execution/LatencyExecutionGate.cpp
+CMakeFiles/chimera.dir/src/execution/LatencyExecutionGate.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/chimera.dir/src/execution/LatencyExecutionGate.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/execution/LatencyExecutionGate.cpp.o -MF CMakeFiles/chimera.dir/src/execution/LatencyExecutionGate.cpp.o.d -o CMakeFiles/chimera.dir/src/execution/LatencyExecutionGate.cpp.o -c /home/trader/Chimera/src/execution/LatencyExecutionGate.cpp
+
+CMakeFiles/chimera.dir/src/execution/LatencyExecutionGate.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/execution/LatencyExecutionGate.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/trader/Chimera/src/execution/LatencyExecutionGate.cpp > CMakeFiles/chimera.dir/src/execution/LatencyExecutionGate.cpp.i
+
+CMakeFiles/chimera.dir/src/execution/LatencyExecutionGate.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/execution/LatencyExecutionGate.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/execution/LatencyExecutionGate.cpp -o CMakeFiles/chimera.dir/src/execution/LatencyExecutionGate.cpp.s
 
 CMakeFiles/chimera.dir/src/execution/LatencyExecutionGovernor.cpp.o: CMakeFiles/chimera.dir/flags.make
 CMakeFiles/chimera.dir/src/execution/LatencyExecutionGovernor.cpp.o: /home/trader/Chimera/src/execution/LatencyExecutionGovernor.cpp
 CMakeFiles/chimera.dir/src/execution/LatencyExecutionGovernor.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/chimera.dir/src/execution/LatencyExecutionGovernor.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/chimera.dir/src/execution/LatencyExecutionGovernor.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/execution/LatencyExecutionGovernor.cpp.o -MF CMakeFiles/chimera.dir/src/execution/LatencyExecutionGovernor.cpp.o.d -o CMakeFiles/chimera.dir/src/execution/LatencyExecutionGovernor.cpp.o -c /home/trader/Chimera/src/execution/LatencyExecutionGovernor.cpp
 
 CMakeFiles/chimera.dir/src/execution/LatencyExecutionGovernor.cpp.i: cmake_force
@@ -237,108 +181,150 @@ CMakeFiles/chimera.dir/src/execution/LatencyExecutionGovernor.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/execution/LatencyExecutionGovernor.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/execution/LatencyExecutionGovernor.cpp -o CMakeFiles/chimera.dir/src/execution/LatencyExecutionGovernor.cpp.s
 
-CMakeFiles/chimera.dir/src/execution/ExecutionRouter.cpp.o: CMakeFiles/chimera.dir/flags.make
-CMakeFiles/chimera.dir/src/execution/ExecutionRouter.cpp.o: /home/trader/Chimera/src/execution/ExecutionRouter.cpp
-CMakeFiles/chimera.dir/src/execution/ExecutionRouter.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/chimera.dir/src/execution/ExecutionRouter.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/execution/ExecutionRouter.cpp.o -MF CMakeFiles/chimera.dir/src/execution/ExecutionRouter.cpp.o.d -o CMakeFiles/chimera.dir/src/execution/ExecutionRouter.cpp.o -c /home/trader/Chimera/src/execution/ExecutionRouter.cpp
+CMakeFiles/chimera.dir/src/execution/VelocityCalculator.cpp.o: CMakeFiles/chimera.dir/flags.make
+CMakeFiles/chimera.dir/src/execution/VelocityCalculator.cpp.o: /home/trader/Chimera/src/execution/VelocityCalculator.cpp
+CMakeFiles/chimera.dir/src/execution/VelocityCalculator.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/chimera.dir/src/execution/VelocityCalculator.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/execution/VelocityCalculator.cpp.o -MF CMakeFiles/chimera.dir/src/execution/VelocityCalculator.cpp.o.d -o CMakeFiles/chimera.dir/src/execution/VelocityCalculator.cpp.o -c /home/trader/Chimera/src/execution/VelocityCalculator.cpp
 
-CMakeFiles/chimera.dir/src/execution/ExecutionRouter.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/execution/ExecutionRouter.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/trader/Chimera/src/execution/ExecutionRouter.cpp > CMakeFiles/chimera.dir/src/execution/ExecutionRouter.cpp.i
+CMakeFiles/chimera.dir/src/execution/VelocityCalculator.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/execution/VelocityCalculator.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/trader/Chimera/src/execution/VelocityCalculator.cpp > CMakeFiles/chimera.dir/src/execution/VelocityCalculator.cpp.i
 
-CMakeFiles/chimera.dir/src/execution/ExecutionRouter.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/execution/ExecutionRouter.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/execution/ExecutionRouter.cpp -o CMakeFiles/chimera.dir/src/execution/ExecutionRouter.cpp.s
+CMakeFiles/chimera.dir/src/execution/VelocityCalculator.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/execution/VelocityCalculator.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/execution/VelocityCalculator.cpp -o CMakeFiles/chimera.dir/src/execution/VelocityCalculator.cpp.s
 
-CMakeFiles/chimera.dir/src/risk/LatencyAwareTP.cpp.o: CMakeFiles/chimera.dir/flags.make
-CMakeFiles/chimera.dir/src/risk/LatencyAwareTP.cpp.o: /home/trader/Chimera/src/risk/LatencyAwareTP.cpp
-CMakeFiles/chimera.dir/src/risk/LatencyAwareTP.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/chimera.dir/src/risk/LatencyAwareTP.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/risk/LatencyAwareTP.cpp.o -MF CMakeFiles/chimera.dir/src/risk/LatencyAwareTP.cpp.o.d -o CMakeFiles/chimera.dir/src/risk/LatencyAwareTP.cpp.o -c /home/trader/Chimera/src/risk/LatencyAwareTP.cpp
+CMakeFiles/chimera.dir/src/gui/ExecutionSnapshotJSON.cpp.o: CMakeFiles/chimera.dir/flags.make
+CMakeFiles/chimera.dir/src/gui/ExecutionSnapshotJSON.cpp.o: /home/trader/Chimera/src/gui/ExecutionSnapshotJSON.cpp
+CMakeFiles/chimera.dir/src/gui/ExecutionSnapshotJSON.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/chimera.dir/src/gui/ExecutionSnapshotJSON.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/gui/ExecutionSnapshotJSON.cpp.o -MF CMakeFiles/chimera.dir/src/gui/ExecutionSnapshotJSON.cpp.o.d -o CMakeFiles/chimera.dir/src/gui/ExecutionSnapshotJSON.cpp.o -c /home/trader/Chimera/src/gui/ExecutionSnapshotJSON.cpp
 
-CMakeFiles/chimera.dir/src/risk/LatencyAwareTP.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/risk/LatencyAwareTP.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/trader/Chimera/src/risk/LatencyAwareTP.cpp > CMakeFiles/chimera.dir/src/risk/LatencyAwareTP.cpp.i
+CMakeFiles/chimera.dir/src/gui/ExecutionSnapshotJSON.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/gui/ExecutionSnapshotJSON.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/trader/Chimera/src/gui/ExecutionSnapshotJSON.cpp > CMakeFiles/chimera.dir/src/gui/ExecutionSnapshotJSON.cpp.i
 
-CMakeFiles/chimera.dir/src/risk/LatencyAwareTP.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/risk/LatencyAwareTP.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/risk/LatencyAwareTP.cpp -o CMakeFiles/chimera.dir/src/risk/LatencyAwareTP.cpp.s
+CMakeFiles/chimera.dir/src/gui/ExecutionSnapshotJSON.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/gui/ExecutionSnapshotJSON.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/gui/ExecutionSnapshotJSON.cpp -o CMakeFiles/chimera.dir/src/gui/ExecutionSnapshotJSON.cpp.s
 
-CMakeFiles/chimera.dir/src/risk/ImpulseSizer.cpp.o: CMakeFiles/chimera.dir/flags.make
-CMakeFiles/chimera.dir/src/risk/ImpulseSizer.cpp.o: /home/trader/Chimera/src/risk/ImpulseSizer.cpp
-CMakeFiles/chimera.dir/src/risk/ImpulseSizer.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/chimera.dir/src/risk/ImpulseSizer.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/risk/ImpulseSizer.cpp.o -MF CMakeFiles/chimera.dir/src/risk/ImpulseSizer.cpp.o.d -o CMakeFiles/chimera.dir/src/risk/ImpulseSizer.cpp.o -c /home/trader/Chimera/src/risk/ImpulseSizer.cpp
+CMakeFiles/chimera.dir/src/gui/GUIBroadcaster.cpp.o: CMakeFiles/chimera.dir/flags.make
+CMakeFiles/chimera.dir/src/gui/GUIBroadcaster.cpp.o: /home/trader/Chimera/src/gui/GUIBroadcaster.cpp
+CMakeFiles/chimera.dir/src/gui/GUIBroadcaster.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/chimera.dir/src/gui/GUIBroadcaster.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/gui/GUIBroadcaster.cpp.o -MF CMakeFiles/chimera.dir/src/gui/GUIBroadcaster.cpp.o.d -o CMakeFiles/chimera.dir/src/gui/GUIBroadcaster.cpp.o -c /home/trader/Chimera/src/gui/GUIBroadcaster.cpp
 
-CMakeFiles/chimera.dir/src/risk/ImpulseSizer.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/risk/ImpulseSizer.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/trader/Chimera/src/risk/ImpulseSizer.cpp > CMakeFiles/chimera.dir/src/risk/ImpulseSizer.cpp.i
+CMakeFiles/chimera.dir/src/gui/GUIBroadcaster.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/gui/GUIBroadcaster.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/trader/Chimera/src/gui/GUIBroadcaster.cpp > CMakeFiles/chimera.dir/src/gui/GUIBroadcaster.cpp.i
 
-CMakeFiles/chimera.dir/src/risk/ImpulseSizer.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/risk/ImpulseSizer.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/risk/ImpulseSizer.cpp -o CMakeFiles/chimera.dir/src/risk/ImpulseSizer.cpp.s
+CMakeFiles/chimera.dir/src/gui/GUIBroadcaster.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/gui/GUIBroadcaster.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/gui/GUIBroadcaster.cpp -o CMakeFiles/chimera.dir/src/gui/GUIBroadcaster.cpp.s
 
-CMakeFiles/chimera.dir/src/risk/ImpulseDecayExit.cpp.o: CMakeFiles/chimera.dir/flags.make
-CMakeFiles/chimera.dir/src/risk/ImpulseDecayExit.cpp.o: /home/trader/Chimera/src/risk/ImpulseDecayExit.cpp
-CMakeFiles/chimera.dir/src/risk/ImpulseDecayExit.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/chimera.dir/src/risk/ImpulseDecayExit.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/risk/ImpulseDecayExit.cpp.o -MF CMakeFiles/chimera.dir/src/risk/ImpulseDecayExit.cpp.o.d -o CMakeFiles/chimera.dir/src/risk/ImpulseDecayExit.cpp.o -c /home/trader/Chimera/src/risk/ImpulseDecayExit.cpp
+CMakeFiles/chimera.dir/src/gui/GuiState.cpp.o: CMakeFiles/chimera.dir/flags.make
+CMakeFiles/chimera.dir/src/gui/GuiState.cpp.o: /home/trader/Chimera/src/gui/GuiState.cpp
+CMakeFiles/chimera.dir/src/gui/GuiState.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/chimera.dir/src/gui/GuiState.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/gui/GuiState.cpp.o -MF CMakeFiles/chimera.dir/src/gui/GuiState.cpp.o.d -o CMakeFiles/chimera.dir/src/gui/GuiState.cpp.o -c /home/trader/Chimera/src/gui/GuiState.cpp
 
-CMakeFiles/chimera.dir/src/risk/ImpulseDecayExit.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/risk/ImpulseDecayExit.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/trader/Chimera/src/risk/ImpulseDecayExit.cpp > CMakeFiles/chimera.dir/src/risk/ImpulseDecayExit.cpp.i
+CMakeFiles/chimera.dir/src/gui/GuiState.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/gui/GuiState.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/trader/Chimera/src/gui/GuiState.cpp > CMakeFiles/chimera.dir/src/gui/GuiState.cpp.i
 
-CMakeFiles/chimera.dir/src/risk/ImpulseDecayExit.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/risk/ImpulseDecayExit.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/risk/ImpulseDecayExit.cpp -o CMakeFiles/chimera.dir/src/risk/ImpulseDecayExit.cpp.s
+CMakeFiles/chimera.dir/src/gui/GuiState.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/gui/GuiState.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/gui/GuiState.cpp -o CMakeFiles/chimera.dir/src/gui/GuiState.cpp.s
 
-CMakeFiles/chimera.dir/src/routing/SymbolOpportunityRouter.cpp.o: CMakeFiles/chimera.dir/flags.make
-CMakeFiles/chimera.dir/src/routing/SymbolOpportunityRouter.cpp.o: /home/trader/Chimera/src/routing/SymbolOpportunityRouter.cpp
-CMakeFiles/chimera.dir/src/routing/SymbolOpportunityRouter.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/chimera.dir/src/routing/SymbolOpportunityRouter.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/routing/SymbolOpportunityRouter.cpp.o -MF CMakeFiles/chimera.dir/src/routing/SymbolOpportunityRouter.cpp.o.d -o CMakeFiles/chimera.dir/src/routing/SymbolOpportunityRouter.cpp.o -c /home/trader/Chimera/src/routing/SymbolOpportunityRouter.cpp
+CMakeFiles/chimera.dir/src/gui/LatencyStats.cpp.o: CMakeFiles/chimera.dir/flags.make
+CMakeFiles/chimera.dir/src/gui/LatencyStats.cpp.o: /home/trader/Chimera/src/gui/LatencyStats.cpp
+CMakeFiles/chimera.dir/src/gui/LatencyStats.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/chimera.dir/src/gui/LatencyStats.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/gui/LatencyStats.cpp.o -MF CMakeFiles/chimera.dir/src/gui/LatencyStats.cpp.o.d -o CMakeFiles/chimera.dir/src/gui/LatencyStats.cpp.o -c /home/trader/Chimera/src/gui/LatencyStats.cpp
 
-CMakeFiles/chimera.dir/src/routing/SymbolOpportunityRouter.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/routing/SymbolOpportunityRouter.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/trader/Chimera/src/routing/SymbolOpportunityRouter.cpp > CMakeFiles/chimera.dir/src/routing/SymbolOpportunityRouter.cpp.i
+CMakeFiles/chimera.dir/src/gui/LatencyStats.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/gui/LatencyStats.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/trader/Chimera/src/gui/LatencyStats.cpp > CMakeFiles/chimera.dir/src/gui/LatencyStats.cpp.i
 
-CMakeFiles/chimera.dir/src/routing/SymbolOpportunityRouter.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/routing/SymbolOpportunityRouter.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/routing/SymbolOpportunityRouter.cpp -o CMakeFiles/chimera.dir/src/routing/SymbolOpportunityRouter.cpp.s
+CMakeFiles/chimera.dir/src/gui/LatencyStats.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/gui/LatencyStats.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/gui/LatencyStats.cpp -o CMakeFiles/chimera.dir/src/gui/LatencyStats.cpp.s
 
-CMakeFiles/chimera.dir/src/latency/LatencyMonitor.cpp.o: CMakeFiles/chimera.dir/flags.make
-CMakeFiles/chimera.dir/src/latency/LatencyMonitor.cpp.o: /home/trader/Chimera/src/latency/LatencyMonitor.cpp
-CMakeFiles/chimera.dir/src/latency/LatencyMonitor.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/chimera.dir/src/latency/LatencyMonitor.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/latency/LatencyMonitor.cpp.o -MF CMakeFiles/chimera.dir/src/latency/LatencyMonitor.cpp.o.d -o CMakeFiles/chimera.dir/src/latency/LatencyMonitor.cpp.o -c /home/trader/Chimera/src/latency/LatencyMonitor.cpp
+CMakeFiles/chimera.dir/src/gui/PnLModel.cpp.o: CMakeFiles/chimera.dir/flags.make
+CMakeFiles/chimera.dir/src/gui/PnLModel.cpp.o: /home/trader/Chimera/src/gui/PnLModel.cpp
+CMakeFiles/chimera.dir/src/gui/PnLModel.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/chimera.dir/src/gui/PnLModel.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/gui/PnLModel.cpp.o -MF CMakeFiles/chimera.dir/src/gui/PnLModel.cpp.o.d -o CMakeFiles/chimera.dir/src/gui/PnLModel.cpp.o -c /home/trader/Chimera/src/gui/PnLModel.cpp
 
-CMakeFiles/chimera.dir/src/latency/LatencyMonitor.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/latency/LatencyMonitor.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/trader/Chimera/src/latency/LatencyMonitor.cpp > CMakeFiles/chimera.dir/src/latency/LatencyMonitor.cpp.i
+CMakeFiles/chimera.dir/src/gui/PnLModel.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/gui/PnLModel.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/trader/Chimera/src/gui/PnLModel.cpp > CMakeFiles/chimera.dir/src/gui/PnLModel.cpp.i
 
-CMakeFiles/chimera.dir/src/latency/LatencyMonitor.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/latency/LatencyMonitor.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/latency/LatencyMonitor.cpp -o CMakeFiles/chimera.dir/src/latency/LatencyMonitor.cpp.s
+CMakeFiles/chimera.dir/src/gui/PnLModel.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/gui/PnLModel.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/gui/PnLModel.cpp -o CMakeFiles/chimera.dir/src/gui/PnLModel.cpp.s
 
-CMakeFiles/chimera.dir/src/latency/LatencyClassifier.cpp.o: CMakeFiles/chimera.dir/flags.make
-CMakeFiles/chimera.dir/src/latency/LatencyClassifier.cpp.o: /home/trader/Chimera/src/latency/LatencyClassifier.cpp
-CMakeFiles/chimera.dir/src/latency/LatencyClassifier.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/chimera.dir/src/latency/LatencyClassifier.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/latency/LatencyClassifier.cpp.o -MF CMakeFiles/chimera.dir/src/latency/LatencyClassifier.cpp.o.d -o CMakeFiles/chimera.dir/src/latency/LatencyClassifier.cpp.o -c /home/trader/Chimera/src/latency/LatencyClassifier.cpp
+CMakeFiles/chimera.dir/src/gui/TelemetryServer.cpp.o: CMakeFiles/chimera.dir/flags.make
+CMakeFiles/chimera.dir/src/gui/TelemetryServer.cpp.o: /home/trader/Chimera/src/gui/TelemetryServer.cpp
+CMakeFiles/chimera.dir/src/gui/TelemetryServer.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/chimera.dir/src/gui/TelemetryServer.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/gui/TelemetryServer.cpp.o -MF CMakeFiles/chimera.dir/src/gui/TelemetryServer.cpp.o.d -o CMakeFiles/chimera.dir/src/gui/TelemetryServer.cpp.o -c /home/trader/Chimera/src/gui/TelemetryServer.cpp
 
-CMakeFiles/chimera.dir/src/latency/LatencyClassifier.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/latency/LatencyClassifier.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/trader/Chimera/src/latency/LatencyClassifier.cpp > CMakeFiles/chimera.dir/src/latency/LatencyClassifier.cpp.i
+CMakeFiles/chimera.dir/src/gui/TelemetryServer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/gui/TelemetryServer.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/trader/Chimera/src/gui/TelemetryServer.cpp > CMakeFiles/chimera.dir/src/gui/TelemetryServer.cpp.i
 
-CMakeFiles/chimera.dir/src/latency/LatencyClassifier.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/latency/LatencyClassifier.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/latency/LatencyClassifier.cpp -o CMakeFiles/chimera.dir/src/latency/LatencyClassifier.cpp.s
+CMakeFiles/chimera.dir/src/gui/TelemetryServer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/gui/TelemetryServer.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/gui/TelemetryServer.cpp -o CMakeFiles/chimera.dir/src/gui/TelemetryServer.cpp.s
+
+CMakeFiles/chimera.dir/src/gui/TradeBlotter.cpp.o: CMakeFiles/chimera.dir/flags.make
+CMakeFiles/chimera.dir/src/gui/TradeBlotter.cpp.o: /home/trader/Chimera/src/gui/TradeBlotter.cpp
+CMakeFiles/chimera.dir/src/gui/TradeBlotter.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/chimera.dir/src/gui/TradeBlotter.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/gui/TradeBlotter.cpp.o -MF CMakeFiles/chimera.dir/src/gui/TradeBlotter.cpp.o.d -o CMakeFiles/chimera.dir/src/gui/TradeBlotter.cpp.o -c /home/trader/Chimera/src/gui/TradeBlotter.cpp
+
+CMakeFiles/chimera.dir/src/gui/TradeBlotter.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/gui/TradeBlotter.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/trader/Chimera/src/gui/TradeBlotter.cpp > CMakeFiles/chimera.dir/src/gui/TradeBlotter.cpp.i
+
+CMakeFiles/chimera.dir/src/gui/TradeBlotter.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/gui/TradeBlotter.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/gui/TradeBlotter.cpp -o CMakeFiles/chimera.dir/src/gui/TradeBlotter.cpp.s
+
+CMakeFiles/chimera.dir/src/gui/WsServer.cpp.o: CMakeFiles/chimera.dir/flags.make
+CMakeFiles/chimera.dir/src/gui/WsServer.cpp.o: /home/trader/Chimera/src/gui/WsServer.cpp
+CMakeFiles/chimera.dir/src/gui/WsServer.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/chimera.dir/src/gui/WsServer.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/gui/WsServer.cpp.o -MF CMakeFiles/chimera.dir/src/gui/WsServer.cpp.o.d -o CMakeFiles/chimera.dir/src/gui/WsServer.cpp.o -c /home/trader/Chimera/src/gui/WsServer.cpp
+
+CMakeFiles/chimera.dir/src/gui/WsServer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/gui/WsServer.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/trader/Chimera/src/gui/WsServer.cpp > CMakeFiles/chimera.dir/src/gui/WsServer.cpp.i
+
+CMakeFiles/chimera.dir/src/gui/WsServer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/gui/WsServer.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/gui/WsServer.cpp -o CMakeFiles/chimera.dir/src/gui/WsServer.cpp.s
+
+CMakeFiles/chimera.dir/src/gui/WsServerGlobals.cpp.o: CMakeFiles/chimera.dir/flags.make
+CMakeFiles/chimera.dir/src/gui/WsServerGlobals.cpp.o: /home/trader/Chimera/src/gui/WsServerGlobals.cpp
+CMakeFiles/chimera.dir/src/gui/WsServerGlobals.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/chimera.dir/src/gui/WsServerGlobals.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/gui/WsServerGlobals.cpp.o -MF CMakeFiles/chimera.dir/src/gui/WsServerGlobals.cpp.o.d -o CMakeFiles/chimera.dir/src/gui/WsServerGlobals.cpp.o -c /home/trader/Chimera/src/gui/WsServerGlobals.cpp
+
+CMakeFiles/chimera.dir/src/gui/WsServerGlobals.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/gui/WsServerGlobals.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/trader/Chimera/src/gui/WsServerGlobals.cpp > CMakeFiles/chimera.dir/src/gui/WsServerGlobals.cpp.i
+
+CMakeFiles/chimera.dir/src/gui/WsServerGlobals.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/gui/WsServerGlobals.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/gui/WsServerGlobals.cpp -o CMakeFiles/chimera.dir/src/gui/WsServerGlobals.cpp.s
 
 CMakeFiles/chimera.dir/src/latency/ExecutionPolicy.cpp.o: CMakeFiles/chimera.dir/flags.make
 CMakeFiles/chimera.dir/src/latency/ExecutionPolicy.cpp.o: /home/trader/Chimera/src/latency/ExecutionPolicy.cpp
 CMakeFiles/chimera.dir/src/latency/ExecutionPolicy.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/chimera.dir/src/latency/ExecutionPolicy.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/chimera.dir/src/latency/ExecutionPolicy.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/latency/ExecutionPolicy.cpp.o -MF CMakeFiles/chimera.dir/src/latency/ExecutionPolicy.cpp.o.d -o CMakeFiles/chimera.dir/src/latency/ExecutionPolicy.cpp.o -c /home/trader/Chimera/src/latency/ExecutionPolicy.cpp
 
 CMakeFiles/chimera.dir/src/latency/ExecutionPolicy.cpp.i: cmake_force
@@ -349,10 +335,52 @@ CMakeFiles/chimera.dir/src/latency/ExecutionPolicy.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/latency/ExecutionPolicy.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/latency/ExecutionPolicy.cpp -o CMakeFiles/chimera.dir/src/latency/ExecutionPolicy.cpp.s
 
+CMakeFiles/chimera.dir/src/latency/LatencyClassifier.cpp.o: CMakeFiles/chimera.dir/flags.make
+CMakeFiles/chimera.dir/src/latency/LatencyClassifier.cpp.o: /home/trader/Chimera/src/latency/LatencyClassifier.cpp
+CMakeFiles/chimera.dir/src/latency/LatencyClassifier.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/chimera.dir/src/latency/LatencyClassifier.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/latency/LatencyClassifier.cpp.o -MF CMakeFiles/chimera.dir/src/latency/LatencyClassifier.cpp.o.d -o CMakeFiles/chimera.dir/src/latency/LatencyClassifier.cpp.o -c /home/trader/Chimera/src/latency/LatencyClassifier.cpp
+
+CMakeFiles/chimera.dir/src/latency/LatencyClassifier.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/latency/LatencyClassifier.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/trader/Chimera/src/latency/LatencyClassifier.cpp > CMakeFiles/chimera.dir/src/latency/LatencyClassifier.cpp.i
+
+CMakeFiles/chimera.dir/src/latency/LatencyClassifier.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/latency/LatencyClassifier.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/latency/LatencyClassifier.cpp -o CMakeFiles/chimera.dir/src/latency/LatencyClassifier.cpp.s
+
+CMakeFiles/chimera.dir/src/latency/LatencyGovernor.cpp.o: CMakeFiles/chimera.dir/flags.make
+CMakeFiles/chimera.dir/src/latency/LatencyGovernor.cpp.o: /home/trader/Chimera/src/latency/LatencyGovernor.cpp
+CMakeFiles/chimera.dir/src/latency/LatencyGovernor.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/chimera.dir/src/latency/LatencyGovernor.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/latency/LatencyGovernor.cpp.o -MF CMakeFiles/chimera.dir/src/latency/LatencyGovernor.cpp.o.d -o CMakeFiles/chimera.dir/src/latency/LatencyGovernor.cpp.o -c /home/trader/Chimera/src/latency/LatencyGovernor.cpp
+
+CMakeFiles/chimera.dir/src/latency/LatencyGovernor.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/latency/LatencyGovernor.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/trader/Chimera/src/latency/LatencyGovernor.cpp > CMakeFiles/chimera.dir/src/latency/LatencyGovernor.cpp.i
+
+CMakeFiles/chimera.dir/src/latency/LatencyGovernor.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/latency/LatencyGovernor.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/latency/LatencyGovernor.cpp -o CMakeFiles/chimera.dir/src/latency/LatencyGovernor.cpp.s
+
+CMakeFiles/chimera.dir/src/latency/LatencyMonitor.cpp.o: CMakeFiles/chimera.dir/flags.make
+CMakeFiles/chimera.dir/src/latency/LatencyMonitor.cpp.o: /home/trader/Chimera/src/latency/LatencyMonitor.cpp
+CMakeFiles/chimera.dir/src/latency/LatencyMonitor.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/chimera.dir/src/latency/LatencyMonitor.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/latency/LatencyMonitor.cpp.o -MF CMakeFiles/chimera.dir/src/latency/LatencyMonitor.cpp.o.d -o CMakeFiles/chimera.dir/src/latency/LatencyMonitor.cpp.o -c /home/trader/Chimera/src/latency/LatencyMonitor.cpp
+
+CMakeFiles/chimera.dir/src/latency/LatencyMonitor.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/latency/LatencyMonitor.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/trader/Chimera/src/latency/LatencyMonitor.cpp > CMakeFiles/chimera.dir/src/latency/LatencyMonitor.cpp.i
+
+CMakeFiles/chimera.dir/src/latency/LatencyMonitor.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/latency/LatencyMonitor.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/latency/LatencyMonitor.cpp -o CMakeFiles/chimera.dir/src/latency/LatencyMonitor.cpp.s
+
 CMakeFiles/chimera.dir/src/latency/LatencyRouter.cpp.o: CMakeFiles/chimera.dir/flags.make
 CMakeFiles/chimera.dir/src/latency/LatencyRouter.cpp.o: /home/trader/Chimera/src/latency/LatencyRouter.cpp
 CMakeFiles/chimera.dir/src/latency/LatencyRouter.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/chimera.dir/src/latency/LatencyRouter.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/chimera.dir/src/latency/LatencyRouter.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/latency/LatencyRouter.cpp.o -MF CMakeFiles/chimera.dir/src/latency/LatencyRouter.cpp.o.d -o CMakeFiles/chimera.dir/src/latency/LatencyRouter.cpp.o -c /home/trader/Chimera/src/latency/LatencyRouter.cpp
 
 CMakeFiles/chimera.dir/src/latency/LatencyRouter.cpp.i: cmake_force
@@ -363,64 +391,288 @@ CMakeFiles/chimera.dir/src/latency/LatencyRouter.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/latency/LatencyRouter.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/latency/LatencyRouter.cpp -o CMakeFiles/chimera.dir/src/latency/LatencyRouter.cpp.s
 
+CMakeFiles/chimera.dir/src/main.cpp.o: CMakeFiles/chimera.dir/flags.make
+CMakeFiles/chimera.dir/src/main.cpp.o: /home/trader/Chimera/src/main.cpp
+CMakeFiles/chimera.dir/src/main.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/chimera.dir/src/main.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/main.cpp.o -MF CMakeFiles/chimera.dir/src/main.cpp.o.d -o CMakeFiles/chimera.dir/src/main.cpp.o -c /home/trader/Chimera/src/main.cpp
+
+CMakeFiles/chimera.dir/src/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/main.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/trader/Chimera/src/main.cpp > CMakeFiles/chimera.dir/src/main.cpp.i
+
+CMakeFiles/chimera.dir/src/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/main.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/main.cpp -o CMakeFiles/chimera.dir/src/main.cpp.s
+
+CMakeFiles/chimera.dir/src/risk/ImpulseDecayExit.cpp.o: CMakeFiles/chimera.dir/flags.make
+CMakeFiles/chimera.dir/src/risk/ImpulseDecayExit.cpp.o: /home/trader/Chimera/src/risk/ImpulseDecayExit.cpp
+CMakeFiles/chimera.dir/src/risk/ImpulseDecayExit.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object CMakeFiles/chimera.dir/src/risk/ImpulseDecayExit.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/risk/ImpulseDecayExit.cpp.o -MF CMakeFiles/chimera.dir/src/risk/ImpulseDecayExit.cpp.o.d -o CMakeFiles/chimera.dir/src/risk/ImpulseDecayExit.cpp.o -c /home/trader/Chimera/src/risk/ImpulseDecayExit.cpp
+
+CMakeFiles/chimera.dir/src/risk/ImpulseDecayExit.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/risk/ImpulseDecayExit.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/trader/Chimera/src/risk/ImpulseDecayExit.cpp > CMakeFiles/chimera.dir/src/risk/ImpulseDecayExit.cpp.i
+
+CMakeFiles/chimera.dir/src/risk/ImpulseDecayExit.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/risk/ImpulseDecayExit.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/risk/ImpulseDecayExit.cpp -o CMakeFiles/chimera.dir/src/risk/ImpulseDecayExit.cpp.s
+
+CMakeFiles/chimera.dir/src/risk/ImpulseSizer.cpp.o: CMakeFiles/chimera.dir/flags.make
+CMakeFiles/chimera.dir/src/risk/ImpulseSizer.cpp.o: /home/trader/Chimera/src/risk/ImpulseSizer.cpp
+CMakeFiles/chimera.dir/src/risk/ImpulseSizer.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object CMakeFiles/chimera.dir/src/risk/ImpulseSizer.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/risk/ImpulseSizer.cpp.o -MF CMakeFiles/chimera.dir/src/risk/ImpulseSizer.cpp.o.d -o CMakeFiles/chimera.dir/src/risk/ImpulseSizer.cpp.o -c /home/trader/Chimera/src/risk/ImpulseSizer.cpp
+
+CMakeFiles/chimera.dir/src/risk/ImpulseSizer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/risk/ImpulseSizer.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/trader/Chimera/src/risk/ImpulseSizer.cpp > CMakeFiles/chimera.dir/src/risk/ImpulseSizer.cpp.i
+
+CMakeFiles/chimera.dir/src/risk/ImpulseSizer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/risk/ImpulseSizer.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/risk/ImpulseSizer.cpp -o CMakeFiles/chimera.dir/src/risk/ImpulseSizer.cpp.s
+
+CMakeFiles/chimera.dir/src/risk/LatencyAwareTP.cpp.o: CMakeFiles/chimera.dir/flags.make
+CMakeFiles/chimera.dir/src/risk/LatencyAwareTP.cpp.o: /home/trader/Chimera/src/risk/LatencyAwareTP.cpp
+CMakeFiles/chimera.dir/src/risk/LatencyAwareTP.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object CMakeFiles/chimera.dir/src/risk/LatencyAwareTP.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/risk/LatencyAwareTP.cpp.o -MF CMakeFiles/chimera.dir/src/risk/LatencyAwareTP.cpp.o.d -o CMakeFiles/chimera.dir/src/risk/LatencyAwareTP.cpp.o -c /home/trader/Chimera/src/risk/LatencyAwareTP.cpp
+
+CMakeFiles/chimera.dir/src/risk/LatencyAwareTP.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/risk/LatencyAwareTP.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/trader/Chimera/src/risk/LatencyAwareTP.cpp > CMakeFiles/chimera.dir/src/risk/LatencyAwareTP.cpp.i
+
+CMakeFiles/chimera.dir/src/risk/LatencyAwareTP.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/risk/LatencyAwareTP.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/risk/LatencyAwareTP.cpp -o CMakeFiles/chimera.dir/src/risk/LatencyAwareTP.cpp.s
+
+CMakeFiles/chimera.dir/src/risk/TradePermissionGate.cpp.o: CMakeFiles/chimera.dir/flags.make
+CMakeFiles/chimera.dir/src/risk/TradePermissionGate.cpp.o: /home/trader/Chimera/src/risk/TradePermissionGate.cpp
+CMakeFiles/chimera.dir/src/risk/TradePermissionGate.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building CXX object CMakeFiles/chimera.dir/src/risk/TradePermissionGate.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/risk/TradePermissionGate.cpp.o -MF CMakeFiles/chimera.dir/src/risk/TradePermissionGate.cpp.o.d -o CMakeFiles/chimera.dir/src/risk/TradePermissionGate.cpp.o -c /home/trader/Chimera/src/risk/TradePermissionGate.cpp
+
+CMakeFiles/chimera.dir/src/risk/TradePermissionGate.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/risk/TradePermissionGate.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/trader/Chimera/src/risk/TradePermissionGate.cpp > CMakeFiles/chimera.dir/src/risk/TradePermissionGate.cpp.i
+
+CMakeFiles/chimera.dir/src/risk/TradePermissionGate.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/risk/TradePermissionGate.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/risk/TradePermissionGate.cpp -o CMakeFiles/chimera.dir/src/risk/TradePermissionGate.cpp.s
+
+CMakeFiles/chimera.dir/src/risk/XAUEntryGovernor.cpp.o: CMakeFiles/chimera.dir/flags.make
+CMakeFiles/chimera.dir/src/risk/XAUEntryGovernor.cpp.o: /home/trader/Chimera/src/risk/XAUEntryGovernor.cpp
+CMakeFiles/chimera.dir/src/risk/XAUEntryGovernor.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building CXX object CMakeFiles/chimera.dir/src/risk/XAUEntryGovernor.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/risk/XAUEntryGovernor.cpp.o -MF CMakeFiles/chimera.dir/src/risk/XAUEntryGovernor.cpp.o.d -o CMakeFiles/chimera.dir/src/risk/XAUEntryGovernor.cpp.o -c /home/trader/Chimera/src/risk/XAUEntryGovernor.cpp
+
+CMakeFiles/chimera.dir/src/risk/XAUEntryGovernor.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/risk/XAUEntryGovernor.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/trader/Chimera/src/risk/XAUEntryGovernor.cpp > CMakeFiles/chimera.dir/src/risk/XAUEntryGovernor.cpp.i
+
+CMakeFiles/chimera.dir/src/risk/XAUEntryGovernor.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/risk/XAUEntryGovernor.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/risk/XAUEntryGovernor.cpp -o CMakeFiles/chimera.dir/src/risk/XAUEntryGovernor.cpp.s
+
+CMakeFiles/chimera.dir/src/routing/SymbolOpportunityRouter.cpp.o: CMakeFiles/chimera.dir/flags.make
+CMakeFiles/chimera.dir/src/routing/SymbolOpportunityRouter.cpp.o: /home/trader/Chimera/src/routing/SymbolOpportunityRouter.cpp
+CMakeFiles/chimera.dir/src/routing/SymbolOpportunityRouter.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building CXX object CMakeFiles/chimera.dir/src/routing/SymbolOpportunityRouter.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/routing/SymbolOpportunityRouter.cpp.o -MF CMakeFiles/chimera.dir/src/routing/SymbolOpportunityRouter.cpp.o.d -o CMakeFiles/chimera.dir/src/routing/SymbolOpportunityRouter.cpp.o -c /home/trader/Chimera/src/routing/SymbolOpportunityRouter.cpp
+
+CMakeFiles/chimera.dir/src/routing/SymbolOpportunityRouter.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/routing/SymbolOpportunityRouter.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/trader/Chimera/src/routing/SymbolOpportunityRouter.cpp > CMakeFiles/chimera.dir/src/routing/SymbolOpportunityRouter.cpp.i
+
+CMakeFiles/chimera.dir/src/routing/SymbolOpportunityRouter.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/routing/SymbolOpportunityRouter.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/routing/SymbolOpportunityRouter.cpp -o CMakeFiles/chimera.dir/src/routing/SymbolOpportunityRouter.cpp.s
+
+CMakeFiles/chimera.dir/src/shadow/CrashHandler.cpp.o: CMakeFiles/chimera.dir/flags.make
+CMakeFiles/chimera.dir/src/shadow/CrashHandler.cpp.o: /home/trader/Chimera/src/shadow/CrashHandler.cpp
+CMakeFiles/chimera.dir/src/shadow/CrashHandler.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building CXX object CMakeFiles/chimera.dir/src/shadow/CrashHandler.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/shadow/CrashHandler.cpp.o -MF CMakeFiles/chimera.dir/src/shadow/CrashHandler.cpp.o.d -o CMakeFiles/chimera.dir/src/shadow/CrashHandler.cpp.o -c /home/trader/Chimera/src/shadow/CrashHandler.cpp
+
+CMakeFiles/chimera.dir/src/shadow/CrashHandler.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/shadow/CrashHandler.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/trader/Chimera/src/shadow/CrashHandler.cpp > CMakeFiles/chimera.dir/src/shadow/CrashHandler.cpp.i
+
+CMakeFiles/chimera.dir/src/shadow/CrashHandler.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/shadow/CrashHandler.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/shadow/CrashHandler.cpp -o CMakeFiles/chimera.dir/src/shadow/CrashHandler.cpp.s
+
+CMakeFiles/chimera.dir/src/shadow/EquityCurve.cpp.o: CMakeFiles/chimera.dir/flags.make
+CMakeFiles/chimera.dir/src/shadow/EquityCurve.cpp.o: /home/trader/Chimera/src/shadow/EquityCurve.cpp
+CMakeFiles/chimera.dir/src/shadow/EquityCurve.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building CXX object CMakeFiles/chimera.dir/src/shadow/EquityCurve.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/shadow/EquityCurve.cpp.o -MF CMakeFiles/chimera.dir/src/shadow/EquityCurve.cpp.o.d -o CMakeFiles/chimera.dir/src/shadow/EquityCurve.cpp.o -c /home/trader/Chimera/src/shadow/EquityCurve.cpp
+
+CMakeFiles/chimera.dir/src/shadow/EquityCurve.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/shadow/EquityCurve.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/trader/Chimera/src/shadow/EquityCurve.cpp > CMakeFiles/chimera.dir/src/shadow/EquityCurve.cpp.i
+
+CMakeFiles/chimera.dir/src/shadow/EquityCurve.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/shadow/EquityCurve.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/shadow/EquityCurve.cpp -o CMakeFiles/chimera.dir/src/shadow/EquityCurve.cpp.s
+
+CMakeFiles/chimera.dir/src/shadow/JournalWriter.cpp.o: CMakeFiles/chimera.dir/flags.make
+CMakeFiles/chimera.dir/src/shadow/JournalWriter.cpp.o: /home/trader/Chimera/src/shadow/JournalWriter.cpp
+CMakeFiles/chimera.dir/src/shadow/JournalWriter.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Building CXX object CMakeFiles/chimera.dir/src/shadow/JournalWriter.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/shadow/JournalWriter.cpp.o -MF CMakeFiles/chimera.dir/src/shadow/JournalWriter.cpp.o.d -o CMakeFiles/chimera.dir/src/shadow/JournalWriter.cpp.o -c /home/trader/Chimera/src/shadow/JournalWriter.cpp
+
+CMakeFiles/chimera.dir/src/shadow/JournalWriter.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/shadow/JournalWriter.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/trader/Chimera/src/shadow/JournalWriter.cpp > CMakeFiles/chimera.dir/src/shadow/JournalWriter.cpp.i
+
+CMakeFiles/chimera.dir/src/shadow/JournalWriter.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/shadow/JournalWriter.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/shadow/JournalWriter.cpp -o CMakeFiles/chimera.dir/src/shadow/JournalWriter.cpp.s
+
+CMakeFiles/chimera.dir/src/shadow/MultiSymbolExecutor.cpp.o: CMakeFiles/chimera.dir/flags.make
+CMakeFiles/chimera.dir/src/shadow/MultiSymbolExecutor.cpp.o: /home/trader/Chimera/src/shadow/MultiSymbolExecutor.cpp
+CMakeFiles/chimera.dir/src/shadow/MultiSymbolExecutor.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Building CXX object CMakeFiles/chimera.dir/src/shadow/MultiSymbolExecutor.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/shadow/MultiSymbolExecutor.cpp.o -MF CMakeFiles/chimera.dir/src/shadow/MultiSymbolExecutor.cpp.o.d -o CMakeFiles/chimera.dir/src/shadow/MultiSymbolExecutor.cpp.o -c /home/trader/Chimera/src/shadow/MultiSymbolExecutor.cpp
+
+CMakeFiles/chimera.dir/src/shadow/MultiSymbolExecutor.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/shadow/MultiSymbolExecutor.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/trader/Chimera/src/shadow/MultiSymbolExecutor.cpp > CMakeFiles/chimera.dir/src/shadow/MultiSymbolExecutor.cpp.i
+
+CMakeFiles/chimera.dir/src/shadow/MultiSymbolExecutor.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/shadow/MultiSymbolExecutor.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/shadow/MultiSymbolExecutor.cpp -o CMakeFiles/chimera.dir/src/shadow/MultiSymbolExecutor.cpp.s
+
+CMakeFiles/chimera.dir/src/shadow/SymbolExecutor.cpp.o: CMakeFiles/chimera.dir/flags.make
+CMakeFiles/chimera.dir/src/shadow/SymbolExecutor.cpp.o: /home/trader/Chimera/src/shadow/SymbolExecutor.cpp
+CMakeFiles/chimera.dir/src/shadow/SymbolExecutor.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Building CXX object CMakeFiles/chimera.dir/src/shadow/SymbolExecutor.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/shadow/SymbolExecutor.cpp.o -MF CMakeFiles/chimera.dir/src/shadow/SymbolExecutor.cpp.o.d -o CMakeFiles/chimera.dir/src/shadow/SymbolExecutor.cpp.o -c /home/trader/Chimera/src/shadow/SymbolExecutor.cpp
+
+CMakeFiles/chimera.dir/src/shadow/SymbolExecutor.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/shadow/SymbolExecutor.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/trader/Chimera/src/shadow/SymbolExecutor.cpp > CMakeFiles/chimera.dir/src/shadow/SymbolExecutor.cpp.i
+
+CMakeFiles/chimera.dir/src/shadow/SymbolExecutor.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/shadow/SymbolExecutor.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/shadow/SymbolExecutor.cpp -o CMakeFiles/chimera.dir/src/shadow/SymbolExecutor.cpp.s
+
+CMakeFiles/chimera.dir/src/shadow/WatchdogThread.cpp.o: CMakeFiles/chimera.dir/flags.make
+CMakeFiles/chimera.dir/src/shadow/WatchdogThread.cpp.o: /home/trader/Chimera/src/shadow/WatchdogThread.cpp
+CMakeFiles/chimera.dir/src/shadow/WatchdogThread.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_36) "Building CXX object CMakeFiles/chimera.dir/src/shadow/WatchdogThread.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/shadow/WatchdogThread.cpp.o -MF CMakeFiles/chimera.dir/src/shadow/WatchdogThread.cpp.o.d -o CMakeFiles/chimera.dir/src/shadow/WatchdogThread.cpp.o -c /home/trader/Chimera/src/shadow/WatchdogThread.cpp
+
+CMakeFiles/chimera.dir/src/shadow/WatchdogThread.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/shadow/WatchdogThread.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/trader/Chimera/src/shadow/WatchdogThread.cpp > CMakeFiles/chimera.dir/src/shadow/WatchdogThread.cpp.i
+
+CMakeFiles/chimera.dir/src/shadow/WatchdogThread.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/shadow/WatchdogThread.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/shadow/WatchdogThread.cpp -o CMakeFiles/chimera.dir/src/shadow/WatchdogThread.cpp.s
+
+CMakeFiles/chimera.dir/src/timing/ExecutionGovernor.cpp.o: CMakeFiles/chimera.dir/flags.make
+CMakeFiles/chimera.dir/src/timing/ExecutionGovernor.cpp.o: /home/trader/Chimera/src/timing/ExecutionGovernor.cpp
+CMakeFiles/chimera.dir/src/timing/ExecutionGovernor.cpp.o: CMakeFiles/chimera.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_37) "Building CXX object CMakeFiles/chimera.dir/src/timing/ExecutionGovernor.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chimera.dir/src/timing/ExecutionGovernor.cpp.o -MF CMakeFiles/chimera.dir/src/timing/ExecutionGovernor.cpp.o.d -o CMakeFiles/chimera.dir/src/timing/ExecutionGovernor.cpp.o -c /home/trader/Chimera/src/timing/ExecutionGovernor.cpp
+
+CMakeFiles/chimera.dir/src/timing/ExecutionGovernor.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chimera.dir/src/timing/ExecutionGovernor.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/trader/Chimera/src/timing/ExecutionGovernor.cpp > CMakeFiles/chimera.dir/src/timing/ExecutionGovernor.cpp.i
+
+CMakeFiles/chimera.dir/src/timing/ExecutionGovernor.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chimera.dir/src/timing/ExecutionGovernor.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/trader/Chimera/src/timing/ExecutionGovernor.cpp -o CMakeFiles/chimera.dir/src/timing/ExecutionGovernor.cpp.s
+
 # Object files for target chimera
 chimera_OBJECTS = \
-"CMakeFiles/chimera.dir/src/main.cpp.o" \
-"CMakeFiles/chimera.dir/src/shadow/SymbolExecutor.cpp.o" \
-"CMakeFiles/chimera.dir/src/shadow/MultiSymbolExecutor.cpp.o" \
-"CMakeFiles/chimera.dir/src/shadow/CrashHandler.cpp.o" \
-"CMakeFiles/chimera.dir/src/shadow/WatchdogThread.cpp.o" \
-"CMakeFiles/chimera.dir/src/shadow/JournalWriter.cpp.o" \
-"CMakeFiles/chimera.dir/src/shadow/EquityCurve.cpp.o" \
+"CMakeFiles/chimera.dir/src/core/Globals.cpp.o" \
 "CMakeFiles/chimera.dir/src/core/TradeLedger.cpp.o" \
+"CMakeFiles/chimera.dir/src/execution/CostModel.cpp.o" \
 "CMakeFiles/chimera.dir/src/execution/ExecutionGovernor.cpp.o" \
 "CMakeFiles/chimera.dir/src/execution/ExecutionGovernor_drift.cpp.o" \
-"CMakeFiles/chimera.dir/src/execution/VelocityCalculator.cpp.o" \
+"CMakeFiles/chimera.dir/src/execution/ExecutionRouter_dual_tier.cpp.o" \
+"CMakeFiles/chimera.dir/src/execution/LatencyExecutionGate.cpp.o" \
 "CMakeFiles/chimera.dir/src/execution/LatencyExecutionGovernor.cpp.o" \
-"CMakeFiles/chimera.dir/src/execution/ExecutionRouter.cpp.o" \
-"CMakeFiles/chimera.dir/src/risk/LatencyAwareTP.cpp.o" \
-"CMakeFiles/chimera.dir/src/risk/ImpulseSizer.cpp.o" \
-"CMakeFiles/chimera.dir/src/risk/ImpulseDecayExit.cpp.o" \
-"CMakeFiles/chimera.dir/src/routing/SymbolOpportunityRouter.cpp.o" \
-"CMakeFiles/chimera.dir/src/latency/LatencyMonitor.cpp.o" \
-"CMakeFiles/chimera.dir/src/latency/LatencyClassifier.cpp.o" \
+"CMakeFiles/chimera.dir/src/execution/VelocityCalculator.cpp.o" \
+"CMakeFiles/chimera.dir/src/gui/ExecutionSnapshotJSON.cpp.o" \
+"CMakeFiles/chimera.dir/src/gui/GUIBroadcaster.cpp.o" \
+"CMakeFiles/chimera.dir/src/gui/GuiState.cpp.o" \
+"CMakeFiles/chimera.dir/src/gui/LatencyStats.cpp.o" \
+"CMakeFiles/chimera.dir/src/gui/PnLModel.cpp.o" \
+"CMakeFiles/chimera.dir/src/gui/TelemetryServer.cpp.o" \
+"CMakeFiles/chimera.dir/src/gui/TradeBlotter.cpp.o" \
+"CMakeFiles/chimera.dir/src/gui/WsServer.cpp.o" \
+"CMakeFiles/chimera.dir/src/gui/WsServerGlobals.cpp.o" \
 "CMakeFiles/chimera.dir/src/latency/ExecutionPolicy.cpp.o" \
-"CMakeFiles/chimera.dir/src/latency/LatencyRouter.cpp.o"
+"CMakeFiles/chimera.dir/src/latency/LatencyClassifier.cpp.o" \
+"CMakeFiles/chimera.dir/src/latency/LatencyGovernor.cpp.o" \
+"CMakeFiles/chimera.dir/src/latency/LatencyMonitor.cpp.o" \
+"CMakeFiles/chimera.dir/src/latency/LatencyRouter.cpp.o" \
+"CMakeFiles/chimera.dir/src/main.cpp.o" \
+"CMakeFiles/chimera.dir/src/risk/ImpulseDecayExit.cpp.o" \
+"CMakeFiles/chimera.dir/src/risk/ImpulseSizer.cpp.o" \
+"CMakeFiles/chimera.dir/src/risk/LatencyAwareTP.cpp.o" \
+"CMakeFiles/chimera.dir/src/risk/TradePermissionGate.cpp.o" \
+"CMakeFiles/chimera.dir/src/risk/XAUEntryGovernor.cpp.o" \
+"CMakeFiles/chimera.dir/src/routing/SymbolOpportunityRouter.cpp.o" \
+"CMakeFiles/chimera.dir/src/shadow/CrashHandler.cpp.o" \
+"CMakeFiles/chimera.dir/src/shadow/EquityCurve.cpp.o" \
+"CMakeFiles/chimera.dir/src/shadow/JournalWriter.cpp.o" \
+"CMakeFiles/chimera.dir/src/shadow/MultiSymbolExecutor.cpp.o" \
+"CMakeFiles/chimera.dir/src/shadow/SymbolExecutor.cpp.o" \
+"CMakeFiles/chimera.dir/src/shadow/WatchdogThread.cpp.o" \
+"CMakeFiles/chimera.dir/src/timing/ExecutionGovernor.cpp.o"
 
 # External object files for target chimera
 chimera_EXTERNAL_OBJECTS =
 
-chimera: CMakeFiles/chimera.dir/src/main.cpp.o
-chimera: CMakeFiles/chimera.dir/src/shadow/SymbolExecutor.cpp.o
-chimera: CMakeFiles/chimera.dir/src/shadow/MultiSymbolExecutor.cpp.o
-chimera: CMakeFiles/chimera.dir/src/shadow/CrashHandler.cpp.o
-chimera: CMakeFiles/chimera.dir/src/shadow/WatchdogThread.cpp.o
-chimera: CMakeFiles/chimera.dir/src/shadow/JournalWriter.cpp.o
-chimera: CMakeFiles/chimera.dir/src/shadow/EquityCurve.cpp.o
+chimera: CMakeFiles/chimera.dir/src/core/Globals.cpp.o
 chimera: CMakeFiles/chimera.dir/src/core/TradeLedger.cpp.o
+chimera: CMakeFiles/chimera.dir/src/execution/CostModel.cpp.o
 chimera: CMakeFiles/chimera.dir/src/execution/ExecutionGovernor.cpp.o
 chimera: CMakeFiles/chimera.dir/src/execution/ExecutionGovernor_drift.cpp.o
-chimera: CMakeFiles/chimera.dir/src/execution/VelocityCalculator.cpp.o
+chimera: CMakeFiles/chimera.dir/src/execution/ExecutionRouter_dual_tier.cpp.o
+chimera: CMakeFiles/chimera.dir/src/execution/LatencyExecutionGate.cpp.o
 chimera: CMakeFiles/chimera.dir/src/execution/LatencyExecutionGovernor.cpp.o
-chimera: CMakeFiles/chimera.dir/src/execution/ExecutionRouter.cpp.o
-chimera: CMakeFiles/chimera.dir/src/risk/LatencyAwareTP.cpp.o
-chimera: CMakeFiles/chimera.dir/src/risk/ImpulseSizer.cpp.o
-chimera: CMakeFiles/chimera.dir/src/risk/ImpulseDecayExit.cpp.o
-chimera: CMakeFiles/chimera.dir/src/routing/SymbolOpportunityRouter.cpp.o
-chimera: CMakeFiles/chimera.dir/src/latency/LatencyMonitor.cpp.o
-chimera: CMakeFiles/chimera.dir/src/latency/LatencyClassifier.cpp.o
+chimera: CMakeFiles/chimera.dir/src/execution/VelocityCalculator.cpp.o
+chimera: CMakeFiles/chimera.dir/src/gui/ExecutionSnapshotJSON.cpp.o
+chimera: CMakeFiles/chimera.dir/src/gui/GUIBroadcaster.cpp.o
+chimera: CMakeFiles/chimera.dir/src/gui/GuiState.cpp.o
+chimera: CMakeFiles/chimera.dir/src/gui/LatencyStats.cpp.o
+chimera: CMakeFiles/chimera.dir/src/gui/PnLModel.cpp.o
+chimera: CMakeFiles/chimera.dir/src/gui/TelemetryServer.cpp.o
+chimera: CMakeFiles/chimera.dir/src/gui/TradeBlotter.cpp.o
+chimera: CMakeFiles/chimera.dir/src/gui/WsServer.cpp.o
+chimera: CMakeFiles/chimera.dir/src/gui/WsServerGlobals.cpp.o
 chimera: CMakeFiles/chimera.dir/src/latency/ExecutionPolicy.cpp.o
+chimera: CMakeFiles/chimera.dir/src/latency/LatencyClassifier.cpp.o
+chimera: CMakeFiles/chimera.dir/src/latency/LatencyGovernor.cpp.o
+chimera: CMakeFiles/chimera.dir/src/latency/LatencyMonitor.cpp.o
 chimera: CMakeFiles/chimera.dir/src/latency/LatencyRouter.cpp.o
+chimera: CMakeFiles/chimera.dir/src/main.cpp.o
+chimera: CMakeFiles/chimera.dir/src/risk/ImpulseDecayExit.cpp.o
+chimera: CMakeFiles/chimera.dir/src/risk/ImpulseSizer.cpp.o
+chimera: CMakeFiles/chimera.dir/src/risk/LatencyAwareTP.cpp.o
+chimera: CMakeFiles/chimera.dir/src/risk/TradePermissionGate.cpp.o
+chimera: CMakeFiles/chimera.dir/src/risk/XAUEntryGovernor.cpp.o
+chimera: CMakeFiles/chimera.dir/src/routing/SymbolOpportunityRouter.cpp.o
+chimera: CMakeFiles/chimera.dir/src/shadow/CrashHandler.cpp.o
+chimera: CMakeFiles/chimera.dir/src/shadow/EquityCurve.cpp.o
+chimera: CMakeFiles/chimera.dir/src/shadow/JournalWriter.cpp.o
+chimera: CMakeFiles/chimera.dir/src/shadow/MultiSymbolExecutor.cpp.o
+chimera: CMakeFiles/chimera.dir/src/shadow/SymbolExecutor.cpp.o
+chimera: CMakeFiles/chimera.dir/src/shadow/WatchdogThread.cpp.o
+chimera: CMakeFiles/chimera.dir/src/timing/ExecutionGovernor.cpp.o
 chimera: CMakeFiles/chimera.dir/build.make
 chimera: /usr/lib/x86_64-linux-gnu/libssl.so
 chimera: /usr/lib/x86_64-linux-gnu/libcrypto.so
-chimera: libgui.a
 chimera: CMakeFiles/chimera.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Linking CXX executable chimera"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/trader/Chimera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_38) "Linking CXX executable chimera"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/chimera.dir/link.txt --verbose=$(VERBOSE)
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold "Copying config files"
-	/usr/bin/cmake -E copy_if_different /home/trader/Chimera/config.ini /home/trader/Chimera/build/config.ini
-	/usr/bin/cmake -E copy_if_different /home/trader/Chimera/chimera_dashboard.html /home/trader/Chimera/build/chimera_dashboard.html
 
 # Rule to build all files generated by this target.
 CMakeFiles/chimera.dir/build: chimera

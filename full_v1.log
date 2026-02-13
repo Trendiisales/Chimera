@@ -1,0 +1,124 @@
+[FIX-DBG][CTraderFIXClient::connect] >>> START
+[FIX-DBG][CTraderFIXClient::connect] Calling disconnect() first...
+[FIX-DBG][FIXSession::stop][QUOTE] START state=0
+[FIX-DBG][FIXSession::stop][QUOTE] heartbeatThread_.joinable()=0
+[FIX-DBG][FIXSession::stop][QUOTE] Already DISCONNECTED, returning
+[FIX-DBG][FIXSession::stop][TRADE] START state=0
+[FIX-DBG][FIXSession::stop][TRADE] heartbeatThread_.joinable()=0
+[FIX-DBG][FIXSession::stop][TRADE] Already DISCONNECTED, returning
+[FIX-DBG][CTraderFIXClient::connect] disconnect() done, proceeding...
+[FIX-DBG][CTraderFIXClient::connect] Setting up TRADE callbacks...
+[FIX-DBG][CTraderFIXClient::connect] Setting up QUOTE callbacks...
+[FIX-DBG][CTraderFIXClient::connect] >>> STEP 1: Starting TRADE session...
+[FIX-DBG][FIXSession::start][TRADE] START host=demo-uk-eqx-01.p.c-trader.com port=5212
+[FIX-DBG][FIXSession::start][TRADE] state=CONNECTING
+[FIX-DBG][FIXSession::start][TRADE] Calling transport_.connect()...
+[FIX-DBG][FIXSession::stateCallback][TRADE] connected=1
+[FIX-DBG][FIXSession::start][TRADE] transport_.connect() OK
+[FIX-DBG][FIXSession::start][TRADE] Creating heartbeat thread...
+[FIX-DBG][FIXSession::start][TRADE] heartbeatThread_.joinable()=0 BEFORE
+[FIX-DBG][FIXSession::start][TRADE] heartbeat thread CREATED
+[FIX-DBG][FIXSession::start][TRADE] Waiting for RX thread ready...
+═══════════════════════════════════════════════════════════
+  CHIMERA v4.35 - METALS PRODUCTION
+═══════════════════════════════════════════════════════════
+
+[CRASH_HANDLER] Installed signal handlers
+[CRASH_HANDLER] Backtrace will be written to: /var/log/chimera/backtrace.log
+[JOURNAL] Initialized: /var/log/chimera/shadow_fix_journal.log
+[JOURNAL] ClOrdID starts at: 10000
+[JOURNAL] ExecID starts at: 50000
+[INIT] Configured: XAUUSD, XAGUSD
+[INIT] GUI started
+[INIT] Signal generator initialized
+[INIT] Loading FIX config...
+═══════════════════════════════════════════════════════════════
+  FIX Configuration (from config.ini)
+═══════════════════════════════════════════════════════════════
+  Host:           demo-uk-eqx-01.p.c-trader.com
+  TRADE Port:     5212 (connects FIRST)
+  QUOTE Port:     5211 (connects AFTER)
+  SenderCompID:   demo.blackbull.2067070
+  TargetCompID:   cServer
+  Username:       2067070
+  Password:       ********
+  HeartBtInt:     30s
+═══════════════════════════════════════════════════════════════
+[FIX-DBG] CONSTRUCTOR instance=0 this=0x7fff37425058
+[FIX-DBG]   rxThread_.joinable()=0 txThread_.joinable()=0
+[FIX-DBG] initSSL() instance=0
+[FIX-DBG]   Global SSL init...
+[FIX-DBG]   OpenSSL 1.1+ init done
+[FIX-DBG]   SSL_CTX_new...
+[FIX-DBG] initSSL() DONE sslCtx_=0x616aadb86cf0
+[FIX-DBG] CONSTRUCTOR DONE instance=0 sslCtx_=0x616aadb86cf0
+[FIX-DBG] CONSTRUCTOR instance=1 this=0x7fff37665718
+[FIX-DBG]   rxThread_.joinable()=0 txThread_.joinable()=0
+[FIX-DBG] initSSL() instance=1
+[FIX-DBG]   SSL_CTX_new...
+[FIX-DBG] initSSL() DONE sslCtx_=0x616aadbc5900
+[FIX-DBG] CONSTRUCTOR DONE instance=1 sslCtx_=0x616aadbc5900
+[CTraderFIX] Symbol specs initialized (11 symbols)
+[INIT] Connecting to cTrader FIX...
+[CTraderFIX] Disconnecting...
+[CTraderFIX] Fully disconnected
+[CTraderFIX] ============================================
+[CTraderFIX] CONNECTING TO CTRADER FIX
+[CTraderFIX] Host: demo-uk-eqx-01.p.c-trader.com
+[CTraderFIX] TRADE port: 5212 (connects FIRST)
+[CTraderFIX] QUOTE port: 5211 (connects AFTER trade)
+[CTraderFIX] SenderCompID: demo.blackbull.2067070
+[CTraderFIX] ============================================
+[CTraderFIX] STEP 1: Starting TRADE session on port 5212...
+[FIX-DBG] >>> connect() START instance=1 host=demo-uk-eqx-01.p.c-trader.com port=5212
+[FIX-DBG]   rxThread_.joinable()=0 txThread_.joinable()=0 BEFORE lock
+[FIX-DBG]   connMtx_ LOCKED
+[FIX-DBG]   Creating socket...
+[FIX-DBG]   Socket created: fd=4
+[FIX-DBG]   Resolving hostname...
+[FIX-DBG]   DNS OK
+[FIX-DBG]   TCP connect (non-blocking)...
+[FIX-DBG]   Waiting for connect (10s timeout)...
+[FIX-DBG]   TCP connected OK
+[FIX-DBG]   SSL handshake...
+[FIX-DBG] sslHandshake() instance=1
+[FIX-DBG]   SSL_new(ctx=0x616aadbc5900)...
+[FIX-DBG]   ssl_=0x616aadbcbb30
+[FIX-DBG]   SSL_connect...
+[FIX-DBG]   SSL connected: cipher=ECDHE-RSA-AES256-GCM-SHA384
+[FIX-DBG]   SSL handshake OK
+[FIX-DBG]   Setting running_=true connected_=true
+[FIX-DBG]   THREAD CHECK: rxThread_.joinable()=0 txThread_.joinable()=0
+[FIX-DBG]   >>> Creating RX thread...
+[FIX-DBG]   RX thread CREATED handle=130959838013120
+[FIX-DBG]   >>> Creating TX thread...
+[FIX-DBG]   TX thread CREATED handle=130959829620416
+[FIX-DBG]   Both threads created successfully
+[FIX-DBG]   Calling stateCallback_(true)...
+[FIX-DBG]   stateCallback_ returned OK
+[FIX-DBG] >>> connect() COMPLETE instance=1 SUCCESS
+[FIX-DBG] waitForRxReady() START timeout=5000ms
+[FIX-DBG] >>> txLoop() START instance=1
+[FIX-DBG] >>> rxLoo[FIX-DBG][FIXSession::start][TRADE] RX thread ready, sending logon...
+[FIX-DBG][FIXSession::start][TRADE] COMPLETE SUCCESS
+[FIX-DBG][CTraderFIXClient::connect] TRADE session started OK
+[FIX-DBG][FIXSession::stateCallback][TRADE] connected=0
+p() START instance=1
+[FIX-DBG]   Allocating buffer...
+[FIX-DBG]   Buffer allocated OK
+[FIX-DBG]   RX READY - signaling waiters
+[FIX-DBG]   Entering read loop...
+[FIX-DBG] waitForRxReady() RX THREAD IS READY - safe to send LOGON
+[TRADE] Sending LOGON (seq=1)
+[TRADE] TX: 8=FIX.4.4|9=130|35=A|49=demo.blackbull.2067070|56=cServer|34=1|52=20260212-22:03:46|57=TRADE|50=TRADE|98=0|108=30|141=Y|553=2067070|554=Bowen6feb|10=030|
+[CTraderFIX] Waiting for TRADE logon...
+[FIX-DBG]   TX dequeued 153 bytes
+[FIX-DBG]   SSL_write attempt: offset=0 remaining=153
+[FIX-DBG]   SSL_write returned: 153
+[FIX-DBG]   SSL_write sent 153 bytes, total=153
+[FIX-DBG]   TX COMPLETE: sent=153 bytes OK
+[FIX-DBG]   Peer closed connection
+[FIX-DBG]   Read loop ended
+[FIX-DBG]   Unexpected disconnect
+[TRADE] Connection lost
+[FIX-DBG][CTraderFIXClient] TRADE onLogout callback: Connection lost
