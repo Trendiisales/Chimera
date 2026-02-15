@@ -1,0 +1,27 @@
+﻿# Build artifacts
+build/
+*.o
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Runtime files
+*.log
+*.bin
+*.dat
+events_*
+*_snapshot.bin
+*_index.txt
+fix_seq.dat
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
