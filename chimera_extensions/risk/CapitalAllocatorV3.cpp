@@ -15,7 +15,6 @@ bool CapitalAllocatorV3::reserve(const core::OrderIntent& intent) {
     
     double notional = calculate_notional(intent);
     
-    // FIX #2: Bounded checks with floor/ceiling
     double projected_global = m_global_exposure.reserved + m_global_exposure.committed + notional;
     if (projected_global > m_global_cap)
         return false;
@@ -56,9 +55,16 @@ void CapitalAllocatorV3::commit(const core::OrderIntent& intent) {
     auto& symbol_state = m_symbol_exposure[intent.symbol];
     symbol_state.reserved -= notional;
     symbol_state.committed += notional;
+    
+    // FIX #3: Clamp to prevent negative underflow
+    m_global_exposure.reserved = std::max(0.0, m_global_exposure.reserved);
+    m_global_exposure.committed = std::max(0.0, m_global_exposure.committed);
+    engine_state.reserved = std::max(0.0, engine_state.reserved);
+    engine_state.committed = std::max(0.0, engine_state.committed);
+    symbol_state.reserved = std::max(0.0, symbol_state.reserved);
+    symbol_state.committed = std::max(0.0, symbol_state.committed);
 }
 
-// FIX #1: CRITICAL - Partial fill reconciliation
 void CapitalAllocatorV3::adjust_on_fill(const core::OrderIntent& intent,
                                         double actual_fill_qty,
                                         double actual_fill_price) {
@@ -68,7 +74,6 @@ void CapitalAllocatorV3::adjust_on_fill(const core::OrderIntent& intent,
     double actual_notional = actual_fill_qty * actual_fill_price;
     double remainder = reserved_notional - actual_notional;
     
-    // Move from reserved to committed based on actual fill
     m_global_exposure.reserved -= reserved_notional;
     m_global_exposure.committed += actual_notional;
     
@@ -80,12 +85,19 @@ void CapitalAllocatorV3::adjust_on_fill(const core::OrderIntent& intent,
     symbol_state.reserved -= reserved_notional;
     symbol_state.committed += actual_notional;
     
-    // Release unfilled portion
     if (remainder > 0.0) {
         m_global_exposure.committed -= remainder;
         engine_state.committed -= remainder;
         symbol_state.committed -= remainder;
     }
+    
+    // FIX #3: CRITICAL - Prevent negative exposure from edge cases
+    m_global_exposure.reserved = std::max(0.0, m_global_exposure.reserved);
+    m_global_exposure.committed = std::max(0.0, m_global_exposure.committed);
+    engine_state.reserved = std::max(0.0, engine_state.reserved);
+    engine_state.committed = std::max(0.0, engine_state.committed);
+    symbol_state.reserved = std::max(0.0, symbol_state.reserved);
+    symbol_state.committed = std::max(0.0, symbol_state.committed);
 }
 
 void CapitalAllocatorV3::release(const core::OrderIntent& intent) {
@@ -99,6 +111,11 @@ void CapitalAllocatorV3::release(const core::OrderIntent& intent) {
     
     auto& symbol_state = m_symbol_exposure[intent.symbol];
     symbol_state.reserved -= notional;
+    
+    // FIX #3: Clamp on release too
+    m_global_exposure.reserved = std::max(0.0, m_global_exposure.reserved);
+    engine_state.reserved = std::max(0.0, engine_state.reserved);
+    symbol_state.reserved = std::max(0.0, symbol_state.reserved);
 }
 
 void CapitalAllocatorV3::update_engine_weights(double hft_weight, double struct_weight) {
@@ -122,7 +139,6 @@ double CapitalAllocatorV3::get_engine_exposure(core::EngineType engine) {
     return m_engine_exposure[engine].committed + m_engine_exposure[engine].reserved;
 }
 
-// FIX #5: Get NET exposure for hedge direction
 double CapitalAllocatorV3::get_net_exposure(core::EngineType engine) {
     std::lock_guard<std::mutex> lock(m_mutex);
     return m_engine_exposure[engine].committed;
