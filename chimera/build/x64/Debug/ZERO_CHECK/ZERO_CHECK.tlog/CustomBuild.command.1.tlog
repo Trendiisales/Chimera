@@ -1,0 +1,10 @@
+^C:\CHIMERA\CHIMERA\BUILD\CMAKEFILES\2A425117703A51E3CE3A1E8B89D76565\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Chimera/chimera -BC:/Chimera/chimera/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Chimera/chimera/build/chimera.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
