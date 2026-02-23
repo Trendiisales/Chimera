@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ChimeraMetals V3 - Trade Desk</title>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: 'Courier New', monospace;
+        background: #0a0a0a;
+        color: #00ff41;
+        padding: 20px;
+    }
+    
+    .container {
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+    
+    header {
+        text-align: center;
+        padding: 20px;
+        border-bottom: 2px solid #00ff41;
+        margin-bottom: 30px;
+    }
+    
+    h1 {
+        font-size: 2.5em;
+        text-shadow: 0 0 10px #00ff41;
+    }
+    
+    .status {
+        font-size: 0.9em;
+        margin-top: 10px;
+        opacity: 0.7;
+    }
+    
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+    
+    .panel {
+        background: #111;
+        border: 1px solid #00ff41;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
+    }
+    
+    .panel h2 {
+        color: #00ff41;
+        margin-bottom: 15px;
+        font-size: 1.2em;
+        border-bottom: 1px solid #00ff41;
+        padding-bottom: 10px;
+    }
+    
+    .metric {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+        border-bottom: 1px dotted #333;
+    }
+    
+    .metric:last-child {
+        border-bottom: none;
+    }
+    
+    .label {
+        opacity: 0.7;
+    }
+    
+    .value {
+        font-weight: bold;
+    }
+    
+    .positive {
+        color: #00ff41;
+    }
+    
+    .negative {
+        color: #ff4136;
+    }
+    
+    .warning {
+        color: #ffdc00;
+    }
+    
+    .lockdown {
+        background: #ff4136;
+        color: #fff;
+        padding: 10px;
+        text-align: center;
+        font-weight: bold;
+        margin-bottom: 20px;
+        animation: pulse 1s infinite;
+    }
+    
+    @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+    }
+    
+    .bar {
+        height: 20px;
+        background: #222;
+        border-radius: 3px;
+        overflow: hidden;
+        margin-top: 5px;
+    }
+    
+    .bar-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #00ff41, #00aa2b);
+        transition: width 0.3s ease;
+    }
+    
+    .connection {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 5px 10px;
+        background: #111;
+        border: 1px solid;
+        border-radius: 3px;
+        font-size: 0.8em;
+    }
+    
+    .connected {
+        border-color: #00ff41;
+        color: #00ff41;
+    }
+    
+    .disconnected {
+        border-color: #ff4136;
+        color: #ff4136;
+    }
+</style>
+</head>
+<body>
+
+<div class="connection" id="connection">● CONNECTING</div>
+
+<div class="container">
+    <header>
+        <h1>CHIMERAMETALS V3</h1>
+        <div class="status">INSTITUTIONAL GRADE TRADE DESK</div>
+    </header>
+    
+    <div id="lockdown" class="lockdown" style="display:none;">
+        ⚠️ VOLATILITY LOCKDOWN MODE ACTIVE - SIZE REDUCED TO 20%
+    </div>
+    
+    <div class="grid">
+        <!-- Exposure Panel -->
+        <div class="panel">
+            <h2>EXPOSURE</h2>
+            <div class="metric">
+                <span class="label">Global:</span>
+                <span class="value" id="global-exposure">$0.00</span>
+            </div>
+            <div class="metric">
+                <span class="label">HFT:</span>
+                <span class="value" id="hft-exposure">$0.00</span>
+            </div>
+            <div class="metric">
+                <span class="label">Structure:</span>
+                <span class="value" id="structure-exposure">$0.00</span>
+            </div>
+        </div>
+        
+        <!-- P&L Panel -->
+        <div class="panel">
+            <h2>P&L</h2>
+            <div class="metric">
+                <span class="label">Daily P&L:</span>
+                <span class="value" id="daily-pnl">$0.00</span>
+            </div>
+            <div class="metric">
+                <span class="label">Total Trades:</span>
+                <span class="value" id="total-trades">0</span>
+            </div>
+        </div>
+        
+        <!-- Execution Panel -->
+        <div class="panel">
+            <h2>EXECUTION</h2>
+            <div class="metric">
+                <span class="label">Latency EMA:</span>
+                <span class="value" id="latency-ema">0.00ms</span>
+            </div>
+            <div class="metric">
+                <span class="label">Slippage EMA:</span>
+                <span class="value" id="slippage-ema">0.00 bps</span>
+            </div>
+        </div>
+        
+        <!-- Engine Performance -->
+        <div class="panel">
+            <h2>ENGINE PERFORMANCE</h2>
+            <div class="metric">
+                <span class="label">HFT Score:</span>
+                <span class="value">
+                    <span id="hft-score">0.00</span>
+                    <div class="bar">
+                        <div class="bar-fill" id="hft-bar" style="width:0%"></div>
+                    </div>
+                </span>
+            </div>
+            <div class="metric">
+                <span class="label">Structure Score:</span>
+                <span class="value">
+                    <span id="structure-score">0.00</span>
+                    <div class="bar">
+                        <div class="bar-fill" id="structure-bar" style="width:0%"></div>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+        <!-- Adaptive Parameters -->
+        <div class="panel">
+            <h2>ADAPTIVE PARAMS</h2>
+            <div class="metric">
+                <span class="label">HFT Threshold:</span>
+                <span class="value" id="hft-threshold">0.00</span>
+            </div>
+            <div class="metric">
+                <span class="label">Structure Threshold:</span>
+                <span class="value" id="structure-threshold">0.00</span>
+            </div>
+        </div>
+        
+        <!-- Risk Limits -->
+        <div class="panel">
+            <h2>RISK LIMITS</h2>
+            <div class="metric">
+                <span class="label">Spread Limit:</span>
+                <span class="value" id="spread-limit">0.00</span>
+            </div>
+            <div class="metric">
+                <span class="label">Vol Limit:</span>
+                <span class="value" id="vol-limit">0.00</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+const ws = new WebSocket('ws://localhost:9000');
+const connEl = document.getElementById('connection');
+
+ws.onopen = () => {
+    connEl.textContent = '● CONNECTED';
+    connEl.className = 'connection connected';
+};
+
+ws.onclose = () => {
+    connEl.textContent = '● DISCONNECTED';
+    connEl.className = 'connection disconnected';
+};
+
+ws.onmessage = (event) => {
+    const data = JSON.parse(event.data);
+    
+    // Exposure
+    document.getElementById('global-exposure').textContent = '$' + data.global_exposure.toFixed(2);
+    document.getElementById('hft-exposure').textContent = '$' + data.hft_exposure.toFixed(2);
+    document.getElementById('structure-exposure').textContent = '$' + data.structure_exposure.toFixed(2);
+    
+    // P&L
+    const pnlEl = document.getElementById('daily-pnl');
+    pnlEl.textContent = '$' + data.daily_pnl.toFixed(2);
+    pnlEl.className = 'value ' + (data.daily_pnl >= 0 ? 'positive' : 'negative');
+    
+    document.getElementById('total-trades').textContent = data.total_trades;
+    
+    // Execution
+    document.getElementById('latency-ema').textContent = data.latency_ema.toFixed(2) + 'ms';
+    document.getElementById('slippage-ema').textContent = data.slippage_ema.toFixed(2) + ' bps';
+    
+    // Engine Performance
+    document.getElementById('hft-score').textContent = data.hft_score.toFixed(3);
+    document.getElementById('hft-bar').style.width = (data.hft_score * 100) + '%';
+    
+    document.getElementById('structure-score').textContent = data.structure_score.toFixed(3);
+    document.getElementById('structure-bar').style.width = (data.structure_score * 100) + '%';
+    
+    // Adaptive Parameters
+    document.getElementById('hft-threshold').textContent = data.hft_threshold.toFixed(3);
+    document.getElementById('structure-threshold').textContent = data.structure_threshold.toFixed(3);
+    
+    // Risk Limits
+    document.getElementById('spread-limit').textContent = data.spread_limit.toFixed(2);
+    document.getElementById('vol-limit').textContent = data.vol_limit.toFixed(2);
+    
+    // Lockdown mode
+    const lockdownEl = document.getElementById('lockdown');
+    lockdownEl.style.display = data.lockdown_mode ? 'block' : 'none';
+};
+
+ws.onerror = (error) => {
+    console.error('WebSocket error:', error);
+};
+</script>
+
+</body>
+</html>
