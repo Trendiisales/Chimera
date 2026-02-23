@@ -1,0 +1,61 @@
+cmake_minimum_required(VERSION 3.15)
+
+# V2 INSTITUTIONAL COMPONENTS
+
+# Core
+add_library(chimera_v2_core STATIC
+    core/PerformanceTracker.cpp
+    core/HedgeController.cpp
+    core/EngineCoordinatorV2.cpp
+)
+
+target_include_directories(chimera_v2_core PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}
+)
+
+# Engines
+add_library(chimera_v2_engines STATIC
+    engines/MicrostructureAnalyzer.cpp
+    engines/TimeframeAggregator.cpp
+    engines/RegimeClassifier.cpp
+    engines/HFTEngineV2.cpp
+    engines/StructureEngineV2.cpp
+)
+
+target_include_directories(chimera_v2_engines PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}
+)
+
+# Risk
+add_library(chimera_v2_risk STATIC
+    risk/CapitalAllocatorV2.cpp
+    risk/RiskGovernorV2.cpp
+)
+
+target_include_directories(chimera_v2_risk PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}
+)
+
+# Execution
+add_library(chimera_v2_execution STATIC
+    execution/LatencyEngine.cpp
+)
+
+target_include_directories(chimera_v2_execution PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}
+)
+
+# V2 Interface Library (combines all)
+add_library(chimera_v2 INTERFACE)
+target_link_libraries(chimera_v2 INTERFACE
+    chimera_v2_core
+    chimera_v2_engines
+    chimera_v2_risk
+    chimera_v2_execution
+)
+
+message(STATUS "✓ ChimeraMetals V2 - Institutional Components Built")
+message(STATUS "  - Core: PerformanceTracker, HedgeController, CoordinatorV2")
+message(STATUS "  - Engines: HFTv2 (Microstructure), Structurev2 (Regime)")
+message(STATUS "  - Risk: Dynamic Allocator, Adaptive Governor")
+message(STATUS "  - Execution: Latency Attribution Engine")
