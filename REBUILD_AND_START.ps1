@@ -1,0 +1,65 @@
+# ==============================================================================
+#                   OMEGA - CLEAN REBUILD AND START
+# ==============================================================================
+$ErrorActionPreference = "Stop"
+
+Write-Host "=======================================================" -ForegroundColor Cyan
+Write-Host "   OMEGA - CLEAN REBUILD                               " -ForegroundColor Cyan
+Write-Host "=======================================================" -ForegroundColor Cyan
+Write-Host ""
+
+Write-Host "[1/4] Stopping Omega..." -ForegroundColor Yellow
+Stop-Process -Name "Omega" -Force -ErrorAction SilentlyContinue
+Start-Sleep -Seconds 2
+Write-Host "      [OK]" -ForegroundColor Green
+Write-Host ""
+
+Write-Host "[2/4] Syncing to origin/main..." -ForegroundColor Yellow
+Set-Location C:\Omega
+git fetch origin
+git checkout main
+# Deterministic deploy: always build exact remote head.
+git reset --hard origin/main
+$localHead  = (git rev-parse HEAD).Trim()
+$remoteHead = (git rev-parse origin/main).Trim()
+if ($localHead -ne $remoteHead) {
+    Write-Host "      [ERROR] Repo not aligned to origin/main" -ForegroundColor Red
+    exit 1
+}
+Write-Host "      [OK] HEAD $localHead" -ForegroundColor Green
+Write-Host ""
+
+Write-Host "[3/4] Clean build..." -ForegroundColor Yellow
+Remove-Item -Path "C:\Omega\build" -Recurse -Force -ErrorAction SilentlyContinue
+New-Item -ItemType Directory -Path "C:\Omega\build" -Force | Out-Null
+Set-Location C:\Omega\build
+cmake ..
+cmake --build . --config Release
+
+if (-not (Test-Path "Release\Omega.exe")) {
+    Write-Host "      [ERROR] Build failed!" -ForegroundColor Red
+    exit 1
+}
+Write-Host "      [OK] Omega.exe built" -ForegroundColor Green
+Write-Host ""
+
+Write-Host "[4/4] Copying assets and starting..." -ForegroundColor Yellow
+$configSource = "C:\Omega\config\omega_config.ini"
+if (-not (Test-Path $configSource)) { $configSource = "C:\Omega\omega_config.ini" }
+if (-not (Test-Path $configSource)) {
+    Write-Host "      [ERROR] omega_config.ini not found in repo" -ForegroundColor Red
+    exit 1
+}
+Copy-Item $configSource "Release\omega_config.ini" -Force
+Copy-Item "C:\Omega\src\gui\www\omega_index.html" "Release\omega_index.html" -Force -ErrorAction SilentlyContinue
+Copy-Item "C:\Omega\src\gui\www\chimera_logo.png" "Release\chimera_logo.png" -Force -ErrorAction SilentlyContinue
+
+Write-Host ""
+Write-Host "=======================================================" -ForegroundColor Cyan
+Write-Host "  Rebuild complete. Check version:" -ForegroundColor Cyan
+Write-Host "  http://185.167.119.59:7779/version" -ForegroundColor Cyan
+Write-Host "=======================================================" -ForegroundColor Cyan
+Write-Host ""
+
+Set-Location Release
+.\Omega.exe omega_config.ini
