@@ -1,21 +1,21 @@
 # ==============================================================================
-#                   OMEGA - CLEAN REBUILD AND START
+#                   CHIMERA - CLEAN REBUILD AND START
 # ==============================================================================
 $ErrorActionPreference = "Stop"
 
 Write-Host "=======================================================" -ForegroundColor Cyan
-Write-Host "   OMEGA - CLEAN REBUILD                               " -ForegroundColor Cyan
+Write-Host "   CHIMERA - CLEAN REBUILD                               " -ForegroundColor Cyan
 Write-Host "=======================================================" -ForegroundColor Cyan
 Write-Host ""
 
-Write-Host "[1/4] Stopping Omega..." -ForegroundColor Yellow
-Stop-Process -Name "Omega" -Force -ErrorAction SilentlyContinue
+Write-Host "[1/4] Stopping Chimera..." -ForegroundColor Yellow
+Stop-Process -Name "Chimera" -Force -ErrorAction SilentlyContinue
 Start-Sleep -Seconds 2
 Write-Host "      [OK]" -ForegroundColor Green
 Write-Host ""
 
 Write-Host "[2/4] Syncing to origin/main..." -ForegroundColor Yellow
-Set-Location C:\Omega
+Set-Location C:\Chimera
 git fetch origin
 git checkout main
 # Deterministic deploy: always build exact remote head.
@@ -30,29 +30,29 @@ Write-Host "      [OK] HEAD $localHead" -ForegroundColor Green
 Write-Host ""
 
 Write-Host "[3/4] Clean build..." -ForegroundColor Yellow
-Remove-Item -Path "C:\Omega\build" -Recurse -Force -ErrorAction SilentlyContinue
-New-Item -ItemType Directory -Path "C:\Omega\build" -Force | Out-Null
-Set-Location C:\Omega\build
+Remove-Item -Path "C:\Chimera\build" -Recurse -Force -ErrorAction SilentlyContinue
+New-Item -ItemType Directory -Path "C:\Chimera\build" -Force | Out-Null
+Set-Location C:\Chimera\build
 cmake ..
 cmake --build . --config Release
 
-if (-not (Test-Path "Release\Omega.exe")) {
+if (-not (Test-Path "Release\Chimera.exe")) {
     Write-Host "      [ERROR] Build failed!" -ForegroundColor Red
     exit 1
 }
-Write-Host "      [OK] Omega.exe built" -ForegroundColor Green
+Write-Host "      [OK] Chimera.exe built" -ForegroundColor Green
 Write-Host ""
 
 Write-Host "[4/4] Copying assets and starting..." -ForegroundColor Yellow
-$configSource = "C:\Omega\config\omega_config.ini"
-if (-not (Test-Path $configSource)) { $configSource = "C:\Omega\omega_config.ini" }
+$configSource = "C:\Chimera\config\chimera_config.ini"
+if (-not (Test-Path $configSource)) { $configSource = "C:\Chimera\chimera_config.ini" }
 if (-not (Test-Path $configSource)) {
-    Write-Host "      [ERROR] omega_config.ini not found in repo" -ForegroundColor Red
+    Write-Host "      [ERROR] chimera_config.ini not found in repo" -ForegroundColor Red
     exit 1
 }
-Copy-Item $configSource "Release\omega_config.ini" -Force
-Copy-Item "C:\Omega\src\gui\www\omega_index.html" "Release\omega_index.html" -Force -ErrorAction SilentlyContinue
-Copy-Item "C:\Omega\src\gui\www\chimera_logo.png" "Release\chimera_logo.png" -Force -ErrorAction SilentlyContinue
+Copy-Item $configSource "Release\chimera_config.ini" -Force
+Copy-Item "C:\Chimera\src\gui\www\chimera_index.html" "Release\chimera_index.html" -Force -ErrorAction SilentlyContinue
+Copy-Item "C:\Chimera\src\gui\www\chimera_logo.png" "Release\chimera_logo.png" -Force -ErrorAction SilentlyContinue
 
 Write-Host ""
 Write-Host "=======================================================" -ForegroundColor Cyan
@@ -62,4 +62,4 @@ Write-Host "=======================================================" -Foreground
 Write-Host ""
 
 Set-Location Release
-.\Omega.exe omega_config.ini
+.\Chimera.exe chimera_config.ini

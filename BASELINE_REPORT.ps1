@@ -1,7 +1,7 @@
 $ErrorActionPreference = "Stop"
 
 param(
-    [string]$CsvPath = "C:\Omega\build\Release\logs\trades\omega_trade_closes.csv",
+    [string]$CsvPath = "C:\Chimera\build\Release\logs\trades\chimera_trade_closes.csv",
     [int]$MinTrades = 30
 )
 
@@ -58,7 +58,7 @@ function Finish-Metrics($name, [hashtable]$m, [int]$minTrades) {
 }
 
 if (-not (Test-Path $CsvPath)) {
-    $legacyCsv = "C:\Omega\build\Release\omega_shadow.csv"
+    $legacyCsv = "C:\Chimera\build\Release\chimera_shadow.csv"
     if (Test-Path $legacyCsv) {
         Write-Host "[INFO] New full trade CSV not found, falling back to legacy shadow CSV: $legacyCsv" -ForegroundColor Yellow
         $CsvPath = $legacyCsv
@@ -95,7 +95,7 @@ foreach ($r in $rows) {
     Add-Trade -m $bySymbolEngine[$k] -row $r
 }
 
-Write-Host "`n=== OMEGA BASELINE REPORT ===" -ForegroundColor Cyan
+Write-Host "`n=== CHIMERA BASELINE REPORT ===" -ForegroundColor Cyan
 Write-Host "CSV: $CsvPath"
 Write-Host "Trades: $($rows.Count)"
 Write-Host "Rule: KEEP only if trades >= $MinTrades, expectancy > 0, PF >= 1.20`n"

@@ -1,9 +1,9 @@
-# Omega — Commodities & Indices Trading System
+# Chimera — Commodities & Indices Trading System
 
 **Strategy:** Compression Breakout (CRTP engine, zero virtual dispatch)  
 **Broker:** BlackBull Markets — same FIX stack as ChimeraMetals  
-**Primary symbols:** MES · MNQ · MCL  
-**Confirmation:** ES · NQ · CL · VIX · DX · ZN · YM · RTY  
+**Primary symbols:** US500.F · USTEC.F · USOIL.F  
+**Extended symbols:** DJ30.F · GER30 · UK100 · ESTX50 · XAGUSD · EURUSD · UKBRENT  
 **GUI:** HTTP :7779 / WebSocket :7780  
 **Mode:** Shadow (default)
 
@@ -16,7 +16,7 @@ cmake --build . --config Release
 
 ## Run
 ```
-build\Release\Omega.exe omega_config.ini
+build\Release\Chimera.exe chimera_config.ini
 ```
 
 ## GUI
@@ -26,6 +26,6 @@ Open `http://localhost:7779` in browser.
 Run expectancy/profit-factor summary from the full trade CSV:
 
 ```powershell
-Set-Location C:\Omega
-powershell -ExecutionPolicy Bypass -File .\BASELINE_REPORT.ps1 -CsvPath "C:\Omega\build\Release\logs\trades\omega_trade_closes.csv" -MinTrades 30
+Set-Location C:\Chimera
+powershell -ExecutionPolicy Bypass -File .\BASELINE_REPORT.ps1 -CsvPath "C:\Chimera\build\Release\logs\trades\chimera_trade_closes.csv" -MinTrades 30
 ```

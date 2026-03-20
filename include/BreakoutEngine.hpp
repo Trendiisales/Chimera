@@ -12,7 +12,7 @@
 #include <algorithm>
 #include <functional>
 #include <cstring>
-#include "OmegaTradeLedger.hpp"
+#include "ChimeraTradeLedger.hpp"
 
 namespace omega {
 

@@ -1,15 +1,15 @@
 #pragma once
 // AUTO-GENERATED — split into chunks to stay under MSVC 16KB string literal limit.
-namespace omega_gui {
+namespace chimera_gui {
 static const char* INDEX_HTML =
-R"OMEGA0(
+R"CHIMERA0(
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="Cache-Control" content="no-store,no-cache,must-revalidate">
-<title>Omega — Trading Desk</title>
+<title>Chimera — Trading Desk</title>
 <link rel="icon" type="image/png" href="/chimera_logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -239,10 +239,10 @@ td{padding:6px 8px;border-bottom:1px solid rgba(255,255,255,0.025);white-space:n
   <div class="logo">
     <div class="logo-img"></div>
     <div>
-      <div class="logo-name">Omega</div>
-)OMEGA0"
+      <div class="logo-name">Chimera</div>
+)CHIMERA0"
 
-R"OMEGA1(
+R"CHIMERA1(
       <div class="logo-sub">Commodities &amp; Indices</div>
     </div>
   </div>
@@ -436,9 +436,9 @@ R"OMEGA1(
       <div class="eng-grid" style="grid-template-columns:repeat(4,1fr)">
         <div class="eng-cell" id="engGER"><div class="eng-sym c-purple">GER30</div><div class="eng-ph eph-flat" id="engGERPhase">FLAT</div><div class="eng-px"><span class="eng-bid" id="engGERBid">--</span><span class="eng-sep">|</span><span class="eng-ask" id="engGERAsk">--</span></div><div class="eng-vol" id="engGERVol">--</div><div class="eng-sigs" id="engGERSig">0 signals</div><div class="eng-prox"><div class="eng-prox-track"><div class="eng-prox-fill" id="engGERProx" style="width:0%;background:var(--t3)"></div></div><span class="eng-prox-pct" id="engGERPct"></span></div></div>
         <div class="eng-cell" id="engUK"><div class="eng-sym c-purple">UK100</div><div class="eng-ph eph-flat" id="engUKPhase">FLAT</div><div class="eng-px"><span class="eng-bid" id="engUKBid">--</span><span class="eng-sep">|</span><span class="eng-ask" id="engUKAsk">--</span></div><div class="eng-vol" id="engUKVol">--</div><div class="eng-sigs" id="engUKSig">0 signals</div><div class="eng-prox"><div class="eng-prox-track"><div class="eng-prox-fill" id="engUKProx" style="width:0%;background:var(--t3)"></div></div><span class="eng-prox-pct" id="engUKPct"></span></div></div>
-)OMEGA1"
+)CHIMERA1"
 
-R"OMEGA2(
+R"CHIMERA2(
         <div class="eng-cell" id="engESTX"><div class="eng-sym c-purple">ESTX50</div><div class="eng-ph eph-flat" id="engESTXPhase">FLAT</div><div class="eng-px"><span class="eng-bid" id="engESTXBid">--</span><span class="eng-sep">|</span><span class="eng-ask" id="engESTXAsk">--</span></div><div class="eng-vol" id="engESTXVol">--</div><div class="eng-sigs" id="engESTXSig">0 signals</div><div class="eng-prox"><div class="eng-prox-track"><div class="eng-prox-fill" id="engESTXProx" style="width:0%;background:var(--t3)"></div></div><span class="eng-prox-pct" id="engESTXPct"></span></div></div>
         <div class="eng-cell" id="engBRENT"><div class="eng-sym" style="color:var(--amber)">BRENT</div><div class="eng-ph eph-flat" id="engBRENTPhase">FLAT</div><div class="eng-px"><span class="eng-bid" id="engBRENTBid">--</span><span class="eng-sep">|</span><span class="eng-ask" id="engBRENTAsk">--</span></div><div class="eng-vol" id="engBRENTVol">--</div><div class="eng-sigs" id="engBRENTSig">0 signals</div><div class="eng-prox"><div class="eng-prox-track"><div class="eng-prox-fill" id="engBRENTProx" style="width:0%;background:var(--t3)"></div></div><span class="eng-prox-pct" id="engBRENTPct"></span></div></div>
       </div>
@@ -599,9 +599,9 @@ function updateEngCell(cellId,phaseId,volId,sigId,phase,rv,bv,sigs,hi,lo,bid,ask
   const bidEl=document.getElementById(cellId+'Bid'),askEl=document.getElementById(cellId+'Ask');
   if(bidEl&&safe(bid)>0)bidEl.textContent=safe(bid).toFixed(d);
   if(askEl&&safe(ask)>0)askEl.textContent=safe(ask).toFixed(d);
-)OMEGA2"
+)CHIMERA2"
 
-R"OMEGA3(
+R"CHIMERA3(
   // Proximity bar — how close is price to breaking the compression boundary?
   // p=0(FLAT): empty. p=1(COMP): fill = how tight compression is (rv/bv inverted).
   // p=2(BREAKOUT_WATCH): fill = how far price has moved through range toward boundary.
@@ -809,9 +809,9 @@ function updateDashboard(d){
   // Regime — header strip
   const vix=safe(d.vix_level),reg=d.macro_regime||'NEUTRAL',div=safe(d.es_nq_divergence);
   const vHdr=document.getElementById('vixLevelHdr');
-)OMEGA3"
+)CHIMERA3"
 
-R"OMEGA4(
+R"CHIMERA4(
   if(vHdr){vHdr.textContent=vix>0?vix.toFixed(1):'--';vHdr.style.color=vix>=25?'var(--red)':vix<=15?'var(--green)':'var(--amber)';}
   const rHdr=document.getElementById('macroRegimeHdr');
   if(rHdr){rHdr.textContent=reg;rHdr.style.color=reg==='RISK_ON'?'var(--green)':reg==='RISK_OFF'?'var(--red)':'var(--amber)';}
@@ -873,6 +873,6 @@ pollTrades();
 
 
 
-)OMEGA4"
+)CHIMERA4"
 ;
-} // namespace omega_gui
+} // namespace chimera_gui

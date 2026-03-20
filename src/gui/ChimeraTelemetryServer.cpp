@@ -1,13 +1,13 @@
 // ==============================================================================
-// OmegaTelemetryServer.cpp
+// ChimeraTelemetryServer.cpp
 // HTTP :7779 (GUI + REST) + WebSocket :7780 (250ms push)
 // All MSVC /W4 /WX issues resolved:
 //   - WS frame bytes use static_cast<char> from uint8_t constants
 //   - No truncation warnings
 // ==============================================================================
-#include "OmegaTelemetryServer.hpp"
-#include "OmegaIndexHtml.hpp"   // HTML embedded at build time
-#include "OmegaTradeLedger.hpp"
+#include "ChimeraTelemetryServer.hpp"
+#include "ChimeraIndexHtml.hpp"   // HTML embedded at build time
+#include "ChimeraTradeLedger.hpp"
 
 #ifdef _WIN32
 #include <winsock2.h>
@@ -31,7 +31,7 @@
 #include <cstdint>
 #include <cstdio>
 
-extern omega::OmegaTradeLedger g_omegaLedger;
+extern omega::ChimeraTradeLedger g_chimeraLedger;
 
 namespace omega {
 
@@ -42,7 +42,7 @@ namespace omega {
 static std::string loadFile(const std::string& p)
 {
     static const char* bases[] = {
-        "", "C:\\Omega\\", "..\\", ".\\"
+        "", "C:\\Chimera\\", "..\\", ".\\"
     };
     for (const char* base : bases) {
         std::string full = std::string(base) + p;
@@ -88,13 +88,13 @@ static std::string extractHeader(const std::string& req, const std::string& name
 // JSON builders
 // ─────────────────────────────────────────────────────────────────────────────
 
-static std::string buildTelemetryJson(const OmegaTelemetrySnapshot* s)
+static std::string buildTelemetryJson(const ChimeraTelemetrySnapshot* s)
 {
     if (!s) return "{}";
     const int    trades = s->total_trades;
     const int    wins   = s->wins;
     const double wr     = (trades > 0) ? (100.0 * wins / trades) : 0.0;
-    char buf[8192];
+    char buf[16384];
     snprintf(buf, sizeof(buf),
         "{"
         "\"sp_bid\":%.4f,\"sp_ask\":%.4f,"
@@ -133,6 +133,30 @@ static std::string buildTelemetryJson(const OmegaTelemetrySnapshot* s)
         "\"nq_recent_vol_pct\":%.4f,\"nq_baseline_vol_pct\":%.4f,\"nq_signals\":%d,"
         "\"cl_phase\":%d,\"cl_comp_high\":%.4f,\"cl_comp_low\":%.4f,"
         "\"cl_recent_vol_pct\":%.4f,\"cl_baseline_vol_pct\":%.4f,\"cl_signals\":%d,"
+        "\"dj_phase\":%d,\"dj_comp_high\":%.4f,\"dj_comp_low\":%.4f,"
+        "\"dj_recent_vol_pct\":%.4f,\"dj_baseline_vol_pct\":%.4f,\"dj_signals\":%d,"
+        "\"nas_phase\":%d,\"nas_comp_high\":%.4f,\"nas_comp_low\":%.4f,"
+        "\"nas_recent_vol_pct\":%.4f,\"nas_baseline_vol_pct\":%.4f,\"nas_signals\":%d,"
+        "\"ger30_phase\":%d,\"ger30_comp_high\":%.4f,\"ger30_comp_low\":%.4f,"
+        "\"ger30_recent_vol_pct\":%.4f,\"ger30_baseline_vol_pct\":%.4f,\"ger30_signals\":%d,"
+        "\"uk100_phase\":%d,\"uk100_comp_high\":%.4f,\"uk100_comp_low\":%.4f,"
+        "\"uk100_recent_vol_pct\":%.4f,\"uk100_baseline_vol_pct\":%.4f,\"uk100_signals\":%d,"
+        "\"estx50_phase\":%d,\"estx50_comp_high\":%.4f,\"estx50_comp_low\":%.4f,"
+        "\"estx50_recent_vol_pct\":%.4f,\"estx50_baseline_vol_pct\":%.4f,\"estx50_signals\":%d,"
+        "\"brent_phase\":%d,\"brent_comp_high\":%.4f,\"brent_comp_low\":%.4f,"
+        "\"brent_recent_vol_pct\":%.4f,\"brent_baseline_vol_pct\":%.4f,\"brent_signals\":%d,"
+        "\"xag_phase\":%d,\"xag_comp_high\":%.4f,\"xag_comp_low\":%.4f,"
+        "\"xag_recent_vol_pct\":%.4f,\"xag_baseline_vol_pct\":%.4f,\"xag_signals\":%d,"
+        "\"eurusd_phase\":%d,\"eurusd_comp_high\":%.4f,\"eurusd_comp_low\":%.4f,"
+        "\"eurusd_recent_vol_pct\":%.4f,\"eurusd_baseline_vol_pct\":%.4f,\"eurusd_signals\":%d,"
+        "\"gbpusd_phase\":%d,\"gbpusd_comp_high\":%.4f,\"gbpusd_comp_low\":%.4f,"
+        "\"gbpusd_recent_vol_pct\":%.4f,\"gbpusd_baseline_vol_pct\":%.4f,\"gbpusd_signals\":%d,"
+        "\"audusd_phase\":%d,\"audusd_comp_high\":%.4f,\"audusd_comp_low\":%.4f,"
+        "\"audusd_recent_vol_pct\":%.4f,\"audusd_baseline_vol_pct\":%.4f,\"audusd_signals\":%d,"
+        "\"nzdusd_phase\":%d,\"nzdusd_comp_high\":%.4f,\"nzdusd_comp_low\":%.4f,"
+        "\"nzdusd_recent_vol_pct\":%.4f,\"nzdusd_baseline_vol_pct\":%.4f,\"nzdusd_signals\":%d,"
+        "\"usdjpy_phase\":%d,\"usdjpy_comp_high\":%.4f,\"usdjpy_comp_low\":%.4f,"
+        "\"usdjpy_recent_vol_pct\":%.4f,\"usdjpy_baseline_vol_pct\":%.4f,\"usdjpy_signals\":%d,"
         "\"last_signal_symbol\":\"%s\",\"last_signal_side\":\"%s\","
         "\"last_signal_price\":%.4f,\"last_signal_reason\":\"%s\","
         "\"vix_level\":%.2f,\"macro_regime\":\"%s\",\"es_nq_divergence\":%.6f,"
@@ -170,6 +194,30 @@ static std::string buildTelemetryJson(const OmegaTelemetrySnapshot* s)
         s->nq_recent_vol_pct, s->nq_baseline_vol_pct, s->nq_signals,
         s->cl_phase, s->cl_comp_high, s->cl_comp_low,
         s->cl_recent_vol_pct, s->cl_baseline_vol_pct, s->cl_signals,
+        s->dj_phase, s->dj_comp_high, s->dj_comp_low,
+        s->dj_recent_vol_pct, s->dj_baseline_vol_pct, s->dj_signals,
+        s->nas_phase, s->nas_comp_high, s->nas_comp_low,
+        s->nas_recent_vol_pct, s->nas_baseline_vol_pct, s->nas_signals,
+        s->ger30_phase, s->ger30_comp_high, s->ger30_comp_low,
+        s->ger30_recent_vol_pct, s->ger30_baseline_vol_pct, s->ger30_signals,
+        s->uk100_phase, s->uk100_comp_high, s->uk100_comp_low,
+        s->uk100_recent_vol_pct, s->uk100_baseline_vol_pct, s->uk100_signals,
+        s->estx50_phase, s->estx50_comp_high, s->estx50_comp_low,
+        s->estx50_recent_vol_pct, s->estx50_baseline_vol_pct, s->estx50_signals,
+        s->brent_phase, s->brent_comp_high, s->brent_comp_low,
+        s->brent_recent_vol_pct, s->brent_baseline_vol_pct, s->brent_signals,
+        s->xag_phase, s->xag_comp_high, s->xag_comp_low,
+        s->xag_recent_vol_pct, s->xag_baseline_vol_pct, s->xag_signals,
+        s->eurusd_phase, s->eurusd_comp_high, s->eurusd_comp_low,
+        s->eurusd_recent_vol_pct, s->eurusd_baseline_vol_pct, s->eurusd_signals,
+        s->gbpusd_phase, s->gbpusd_comp_high, s->gbpusd_comp_low,
+        s->gbpusd_recent_vol_pct, s->gbpusd_baseline_vol_pct, s->gbpusd_signals,
+        s->audusd_phase, s->audusd_comp_high, s->audusd_comp_low,
+        s->audusd_recent_vol_pct, s->audusd_baseline_vol_pct, s->audusd_signals,
+        s->nzdusd_phase, s->nzdusd_comp_high, s->nzdusd_comp_low,
+        s->nzdusd_recent_vol_pct, s->nzdusd_baseline_vol_pct, s->nzdusd_signals,
+        s->usdjpy_phase, s->usdjpy_comp_high, s->usdjpy_comp_low,
+        s->usdjpy_recent_vol_pct, s->usdjpy_baseline_vol_pct, s->usdjpy_signals,
         s->last_signal_symbol, s->last_signal_side,
         s->last_signal_price, s->last_signal_reason,
         s->vix_level, s->macro_regime, s->es_nq_divergence,
@@ -185,7 +233,7 @@ static std::string buildTelemetryJson(const OmegaTelemetrySnapshot* s)
 
 static std::string buildTradesJson()
 {
-    const auto trades = g_omegaLedger.snapshot();
+    const auto trades = g_chimeraLedger.snapshot();
     std::string out;
     out.reserve(4096);
     out += '[';
@@ -215,10 +263,10 @@ static std::string buildTradesJson()
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// OmegaTelemetryServer ctor / dtor / start / stop
+// ChimeraTelemetryServer ctor / dtor / start / stop
 // ─────────────────────────────────────────────────────────────────────────────
 
-OmegaTelemetryServer::OmegaTelemetryServer()
+ChimeraTelemetryServer::ChimeraTelemetryServer()
     : running_(false)
     , server_fd_(INVALID_SOCKET)
     , ws_fd_(INVALID_SOCKET)
@@ -227,9 +275,9 @@ OmegaTelemetryServer::OmegaTelemetryServer()
     , snap_(nullptr)
 {}
 
-OmegaTelemetryServer::~OmegaTelemetryServer() { stop(); }
+ChimeraTelemetryServer::~ChimeraTelemetryServer() { stop(); }
 
-void OmegaTelemetryServer::start(int http_port, int ws_port, OmegaTelemetrySnapshot* snap)
+void ChimeraTelemetryServer::start(int http_port, int ws_port, ChimeraTelemetrySnapshot* snap)
 {
     if (running_.load()) return;
     ws_port_ = ws_port;
@@ -237,21 +285,21 @@ void OmegaTelemetryServer::start(int http_port, int ws_port, OmegaTelemetrySnaps
     if (snap) {
         // Direct pointer — same process, no shared memory roundtrip needed
         snap_ = snap;
-        std::cout << "[OmegaHTTP] Direct snapshot pointer OK\n";
+        std::cout << "[ChimeraHTTP] Direct snapshot pointer OK\n";
     } else {
-        hMap_ = OpenFileMappingA(FILE_MAP_READ, FALSE, "Global\\OmegaTelemetrySharedMemory");
+        hMap_ = OpenFileMappingA(FILE_MAP_READ, FALSE, "Global\\ChimeraTelemetrySharedMemory");
         if (hMap_)
-            snap_ = static_cast<OmegaTelemetrySnapshot*>(
-                        MapViewOfFile(hMap_, FILE_MAP_READ, 0, 0, sizeof(OmegaTelemetrySnapshot)));
+            snap_ = static_cast<ChimeraTelemetrySnapshot*>(
+                        MapViewOfFile(hMap_, FILE_MAP_READ, 0, 0, sizeof(ChimeraTelemetrySnapshot)));
         if (!snap_)
-            std::cerr << "[OmegaHTTP] WARNING: snapshot null — no data will show\n";
+            std::cerr << "[ChimeraHTTP] WARNING: snapshot null — no data will show\n";
     }
     running_.store(true);
-    thread_    = std::thread(&OmegaTelemetryServer::run,             this, http_port);
-    ws_thread_ = std::thread(&OmegaTelemetryServer::wsBroadcastLoop, this);
+    thread_    = std::thread(&ChimeraTelemetryServer::run,             this, http_port);
+    ws_thread_ = std::thread(&ChimeraTelemetryServer::wsBroadcastLoop, this);
 }
 
-void OmegaTelemetryServer::stop()
+void ChimeraTelemetryServer::stop()
 {
     if (!running_.load()) return;
     running_.store(false);
@@ -267,7 +315,7 @@ void OmegaTelemetryServer::stop()
 // WebSocket helpers
 // ─────────────────────────────────────────────────────────────────────────────
 
-std::string OmegaTelemetryServer::wsHandshakeResponse(const std::string& request)
+std::string ChimeraTelemetryServer::wsHandshakeResponse(const std::string& request)
 {
     const std::string key = extractHeader(request, "Sec-WebSocket-Key");
     if (key.empty()) return "";
@@ -280,7 +328,7 @@ std::string OmegaTelemetryServer::wsHandshakeResponse(const std::string& request
            "Sec-WebSocket-Accept: " + accept + "\r\n\r\n";
 }
 
-std::string OmegaTelemetryServer::wsBuildFrame(const std::string& payload)
+std::string ChimeraTelemetryServer::wsBuildFrame(const std::string& payload)
 {
     // Use uint8_t constants to avoid MSVC C4309 truncation warning,
     // then narrow to char via static_cast for std::string::push_back.
@@ -306,7 +354,7 @@ std::string OmegaTelemetryServer::wsBuildFrame(const std::string& payload)
     return frame;
 }
 
-bool OmegaTelemetryServer::wsSendFrame(SOCKET s, const std::string& payload)
+bool ChimeraTelemetryServer::wsSendFrame(SOCKET s, const std::string& payload)
 {
     const std::string frame = wsBuildFrame(payload);
     return send(s, frame.c_str(), static_cast<int>(frame.size()), 0) > 0;
@@ -316,7 +364,7 @@ bool OmegaTelemetryServer::wsSendFrame(SOCKET s, const std::string& payload)
 // WebSocket broadcast loop — 250ms push
 // ─────────────────────────────────────────────────────────────────────────────
 
-void OmegaTelemetryServer::wsBroadcastLoop()
+void ChimeraTelemetryServer::wsBroadcastLoop()
 {
     WSADATA wsa; WSAStartup(MAKEWORD(2, 2), &wsa);
 
@@ -331,13 +379,13 @@ void OmegaTelemetryServer::wsBroadcastLoop()
 
     if (bind(ws_fd_, reinterpret_cast<sockaddr*>(&addr), sizeof(addr)) == SOCKET_ERROR ||
         listen(ws_fd_, 8) == SOCKET_ERROR) {
-        std::cerr << "[OmegaWS] bind/listen failed\n"; return;
+        std::cerr << "[ChimeraWS] bind/listen failed\n"; return;
     }
 
     u_long nb = 1;
     ioctlsocket(ws_fd_, FIONBIO, &nb);
 
-    std::cout << "[OmegaWS] WebSocket port " << ws_port_ << "\n" << std::flush;
+    std::cout << "[ChimeraWS] WebSocket port " << ws_port_ << "\n" << std::flush;
 
     auto last_broadcast = std::chrono::steady_clock::now();
 
@@ -388,7 +436,7 @@ void OmegaTelemetryServer::wsBroadcastLoop()
 // HTTP handler
 // ─────────────────────────────────────────────────────────────────────────────
 
-void OmegaTelemetryServer::run(int port)
+void ChimeraTelemetryServer::run(int port)
 {
     WSADATA wsa; WSAStartup(MAKEWORD(2, 2), &wsa);
 
@@ -403,10 +451,10 @@ void OmegaTelemetryServer::run(int port)
 
     if (bind(server_fd_, reinterpret_cast<sockaddr*>(&addr), sizeof(addr)) == SOCKET_ERROR ||
         listen(server_fd_, 16) == SOCKET_ERROR) {
-        std::cerr << "[OmegaHTTP] bind/listen failed\n"; return;
+        std::cerr << "[ChimeraHTTP] bind/listen failed\n"; return;
     }
 
-    std::cout << "[OmegaHTTP] port " << port << "\n" << std::flush;
+    std::cout << "[ChimeraHTTP] port " << port << "\n" << std::flush;
 
     while (running_.load()) {
         sockaddr_in ca{}; int cl = sizeof(ca);
@@ -435,8 +483,8 @@ void OmegaTelemetryServer::run(int port)
         else if (strstr(buf, "GET /chimera_logo.png")) { ct = "image/png"; body = loadFile("chimera_logo.png"); }
         else if (strstr(buf, "GET / ") || strstr(buf, "GET /index.html")) {
             ct = "text/html";
-            body = omega_gui::INDEX_HTML;
-            if (body.empty()) { body = "<h1>Omega GUI not found</h1>"; status = 404; }
+            body = chimera_gui::INDEX_HTML;
+            if (body.empty()) { body = "<h1>Chimera GUI not found</h1>"; status = 404; }
         }
         else { status = 404; body = "Not Found"; }
 

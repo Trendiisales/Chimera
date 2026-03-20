@@ -1,6 +1,6 @@
 #pragma once
 // =============================================================================
-// GoldEngineStack.hpp — Self-contained gold multi-engine stack for Omega
+// GoldEngineStack.hpp — Self-contained gold multi-engine stack for Chimera
 //
 // Ported from ChimeraMetals. Zero external dependencies on ChimeraMetals.
 // All 5 engines + RegimeGovernor + Supervisor in one header.
@@ -32,7 +32,7 @@
 #include <algorithm>
 #include <functional>
 #include <deque>
-#include "OmegaTradeLedger.hpp"
+#include "ChimeraTradeLedger.hpp"
 
 namespace omega {
 namespace gold {
@@ -690,7 +690,7 @@ public:
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
-// GoldEngineStack — the public interface wired into Omega's on_tick
+// GoldEngineStack — the public interface wired into Chimera's on_tick
 // ─────────────────────────────────────────────────────────────────────────────
 // ─────────────────────────────────────────────────────────────────────────────
 // GoldPositionManager — tracks open position, runs TP/SL/timeout each tick,

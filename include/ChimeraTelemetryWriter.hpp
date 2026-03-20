@@ -5,13 +5,12 @@
 #include <cstring>
 
 // ==============================================================================
-// OmegaTelemetrySnapshot — shared memory block written by main loop,
-// read by OmegaTelemetryServer (GUI). Uses a different named mapping
-// ("Global\\OmegaTelemetrySharedMemory") so it does not conflict with
-// ChimeraMetals which uses "Global\\ChimeraTelemetrySharedMemory".
+// ChimeraTelemetrySnapshot — shared memory block written by the main loop and
+// read by the embedded GUI server. The mapping name is part of the runtime
+// contract, so keep it aligned with the Chimera process identity.
 // ==============================================================================
 
-struct OmegaTelemetrySnapshot
+struct ChimeraTelemetrySnapshot
 {
     std::atomic<uint64_t> sequence;
 
@@ -111,6 +110,102 @@ struct OmegaTelemetrySnapshot
     double xau_baseline_vol_pct;
     int  xau_signals;
 
+    // DJ30.F
+    int  dj_phase;
+    double dj_comp_high;
+    double dj_comp_low;
+    double dj_recent_vol_pct;
+    double dj_baseline_vol_pct;
+    int  dj_signals;
+
+    // NAS100
+    int  nas_phase;
+    double nas_comp_high;
+    double nas_comp_low;
+    double nas_recent_vol_pct;
+    double nas_baseline_vol_pct;
+    int  nas_signals;
+
+    // GER30
+    int  ger30_phase;
+    double ger30_comp_high;
+    double ger30_comp_low;
+    double ger30_recent_vol_pct;
+    double ger30_baseline_vol_pct;
+    int  ger30_signals;
+
+    // UK100
+    int  uk100_phase;
+    double uk100_comp_high;
+    double uk100_comp_low;
+    double uk100_recent_vol_pct;
+    double uk100_baseline_vol_pct;
+    int  uk100_signals;
+
+    // ESTX50
+    int  estx50_phase;
+    double estx50_comp_high;
+    double estx50_comp_low;
+    double estx50_recent_vol_pct;
+    double estx50_baseline_vol_pct;
+    int  estx50_signals;
+
+    // UKBRENT
+    int  brent_phase;
+    double brent_comp_high;
+    double brent_comp_low;
+    double brent_recent_vol_pct;
+    double brent_baseline_vol_pct;
+    int  brent_signals;
+
+    // XAGUSD
+    int  xag_phase;
+    double xag_comp_high;
+    double xag_comp_low;
+    double xag_recent_vol_pct;
+    double xag_baseline_vol_pct;
+    int  xag_signals;
+
+    // EURUSD
+    int  eurusd_phase;
+    double eurusd_comp_high;
+    double eurusd_comp_low;
+    double eurusd_recent_vol_pct;
+    double eurusd_baseline_vol_pct;
+    int  eurusd_signals;
+
+    // GBPUSD
+    int  gbpusd_phase;
+    double gbpusd_comp_high;
+    double gbpusd_comp_low;
+    double gbpusd_recent_vol_pct;
+    double gbpusd_baseline_vol_pct;
+    int  gbpusd_signals;
+
+    // AUDUSD
+    int  audusd_phase;
+    double audusd_comp_high;
+    double audusd_comp_low;
+    double audusd_recent_vol_pct;
+    double audusd_baseline_vol_pct;
+    int  audusd_signals;
+
+    // NZDUSD
+    int  nzdusd_phase;
+    double nzdusd_comp_high;
+    double nzdusd_comp_low;
+    double nzdusd_recent_vol_pct;
+    double nzdusd_baseline_vol_pct;
+    int  nzdusd_signals;
+
+    // USDJPY
+    int  usdjpy_phase;
+    double usdjpy_comp_high;
+    double usdjpy_comp_low;
+    double usdjpy_recent_vol_pct;
+    double usdjpy_baseline_vol_pct;
+    int  usdjpy_signals;
+
     // --- Last signal ---
     char last_signal_symbol[16];
     char last_signal_side[8];   // "LONG" / "SHORT" / "NONE"
@@ -135,13 +230,13 @@ struct OmegaTelemetrySnapshot
 };
 
 // ==============================================================================
-// OmegaTelemetryWriter — writes to the shared memory snapshot
+// ChimeraTelemetryWriter — writes to the shared memory snapshot
 // ==============================================================================
-class OmegaTelemetryWriter
+class ChimeraTelemetryWriter
 {
 private:
     HANDLE              m_map;
-    OmegaTelemetrySnapshot* m_snap;
+    ChimeraTelemetrySnapshot* m_snap;
 
     // Last valid prices (prevents zero-price bug)
     double lv_sp_bid=0,     lv_sp_ask=0;
@@ -167,9 +262,9 @@ private:
     double lv_brent_bid=0,  lv_brent_ask=0;
 
 public:
-    OmegaTelemetryWriter() : m_map(nullptr), m_snap(nullptr) {}
+    ChimeraTelemetryWriter() : m_map(nullptr), m_snap(nullptr) {}
 
-    ~OmegaTelemetryWriter()
+    ~ChimeraTelemetryWriter()
     {
         if (m_snap) UnmapViewOfFile(m_snap);
         if (m_map)  CloseHandle(m_map);
@@ -179,14 +274,14 @@ public:
     {
         m_map = CreateFileMappingA(
             INVALID_HANDLE_VALUE, nullptr, PAGE_READWRITE,
-            0, sizeof(OmegaTelemetrySnapshot),
-            "Global\\OmegaTelemetrySharedMemory"
+            0, sizeof(ChimeraTelemetrySnapshot),
+            "Global\\ChimeraTelemetrySharedMemory"
         );
         if (!m_map) return false;
-        m_snap = (OmegaTelemetrySnapshot*)MapViewOfFile(
-            m_map, FILE_MAP_ALL_ACCESS, 0, 0, sizeof(OmegaTelemetrySnapshot));
+        m_snap = (ChimeraTelemetrySnapshot*)MapViewOfFile(
+            m_map, FILE_MAP_ALL_ACCESS, 0, 0, sizeof(ChimeraTelemetrySnapshot));
         if (m_snap) {
-            memset(m_snap, 0, sizeof(OmegaTelemetrySnapshot));
+            memset(m_snap, 0, sizeof(ChimeraTelemetrySnapshot));
             m_snap->sequence.store(0, std::memory_order_release);
             strcpy_s(m_snap->fix_quote_status, "DISCONNECTED");
             strcpy_s(m_snap->fix_trade_status, "DISCONNECTED");
@@ -197,7 +292,7 @@ public:
         return m_snap != nullptr;
     }
 
-    OmegaTelemetrySnapshot* snap() { return m_snap; }
+    ChimeraTelemetrySnapshot* snap() { return m_snap; }
 
     void UpdatePrice(const char* sym, double bid, double ask)
     {
@@ -294,6 +389,54 @@ public:
             m_snap->xau_phase=phase; m_snap->xau_comp_high=comp_high;
             m_snap->xau_comp_low=comp_low; m_snap->xau_recent_vol_pct=recent_vol_pct;
             m_snap->xau_baseline_vol_pct=baseline_vol_pct; m_snap->xau_signals=signals;
+        } else if (!strcmp(sym,"DJ30.F")) {
+            m_snap->dj_phase=phase; m_snap->dj_comp_high=comp_high;
+            m_snap->dj_comp_low=comp_low; m_snap->dj_recent_vol_pct=recent_vol_pct;
+            m_snap->dj_baseline_vol_pct=baseline_vol_pct; m_snap->dj_signals=signals;
+        } else if (!strcmp(sym,"NAS100")) {
+            m_snap->nas_phase=phase; m_snap->nas_comp_high=comp_high;
+            m_snap->nas_comp_low=comp_low; m_snap->nas_recent_vol_pct=recent_vol_pct;
+            m_snap->nas_baseline_vol_pct=baseline_vol_pct; m_snap->nas_signals=signals;
+        } else if (!strcmp(sym,"GER30")) {
+            m_snap->ger30_phase=phase; m_snap->ger30_comp_high=comp_high;
+            m_snap->ger30_comp_low=comp_low; m_snap->ger30_recent_vol_pct=recent_vol_pct;
+            m_snap->ger30_baseline_vol_pct=baseline_vol_pct; m_snap->ger30_signals=signals;
+        } else if (!strcmp(sym,"UK100")) {
+            m_snap->uk100_phase=phase; m_snap->uk100_comp_high=comp_high;
+            m_snap->uk100_comp_low=comp_low; m_snap->uk100_recent_vol_pct=recent_vol_pct;
+            m_snap->uk100_baseline_vol_pct=baseline_vol_pct; m_snap->uk100_signals=signals;
+        } else if (!strcmp(sym,"ESTX50")) {
+            m_snap->estx50_phase=phase; m_snap->estx50_comp_high=comp_high;
+            m_snap->estx50_comp_low=comp_low; m_snap->estx50_recent_vol_pct=recent_vol_pct;
+            m_snap->estx50_baseline_vol_pct=baseline_vol_pct; m_snap->estx50_signals=signals;
+        } else if (!strcmp(sym,"UKBRENT")) {
+            m_snap->brent_phase=phase; m_snap->brent_comp_high=comp_high;
+            m_snap->brent_comp_low=comp_low; m_snap->brent_recent_vol_pct=recent_vol_pct;
+            m_snap->brent_baseline_vol_pct=baseline_vol_pct; m_snap->brent_signals=signals;
+        } else if (!strcmp(sym,"XAGUSD")) {
+            m_snap->xag_phase=phase; m_snap->xag_comp_high=comp_high;
+            m_snap->xag_comp_low=comp_low; m_snap->xag_recent_vol_pct=recent_vol_pct;
+            m_snap->xag_baseline_vol_pct=baseline_vol_pct; m_snap->xag_signals=signals;
+        } else if (!strcmp(sym,"EURUSD")) {
+            m_snap->eurusd_phase=phase; m_snap->eurusd_comp_high=comp_high;
+            m_snap->eurusd_comp_low=comp_low; m_snap->eurusd_recent_vol_pct=recent_vol_pct;
+            m_snap->eurusd_baseline_vol_pct=baseline_vol_pct; m_snap->eurusd_signals=signals;
+        } else if (!strcmp(sym,"GBPUSD")) {
+            m_snap->gbpusd_phase=phase; m_snap->gbpusd_comp_high=comp_high;
+            m_snap->gbpusd_comp_low=comp_low; m_snap->gbpusd_recent_vol_pct=recent_vol_pct;
+            m_snap->gbpusd_baseline_vol_pct=baseline_vol_pct; m_snap->gbpusd_signals=signals;
+        } else if (!strcmp(sym,"AUDUSD")) {
+            m_snap->audusd_phase=phase; m_snap->audusd_comp_high=comp_high;
+            m_snap->audusd_comp_low=comp_low; m_snap->audusd_recent_vol_pct=recent_vol_pct;
+            m_snap->audusd_baseline_vol_pct=baseline_vol_pct; m_snap->audusd_signals=signals;
+        } else if (!strcmp(sym,"NZDUSD")) {
+            m_snap->nzdusd_phase=phase; m_snap->nzdusd_comp_high=comp_high;
+            m_snap->nzdusd_comp_low=comp_low; m_snap->nzdusd_recent_vol_pct=recent_vol_pct;
+            m_snap->nzdusd_baseline_vol_pct=baseline_vol_pct; m_snap->nzdusd_signals=signals;
+        } else if (!strcmp(sym,"USDJPY")) {
+            m_snap->usdjpy_phase=phase; m_snap->usdjpy_comp_high=comp_high;
+            m_snap->usdjpy_comp_low=comp_low; m_snap->usdjpy_recent_vol_pct=recent_vol_pct;
+            m_snap->usdjpy_baseline_vol_pct=baseline_vol_pct; m_snap->usdjpy_signals=signals;
         }
     }
 

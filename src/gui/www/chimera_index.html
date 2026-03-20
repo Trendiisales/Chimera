@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Omega — Trading Desk</title>
+    <title>Chimera — Trading Desk</title>
     <link rel="icon" type="image/png" href="/chimera_logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -139,7 +139,7 @@
         <div class="logo">
             <div class="logo-img"></div>
             <div>
-                <div class="logo-name">Omega</div>
+                <div class="logo-name">Chimera</div>
                 <div class="logo-sub">Gold-Led Commodities &amp; Indices — Breakout System</div>
             </div>
         </div>
@@ -688,7 +688,7 @@ function connectWS() {
         if (wsFailCount >= 5) {
             // Port likely blocked by firewall — stop hammering, use HTTP poll
             wsGiveUp = true;
-            console.log('[Omega] WS port 7780 unreachable after 5 attempts — switching to HTTP poll mode');
+            console.log('[Chimera] WS port 7780 unreachable after 5 attempts — switching to HTTP poll mode');
             return;
         }
         // Exponential backoff: 2s, 4s, 8s, max 15s

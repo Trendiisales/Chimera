@@ -1,14 +1,14 @@
 #pragma once
 // ==============================================================================
-// OmegaTelemetryServer — HTTP :7779 + WebSocket :7780
-// Reads OmegaTelemetrySharedMemory and serves GUI + JSON API.
+// ChimeraTelemetryServer — HTTP :7779 + WebSocket :7780
+// Reads ChimeraTelemetrySharedMemory and serves GUI + JSON API.
 // ==============================================================================
 #include <atomic>
 #include <thread>
 #include <vector>
 #include <mutex>
 #include <string>
-#include "OmegaTelemetryWriter.hpp"
+#include "ChimeraTelemetryWriter.hpp"
 
 #ifdef _WIN32
 #include <winsock2.h>
@@ -17,13 +17,13 @@
 
 namespace omega {
 
-class OmegaTelemetryServer
+class ChimeraTelemetryServer
 {
 public:
-    OmegaTelemetryServer();
-    ~OmegaTelemetryServer();
+    ChimeraTelemetryServer();
+    ~ChimeraTelemetryServer();
 
-    void start(int http_port, int ws_port, OmegaTelemetrySnapshot* snap = nullptr);
+    void start(int http_port, int ws_port, ChimeraTelemetrySnapshot* snap = nullptr);
     void stop();
 
 private:
@@ -46,7 +46,7 @@ private:
     std::mutex          ws_mutex_;
 
     HANDLE                  hMap_;
-    OmegaTelemetrySnapshot* snap_;
+    ChimeraTelemetrySnapshot* snap_;
 };
 
 } // namespace omega

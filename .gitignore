@@ -7,7 +7,7 @@ build/
 *.lib
 logs/
 *.log
-omega_shadow.csv
+chimera_shadow.csv
 CMakeFiles/
 CMakeCache.txt
 cmake_install.cmake

@@ -1,5 +1,5 @@
 // ==============================================================================
-// OMEGA -- Commodities & Indices Trading System
+// CHIMERA -- Commodities & Indices Trading System
 // Strategy: Compression Breakout (CRTP engine, zero virtual dispatch)
 // Broker: BlackBull Markets -- identical FIX stack to ChimeraMetals
 // Primary: MES · MNQ · MCL  |  Confirmation: ES NQ CL VIX DX ZN YM RTY
@@ -36,28 +36,28 @@
 #include <cstdint>
 #include <cstring>
 
-// ── Omega headers (flat -- all files in same directory on VPS) ────────────────
-#include "OmegaTelemetryWriter.hpp"
-#include "OmegaTradeLedger.hpp"
+// ── Chimera headers (flat -- all files in same directory on VPS) ────────────────
+#include "ChimeraTelemetryWriter.hpp"
+#include "ChimeraTradeLedger.hpp"
 
 // ── Build version -- injected by CMake from git hash + build timestamp ────────
 // If not set by CMake (manual compile), falls back to "dev-build".
-#ifndef OMEGA_GIT_HASH
-#  define OMEGA_GIT_HASH "dev-build"
+#ifndef CHIMERA_GIT_HASH
+#  define CHIMERA_GIT_HASH "dev-build"
 #endif
-#ifndef OMEGA_GIT_DATE
-#  define OMEGA_GIT_DATE "unknown"
+#ifndef CHIMERA_GIT_DATE
+#  define CHIMERA_GIT_DATE "unknown"
 #endif
-#ifndef OMEGA_BUILD_TIME
-#  define OMEGA_BUILD_TIME __DATE__ " " __TIME__
+#ifndef CHIMERA_BUILD_TIME
+#  define CHIMERA_BUILD_TIME __DATE__ " " __TIME__
 #endif
-static constexpr const char* OMEGA_VERSION = OMEGA_GIT_HASH;
-static constexpr const char* OMEGA_BUILT   = OMEGA_BUILD_TIME;
-static constexpr const char* OMEGA_COMMIT  = OMEGA_GIT_DATE;
+static constexpr const char* CHIMERA_VERSION = CHIMERA_GIT_HASH;
+static constexpr const char* CHIMERA_BUILT   = CHIMERA_BUILD_TIME;
+static constexpr const char* CHIMERA_COMMIT  = CHIMERA_GIT_DATE;
 #include "BreakoutEngine.hpp"
 #include "SymbolEngines.hpp"      // SpEngine, NqEngine, OilEngine, MacroContext (includes BreakoutEngine.hpp)
 #include "MacroRegimeDetector.hpp"
-#include "OmegaTelemetryServer.hpp"
+#include "ChimeraTelemetryServer.hpp"
 #include "GoldEngineStack.hpp"    // Multi-engine gold stack (ported from ChimeraMetals)
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -68,7 +68,7 @@ static HANDLE g_singleton_mutex = NULL;
 // ─────────────────────────────────────────────────────────────────────────────
 // Config
 // ─────────────────────────────────────────────────────────────────────────────
-struct OmegaConfig {
+struct ChimeraConfig {
     // FIX -- identical to ChimeraMetals
     std::string host       = "live-uk-eqx-02.p.c-trader.com";
     int         port       = 5211;
@@ -151,19 +151,19 @@ struct OmegaConfig {
     int         gui_port   = 7779;
     int         ws_port    = 7780;
     int         trade_port = 5212;   // FIX trade connection (orders)
-    std::string shadow_csv = "omega_shadow.csv";
-    std::string shadow_signal_csv = "omega_shadow_signals.csv";
+    std::string shadow_csv = "chimera_shadow.csv";
+    std::string shadow_signal_csv = "chimera_shadow_signals.csv";
     std::string log_file   = "";   // if set, tee all stdout+stderr here
 };
 
-static OmegaConfig         g_cfg;
+static ChimeraConfig         g_cfg;
 static std::atomic<bool>   g_running(true);
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Globals
 // ─────────────────────────────────────────────────────────────────────────────
-static OmegaTelemetryWriter      g_telemetry;
-omega::OmegaTradeLedger          g_omegaLedger;      // extern in TelemetryServer.cpp
+static ChimeraTelemetryWriter      g_telemetry;
+omega::ChimeraTradeLedger          g_chimeraLedger;      // extern in TelemetryServer.cpp
 static omega::MacroRegimeDetector g_macroDetector;
 
 // CRTP breakout engines -- typed per symbol (instrument-specific params + regime gating)
@@ -298,7 +298,7 @@ static void print_perf_stats() {
     for (const auto& kv : g_perf) {
         const auto& k = kv.first;
         const auto& s = kv.second;
-        std::cout << "[OMEGA-PERF] " << k
+        std::cout << "[CHIMERA-PERF] " << k
                   << " liveT=" << s.live_trades
                   << " livePnL=" << s.live_pnl
                   << " WR=" << (s.live_trades > 0 ? (100.0 * s.live_wins / s.live_trades) : 0.0)
@@ -311,7 +311,7 @@ static void print_perf_stats() {
 // ─────────────────────────────────────────────────────────────────────────────
 // RollingTeeBuffer — mirrors stdout to a daily rolling log file
 // Rotates at UTC midnight. Keeps LOG_KEEP_DAYS files, deletes older ones.
-// File naming: logs/omega_YYYY-MM-DD.log
+// File naming: logs/chimera_YYYY-MM-DD.log
 // ─────────────────────────────────────────────────────────────────────────────
 class RollingTeeBuffer : public std::streambuf {
 public:
@@ -375,7 +375,7 @@ private:
     void open_today() {
         if (file_.is_open()) { file_.flush(); file_.close(); file_buf_ = nullptr; }
         _mkdir(log_dir_.c_str());
-        current_path_ = log_dir_ + "/omega_" + utc_date_str() + ".log";
+        current_path_ = log_dir_ + "/chimera_" + utc_date_str() + ".log";
         file_.open(current_path_, std::ios::app);
         file_buf_    = file_.is_open() ? file_.rdbuf() : nullptr;
         current_day_ = utc_day_of_year();
@@ -388,9 +388,9 @@ private:
     }
 
     void purge_old_logs() {
-        // Enumerate logs/omega_*.log and delete files older than LOG_KEEP_DAYS
+        // Enumerate logs/chimera_*.log and delete files older than LOG_KEEP_DAYS
         WIN32_FIND_DATAA fd{};
-        std::string pattern = log_dir_ + "/omega_*.log";
+        std::string pattern = log_dir_ + "/chimera_*.log";
         HANDLE h = FindFirstFileA(pattern.c_str(), &fd);
         if (h == INVALID_HANDLE_VALUE) return;
 
@@ -772,7 +772,7 @@ static std::string build_logon(int seq, const char* subID) {
 // Confirmation:    VIX.F, DX.F, DJ30.F, NAS100, GOLD.F, NGAS.F, ES, DX
 // ─────────────────────────────────────────────────────────────────────────────
 struct SymbolDef { int id; const char* name; };
-static SymbolDef OMEGA_SYMS[] = {
+static SymbolDef CHIMERA_SYMS[] = {
     // Primary -- traded
     { 2642, "US500.F"  },   // S&P 500 futures
     { 2643, "USTEC.F"  },   // Nasdaq futures
@@ -786,21 +786,21 @@ static SymbolDef OMEGA_SYMS[] = {
     { 2631, "NGAS.F"   },
     // ES (3225) and DX (3173) removed -- not valid on BlackBull, generated FIX rejects
 };
-static const int OMEGA_NSYMS = 9;
+static const int CHIMERA_NSYMS = 9;
 struct ExtSymbolDef { int id; const char* name; };
 static std::vector<ExtSymbolDef> g_ext_syms = {
     {0, "GER30"}, {0, "UK100"}, {0, "ESTX50"}, {0, "XAGUSD"}, {0, "EURUSD"}, {0, "UKBRENT"}
 };
 
-// Runtime ID->name map built at startup from OMEGA_SYMS
+// Runtime ID->name map built at startup from CHIMERA_SYMS
 static std::mutex g_symbol_map_mtx;
 static std::unordered_map<int, std::string> g_id_to_sym;
 
 static void build_id_map() {
     std::lock_guard<std::mutex> lk(g_symbol_map_mtx);
     g_id_to_sym.clear();
-    for (int i = 0; i < OMEGA_NSYMS; ++i)
-        g_id_to_sym[OMEGA_SYMS[i].id] = OMEGA_SYMS[i].name;
+    for (int i = 0; i < CHIMERA_NSYMS; ++i)
+        g_id_to_sym[CHIMERA_SYMS[i].id] = CHIMERA_SYMS[i].name;
     for (const auto& e : g_ext_syms) {
         if (e.id > 0) g_id_to_sym[e.id] = e.name;
     }
@@ -812,10 +812,10 @@ static std::string build_marketdata_req(int seq) {
       << "49=" << g_cfg.sender << "\x01" << "56=" << g_cfg.target << "\x01"
       << "50=QUOTE\x01" << "57=QUOTE\x01"
       << "34=" << seq << "\x01" << "52=" << timestamp() << "\x01"
-      << "262=OMEGA-MD-001\x01" << "263=1\x01" << "264=1\x01" << "265=0\x01"
-      << "146=" << OMEGA_NSYMS << "\x01";
-    for (int i = 0; i < OMEGA_NSYMS; ++i)
-        b << "55=" << OMEGA_SYMS[i].id << "\x01";
+      << "262=CHIMERA-MD-001\x01" << "263=1\x01" << "264=1\x01" << "265=0\x01"
+      << "146=" << CHIMERA_NSYMS << "\x01";
+    for (int i = 0; i < CHIMERA_NSYMS; ++i)
+        b << "55=" << CHIMERA_SYMS[i].id << "\x01";
     b << "267=2\x01" << "269=0\x01" << "269=1\x01";
     return wrap_fix(b.str());
 }
@@ -834,7 +834,7 @@ static std::string build_marketdata_req_extended(int seq) {
       << "49=" << g_cfg.sender << "\x01" << "56=" << g_cfg.target << "\x01"
       << "50=QUOTE\x01" << "57=QUOTE\x01"
       << "34=" << seq << "\x01" << "52=" << timestamp() << "\x01"
-      << "262=OMEGA-MD-EXT-" << seq << "\x01" << "263=1\x01" << "264=1\x01" << "265=0\x01"
+      << "262=CHIMERA-MD-EXT-" << seq << "\x01" << "263=1\x01" << "264=1\x01" << "265=0\x01"
       << "146=" << ids.size() << "\x01";
     for (int id : ids) b << "55=" << id << "\x01";
     b << "267=2\x01" << "269=0\x01" << "269=1\x01";
@@ -891,11 +891,11 @@ static bool apply_security_list_symbol_map(const std::vector<std::pair<int, std:
 
         g_id_to_sym[id] = name;
 
-        for (int i = 0; i < OMEGA_NSYMS; ++i) {
-            if (name == OMEGA_SYMS[i].name && OMEGA_SYMS[i].id != id) {
-                std::cout << "[OMEGA-SECURITY] primary id update " << name
-                          << " " << OMEGA_SYMS[i].id << " -> " << id << "\n";
-                OMEGA_SYMS[i].id = id;
+        for (int i = 0; i < CHIMERA_NSYMS; ++i) {
+            if (name == CHIMERA_SYMS[i].name && CHIMERA_SYMS[i].id != id) {
+                std::cout << "[CHIMERA-SECURITY] primary id update " << name
+                          << " " << CHIMERA_SYMS[i].id << " -> " << id << "\n";
+                CHIMERA_SYMS[i].id = id;
             }
         }
 
@@ -904,7 +904,7 @@ static bool apply_security_list_symbol_map(const std::vector<std::pair<int, std:
             if (name != ext.name) continue;
             if (ext.id == id) break;
 
-            std::cout << "[OMEGA-SECURITY] learned ext id " << name
+            std::cout << "[CHIMERA-SECURITY] learned ext id " << name
                       << " -> " << id << "\n";
             ext.id = id;
             ext_changed = true;
@@ -1416,7 +1416,7 @@ static void maybe_reset_daily_ledger() {
     if (ti.tm_yday == g_last_ledger_utc_day) return;
     g_last_ledger_utc_day = ti.tm_yday;
 
-    g_omegaLedger.resetDaily();
+    g_chimeraLedger.resetDaily();
     {
         std::lock_guard<std::mutex> lk(g_sym_risk_mtx);
         g_sym_risk.clear();
@@ -1432,11 +1432,11 @@ static void maybe_reset_daily_ledger() {
     }
     g_disable_gold_stack = false;
     g_gov_spread = g_gov_lat = g_gov_pnl = g_gov_pos = g_gov_consec = 0;
-    std::cout << "[OMEGA-RISK] UTC day rollover — per-symbol risk state reset\n";
+    std::cout << "[CHIMERA-RISK] UTC day rollover — per-symbol risk state reset\n";
 }
 
 static void handle_closed_trade(const omega::TradeRecord& tr) {
-    g_omegaLedger.record(tr);
+    g_chimeraLedger.record(tr);
     write_shadow_csv(tr);
     write_trade_close_logs(tr);
 
@@ -1452,7 +1452,7 @@ static void handle_closed_trade(const omega::TradeRecord& tr) {
             const int pause_sec  = shadow_research ? 300 : g_cfg.loss_pause_sec;
             if (++st.consec_losses >= loss_limit) {
                 st.pause_until = nowSec() + pause_sec;
-                std::cout << "[OMEGA-RISK] " << risk_key << " "
+                std::cout << "[CHIMERA-RISK] " << risk_key << " "
                           << loss_limit << " consecutive losses -- pause "
                           << pause_sec << "s\n";
             }
@@ -1469,7 +1469,7 @@ static void handle_closed_trade(const omega::TradeRecord& tr) {
             if (fast_bad_loss) {
                 if (++qs.fast_loss_streak >= 2) {
                     qs.pause_until = nowSec() + 180;
-                    std::cout << "[OMEGA-QUALITY] " << tr.symbol
+                    std::cout << "[CHIMERA-QUALITY] " << tr.symbol
                               << " fast-loss streak=" << qs.fast_loss_streak
                               << " pause=180s\n";
                 }
@@ -1492,15 +1492,15 @@ static void handle_closed_trade(const omega::TradeRecord& tr) {
             ps.live_pnl < 0.0) {
             ps.disabled = true;
             if (perf_key == "GOLD_STACK") g_disable_gold_stack = true;
-            std::cout << "[OMEGA-AUTO-DISABLE] " << perf_key
+            std::cout << "[CHIMERA-AUTO-DISABLE] " << perf_key
                       << " live_trades=" << ps.live_trades
                       << " pnl=" << ps.live_pnl << "\n";
         }
     }
     g_telemetry.UpdateStats(
-        g_omegaLedger.dailyPnl(), g_omegaLedger.maxDD(),
-        g_omegaLedger.total(), g_omegaLedger.wins(), g_omegaLedger.losses(),
-        g_omegaLedger.winRate(), g_omegaLedger.avgWin(), g_omegaLedger.avgLoss(), 0, 0);
+        g_chimeraLedger.dailyPnl(), g_chimeraLedger.grossDailyPnl(), g_chimeraLedger.maxDD(),
+        g_chimeraLedger.total(), g_chimeraLedger.wins(), g_chimeraLedger.losses(),
+        g_chimeraLedger.winRate(), g_chimeraLedger.avgWin(), g_chimeraLedger.avgLoss(), 0, 0);
     g_telemetry.UpdateLastSignal(tr.symbol.c_str(), "CLOSED", tr.exitPrice, tr.exitReason.c_str());
 }
 
@@ -1570,7 +1570,7 @@ static void on_tick(const std::string& sym, double bid, double ask) {
         if (st.pause_until != 0 && st.pause_until <= now) {
             st.pause_until = 0;
             st.consec_losses = 0;
-            std::cout << "[OMEGA-RISK] " << symbol << " loss pause cleared\n";
+            std::cout << "[CHIMERA-RISK] " << symbol << " loss pause cleared\n";
         }
         return false;
     };
@@ -1656,7 +1656,7 @@ static void on_tick(const std::string& sym, double bid, double ask) {
             g_telemetry.UpdateLastSignal(sym.c_str(),
                 sig.is_long ? "LONG" : "SHORT", sig.entry, sig.reason);
             std::cout << "\033[1;" << (sig.is_long ? "32" : "31") << "m"
-                      << "[OMEGA] " << sym << " " << (sig.is_long ? "LONG" : "SHORT")
+                      << "[CHIMERA] " << sym << " " << (sig.is_long ? "LONG" : "SHORT")
                       << " entry=" << sig.entry << " tp=" << sig.tp << " sl=" << sig.sl
                       << " regime=" << regime << "\033[0m\n";
         }
@@ -1759,19 +1759,19 @@ static void dispatch_fix(const std::string& msg, SSL* ssl) {
     const std::string type = extract_tag(msg, "35");
 
     if (type == "A") {
-        std::cout << "[OMEGA] LOGON ACCEPTED\n";
+        std::cout << "[CHIMERA] LOGON ACCEPTED\n";
         g_quote_ready.store(true);
         g_telemetry.UpdateFixStatus("CONNECTED", "CONNECTED", 0, 0);
         const std::string md = build_marketdata_req(g_quote_seq++);
         SSL_write(ssl, md.c_str(), static_cast<int>(md.size()));
-        std::cout << "[OMEGA] Subscribed: US500.F USTEC.F USOIL.F + 8 confirmation\n";
+        std::cout << "[CHIMERA] Subscribed: US500.F USTEC.F USOIL.F + 8 confirmation\n";
         if (g_cfg.enable_extended_symbols) {
             const std::string ext = build_marketdata_req_extended(g_quote_seq++);
             if (!ext.empty()) {
                 SSL_write(ssl, ext.c_str(), static_cast<int>(ext.size()));
-                std::cout << "[OMEGA] Subscribed EXT (numeric IDs from config)\n";
+                std::cout << "[CHIMERA] Subscribed EXT (numeric IDs from config)\n";
             } else {
-                std::cout << "[OMEGA] EXT subscription deferred (waiting for SecurityList or configured IDs)\n";
+                std::cout << "[CHIMERA] EXT subscription deferred (waiting for SecurityList or configured IDs)\n";
             }
         }
         return;
@@ -1800,7 +1800,7 @@ static void dispatch_fix(const std::string& msg, SSL* ssl) {
     if (type != "W" && type != "X" && type != "A" && type != "0" && type != "1" && type != "3" && type != "j") {
         std::string readable = msg.substr(0, std::min(msg.size(), size_t(300)));
         for (char& c : readable) if (c == '\x01') c = '|';
-        std::cerr << "[OMEGA-RAW] type=" << type << " msg=" << readable << "\n";
+        std::cerr << "[CHIMERA-RAW] type=" << type << " msg=" << readable << "\n";
         std::cerr.flush();
     }
 
@@ -1808,7 +1808,7 @@ static void dispatch_fix(const std::string& msg, SSL* ssl) {
     if (type == "W" || type == "X") {
         const std::string sym_raw = extract_tag(msg, "55");
         if (sym_raw.empty()) {
-            std::cerr << "[OMEGA-MD] W/X msg missing tag 55 -- raw: ";
+            std::cerr << "[CHIMERA-MD] W/X msg missing tag 55 -- raw: ";
             std::string r = msg.substr(0, 200); for (char& c : r) if (c=='\x01') c='|';
             std::cerr << r << "\n"; std::cerr.flush();
             return;
@@ -1820,15 +1820,15 @@ static void dispatch_fix(const std::string& msg, SSL* ssl) {
             std::lock_guard<std::mutex> lk(g_symbol_map_mtx);
             const auto it = g_id_to_sym.find(id);
             if (it == g_id_to_sym.end()) {
-                std::cerr << "[OMEGA-MD] Unknown numeric ID " << id << " in tag55\n";
+                std::cerr << "[CHIMERA-MD] Unknown numeric ID " << id << " in tag55\n";
                 std::cerr.flush();
                 return;
             }
             sym = it->second;
         } catch (...) {
             // Broker sent string name in 55= (e.g. "GOLD.F") -- look up directly
-            for (int i = 0; i < OMEGA_NSYMS; ++i) {
-                if (sym_raw == OMEGA_SYMS[i].name) { sym = OMEGA_SYMS[i].name; break; }
+            for (int i = 0; i < CHIMERA_NSYMS; ++i) {
+                if (sym_raw == CHIMERA_SYMS[i].name) { sym = CHIMERA_SYMS[i].name; break; }
             }
             if (sym.empty() && g_cfg.enable_extended_symbols) {
                 std::lock_guard<std::mutex> lk(g_symbol_map_mtx);
@@ -1837,7 +1837,7 @@ static void dispatch_fix(const std::string& msg, SSL* ssl) {
                 }
             }
             if (sym.empty()) {
-                std::cerr << "[OMEGA-MD] Unknown string symbol '" << sym_raw << "' in tag55\n";
+                std::cerr << "[CHIMERA-MD] Unknown string symbol '" << sym_raw << "' in tag55\n";
                 std::cerr.flush();
                 return;
             }
@@ -1896,7 +1896,7 @@ static void dispatch_fix(const std::string& msg, SSL* ssl) {
 
     if (type == "3" || type == "j") {
         std::string r = msg.substr(0, 400); for (char& c : r) if (c=='\x01') c='|';
-        std::cerr << "[OMEGA] FIX REJECT type=" << type
+        std::cerr << "[CHIMERA] FIX REJECT type=" << type
                   << " text=" << extract_tag(msg, "58")
                   << " refMsgType=" << extract_tag(msg, "372")
                   << " full=" << r << "\n";
@@ -1917,12 +1917,12 @@ static void trade_loop() {
     const int max_backoff = 30000;
 
     while (g_running.load()) {
-        std::cout << "[OMEGA-TRADE] Connecting " << g_cfg.host << ":" << g_cfg.trade_port << "\n";
+        std::cout << "[CHIMERA-TRADE] Connecting " << g_cfg.host << ":" << g_cfg.trade_port << "\n";
 
         int sock = -1;
         SSL* ssl = connect_ssl(g_cfg.host, g_cfg.trade_port, sock);
         if (!ssl) {
-            std::cerr << "[OMEGA-TRADE] Connect failed -- retry " << backoff_ms << "ms\n";
+            std::cerr << "[CHIMERA-TRADE] Connect failed -- retry " << backoff_ms << "ms\n";
             Sleep(static_cast<DWORD>(backoff_ms));
             backoff_ms = std::min(backoff_ms * 2, max_backoff);
             continue;
@@ -1934,7 +1934,7 @@ static void trade_loop() {
         // Send trade logon
         const std::string logon = build_logon(g_trade_seq++, "TRADE");
         SSL_write(ssl, logon.c_str(), static_cast<int>(logon.size()));
-        std::cout << "[OMEGA-TRADE] Logon sent\n";
+        std::cout << "[CHIMERA-TRADE] Logon sent\n";
 
         // Store globally for order submission
         {
@@ -1965,7 +1965,7 @@ static void trade_loop() {
                 if (err == SSL_ERROR_WANT_READ || err == SSL_ERROR_WANT_WRITE) {
                     Sleep(1); continue;
                 }
-                std::cerr << "[OMEGA-TRADE] SSL error " << err << " -- reconnecting\n";
+                std::cerr << "[CHIMERA-TRADE] SSL error " << err << " -- reconnecting\n";
                 break;
             }
             trade_recv_buf.append(buf, static_cast<size_t>(n));
@@ -1990,28 +1990,28 @@ static void trade_loop() {
                 const std::string ttype = extract_tag(tmsg, "35");
                 if (ttype == "A") {
                     g_trade_ready.store(true);
-                    std::cout << "[OMEGA-TRADE] LOGON ACCEPTED\n";
-                    const std::string req_id = "omega-sec-" + std::to_string(nowSec());
+                    std::cout << "[CHIMERA-TRADE] LOGON ACCEPTED\n";
+                    const std::string req_id = "chimera-sec-" + std::to_string(nowSec());
                     const std::string sec_req = build_security_list_request(g_trade_seq++, req_id);
                     SSL_write(ssl, sec_req.c_str(), static_cast<int>(sec_req.size()));
-                    std::cout << "[OMEGA-TRADE] SecurityListRequest sent req_id=" << req_id << "\n";
+                    std::cout << "[CHIMERA-TRADE] SecurityListRequest sent req_id=" << req_id << "\n";
                 } else if (ttype == "y") {
                     const auto entries = parse_security_list_entries(tmsg);
                     if (!entries.empty()) {
                         const bool ext_changed = apply_security_list_symbol_map(entries);
                         const std::string req_id = extract_tag(tmsg, "320");
-                        std::cout << "[OMEGA-TRADE] SecurityList received req_id="
+                        std::cout << "[CHIMERA-TRADE] SecurityList received req_id="
                                   << (req_id.empty() ? "?" : req_id)
                                   << " entries=" << entries.size() << "\n";
                         if (ext_changed) g_ext_md_refresh_needed.store(true);
                     }
                 } else if (ttype == "5") {
-                    std::cout << "[OMEGA-TRADE] Logout received\n";
+                    std::cout << "[CHIMERA-TRADE] Logout received\n";
                     break;
                 } else if (ttype == "3" || ttype == "j") {
                     std::string r = tmsg.substr(0, 300);
                     for (char& c : r) if (c == '\x01') c = '|';
-                    std::cerr << "[OMEGA-TRADE] REJECT type=" << ttype
+                    std::cerr << "[CHIMERA-TRADE] REJECT type=" << ttype
                               << " text=" << extract_tag(tmsg, "58") << "\n";
                 }
                 // Heartbeats (type=0) and TestRequests (type=1) silently absorbed
@@ -2027,7 +2027,7 @@ static void trade_loop() {
         }
         SSL_shutdown(ssl); SSL_free(ssl);
         if (sock >= 0) closesocket(static_cast<SOCKET>(sock));
-        std::cerr << "[OMEGA-TRADE] Disconnected -- reconnecting\n";
+        std::cerr << "[CHIMERA-TRADE] Disconnected -- reconnecting\n";
         Sleep(2000);
     }
 }
@@ -2037,13 +2037,13 @@ static void quote_loop() {
     const int max_backoff = 30000;
 
     while (g_running.load()) {
-        std::cout << "[OMEGA] Connecting " << g_cfg.host << ":" << g_cfg.port << "\n";
+        std::cout << "[CHIMERA] Connecting " << g_cfg.host << ":" << g_cfg.port << "\n";
         g_telemetry.UpdateFixStatus("CONNECTING", "CONNECTING", 0, 0);
 
         int sock = -1;
         SSL* ssl = connect_ssl(g_cfg.host, g_cfg.port, sock);
         if (!ssl) {
-            std::cerr << "[OMEGA] Connect failed -- retry " << backoff_ms << "ms\n";
+            std::cerr << "[CHIMERA] Connect failed -- retry " << backoff_ms << "ms\n";
             Sleep(static_cast<DWORD>(backoff_ms));
             backoff_ms = std::min(backoff_ms * 2, max_backoff);
             continue;
@@ -2056,7 +2056,7 @@ static void quote_loop() {
 
         const std::string logon = build_logon(g_quote_seq++, "QUOTE");
         SSL_write(ssl, logon.c_str(), static_cast<int>(logon.size()));
-        std::cout << "[OMEGA] Logon sent\n";
+        std::cout << "[CHIMERA] Logon sent\n";
 
         auto last_ping = std::chrono::steady_clock::now();
         auto last_diag = std::chrono::steady_clock::now();
@@ -2080,23 +2080,23 @@ static void quote_loop() {
             if (std::chrono::duration_cast<std::chrono::seconds>(now - last_diag).count() >= 60) {
                 last_diag = now;
                 if (g_tee_buf) g_tee_buf->force_rotate_check();  // ensure daily log rolls at UTC midnight even if stdout is quiet
-                std::cout << "[OMEGA-DIAG] PnL=" << g_omegaLedger.dailyPnl()
-                          << " T=" << g_omegaLedger.total()
-                          << " WR=" << g_omegaLedger.winRate() << "%"
+                std::cout << "[CHIMERA-DIAG] PnL=" << g_chimeraLedger.dailyPnl()
+                          << " T=" << g_chimeraLedger.total()
+                          << " WR=" << g_chimeraLedger.winRate() << "%"
                           << " RTTp95=" << g_rtt_p95 << "ms"
                           << " cap=" << g_cfg.max_latency_ms << "ms"
                           << " lat_ok=" << (g_governor.checkLatency((g_rtt_p95 > 0.0 ? g_rtt_p95 : g_rtt_last), g_cfg.max_latency_ms) ? 1 : 0)
                           << " session=" << (session_tradeable() ? "ACTIVE" : "CLOSED") << "\n"
-                          << "[OMEGA-DIAG] SP phase=" << static_cast<int>(g_eng_sp.phase)
+                          << "[CHIMERA-DIAG] SP phase=" << static_cast<int>(g_eng_sp.phase)
                           << " recent=" << g_eng_sp.recent_vol_pct << "% base=" << g_eng_sp.base_vol_pct << "%"
                           << " ratio=" << (g_eng_sp.base_vol_pct>0 ? g_eng_sp.recent_vol_pct/g_eng_sp.base_vol_pct : 0) << "\n"
-                          << "[OMEGA-DIAG] NQ phase=" << static_cast<int>(g_eng_nq.phase)
+                          << "[CHIMERA-DIAG] NQ phase=" << static_cast<int>(g_eng_nq.phase)
                           << " recent=" << g_eng_nq.recent_vol_pct << "% base=" << g_eng_nq.base_vol_pct << "%"
                           << " ratio=" << (g_eng_nq.base_vol_pct>0 ? g_eng_nq.recent_vol_pct/g_eng_nq.base_vol_pct : 0) << "\n"
-                          << "[OMEGA-DIAG] CL phase=" << static_cast<int>(g_eng_cl.phase)
+                          << "[CHIMERA-DIAG] CL phase=" << static_cast<int>(g_eng_cl.phase)
                           << " recent=" << g_eng_cl.recent_vol_pct << "% base=" << g_eng_cl.base_vol_pct << "%"
                           << " ratio=" << (g_eng_cl.base_vol_pct>0 ? g_eng_cl.recent_vol_pct/g_eng_cl.base_vol_pct : 0) << "\n"
-                          << "[OMEGA-DIAG] XAU phase=" << static_cast<int>(g_eng_xau.phase)
+                          << "[CHIMERA-DIAG] XAU phase=" << static_cast<int>(g_eng_xau.phase)
                           << " recent=" << g_eng_xau.recent_vol_pct << "% base=" << g_eng_xau.base_vol_pct << "%"
                           << " ratio=" << (g_eng_xau.base_vol_pct>0 ? g_eng_xau.recent_vol_pct/g_eng_xau.base_vol_pct : 0) << "\n";
                 // Gold multi-engine stack stats
@@ -2112,7 +2112,7 @@ static void quote_loop() {
                 const std::string ext = build_marketdata_req_extended(g_quote_seq++);
                 if (!ext.empty()) {
                     SSL_write(ssl, ext.c_str(), static_cast<int>(ext.size()));
-                    std::cout << "[OMEGA] Refreshed EXT subscription from SecurityList\n";
+                    std::cout << "[CHIMERA] Refreshed EXT subscription from SecurityList\n";
                 }
             }
 
@@ -2123,7 +2123,7 @@ static void quote_loop() {
                 if (err == SSL_ERROR_WANT_READ || err == SSL_ERROR_WANT_WRITE) {
                     Sleep(1); continue;
                 }
-                std::cerr << "[OMEGA] SSL error " << err << " -- reconnecting\n";
+                std::cerr << "[CHIMERA] SSL error " << err << " -- reconnecting\n";
                 break;
             }
             for (const auto& m : extract_messages(buf, n)) dispatch_fix(m, ssl);
@@ -2175,9 +2175,9 @@ static void quote_loop() {
 // ─────────────────────────────────────────────────────────────────────────────
 int main(int argc, char* argv[])
 {
-    g_singleton_mutex = CreateMutexA(NULL, TRUE, "Global\\Omega_Breakout_System");
+    g_singleton_mutex = CreateMutexA(NULL, TRUE, "Global\\Chimera_Breakout_System");
     if (!g_singleton_mutex || GetLastError() == ERROR_ALREADY_EXISTS) {
-        std::cerr << "[OMEGA] Already running\n"; return 1;
+        std::cerr << "[CHIMERA] Already running\n"; return 1;
     }
 
     SetConsoleOutputCP(CP_UTF8);
@@ -2187,19 +2187,24 @@ int main(int argc, char* argv[])
 
     std::cout << "\033[1;36m"
               << "=======================================================\n"
-              << "  OMEGA  |  Commodities & Indices  |  Breakout System  \n"
+              << "  CHIMERA  |  Commodities & Indices  |  Breakout System  \n"
               << "=======================================================\n"
-              << "  Build:   " << OMEGA_VERSION << "  (" << OMEGA_BUILT << ")\n"
-              << "  Commit:  " << OMEGA_COMMIT  << "\n"
+              << "  Build:   " << CHIMERA_VERSION << "  (" << CHIMERA_BUILT << ")\n"
+              << "  Commit:  " << CHIMERA_COMMIT  << "\n"
               << "=======================================================\n"
               << "\033[0m";
     // Also print to stderr so it's visible even if stdout is redirected
-    std::fprintf(stderr, "[OMEGA] version=%s built=%s\n", OMEGA_VERSION, OMEGA_BUILT);
+    std::fprintf(stderr, "[CHIMERA] version=%s built=%s\n", CHIMERA_VERSION, CHIMERA_BUILT);
 
     std::signal(SIGINT,  sig_handler);
     std::signal(SIGTERM, sig_handler);
 
-    const std::string cfg_path = (argc > 1) ? argv[1] : "omega_config.ini";
+    std::string cfg_path = (argc > 1) ? argv[1] : "chimera_config.ini";
+    if (argc <= 1 &&
+        !std::filesystem::exists(cfg_path) &&
+        std::filesystem::exists("omega_config.ini")) {
+        cfg_path = "omega_config.ini";
+    }
     load_config(cfg_path);
     sanitize_config();
     apply_shadow_research_profile();
@@ -2245,13 +2250,13 @@ int main(int argc, char* argv[])
             g_eng_nq.ENTRY_SIZE = g_cfg.ustec_pilot_size;
             g_eng_nq.MIN_GAP_SEC = g_cfg.ustec_pilot_min_gap_sec;
             g_eng_nq.MAX_TRADES_PER_MIN = std::min(g_eng_nq.MAX_TRADES_PER_MIN, 2);
-            std::cout << "[OMEGA-PILOT] USTEC shadow pilot enabled | size=" << g_eng_nq.ENTRY_SIZE
+            std::cout << "[CHIMERA-PILOT] USTEC shadow pilot enabled | size=" << g_eng_nq.ENTRY_SIZE
                       << " min_gap=" << g_eng_nq.MIN_GAP_SEC
                       << " max_trades_per_min=" << g_eng_nq.MAX_TRADES_PER_MIN << "\n";
         } else {
-            std::cout << "[OMEGA-PILOT] Multi-symbol shadow enabled | all configured engines may trade\n";
+            std::cout << "[CHIMERA-PILOT] Multi-symbol shadow enabled | all configured engines may trade\n";
         }
-        std::cout << "[OMEGA-MODE] SHADOW "
+        std::cout << "[CHIMERA-MODE] SHADOW "
                   << (shadow_research ? "research/discovery" : "paper/live-like")
                   << " execution profile active\n";
     }
@@ -2291,20 +2296,20 @@ int main(int argc, char* argv[])
     build_id_map();
 
     // Open log file and tee stdout into it
-    // Rolling log: logs/omega_YYYY-MM-DD.log, UTC daily rotation, 5-file retention
+    // Rolling log: logs/chimera_YYYY-MM-DD.log, UTC daily rotation, 5-file retention
     {
         const std::string log_dir = log_root_dir();
         g_orig_cout = std::cout.rdbuf();
         g_tee_buf   = new RollingTeeBuffer(g_orig_cout, log_dir);
         if (!g_tee_buf->is_open()) {
-            std::cerr << "[OMEGA-FATAL] Failed to open rolling log under " << log_dir << "\n";
+            std::cerr << "[CHIMERA-FATAL] Failed to open rolling log under " << log_dir << "\n";
             delete g_tee_buf;
             g_tee_buf = nullptr;
             return 1;
         }
         std::cout.rdbuf(g_tee_buf);
         std::cerr.rdbuf(g_tee_buf);  // tee stderr too — nothing gets lost
-        std::cout << "[OMEGA] Rolling log: " << g_tee_buf->current_path()
+        std::cout << "[CHIMERA] Rolling log: " << g_tee_buf->current_path()
                   << " (UTC daily rotation, 5-file retention)\n";
     }
 
@@ -2326,74 +2331,74 @@ int main(int argc, char* argv[])
             "exit_utc_weekday,symbol,side,entry_px,exit_px,tp,sl,pnl,hold_sec,"
             "verdict,reason,exit_reason";
 
-        const std::string trade_csv_path = trade_dir + "/omega_trade_closes.csv";
+        const std::string trade_csv_path = trade_dir + "/chimera_trade_closes.csv";
         ensure_parent_dir(trade_csv_path);
         g_trade_close_csv.open(trade_csv_path, std::ios::app);
         if (!g_trade_close_csv.is_open()) {
-            std::cerr << "[OMEGA-FATAL] Failed to open full trade CSV: " << trade_csv_path << "\n";
+            std::cerr << "[CHIMERA-FATAL] Failed to open full trade CSV: " << trade_csv_path << "\n";
             return 1;
         }
         g_trade_close_csv.seekp(0, std::ios::end);
         if (g_trade_close_csv.tellp() == std::streampos(0))
             g_trade_close_csv << header << '\n';
-        std::cout << "[OMEGA] Full Trade CSV: " << trade_csv_path << "\n";
+        std::cout << "[CHIMERA] Full Trade CSV: " << trade_csv_path << "\n";
 
         g_daily_trade_close_log = std::make_unique<RollingCsvLogger>(
-            trade_dir, "omega_trade_closes", header);
+            trade_dir, "chimera_trade_closes", header);
         g_daily_gold_trade_close_log = std::make_unique<RollingCsvLogger>(
-            gold_dir, "omega_gold_trade_closes", header);
+            gold_dir, "chimera_gold_trade_closes", header);
         g_daily_shadow_trade_log = std::make_unique<RollingCsvLogger>(
-            shadow_trade_dir, "omega_shadow_trades", header);
+            shadow_trade_dir, "chimera_shadow_trades", header);
         g_daily_shadow_signal_log = std::make_unique<RollingCsvLogger>(
-            shadow_signal_dir, "omega_shadow_signals", shadow_signal_header);
+            shadow_signal_dir, "chimera_shadow_signals", shadow_signal_header);
         g_daily_shadow_signal_event_log = std::make_unique<RollingCsvLogger>(
-            shadow_signal_event_dir, "omega_shadow_signal_events", shadow_signal_event_header);
-        std::cout << "[OMEGA] Daily Trade Logs: " << trade_dir
-                  << "/omega_trade_closes_YYYY-MM-DD.csv (UTC, 5-file retention)\n";
-        std::cout << "[OMEGA] Daily Gold Logs: " << gold_dir
-                  << "/omega_gold_trade_closes_YYYY-MM-DD.csv (UTC, 5-file retention)\n";
-        std::cout << "[OMEGA] Daily Shadow Trade Logs: " << shadow_trade_dir
-                  << "/omega_shadow_trades_YYYY-MM-DD.csv (UTC, 5-file retention)\n";
-        std::cout << "[OMEGA] Daily Shadow Signal Logs: " << shadow_signal_dir
-                  << "/omega_shadow_signals_YYYY-MM-DD.csv (UTC, 5-file retention)\n";
-        std::cout << "[OMEGA] Daily Shadow Signal Event Logs: " << shadow_signal_event_dir
-                  << "/omega_shadow_signal_events_YYYY-MM-DD.csv (UTC, 5-file retention)\n";
+            shadow_signal_event_dir, "chimera_shadow_signal_events", shadow_signal_event_header);
+        std::cout << "[CHIMERA] Daily Trade Logs: " << trade_dir
+                  << "/chimera_trade_closes_YYYY-MM-DD.csv (UTC, 5-file retention)\n";
+        std::cout << "[CHIMERA] Daily Gold Logs: " << gold_dir
+                  << "/chimera_gold_trade_closes_YYYY-MM-DD.csv (UTC, 5-file retention)\n";
+        std::cout << "[CHIMERA] Daily Shadow Trade Logs: " << shadow_trade_dir
+                  << "/chimera_shadow_trades_YYYY-MM-DD.csv (UTC, 5-file retention)\n";
+        std::cout << "[CHIMERA] Daily Shadow Signal Logs: " << shadow_signal_dir
+                  << "/chimera_shadow_signals_YYYY-MM-DD.csv (UTC, 5-file retention)\n";
+        std::cout << "[CHIMERA] Daily Shadow Signal Event Logs: " << shadow_signal_event_dir
+                  << "/chimera_shadow_signal_events_YYYY-MM-DD.csv (UTC, 5-file retention)\n";
     }
 
     const std::string shadow_csv_path =
-        resolve_audit_log_path(g_cfg.shadow_csv, "shadow/omega_shadow.csv");
+        resolve_audit_log_path(g_cfg.shadow_csv, "shadow/chimera_shadow.csv");
     ensure_parent_dir(shadow_csv_path);
     g_shadow_csv.open(shadow_csv_path, std::ios::app);
     if (!g_shadow_csv.is_open()) {
-        std::cerr << "[OMEGA-FATAL] Failed to open shadow trade CSV: " << shadow_csv_path << "\n";
+        std::cerr << "[CHIMERA-FATAL] Failed to open shadow trade CSV: " << shadow_csv_path << "\n";
         return 1;
     }
     g_shadow_csv.seekp(0, std::ios::end);
     if (g_shadow_csv.tellp() == std::streampos(0))
         g_shadow_csv << "ts_unix,symbol,side,entry_px,exit_px,pnl,mfe,mae,"
                         "hold_sec,reason,spread_at_entry,latency_ms,regime\n";
-    std::cout << "[OMEGA] Shadow CSV: " << shadow_csv_path << "\n";
+    std::cout << "[CHIMERA] Shadow CSV: " << shadow_csv_path << "\n";
 
     const std::string shadow_signal_csv_path =
-        resolve_audit_log_path(g_cfg.shadow_signal_csv, "shadow/omega_shadow_signals.csv");
+        resolve_audit_log_path(g_cfg.shadow_signal_csv, "shadow/chimera_shadow_signals.csv");
     ensure_parent_dir(shadow_signal_csv_path);
     g_shadow_signal_csv.open(shadow_signal_csv_path, std::ios::app);
     if (!g_shadow_signal_csv.is_open()) {
-        std::cerr << "[OMEGA-FATAL] Failed to open shadow signal CSV: " << shadow_signal_csv_path << "\n";
+        std::cerr << "[CHIMERA-FATAL] Failed to open shadow signal CSV: " << shadow_signal_csv_path << "\n";
         return 1;
     }
     g_shadow_signal_csv.seekp(0, std::ios::end);
     if (g_shadow_signal_csv.tellp() == std::streampos(0))
         g_shadow_signal_csv << "ts_unix,symbol,side,entry_px,exit_px,tp,sl,pnl,hold_sec,verdict,reason,exit_reason\n";
-    std::cout << "[OMEGA] Shadow Signal CSV: " << shadow_signal_csv_path << "\n";
+    std::cout << "[CHIMERA] Shadow Signal CSV: " << shadow_signal_csv_path << "\n";
 
     const std::string shadow_signal_event_csv_path =
-        resolve_audit_log_path("logs/shadow/omega_shadow_signal_events.csv",
-                               "shadow/omega_shadow_signal_events.csv");
+        resolve_audit_log_path("logs/shadow/chimera_shadow_signal_events.csv",
+                               "shadow/chimera_shadow_signal_events.csv");
     ensure_parent_dir(shadow_signal_event_csv_path);
     g_shadow_signal_event_csv.open(shadow_signal_event_csv_path, std::ios::app);
     if (!g_shadow_signal_event_csv.is_open()) {
-        std::cerr << "[OMEGA-FATAL] Failed to open shadow signal event CSV: "
+        std::cerr << "[CHIMERA-FATAL] Failed to open shadow signal event CSV: "
                   << shadow_signal_event_csv_path << "\n";
         return 1;
     }
@@ -2401,33 +2406,38 @@ int main(int argc, char* argv[])
     if (g_shadow_signal_event_csv.tellp() == std::streampos(0))
         g_shadow_signal_event_csv
             << "event_ts_unix,event_ts_utc,event_utc_weekday,symbol,side,entry_px,tp,sl,verdict,reason\n";
-    std::cout << "[OMEGA] Shadow Signal Event CSV: " << shadow_signal_event_csv_path << "\n";
+    std::cout << "[CHIMERA] Shadow Signal Event CSV: " << shadow_signal_event_csv_path << "\n";
 
     WSADATA wsa;
     if (WSAStartup(MAKEWORD(2, 2), &wsa) != 0) {
-        std::cerr << "[OMEGA] WSAStartup failed\n"; return 1;
+        std::cerr << "[CHIMERA] WSAStartup failed\n"; return 1;
     }
     SSL_library_init(); SSL_load_error_strings(); OpenSSL_add_all_algorithms();
 
-    if (!g_telemetry.Init()) std::cerr << "[OMEGA] Telemetry init failed\n";
-    g_telemetry.SetMode(g_cfg.mode.c_str());
-    g_telemetry.UpdateBuildVersion(OMEGA_VERSION, OMEGA_BUILT);
+    if (!g_telemetry.Init()) {
+        std::cerr << "[CHIMERA] Telemetry init failed\n";
+    } else {
+        g_telemetry.SetMode(g_cfg.mode.c_str());
+        g_telemetry.UpdateBuildVersion(CHIMERA_VERSION, CHIMERA_BUILT);
+        g_telemetry.snap()->start_time = nowSec();
+        g_telemetry.snap()->uptime_sec = 0;
+    }
 
-    omega::OmegaTelemetryServer gui_server;
+    omega::ChimeraTelemetryServer gui_server;
     gui_server.start(g_cfg.gui_port, g_cfg.ws_port, g_telemetry.snap());
-    std::cout << "[OMEGA] GUI http://localhost:" << g_cfg.gui_port
+    std::cout << "[CHIMERA] GUI http://localhost:" << g_cfg.gui_port
               << "  WS:" << g_cfg.ws_port << "\n";
 
     SetPriorityClass(GetCurrentProcess(), HIGH_PRIORITY_CLASS);
 
-    std::cout << "[OMEGA] FIX loop starting -- " << g_cfg.mode << " mode\n";
+    std::cout << "[CHIMERA] FIX loop starting -- " << g_cfg.mode << " mode\n";
     // Launch trade connection in background thread
     std::thread trade_thread(trade_loop);
     trade_thread.detach();
     Sleep(500);  // Give trade connection 500ms head start before quote loop
     quote_loop();
 
-    std::cout << "[OMEGA] Shutdown\n";
+    std::cout << "[CHIMERA] Shutdown\n";
     gui_server.stop();
     if (g_daily_trade_close_log) g_daily_trade_close_log->close();
     if (g_daily_gold_trade_close_log) g_daily_gold_trade_close_log->close();

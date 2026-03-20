@@ -1,5 +1,9 @@
 cmake_minimum_required(VERSION 3.20)
-project(Omega VERSION 1.0.0 LANGUAGES CXX)
+project(Chimera VERSION 1.0.0 LANGUAGES CXX)
+
+if(NOT WIN32)
+    message(FATAL_ERROR "Chimera builds only for Windows targets.")
+endif()
 
 add_definitions(-D_WINSOCKAPI_ -DWIN32_LEAN_AND_MEAN)
 set(CMAKE_CXX_STANDARD 20)
@@ -34,12 +38,12 @@ include_directories(
 
 set(SOURCES
     src/main.cpp
-    src/gui/OmegaTelemetryServer.cpp
+    src/gui/ChimeraTelemetryServer.cpp
 )
 
-add_executable(Omega ${SOURCES})
+add_executable(Chimera ${SOURCES})
 
-target_include_directories(Omega PRIVATE
+target_include_directories(Chimera PRIVATE
     ${CMAKE_SOURCE_DIR}
     ${CMAKE_SOURCE_DIR}/include
     ${CMAKE_SOURCE_DIR}/src
@@ -47,11 +51,14 @@ target_include_directories(Omega PRIVATE
     ${OPENSSL_INCLUDE_DIR}
 )
 
-target_link_libraries(Omega
+target_link_libraries(Chimera
     OpenSSL::SSL
     OpenSSL::Crypto
-    ws2_32
 )
+
+if(WIN32)
+    target_link_libraries(Chimera ws2_32)
+endif()
 
 # ── Build version stamp ──────────────────────────────────────────────────────
 # Embeds git hash + build timestamp directly into the binary.
@@ -81,14 +88,27 @@ endif()
 
 string(TIMESTAMP BUILD_TIMESTAMP "%Y-%m-%d %H:%M UTC")
 
-target_compile_definitions(Omega PRIVATE
-    OMEGA_GIT_HASH="${GIT_HASH}"
-    OMEGA_GIT_DATE="${GIT_DATE}"
-    OMEGA_BUILD_TIME="${BUILD_TIMESTAMP}"
+target_compile_definitions(Chimera PRIVATE
+    CHIMERA_GIT_HASH="${GIT_HASH}"
+    CHIMERA_GIT_DATE="${GIT_DATE}"
+    CHIMERA_BUILD_TIME="${BUILD_TIMESTAMP}"
+)
+
+add_custom_command(TARGET Chimera POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${CMAKE_SOURCE_DIR}/config/chimera_config.ini"
+        "$<TARGET_FILE_DIR:Chimera>/chimera_config.ini"
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${CMAKE_SOURCE_DIR}/src/gui/www/chimera_index.html"
+        "$<TARGET_FILE_DIR:Chimera>/chimera_index.html"
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${CMAKE_SOURCE_DIR}/src/gui/www/chimera_logo.png"
+        "$<TARGET_FILE_DIR:Chimera>/chimera_logo.png"
+    COMMENT "Copying Chimera runtime assets"
 )
 
 message(STATUS "========================================")
-message(STATUS "OMEGA — Commodities & Indices System")
+message(STATUS "CHIMERA — Commodities & Indices System")
 message(STATUS "Version:    1.0.0")
 message(STATUS "Git hash:   ${GIT_HASH}")
 message(STATUS "Commit:     ${GIT_DATE}")
